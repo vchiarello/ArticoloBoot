@@ -1,0 +1,3 @@
+Pom.xml
+	i puntamenti ai js e css di terze parti: angular, bootstrap, jquery vengono presi direttamente con maven da webjars (www.webjars.org)
+	 

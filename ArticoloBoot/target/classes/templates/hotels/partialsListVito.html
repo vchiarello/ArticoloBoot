@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/sitelayout">
+<head>
+    <title th:text="#{app.name}">List of Hotels</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.1.1/css/bootstrap.min.css}"
+          href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.1.1/css/bootstrap-theme.css}"
+          href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" th:href="@{/css/application.css}" href="../../static/css/application.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="well well-small">Hotels</h1>
+        </div>
+    </div>
+    <div th:fragment="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Titolo</th>
+                        <th>Riassunto</th>
+                        <th>Testo</th>
+                        <th>autore</th>
+                        <th>Data pubblicazione</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="hotel in hotels">
+                        <td>{{item.titolo}}</td>
+                        <td>{{item.riassuntoname}}</td>
+                        <td>{{item.testo}}</td>
+                        <td>{{item.autore}}</td>
+                        <td>{{item.dataPubblicazione}} <a ui-sref="edit({ hotelId: hotel.id })">Edit</a> | <a
+                                ng-click="deleteHotel(hotel)">Delete</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <a ui-sref="create" class="btn btn-default">New Hotel</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

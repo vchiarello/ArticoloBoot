@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title th:text="#{app.name}">List of Hotels</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.1.1/css/bootstrap.min.css}"
+          href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.1.1/css/bootstrap-theme.css}"
+          href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" th:href="@{/css/application.css}" href="../../static/css/application.css"/>
+    <link rel="stylesheet" th:href="@{/css/bgStyle.css}" href="../../static/css/bgStyle.css"/>
+    <script th:src="@{/webjars/jquery/2.1.0/jquery.js}" src="jquery.js"></script>
+    <script th:src="@{/webjars/bootstrap/3.1.1/js/bootstrap.js}"
+            src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
+    <script th:src="@{/webjars/angularjs/1.3.0/angular.min.js}"
+            src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+    <script th:src="@{/webjars/nervgh-angular-file-upload/1.1.5/angular-file-upload.min.js}"
+            src="//ajax.googleapis.com/nervgh-angular-file-upload/1.1.5/angular-file-upload.min.js"></script>
+    <script th:src="@{/webjars/angularjs/1.3.0/angular-resource.min.js}" src="#"></script>
+    <script th:src="@{/webjars/angular-ui-router/0.2.8/angular-ui-router.min.js}" src="#"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var URLS = {};
+        URLS.items = /*[[@{/rest/items/:id}]]*/ '/rest/items';
+        URLS.partialsListItem = /*[[@{/items/partialsListItem}]]*/ '/items/partialsListItem';
+        URLS.partialsEditItem = /*[[@{/items/partialsEditItem}]]*/ '/items/partialsEditItem';
+        URLS.partialsCreateItem = /*[[@{/items/partialsCreateItem}]]*/ '/items/partialsCreateItem';
+        URLS.partialsCreateItemw1 = /*[[@{/items/partialsCreateItemw1}]]*/ '/items/partialsCreateItemw1';
+        URLS.partialsCreateItemw2 = /*[[@{/items/partialsCreateItemw2}]]*/ '/items/partialsCreateItemw2';
+        URLS.partialsCreateItemw3 = /*[[@{/items/partialsCreateItemw3}]]*/ '/items/partialsCreateItemw3';
+        URLS.tags = /*[[@{/rest/tags}]]*/ '/rest/tags';
+
+        URLS.hotels = /*[[@{/rest/hotels/:id}]]*/ '/hotels/rest';
+        URLS.partialsList = /*[[@{/hotels/partialsList}]]*/ '/hotels/partialsListVito';
+        URLS.partialsEdit = /*[[@{/hotels/partialsEdit}]]*/ '/hotels/partialsEdit';
+        URLS.partialsCreate = /*[[@{/hotels/partialsCreate}]]*/ '/hotels/partialsCreate';
+        URLS.mappingsUrl = /*[[@{/mappings}]]*/ '/mappings';
+        URLS.partialsMappings = /*[[@{/mappings/partialsMappings}]]*/ '/mappings/partialsEndpoints';
+        /*]]>*/
+    </script>
+    <script th:src="@{/js/app.js}" src="../../static/js/app.js"></script>
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Bootstrap theme</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+
+<div class="container-fluid">
+    <div layout:fragment="content">
+        <h1>Static content for prototyping purposes only</h1>
+
+        <p>
+            This is the layout of the site. The actual content will come from individual views making use of this layout
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/sitelayout">
+    <div th:fragment="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="name" class="col-xs-2">Name</label>
+
+                        <div class="col-xs-6">
+                            <input class="form-control" placeholder="Name" ng-model="item.nome"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address" class="col-xs-2">Testo</label>
+
+                        <div class="col-xs-6">
+                            <input class="form-control" placeholder="Address" ng-model="item.testo"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="zip" class="col-xs-2">Zip</label>
+
+                        <div class="col-xs-6">
+                            <input class="form-control" placeholder="Zip" ng-model="item.autore"/>
+                        </div>
+                    </div>
+                    <a class="btn btn-default" ng-click="updateHotel()">Submit</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</html>

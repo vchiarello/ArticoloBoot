@@ -1,0 +1,11 @@
+.listItem{
+	margin-top:18px;
+	margin-bottom:12px;
+	font-family:verdana;
+}
+.listItem > h1{
+	font-weight:bold;
+}
+.padding15Blog{
+	padding:15px;
+}

@@ -75,7 +75,7 @@ public class GestioneBlog {
 		if (item!=null) logger.debug("item trovato " + item.toString());
 		else logger.debug("Item trovato");
 		
-		return new ItemWeb(item);
+		return new ItemWeb(item, getAllTag());
 	}
 	
 	public List<Tag> getAllTag() {
@@ -119,12 +119,12 @@ public class GestioneBlog {
 				}
 			}	
 	
-		if (itemWeb.getTag()!=null)	{
-			for (int i = 0; i < itemWeb.getTag().size();i++){
+		if (itemWeb.getTagSelezionati()!=null)	{
+			for (int i = 0; i < itemWeb.getTagSelezionati().size();i++){
 				LkTagItem lk = new LkTagItem();
 				lk.setItem(itemSalvato);
 				Tag t = new Tag();
-				t.setId(itemWeb.getTag().get(i));
+				t.setId(itemWeb.getTagSelezionati().get(i).id);
 				lk.setTag(t);
 				lkTagItemRepository.save(lk);
 				

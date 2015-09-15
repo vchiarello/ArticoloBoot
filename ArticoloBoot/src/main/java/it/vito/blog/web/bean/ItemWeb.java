@@ -1,7 +1,9 @@
 package it.vito.blog.web.bean;
 
+import it.vito.blog.db.bean.Allegato;
 import it.vito.blog.db.bean.Item;
 import it.vito.blog.db.bean.LkTagItem;
+import it.vito.blog.db.bean.Tag;
 import it.vito.blog.db.bean.TipoItem;
 
 import java.util.Date;
@@ -13,7 +15,6 @@ public class ItemWeb {
 
 	private Integer id;
 	private Integer tipoItem;
-	private List<Integer> tag;
 	private String testo;
 	private String titolo;
 	private String nome;
@@ -22,9 +23,48 @@ public class ItemWeb {
 	private Date dataPubblicazione;
 	private Date dataModifica;
 	private List<String> listaFile;
+	private List<FileSalvato> listaFileSalvati;
+	private List<Option> tagDisponibili;
+	private List<Option> tagSelezionati;
+	
 	
 	public ItemWeb(){
 		
+	}
+	
+	public ItemWeb(Item item, List<Tag> tags){
+		if (item==null) return; 
+		this.autore=item.getAutore();
+		this.dataModifica=item.getDataModifica();
+		this.dataPubblicazione=item.getDataPubblicazione();
+		this.id=item.getId();
+		this.nome=item.getNome();
+		this.riassunto=item.getRiassunto();
+		
+		if (tags !=null){
+			this.tagDisponibili = new LinkedList<Option>();
+			for (int i = 0; i < tags.size();i++)
+				this.tagDisponibili.add(new Option(tags.get(i).getId(), tags.get(i).getNomeTag()));
+		}
+		
+		if (item.getTag()!=null){
+			this.tagSelezionati= new LinkedList<Option>();
+			for (Iterator<LkTagItem> i = item.getTag().iterator(); i.hasNext();){
+				Tag t = i.next().getTag();
+				this.tagSelezionati.add(new Option(t.getId(),t.getNomeTag()));
+			}
+		}
+		
+		if (item.getAllegati()!=null)
+			this.listaFileSalvati=new LinkedList<FileSalvato>();
+			for (Iterator<Allegato> i = item.getAllegati().iterator(); i.hasNext();){
+				Allegato a = i.next();
+				this.listaFileSalvati.add(new FileSalvato(a.getId(), a.getNomeAllegato()));
+			}
+		
+		this.testo=item.getTesto();
+		this.tipoItem=item.getTipoItem().getId();
+		this.titolo=item.getTitolo();
 	}
 	
 	public ItemWeb(Item item){
@@ -36,11 +76,19 @@ public class ItemWeb {
 		this.nome=item.getNome();
 		this.riassunto=item.getRiassunto();
 		if (item.getTag()!=null){
-			this.tag= new LinkedList<Integer>();
+			this.tagSelezionati= new LinkedList<Option>();
 			for (Iterator<LkTagItem> i = item.getTag().iterator(); i.hasNext();){
-				this.tag.add(i.next().getTag().getId());
+				LkTagItem lk = i.next();
+				this.tagSelezionati.add(new Option(lk.getTag().getId(), lk.getTag().getNomeTag()));
 			}
 		}
+		
+		if (item.getAllegati()!=null)
+			for (Iterator<Allegato> i = item.getAllegati().iterator(); i.hasNext();){
+				if (this.listaFileSalvati ==null)this.listaFileSalvati=new LinkedList<FileSalvato>();
+				Allegato a = i.next();
+				this.listaFileSalvati.add(new FileSalvato(a.getId(), a.getNomeAllegato()));
+			}
 		this.testo=item.getTesto();
 		this.tipoItem=item.getTipoItem().getId();
 		this.titolo=item.getTitolo();
@@ -75,12 +123,6 @@ public class ItemWeb {
 	}
 	public void setTipoItem(Integer tipoItem) {
 		this.tipoItem = tipoItem;
-	}
-	public List<Integer> getTag() {
-		return tag;
-	}
-	public void setTag(List<Integer> tag) {
-		this.tag = tag;
 	}
 	public String getTesto() {
 		return testo;
@@ -132,10 +174,35 @@ public class ItemWeb {
 	public void setListaFile(List<String> listaFile) {
 		this.listaFile = listaFile;
 	}
+	
+
+	public List<FileSalvato> getListaFileSalvati() {
+		return listaFileSalvati;
+	}
+
+	public void setListaFileSalvati(List<FileSalvato> listaFileSalvati) {
+		this.listaFileSalvati = listaFileSalvati;
+	}
+
+	public List<Option> getTagDisponibili() {
+		return tagDisponibili;
+	}
+
+	public void setTagDisponibili(List<Option> tagDisponibili) {
+		this.tagDisponibili = tagDisponibili;
+	}
+
+	public List<Option> getTagSelezionati() {
+		return tagSelezionati;
+	}
+
+	public void setTagSelezionati(List<Option> tagSelezionati) {
+		this.tagSelezionati = tagSelezionati;
+	}
 
 	@Override
 	public String toString() {
-		return "ItemWeb [id=" + id + ", tipoItem=" + tipoItem + ", tag=" + tag
+		return "ItemWeb [id=" + id + ", tipoItem=" + tipoItem + ", tag=" + tagSelezionati
 				+ ", testo=" + testo + ", titolo=" + titolo + ", nome=" + nome
 				+ ", riassunto=" + riassunto + ", autore=" + autore
 				+ ", dataPubblicazione=" + dataPubblicazione
@@ -143,5 +210,22 @@ public class ItemWeb {
 				+ "]";
 	}
 	
+	public class FileSalvato{
+		FileSalvato(Integer idAllegato, String nomeAllegato){
+			this.idAllegato=idAllegato;
+			this.nomeAllegato=nomeAllegato;
+		}
+		public Integer idAllegato;
+		public String nomeAllegato;
+	}
+	
+	public class Option{
+		Option(Integer idOption, String nameOption){
+			this.id=idOption;
+			this.name=nameOption;
+		}
+		public Integer id;
+		public String name;
+	}
 	
 }

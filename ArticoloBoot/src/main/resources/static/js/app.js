@@ -160,9 +160,18 @@ app.controller("HotelEditCtrl", function ($scope, Hotel, $state, $stateParams) {
     init();
 });
 
-app.controller("ItemEditCtrl", function ($scope, Item, $state, $stateParams) {
+app.controller("ItemEditCtrl", function ($scope,  Tag, Item, $state, $stateParams) {
     function init() {
         $scope.item = Item.get({id:$stateParams.itemId})
+        $scope.getTags();
+        $scope.data = {
+        	    availableTags: [
+        	      {id: '1', name: 'Option A'},
+        	      {id: '2', name: 'Option B'},
+        	      {id: '3', name: 'Option C'}
+        	    ],
+        	    selectedTags: [{id: '3', name: 'Option C'}, {id: '2', name: 'Option B'}] //This sets the default value of the select in the ui
+        	    };
     }
 
     $scope.updateHotel = function() {
@@ -171,6 +180,13 @@ app.controller("ItemEditCtrl", function ($scope, Item, $state, $stateParams) {
            $state.transitionTo("homeItem");
        }) ;
     }
+    
+    $scope.getTags = function () {
+        $scope.listaTags = Tag.query();
+    };
+
+
+    
     init();
 });
 

@@ -109,7 +109,7 @@ public class GestioneBlog {
 					alle.setDataPubblicazione(new Date());
 					alle.setNomeAllegato(itemWeb.getListaFile().get(i));
 					Item item = new Item();
-					item.setId(1);
+					item.setId(itemSalvato.getId());
 					alle.setArticolo(item);
 					
 					allegatoRepository.save(alle);

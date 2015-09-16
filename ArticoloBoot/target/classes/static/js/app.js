@@ -193,16 +193,38 @@ app.controller("ItemEditCtrl", function ($scope,  Tag, Item, $state, $stateParam
 app.controller("ItemCreateCtrl", function ($scope, Tag, Item, $state, $stateParams, FileUploader) {
 
 	
+    $scope.cancel = function () {
+        $state.transitionTo("homeItem");
+    }
+
     $scope.createItem = function () {
         var item = new Item($scope.item);
-        for (i = 0; i < uploader.queue.length;i++)
+        var attendi = false;
+        for (i = 0; i < uploader.queue.length;i++){
+    		if (item.listaFile===undefined) item.listaFile=new Array();
+        	item.listaFile[i]=uploader.queue[i].file.name;
         	if (uploader.queue[i].isSuccess){
-        		if (item.listaFile===undefined) item.listaFile=new Array();
-        		item.listaFile[i]=uploader.queue[i].file.name;
+        	}else{
+        		attendi=true;
+        		uploader.queue[i].upload();
         	}
-        item.$save({}, function() {
-            $state.transitionTo("homeItem");
-        })
+        }
+        
+        if (attendi){
+	        uploader.onCompleteAll = function() {
+	            item.$save({}, function() {
+	                $state.transitionTo("homeItem");
+	            })
+	        };
+        }else{
+        	item.$save({}, function() {
+                $state.transitionTo("homeItem");
+            })
+        }    
+//        item.$save({}, function() {
+//            $state.transitionTo("homeItem");
+//        })
+        
 
     };
 

@@ -22,6 +22,7 @@ import it.vito.blog.db.dao.ItemRepository;
 import it.vito.blog.db.dao.LkTagItemRepository;
 import it.vito.blog.db.dao.TagRepository;
 import it.vito.blog.web.bean.ItemWeb;
+import it.vito.blog.web.bean.Option;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,14 +76,24 @@ public class GestioneBlog {
 		if (item!=null) logger.debug("item trovato " + item.toString());
 		else logger.debug("Item trovato");
 		
-		return new ItemWeb(item, getAllTag());
+		return new ItemWeb(item, tagRepository.findAll());
 	}
 	
-	public List<Tag> getAllTag() {
+	public List<Option> getAllTag() {
 		List<Tag> l = tagRepository.findAll();
-		if (l!=null) logger.debug("Trovati " + l.size() + " tag...");
-		else logger.debug("Nessun tag trovato");
-		return l;
+
+		if (l==null) {
+			logger.debug("Nessun tag trovato");
+			return null;
+		}
+		
+		logger.debug("Trovati " + l.size() + " tag...");
+		List<Option> risultato = new LinkedList<Option>();
+		for (int i = 0; i < l.size();i++){
+			risultato.add(new Option(l.get(i).getId(),l.get(i).getNomeTag()));
+		}
+		
+		return risultato;
 	}
 	
 	

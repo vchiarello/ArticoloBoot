@@ -49,8 +49,12 @@
                         <label for="autore" class="col-xs-2">Tag</label>
 
                         <div class="col-xs-6">
-                            <select ng-model="item.tag" multiple="multiple" size="3">
-                            	<option ng-repeat="tag in listaTags" value="{{tag.id}}">{{tag.nomeTag}}</option>
+                            
+                            
+                             <select multiple="multiple" size="3"
+                            ng-options="option.name for option in listaTags track by option.id"
+                             ng-model="item.tagSelezionati"
+                            >
                             </select>
                         </div>
                     </div>

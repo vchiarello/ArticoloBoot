@@ -3,6 +3,7 @@ package it.vito.blog.web;
 import it.vito.blog.business.GestioneBlog;
 import it.vito.blog.db.bean.Tag;
 import it.vito.blog.db.dao.TagRepository;
+import it.vito.blog.web.bean.Option;
 
 import java.util.List;
 
@@ -24,9 +25,9 @@ public class TagRestController {
 	
 
 	@RequestMapping(method=RequestMethod.GET)
-	public List<Tag> list() {
+	public List<Option> list() {
 		logger.debug("Get lista tag...");
-		List<Tag> l = gestioneBlog.getAllTag();
+		List<Option> l = gestioneBlog.getAllTag();
 		return l;
 	}
 	

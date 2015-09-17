@@ -22,10 +22,12 @@ public class ItemWeb {
 	private String autore;
 	private Date dataPubblicazione;
 	private Date dataModifica;
-	private List<String> listaFile;
-	private List<FileSalvato> listaFileSalvati;
+	private String nuoviTag;
 	private List<Option> tagDisponibili;
 	private List<Option> tagSelezionati;
+	private List<String> listaFile;
+	private List<FileSalvato> listaFileSalvati;
+	private List<Integer> listaFileDaCancellare;
 	
 	
 	public ItemWeb(){
@@ -200,6 +202,22 @@ public class ItemWeb {
 		this.tagSelezionati = tagSelezionati;
 	}
 
+	public List<Integer> getListaFileDaCancellare() {
+		return listaFileDaCancellare;
+	}
+
+	public void setListaFileDaCancellare(List<Integer> listaFileDaCancellare) {
+		this.listaFileDaCancellare = listaFileDaCancellare;
+	}
+
+	public String getNuoviTag() {
+		return nuoviTag;
+	}
+
+	public void setNuoviTag(String nuoviTag) {
+		this.nuoviTag = nuoviTag;
+	}
+
 	@Override
 	public String toString() {
 		return "ItemWeb [id=" + id + ", tipoItem=" + tipoItem + ", tag=" + tagSelezionati
@@ -210,22 +228,6 @@ public class ItemWeb {
 				+ "]";
 	}
 	
-	public class FileSalvato{
-		FileSalvato(Integer idAllegato, String nomeAllegato){
-			this.idAllegato=idAllegato;
-			this.nomeAllegato=nomeAllegato;
-		}
-		public Integer idAllegato;
-		public String nomeAllegato;
-	}
 	
-	public class Option{
-		Option(Integer idOption, String nameOption){
-			this.id=idOption;
-			this.name=nameOption;
-		}
-		public Integer id;
-		public String name;
-	}
 	
 }

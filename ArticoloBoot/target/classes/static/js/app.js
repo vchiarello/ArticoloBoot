@@ -85,7 +85,7 @@ app.factory("Item", function ($resource) {
 	if (document.querySelector('input[name="_csrf"]') !=null) 	
 		csrf_token = document.querySelector('input[name="_csrf"]').getAttribute('value');
     return $resource(URLS.items, {id: "@id"}, {
-        update: {method: 'PUT'},
+        update: {method: 'PUT', headers: {'X-CSRF-TOKEN': csrf_token}},
         save: {method: 'POST', headers: {'X-CSRF-TOKEN': csrf_token}}
     });
 });
@@ -160,30 +160,86 @@ app.controller("HotelEditCtrl", function ($scope, Hotel, $state, $stateParams) {
     init();
 });
 
-app.controller("ItemEditCtrl", function ($scope,  Tag, Item, $state, $stateParams) {
+app.controller("ItemEditCtrl", function ($scope,  Tag, Item, $state, $stateParams, FileUploader) {
     function init() {
         $scope.item = Item.get({id:$stateParams.itemId})
-        $scope.getTags();
-        $scope.data = {
-        	    availableTags: [
-        	      {id: '1', name: 'Option A'},
-        	      {id: '2', name: 'Option B'},
-        	      {id: '3', name: 'Option C'}
-        	    ],
-        	    selectedTags: [{id: '3', name: 'Option C'}, {id: '2', name: 'Option B'}] //This sets the default value of the select in the ui
-        	    };
     }
 
     $scope.updateHotel = function() {
        var item = new Item($scope.item);
-       item.$update().then(function() {
-           $state.transitionTo("homeItem");
-       }) ;
+       var attendi = false;
+       for (i = 0; i < uploader.queue.length;i++){
+			if (item.listaFile===undefined || item.listaFile==null) item.listaFile=new Array();
+			item.listaFile[i]=uploader.queue[i].file.name;
+			if (!uploader.queue[i].isSuccess){
+				attendi=true;
+	       		uploader.queue[i].upload();
+			}
+       }
+       
+       if (attendi){
+	        uploader.onCompleteAll = function() {
+	            item.$update().then(function() {
+	                $state.transitionTo("homeItem");
+	            });
+	        };
+       }else{
+           item.$update().then(function() {
+               $state.transitionTo("homeItem");
+           });
+       }    
+       
     }
     
     $scope.getTags = function () {
         $scope.listaTags = Tag.query();
     };
+
+	var csrf_token = "";
+	if (	document.querySelector('input[name="_csrf"]')!=null)
+		csrf_token = document.querySelector('input[name="_csrf"]').getAttribute('value');
+
+    var uploader = $scope.uploader = new FileUploader({
+        url: '/rest/upload',
+        headers : {
+        	'X-CSRF-TOKEN': csrf_token
+            }
+    });
+    
+    $scope.labelCancellaRipristina = function ( id){
+    	return _labelCancellaRipristina(id);
+    }
+    
+    function _labelCancellaRipristina (id){
+    	if ($scope.item.listaFileDaCancellare==null) return "cancella";
+    	for (i = 0; i < $scope.item.listaFileDaCancellare.length; i++){
+    		if ($scope.item.listaFileDaCancellare[i]==id)return "ripristina";
+    	}
+    	return "cancella";
+    }
+
+    $scope.cancellaRipristina = function (id){    	
+    	if (_labelCancellaRipristina(id)=="cancella") cancella(id);
+    	else ripristina(id);
+    }
+
+     function cancella(id){
+    	if ($scope.item.listaFileSalvati==null) return ;
+    	
+    	if ($scope.item.listaFileDaCancellare==null) $scope.item.listaFileDaCancellare= new Array();
+        	$scope.item.listaFileDaCancellare.push(id);
+    		
+    }
+
+    function ripristina (id){
+    	if ($scope.item.listaFileSalvati==null||$scope.item.listaFileDaCancellare==null) return ;
+    	for (i = 0; i < $scope.item.listaFileDaCancellare.length; i++){
+    		if ($scope.item.listaFileDaCancellare[i]==id){
+    			$scope.item.listaFileDaCancellare.splice(i,1);
+    			return;
+    		}
+    	}
+    }
 
 
     

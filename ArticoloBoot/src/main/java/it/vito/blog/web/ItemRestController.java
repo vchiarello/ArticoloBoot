@@ -48,6 +48,11 @@ public class ItemRestController {
 		return this.gestioneBlog.saveItem(itemWeb);
 	}
 
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ItemWeb update(@PathVariable("id") int id, @RequestBody @Valid ItemWeb itemWeb) {
+		return this.gestioneBlog.saveItem(itemWeb);
+	}
+
 	
 /*
 	@RequestMapping(value="/lista", method = RequestMethod.GET)

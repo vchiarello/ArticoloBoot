@@ -1,0 +1,10 @@
+- Create: da aggiungere la creazione dei nuovi tag, quelli non presenti nella combo
+- Create: aggiustare la grafica
+- Create: modificare la grafica renderla più decente
+
+- Edit: da aggiungere la creazione dei nuovi tag, quelli non presenti nella combo
+- Edit: da aggiungere la cancellazione dei file caricati precedentemente
+- Edit: da aggiungere l'aggiunta dei file nuovi
+- Edit: da aggiustare la navigazione
+- Edit: aggiustare la grafica
+

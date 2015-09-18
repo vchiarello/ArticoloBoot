@@ -22,6 +22,14 @@ public class Tag implements Serializable, Comparable<Tag>{
 	 */
 	private static final long serialVersionUID = -7480211732650170822L;
 
+	public Tag(){
+		
+	}
+	
+	public Tag(String nomeTag){
+		this.nomeTag=nomeTag;
+	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_Tag")

@@ -102,47 +102,82 @@ public class GestioneBlog {
 		
 		logger.debug("Salvataggio Item...");
 
+		//salvataggio, in anagrafica tag, dei nuovi tag eventualmente inseriti
+		Tag[] tags = null;
+		if (itemWeb.getNuoviTag()!=null){
+			String[] nuoviTag = itemWeb.getNuoviTag().split("[,.;]");
+			if (nuoviTag != null && nuoviTag.length>0)
+				tags = salvaNuoviTag(nuoviTag);
+		}
+		
+		//salvataggio del nuovo item
 		Item itemSalvato = itemRepository.save(itemWeb.toItem());
 		
+		//salvataggio degli allegati
 		if (itemWeb.getListaFile()!=null)
-			for (int i = 0; i < itemWeb.getListaFile().size();i++){
-				Allegato alle = new Allegato();
-				try {
-					//FileInputStream fis = new FileInputStream(new File(itemWeb.getListaFile().get(i)));
-					ByteArrayOutputStream bao = new ByteArrayOutputStream();
-					File f = new File(pathFile+"/"+itemWeb.getListaFile().get(i));
-					//Files.probeContentType(FileSystems.getDefault().getPath(pathFile, itemWeb.getListaFile().get(i)));
-					logger.debug("File letto da: " + f.getAbsolutePath());
-					org.apache.commons.io.FileUtils.copyFile(f, bao);
-					alle.setDati(bao.toByteArray());
-					alle.setContentType(Files.probeContentType(FileSystems.getDefault().getPath(pathFile, itemWeb.getListaFile().get(i))));
-					alle.setDataModifica(new Date());
-					alle.setDataPubblicazione(new Date());
-					alle.setNomeAllegato(itemWeb.getListaFile().get(i));
-					Item item = new Item();
-					item.setId(itemSalvato.getId());
-					alle.setArticolo(item);
-					
-					allegatoRepository.save(alle);
-				} catch (IOException ioe) {
-					// TODO Auto-generated catch block
-					ioe.printStackTrace();
-				}
-			}	
+			for (int i = 0; i < itemWeb.getListaFile().size();i++)
+				salvaAllegato(itemWeb.getListaFile().get(i), itemSalvato.getId());
 	
-		if (itemWeb.getTagSelezionati()!=null)	{
-			for (int i = 0; i < itemWeb.getTagSelezionati().size();i++){
-				LkTagItem lk = new LkTagItem();
-				lk.setItem(itemSalvato);
-				Tag t = new Tag();
-				t.setId(itemWeb.getTagSelezionati().get(i).id);
-				lk.setTag(t);
-				lkTagItemRepository.save(lk);
-				
-			}
-		}
+		//assegnazione dei tag vecchi all'item
+		if (itemWeb.getTagSelezionati()!=null)	
+			for (int i = 0; i < itemWeb.getTagSelezionati().size();i++)
+				salvaLtTagItem(itemSalvato,itemWeb.getTagSelezionati().get(i).id);
+			
+		//assegnazione dei tag nuovi all'item
+		if (tags!=null)	
+			for (int i = 0; i < tags.length;i++)
+				salvaLtTagItem(itemSalvato,tags[i].getId());
+
+		//cancellazione degli eventuali file da cancellare
+		if (itemWeb.getListaFileDaCancellare()!=null && itemWeb.getListaFileDaCancellare().size()>0)
+			for (int i=0;i < itemWeb.getListaFileDaCancellare().size();i++)
+				this.allegatoRepository.delete(itemWeb.getListaFileDaCancellare().get(i));
 		
 		return risultato;
 	}
 	
+	public Tag[] salvaNuoviTag(String[] nuoviTag){
+		if (nuoviTag==null || nuoviTag.length==0)return null;
+		Tag[] risultato = new Tag[nuoviTag.length];
+		for (int i= 0; i < nuoviTag.length;i++){
+			risultato[i]=this.tagRepository.save(new Tag(nuoviTag[i]));
+		}
+		return risultato;
+	}
+	
+	public void salvaAllegato(String nomeFile, Integer idItem){
+		Allegato alle = new Allegato();
+		try {
+			//FileInputStream fis = new FileInputStream(new File(itemWeb.getListaFile().get(i)));
+			ByteArrayOutputStream bao = new ByteArrayOutputStream();
+			File f = new File(pathFile+"/"+nomeFile);
+			//Files.probeContentType(FileSystems.getDefault().getPath(pathFile, itemWeb.getListaFile().get(i)));
+			logger.debug("File letto da: " + f.getAbsolutePath());
+			org.apache.commons.io.FileUtils.copyFile(f, bao);
+			alle.setDati(bao.toByteArray());
+			alle.setContentType(Files.probeContentType(FileSystems.getDefault().getPath(pathFile, nomeFile)));
+			alle.setDataModifica(new Date());
+			alle.setDataPubblicazione(new Date());
+			alle.setNomeAllegato(nomeFile);
+			Item item = new Item();
+			item.setId(idItem);
+			alle.setArticolo(item);
+			
+			allegatoRepository.save(alle);
+		} catch (IOException ioe) {
+			// TODO Auto-generated catch block
+			ioe.printStackTrace();
+		}
+	}
+	
+	public void salvaLtTagItem(Item itemSalvato, Integer idTag){
+		LkTagItem lk = new LkTagItem();
+		lk.setItem(itemSalvato);
+		Tag t = new Tag();
+		t.setId(idTag);
+		lk.setTag(t);
+		lkTagItemRepository.save(lk);
+	}
+	
+
 }

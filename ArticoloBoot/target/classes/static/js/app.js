@@ -241,6 +241,9 @@ app.controller("ItemEditCtrl", function ($scope,  Tag, Item, $state, $stateParam
     	}
     }
 
+    $scope.cancel = function () {
+        $state.transitionTo("homeItem");
+    }
 
     
     init();

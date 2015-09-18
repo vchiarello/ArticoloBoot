@@ -51,15 +51,22 @@
                         
                     </div>
                     <div class="form-group">
-                        <label for="autore" class="col-xs-2">Tag</label>
+                        <label for="tag" class="col-xs-2">Tag</label>
 
                         <div class="col-xs-6">
-                            <select multiple="multiple" size="3"
+                            <select multiple="multiple" size="3" name="tag"
                             ng-options="option.name for option in item.tagDisponibili track by option.id"
                              ng-model="item.tagSelezionati"
                             >
                             </select>
                         </div>
+                        
+                        <label for="nuovoTag" class="col-xs-2">Nuovi Tag</label>
+
+                        <div class="col-xs-6">
+                            <input class="form-control" placeholder="Nuovi tag" ng-model="item.nuoviTag"/>
+                        </div>
+                        
                     </div>
                     
                     					<div style="display:block;">
@@ -135,6 +142,7 @@
                     
                     
                     <a class="btn btn-default" ng-click="updateHotel()">Submit</a>
+                    <a class="btn btn-default" ng-click="cancel()">Annulla</a>
                 </form>
             </div>
         </div>

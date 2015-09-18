@@ -12,5 +12,7 @@ public interface TagRepository extends CrudRepository<Tag, Integer>{
 	public List<Tag> findAll();
 	
 	public Tag findById(Integer id);
-	
+
+	@SuppressWarnings("unchecked")
+	public Tag save(Tag t);
 }

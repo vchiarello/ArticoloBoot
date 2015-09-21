@@ -7,6 +7,7 @@ import it.vito.blog.web.bean.Option;
 
 import java.util.List;
 
+//test merge
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

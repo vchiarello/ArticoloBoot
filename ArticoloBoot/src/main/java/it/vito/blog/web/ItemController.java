@@ -16,6 +16,7 @@ public class ItemController {
 
 	@RequestMapping(value="/items", method=RequestMethod.GET)
 	public String list(Model model) {
+		logger.debug("View item/homeItem.");
 		return "items/homeItem";
 	}
 

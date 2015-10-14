@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/sitelayout">
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/sitelayout" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <div th:fragment="content">
     	<form th:action="@{/}" class="form-horizontal" method="post">
         <div class="row">
             <div class="col-xs-12"  ng-repeat="item in items">
 				<div class="col-xs-12">
-					{{item.titolo}} <a ui-sref="edit({ itemId: item.id })">Edit</a>
+					{{item.titolo}} <a sec:authorize="hasRole('ROLE_ADMIN')"  ui-sref="edit({ itemId: item.id })">Edit</a>
 				</div>
 				<div class="col-xs-12">
 					{{item.riassunto}}

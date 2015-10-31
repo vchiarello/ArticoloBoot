@@ -6,7 +6,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 	
 	
 	
-    $urlRouterProvider.otherwise("homeItem");
+    $urlRouterProvider.otherwise("createItem");
 
     $stateProvider
 	    .state('login', {

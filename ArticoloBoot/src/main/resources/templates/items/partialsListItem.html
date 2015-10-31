@@ -1,32 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/sitelayout" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org">
     <div th:fragment="content">
-    	<form th:action="@{/}" class="form-horizontal" method="post">
-        <div class="row">
-            <div class="col-xs-12"  ng-repeat="item in items">
-				<div class="col-xs-12">
-					{{item.titolo}} <a sec:authorize="hasRole('ROLE_ADMIN')"  ui-sref="edit({ itemId: item.id })">Edit</a>
-				</div>
-				<div class="col-xs-12">
-					{{item.riassunto}}
-				</div>
-				<div class="col-xs-12">
-					{{item.testo}}
-				</div>
-				<div class="col-xs-12">
-					{{item.autore}}
-				</div>
-				<div class="col-xs-12">
-					{{item.dataPubblicazione}}
-				</div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <a ui-sref="createItem" class="btn btn-default">New Item</a>
-                <a ui-sref="createItemw1" class="btn btn-default">New Item Flow</a>
-            </div>
-        </div>
-        </form>
+    	<div class="jumbotronVito">
+			<h1>Righe verticali</h1>
+			<p>Appunti di programmazione generalmente in java.</p>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+			  <div class="row"  ng-repeat="item in items">
+	
+			      <h3 class="titoloArticolo"><a ui-sref="edit({ itemId: item.id })">{{item.titolo}}</a></h3>
+			      <p class="previewArticolo"><a ui-sref="edit({ itemId: item.id })">{{item.riassunto}}</a></p>
+	
+	          </div>
+	        </div>
+	        <div class="col-md-4">
+			</div>
+		</div> 
+		
     </div>
 </html>

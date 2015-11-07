@@ -9,16 +9,32 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("homeItem");
 
     $stateProvider
-        .state('homeItem', {
-            url:'/homeItem',
-            templateUrl: URLS.partialsListItem,
-            controller: 'ItemCtrl'
-        }).state('edit', {
+	    .state('login', {
+	        url:'/login',
+	        templateUrl: URLS.login,
+	        controller: 'LoginCtrl'
+	    }).state('homeItem', {
+	        url:'/homeItem',
+	        templateUrl: URLS.partialsListItem,
+	        controller: 'ItemCtrl'
+	    }).state('homeEditListItem', {
+	        url:'/homeEditListItem',
+	        templateUrl: URLS.partialsEditList,
+	        controller: 'EditListCtrl'
+	    }).state('edit', {
             url:'/edit/:itemId',
             templateUrl: URLS.partialsEditItem,
             controller: 'ItemEditCtrl'
+	    }).state('view', {
+            url:'/view/:itemId',
+            templateUrl: URLS.partialsViewItem,
+            controller: 'ViewItemCtrl'
         }).state('createItem', {
             url:'/createItem',
+            templateUrl: URLS.partialsCreateItem,
+            controller: 'ItemCreateCtrl'
+        }).state('viewItem', {
+            url:'/viewItem',
             templateUrl: URLS.partialsCreateItem,
             controller: 'ItemCreateCtrl'
         }).state('createItemw1', {
@@ -144,6 +160,37 @@ app.controller("ItemCtrl", function ($scope, Item, $state) {
 
    
     init();
+});
+
+app.controller("EditListCtrl", function ($scope, Item, $state) {
+    function init() {
+        $scope.getItems();
+    }
+
+
+    $scope.getItems = function () {
+        $scope.items = Item.query();
+    };
+
+   
+    init();
+});
+
+app.controller("ViewItemCtrl", function ($scope, Item, $stateParams, $state) {
+    function init() {
+        $scope.item = Item.get({id:$stateParams.itemId})
+    }
+
+
+
+   
+    init();
+});
+
+
+
+
+app.controller("LoginCtrl", function ($scope, Item, $state) {
 });
 
 app.controller("HotelEditCtrl", function ($scope, Hotel, $state, $stateParams) {

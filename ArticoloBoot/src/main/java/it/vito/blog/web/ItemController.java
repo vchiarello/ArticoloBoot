@@ -26,12 +26,4 @@ public class ItemController {
 		return "items/editListItem";
 	}
 
-	@RequestMapping(value="/createItem", method=RequestMethod.GET)
-	public String createItem(Model model) {
-		logger.debug("Create item.");
-		return "items/partialsCreateItem";
-	}
-
-
-
 }

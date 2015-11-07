@@ -7,10 +7,11 @@
 		</div>
 		<div class="row">
 			<div class="col-md-8">
-			  <div class="row"  ng-repeat="item in items">
+			  <div class="row"  >
 	
-			      <h3 class="titoloArticolo"><a ui-sref="view({ itemId: item.id })">{{item.titolo}}</a></h3>
-			      <p class="previewArticolo"><a ui-sref="view({ itemId: item.id })">{{item.riassunto}}</a></p>
+			      <h3 class="titoloArticolo"><a ui-sref="edit({ itemId: item.id })">{{item.titolo}}</a></h3>
+			      <p class="previewArticolo"><a ui-sref="edit({ itemId: item.id })">{{item.riassunto}}</a></p>
+			      <p class="previewArticolo"><a ui-sref="edit({ itemId: item.id })">{{item.testo}}</a></p>
 	
 	          </div>
 	        </div>

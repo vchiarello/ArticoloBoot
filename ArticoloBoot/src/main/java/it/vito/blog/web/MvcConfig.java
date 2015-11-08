@@ -15,22 +15,17 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/items/partialsListItem").setViewName("items/partialsListItem::content");
 		registry.addViewController("/items/partialsEditItem").setViewName("items/partialsEditItem::content");
 		registry.addViewController("/items/partialsEditList").setViewName("items/editListItem::content");
-		
-		
 		registry.addViewController("/items/partialsCreateItem").setViewName("items/partialsCreateItem::content");
+		registry.addViewController("/login").setViewName("login");
+		
+		
+
 		registry.addViewController("/items/partialsCreateItemw1").setViewName("items/partialsCreateItemw1::content");
 		registry.addViewController("/items/partialsCreateItemw2").setViewName("items/partialsCreateItemw2::content");
 		registry.addViewController("/items/partialsCreateItemw3").setViewName("items/partialsCreateItemw3::content");
 		registry.addViewController("/items/login").setViewName("/items/login::content");
-		registry.addViewController("/login").setViewName("login");
 		registry.addViewController("/vito").setViewName("vito");
 		
-		registry.addViewController("/hotels/partialsListVito").setViewName("hotels/partialsListVito::content");
-		registry.addViewController("/hotels/partialsList").setViewName("hotels/partialsList::content");
-		registry.addViewController("/hotels/partialsCreate").setViewName("hotels/partialsCreate::content");
-		registry.addViewController("/hotels/partialsEdit").setViewName("hotels/partialsEdit::content");
-		registry.addViewController("/mappings/partialsMappings").setViewName("mappings/partialsMappings::content");
-
 	}
 	
 }

@@ -60,7 +60,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         });
 });
 
-
+//se si decidesse di fare un flow con angular si potrebbe utilizzare un factory con i vari metodi per settare le variabili 
+//con tutte le info delle maschere
 app.factory('itemWebflow', function () {
     var step1;
     var step2;
@@ -88,14 +89,10 @@ app.factory('itemWebflow', function () {
     }
 });
 
-app.factory("Hotel", function ($resource) {
-    return $resource(URLS.hotels, {id: "@id"}, {
-        update: {
-            method: 'PUT'
-        }
-    });
-});
-
+//oggetto che tiene le operazioni sull'oggetto Item. 
+//L'oggetto ritornato da questa factory è un oggetto $resource che permette
+//di chiamare dei servizi rest che lo riguardano.
+//https://docs.angularjs.org/api/ngResource/service/$resource
 app.factory("Item", function ($resource) {
 	var csrf_token = "";
 	if (document.querySelector('input[name="_csrf"]') !=null) 	
@@ -106,6 +103,10 @@ app.factory("Item", function ($resource) {
     });
 });
 
+//oggetto che tiene le operazioni sull'oggetto Tag. 
+//L'oggetto ritornato da questa factory è un oggetto $resource che permette
+//di chiamare dei servizi rest che lo riguardano.
+//https://docs.angularjs.org/api/ngResource/service/$resource
 app.factory("Tag", function ($resource) {
     return $resource(URLS.tags, {id: "@id"}, {
         update: {
@@ -122,37 +123,11 @@ app.factory("mappingsFactory", function($http) {
     return factory;
 });
 
-app.controller("HotelCtrl", function ($scope, Hotel, $state) {
-    function init() {
-        $scope.getHotels();
-    }
-
-
-    $scope.getHotels = function () {
-        $scope.hotels = Hotel.query();
-    };
-
-    $scope.deleteHotel = function (hotel) {
-        return hotel.$delete({}, function () {
-            $scope.hotels.splice($scope.hotels.indexOf(hotel), 1);
-        });
-    };
-
-    $scope.createHotel = function () {
-        var hotel = new Hotel($scope.hotel);
-        hotel.$save({}, function() {
-            $state.transitionTo("home");
-        });
-    };
-
-    init();
-});
-
+//controller della home page con la lista degli item
 app.controller("ItemCtrl", function ($scope, Item, $state) {
     function init() {
         $scope.getItems();
     }
-
 
     $scope.getItems = function () {
         $scope.items = Item.query();
@@ -162,6 +137,7 @@ app.controller("ItemCtrl", function ($scope, Item, $state) {
     init();
 });
 
+//controller della home che edit gli item solo per amministratori
 app.controller("EditListCtrl", function ($scope, Item, $state) {
     function init() {
         $scope.getItems();
@@ -176,13 +152,11 @@ app.controller("EditListCtrl", function ($scope, Item, $state) {
     init();
 });
 
+//controller per la visualizzaizone del singolo articolo
 app.controller("ViewItemCtrl", function ($scope, Item, $stateParams, $state) {
     function init() {
         $scope.item = Item.get({id:$stateParams.itemId})
     }
-
-
-
    
     init();
 });
@@ -193,20 +167,7 @@ app.controller("ViewItemCtrl", function ($scope, Item, $stateParams, $state) {
 app.controller("LoginCtrl", function ($scope, Item, $state) {
 });
 
-app.controller("HotelEditCtrl", function ($scope, Hotel, $state, $stateParams) {
-    function init() {
-        $scope.hotel = Hotel.get({id:$stateParams.hotelId})
-    }
-
-    $scope.updateHotel = function() {
-       var hotel = new Hotel($scope.hotel);
-       hotel.$update().then(function() {
-           $state.transitionTo("home");
-       }) ;
-    }
-    init();
-});
-
+//controller usato nell'edit degli item
 app.controller("ItemEditCtrl", function ($scope,  Tag, Item, $state, $stateParams, FileUploader) {
     function init() {
         $scope.item = Item.get({id:$stateParams.itemId})
@@ -296,6 +257,7 @@ app.controller("ItemEditCtrl", function ($scope,  Tag, Item, $state, $stateParam
     init();
 });
 
+//controller per la creazione degli item
 app.controller("ItemCreateCtrl", function ($scope, Tag, Item, $state, $stateParams, FileUploader) {
 
 	
@@ -358,6 +320,18 @@ app.controller("ItemCreateCtrl", function ($scope, Tag, Item, $state, $statePara
     init();
 });
 
+
+app.controller("MappingsCtrl", function($scope, $state, mappingsFactory) {
+    function init() {
+        mappingsFactory.getMappings().success(function(data) {
+           $scope.mappings = data;
+        });
+    }
+
+    init();
+});
+
+//controller per fare un wizard invece della singola pagina in edit/create
 app.controller("ItemCreateCtrl1", function ($scope, Tag,  $state, itemWebflow, FileUploader) {
 
 	$scope.createItem1 = function () {
@@ -393,16 +367,6 @@ app.controller("ItemCreateCtrl2", function ($scope, Tag, $state, itemWebflow, Fi
     $scope.getTags = function () {
         $scope.listaTags = Tag.query();
     };
-
-    init();
-});
-
-app.controller("MappingsCtrl", function($scope, $state, mappingsFactory) {
-    function init() {
-        mappingsFactory.getMappings().success(function(data) {
-           $scope.mappings = data;
-        });
-    }
 
     init();
 });

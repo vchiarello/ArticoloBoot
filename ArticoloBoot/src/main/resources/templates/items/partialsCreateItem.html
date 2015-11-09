@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/sitelayout" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/sitelayoutVito" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <div th:fragment="content">
+    	<div class="jumbotronVito">
+			<h1>Righe verticali</h1>
+			<p>Appunti di programmazione generalmente in java.</p>
+		</div>
         <div class="row">
             <div class="col-xs-12">
                 <form th:action="@{/rest/upload}" class="form-horizontal" method="post">

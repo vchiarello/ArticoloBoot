@@ -1,7 +1,6 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="blogApp">
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title th:text="#{app.name}">Righe verticali</title>
     <link rel="icon" th:href="@{/css/favicon.ico}" 	/>
@@ -28,9 +27,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
         var URLS = {};
         URLS.items = /*[[@{/rest/items/:id}]]*/ '/rest/items';
         URLS.partialsListItem = /*[[@{/items/partialsListItem}]]*/ '/items/partialsListItem';
-        URLS.partialsViewItem = /*[[@{/items/partialsViewItem}]]*/ '/items/partialsViewItem';
         URLS.partialsEditItem = /*[[@{/items/partialsEditItem}]]*/ '/items/partialsEditItem';
-        URLS.partialsEditList = /*[[@{/items/partialsEditList}]]*/ '/items/partialsEditList';
         URLS.partialsCreateItem = /*[[@{/items/partialsCreateItem}]]*/ '/items/partialsCreateItem';
         URLS.partialsCreateItemw1 = /*[[@{/items/partialsCreateItemw1}]]*/ '/items/partialsCreateItemw1';
         URLS.partialsCreateItemw2 = /*[[@{/items/partialsCreateItemw2}]]*/ '/items/partialsCreateItemw2';
@@ -58,14 +55,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a ui-sref="homeItem">Home</a></li>
+            <li class="active"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
             <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="#contact">Contact</a></li>
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a ui-sref="createItem">New item</a></li>
-                <li><a ui-sref="homeEditListItem" href="">Edit list</a></li>
+                <li><a ui-sref="createItemw1" href="">New item flow</a></li>
                 <li><a href="#">Another action</a></li>
                 <li><a href="#">Something else here</a></li>
                 <li role="separator" class="divider"></li>
@@ -80,12 +77,20 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
     </nav>
 
 
-<div class="container theme-showcase">
-    <div layout:fragment="content">
-        <div class="ui-view"></div>
-    </div>
+<div class="container-fluid" style="padding-top: 50px;">
+    <div th:fragment="content">
+    	<form th:action="@{/login}" class="form-horizontal" method="post">
+		 <div>
+		    User:<input type='text' name='username' value=''/>
+		    <br/>
+		    Password:<input type='password' name='password'/>
+		    <br/>
+		    <input name="submit" type="submit" value="Login"/>
+		    <br/>
+		 </div>
+        </form>
+	</div>
 </div>
 
 </body>
 </html>
-

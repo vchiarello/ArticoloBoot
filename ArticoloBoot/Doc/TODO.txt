@@ -6,5 +6,5 @@
 - multilanguage
 - visualizzazione corretta della data
 - inserimento transazioni
-
-
+- security con ldap
+pippo

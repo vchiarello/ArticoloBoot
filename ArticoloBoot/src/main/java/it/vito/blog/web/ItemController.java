@@ -16,8 +16,14 @@ public class ItemController {
 
 	@RequestMapping(value="/items", method=RequestMethod.GET)
 	public String list(Model model) {
+		logger.debug("List item/homeItem.");
 		return "items/homeItem";
 	}
 
+	@RequestMapping(value="/editListItems", method=RequestMethod.GET)
+	public String listEdit(Model model) {
+		logger.debug("Edit list item/editListItem.");
+		return "items/editListItem";
+	}
 
 }

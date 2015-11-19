@@ -18,8 +18,8 @@ import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @Configuration
 @EnableWebMvcSecurity
-@Profile("ldap")
-public class VitoSecurityLdap  extends WebSecurityConfigurerAdapter{
+@Profile("ldapApache")
+public class VitoSecurityLdapApache  extends WebSecurityConfigurerAdapter{
 
 	@Value("${managerDn}")
 	String managerDn; 

@@ -169,7 +169,9 @@ app.controller("LoginCtrl", function ($scope, Item, $state) {
 
 //controller usato nell'edit degli item
 app.controller("ItemEditCtrl", function ($scope,  Tag, Item, $state, $stateParams, FileUploader) {
-    function init() {
+	
+	//metodo che preleva l'item dal database
+	function init() {
         $scope.item = Item.get({id:$stateParams.itemId})
     }
 
@@ -213,6 +215,21 @@ app.controller("ItemEditCtrl", function ($scope,  Tag, Item, $state, $stateParam
         	'X-CSRF-TOKEN': csrf_token
             }
     });
+
+    //appena si aggiunge un file questo viene immediatamenta uploadato sul server
+    uploader.onAfterAddingFile = function(fileItem) {
+        fileItem.upload();
+    };
+    
+    uploader.onSuccessItem = function(fileItem, response, status, headers) {
+        console.info('onSuccessItem', fileItem, response, status, headers);
+		
+		if ($scope.item.listaFile===undefined || $scope.item.listaFile==null) $scope.item.listaFile=new Array();
+		$scope.item.listaFile[uploader.queue.length]=fileItem._file.name;
+		alert("aggiunto il file "+ fileItem._file.name + " alla lista");
+    };
+
+    
     
     $scope.labelCancellaRipristina = function ( id){
     	return _labelCancellaRipristina(id);
@@ -254,6 +271,7 @@ app.controller("ItemEditCtrl", function ($scope,  Tag, Item, $state, $stateParam
     }
 
     
+	//Appena si accede alla pagina si preleva l'item passato come parametro
     init();
 });
 

@@ -154,6 +154,7 @@ public class GestioneBlog {
 			//Files.probeContentType(FileSystems.getDefault().getPath(pathFile, itemWeb.getListaFile().get(i)));
 			logger.debug("File letto da: " + f.getAbsolutePath());
 			org.apache.commons.io.FileUtils.copyFile(f, bao);
+			
 			alle.setDati(bao.toByteArray());
 			alle.setContentType(Files.probeContentType(FileSystems.getDefault().getPath(pathFile, nomeFile)));
 			alle.setDataModifica(new Date());
@@ -162,6 +163,8 @@ public class GestioneBlog {
 			Item item = new Item();
 			item.setId(idItem);
 			alle.setArticolo(item);
+			
+			
 			
 			allegatoRepository.save(alle);
 		} catch (IOException ioe) {

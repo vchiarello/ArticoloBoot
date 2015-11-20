@@ -9,4 +9,6 @@ public interface AllegatoRepository extends CrudRepository<Allegato, Integer>{
 	@SuppressWarnings("unchecked")
 	public Allegato save(Allegato allegato);
 
+	public Allegato findOne(Integer id);
+
 }

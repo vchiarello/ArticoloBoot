@@ -50,6 +50,10 @@ public class GestioneBlog {
 	@Value("${pathFile}")
 	String pathFile;
 
+	public byte[] getAllegato(Integer idAllegato){
+		Allegato allegato = allegatoRepository.findOne(idAllegato);
+		return allegato.getDati();
+	}
 
 	public List<ItemWeb>getAllItem(){
 		logger.debug("Get lista item...");

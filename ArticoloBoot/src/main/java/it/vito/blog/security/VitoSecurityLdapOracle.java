@@ -47,8 +47,6 @@ public class VitoSecurityLdapOracle  extends WebSecurityConfigurerAdapter{
     public void configure(WebSecurity security){
         security.ignoring().antMatchers("/css/**","/images/**","/js/**","/webjars/**");
     }
-
-
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {

@@ -123,14 +123,12 @@ public class GestioneBlog {
 				salvaAllegato(itemWeb.getListaFile().get(i), itemSalvato.getId());
 	
 		//assegnazione dei tag vecchi all'item
-		if (itemWeb.getTagSelezionati()!=null)	
-			for (int i = 0; i < itemWeb.getTagSelezionati().size();i++)
-				salvaLtTagItem(itemSalvato,itemWeb.getTagSelezionati().get(i).id);
+		salvaLkTagItem(itemSalvato,itemWeb.getTagSelezionati());
 			
 		//assegnazione dei tag nuovi all'item
 		if (tags!=null)	
 			for (int i = 0; i < tags.length;i++)
-				salvaLtTagItem(itemSalvato,tags[i].getId());
+				salvaLkTagItem(itemSalvato,tags[i].getId());
 
 		//cancellazione degli eventuali file da cancellare
 		if (itemWeb.getListaFileDaCancellare()!=null && itemWeb.getListaFileDaCancellare().size()>0)
@@ -177,7 +175,36 @@ public class GestioneBlog {
 		}
 	}
 	
-	public void salvaLtTagItem(Item itemSalvato, Integer idTag){
+	private void salvaLkTagItem(Item itemSalvato, List<Option> tags ){
+		//se nessun tag è da salvare si esce
+		if (tags == null)return;
+		//lista tag salvati per l'item
+		List<LkTagItem> l = lkTagItemRepository.findByItem(itemSalvato);
+		
+		//per ogni tag da salvare
+		for (int i = 0; i < tags.size();i++){
+			//si verifica se già è assegnato
+			boolean trovato = false;
+			for (LkTagItem lkTagItem : l){
+				if (lkTagItem.getTag().getId()==tags.get(i).getId().intValue()){
+					trovato = true;
+					l.remove(lkTagItem);
+					break;
+				}
+			}
+			//se non è presente si salva
+			if (!trovato )
+				salvaLkTagItem(itemSalvato, tags.get(i).getId());
+		}
+		
+		//si cancellano tutti i tag vecchi non più associati
+		for (LkTagItem lkTagItem : l){
+			lkTagItemRepository.delete(lkTagItem);
+		}
+
+	}
+	
+	public void salvaLkTagItem(Item itemSalvato, Integer idTag){
 		LkTagItem lk = new LkTagItem();
 		lk.setItem(itemSalvato);
 		Tag t = new Tag();

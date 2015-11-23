@@ -3,7 +3,7 @@
     <div th:fragment="content">
     	<div class="jumbotronVito">
 			<h1>Righe verticali</h1>
-			<p>Appunti di programmazione generalmente in java.dddd</p>
+			<p>Appunti di programmazione generalmente in java.</p>
 		</div>
 		<form th:action="@{/rest/upload}" class="form-horizontal" method="post">
 
@@ -54,19 +54,6 @@
 				</div>
 	        </div>
 	        <div class="row">
-				<div class="form-group">
-					<div style="display: inline-block;">
-	                  	<p>file</p>
-	                  </div>
-				<div style="display: inline-block;">
-				     <ul>
-				         <li ng-repeat="ffff in item.listaFileSalvati" ><a href="/rest/download?idAllegato={{ffff.idAllegato}}" target="_blank">{{ffff.nomeAllegato}}</a> <a ng-click="cancellaRipristina(ffff.idAllegato)">{{labelCancellaRipristina(ffff.idAllegato)}}</a></li>
-				     </ul>
-				    </div>
-				    
-				</div>
-	        </div>
-	        <div class="row">
 	            <div class="form-group">
 	                <label for="tag" class="col-xs-2">Tag</label>
 	
@@ -93,81 +80,81 @@
 	        <div class="row">
 	                    
 				<div style="display:block;">
-			
-			                <div class="col-md-9" style="margin-bottom: 40px">
-			
-			                    <h3>Allegati</h3>
-			                   
-			                    <input type="file" nv-file-select="" uploader="uploader" multiple="multiple"  /><br/>
-			
-			                    <table class="table">
-			                        <thead>
-			                            <tr>
-			                                <th style="width:30%;" >Nome</th>
-			                                <th ng-show="uploader.isHTML5">Dimensione</th>
-			                                <th ng-show="uploader.isHTML5">Tipo</th>
-			                                <th ng-show="uploader.isHTML5">Progress</th>
-			                                <th>Stato</th>
-			                                <th>Azioni</th>
-			                            </tr>
-			                        </thead>
-			                        <tbody>
-			                            <tr ng-repeat="ffff in item.listaFileSalvati" >
-			                            	<td><strong><a href="/rest/download?idAllegato={{ffff.idAllegato}}" target="_blank">{{ffff.nomeAllegato}}</a></strong></td>
-			                                <td  nowrap="nowrap"></td>
-			                                <td ng-show="uploader.isHTML5" nowrap="nowrap"></td>
-			                                <td ng-show="uploader.isHTML5">
-			                                    <div class="progress" style="margin-bottom: 0;">
-			                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': '100%' }"></div>
-			                                    </div>
-			                                </td>
-			                                <td class="text-center">
-			                                    <span><i class="glyphicon glyphicon-ok"></i></span>
-			                                </td>
-			                                <td nowrap="nowrap">
-			                                    <button type="button" class="btn btn-danger btn-xs" ng-click="cancellaRipristina(ffff.idAllegato)">
-			                                        <span class="glyphicon glyphicon-trash"></span> Rimuovi
-			                                    </button>
-			                                    <button type="button" class="btn btn-danger btn-xs" ng-click="cancellaRipristina(ffff.idAllegato)">
-			                                        <span class="glyphicon glyphicon-repeat"></span> Ripristina
-			                                    </button>
-			                                </td>
-			                            </tr>
-			                        
-			                            <tr ng-repeat="item in uploader.queue">
-			                                <td><strong><a href="/rest/downloadTemp?nomeAllegato={{item.file.name}}" target="_blank">{{ item.file.name }}</a></strong></td>
-			                                <td ng-show="uploader.isHTML5" nowrap="nowrap">{{ item.file.size/1024/1024|number:2 }} MB</td>
-			                                <td ng-show="uploader.isHTML5" nowrap="nowrap">{{ item.file.type }}</td>
-			                                <td ng-show="uploader.isHTML5">
-			                                    <div class="progress" style="margin-bottom: 0;">
-			                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
-			                                    </div>
-			                                </td>
-			                                <td class="text-center">
-			                                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-			                                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
-			                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-			                                </td>
-			                                <td nowrap="nowrap">
-			                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-			                                        <span class="glyphicon glyphicon-trash"></span> Rimuovi
-			                                    </button>
-			                                </td>
-			                            </tr>
-			                        </tbody>
-			                    </table>
-			
-			                   
-			
-			                </div>
-			
-			            </div>
+	
+	                <div class="col-md-9" style="margin-bottom: 40px">
+	
+	                    <h3>Allegati</h3>
+	                   
+	                    <input type="file" nv-file-select="" uploader="uploader" multiple="multiple"  /><br/>
+	
+	                    <table class="table">
+	                        <thead>
+	                            <tr>
+	                                <th style="width:30%;" >Nome</th>
+	                                <th ng-show="uploader.isHTML5">Dimensione</th>
+	                                <th ng-show="uploader.isHTML5">Tipo</th>
+	                                <th ng-show="uploader.isHTML5">Progress</th>
+	                                <th>Stato</th>
+	                                <th style="width:15%;">Azioni</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+	                            <tr ng-repeat="ffff in item.listaFileSalvati" >
+	                            	<td><strong><a href="/rest/download?idAllegato={{ffff.idAllegato}}" target="_blank">{{ffff.nomeAllegato}}</a></strong></td>
+	                                <td  nowrap="nowrap"></td>
+	                                <td ng-show="uploader.isHTML5" nowrap="nowrap"></td>
+	                                <td ng-show="uploader.isHTML5">
+	                                </td>
+	                                <td class="text-center">
+	                                    <span><i class="glyphicon glyphicon-ok"></i></span>
+	                                </td>
+	                                <td nowrap="nowrap">
+	                                    <button type="button" class="btn btn-danger btn-xs" ng-click="cancellaRipristina(ffff.idAllegato)" ng-show="!isCancellato(ffff.idAllegato)">
+	                                        <span class="glyphicon glyphicon-trash"></span> Rimuovi
+	                                    </button>
+	                                    <button type="button" class="btn btn-danger btn-xs" ng-click="cancellaRipristina(ffff.idAllegato)" ng-show="isCancellato(ffff.idAllegato)">
+	                                        <span class="glyphicon glyphicon-repeat"></span> Ripristina
+	                                    </button>
+	                                </td>
+	                            </tr>
+	                        
+	                            <tr ng-repeat="item in uploader.queue">
+	                                <td><strong><a href="/rest/downloadTemp?nomeAllegato={{item.file.name}}" target="_blank">{{ item.file.name }}</a></strong></td>
+	                                <td ng-show="uploader.isHTML5" nowrap="nowrap">{{ item.file.size/1024/1024|number:2 }} MB</td>
+	                                <td ng-show="uploader.isHTML5" nowrap="nowrap">{{ item.file.type }}</td>
+	                                <td ng-show="uploader.isHTML5">
+	                                    <div class="progress" style="margin-bottom: 0;">
+	                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+	                                    </div>
+	                                </td>
+	                                <td class="text-center">
+	                                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+	                                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+	                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+	                                </td>
+	                                <td nowrap="nowrap">
+	                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+	                                        <span class="glyphicon glyphicon-trash"></span> Rimuovi
+	                                    </button>
+	                                </td>
+	                            </tr>
+	                        </tbody>
+	                    </table>
+	
+	                </div>
+	
+	            </div>
 	        </div>
 	        <div class="row">
 	                    
+	            
+				<button type="button" class="btn btn-danger btn-sm" ng-click="cancel()">
+					<span class=" glyphicon glyphicon-menu-left"></span>Annulla
+				</button>
+				<button type="button" class="btn btn-success btn-sm" ng-click="updateItem()">
+					<span class="glyphicon glyphicon-save"></span>Salva
+				</button>
 				
-				<a class="btn btn-default" ng-click="updateHotel()">Submit</a>
-				<a class="btn btn-default" ng-click="cancel()">Annulla</a>
 				
 	
 	        </div>

@@ -8,56 +8,61 @@
 		<form th:action="@{/rest/upload}" class="form-horizontal" method="post">
 
 	        <div class="row">
-
 				<div class="form-group">
-				    <label for="name" class="col-xs-2">Name</label>
-				
-				    <div class="col-xs-6">
+					<div class="col-md-2">
+				    	<label for="name">Name</label>
+					</div>
+				    <div class="col-md-10">
 				        <input class="form-control" placeholder="Name" ng-model="item.nome"/>
 				    </div>
 	            </div>
     	    </div>
 	        <div class="row">
 	            <div class="form-group">
-	                <label for="titolo" class="col-xs-2">Titolo</label>
-	
-	                <div class="col-xs-6">
+	            	<div class="col-md-2">
+		                <label for="titolo">Titolo</label>
+					</div>
+				    <div class="col-md-10">
 	                    <input class="form-control" placeholder="Titolo" ng-model="item.titolo"/>
 	                </div>
 	            </div>
 	        </div>
 	        <div class="row">
 				<div class="form-group">
-				    <label for="testo" class="col-xs-2">Testo</label>
-				
-				    <div class="col-xs-6">
+	            	<div class="col-md-2">
+					    <label for="testo">Testo</label>
+					</div>
+				    <div class="col-md-10">
 				        <textarea class="form-control" cols="20" rows="10" ng-model="item.testo" placeholder="Testo"></textarea>
 				    </div>
 				</div>
 	        </div>
 	        <div class="row">
 				<div class="form-group">
-				    <label for="riassunto" class="col-xs-2">Riassunto</label>
-				
-				    <div class="col-xs-6">
+	            	<div class="col-md-2">
+					    <label for="riassunto">Riassunto</label>
+					</div>
+				    <div class="col-md-10">
 				        <input class="form-control" placeholder="Riassunto" ng-model="item.riassunto"/>
 				    </div>
 				</div>
 	        </div>
 	        <div class="row">
 				<div class="form-group">
-				    <label for="zip" class="col-xs-2">Autore</label>
-				
-				    <div class="col-xs-6">
+	            	<div class="col-md-2">
+					    <label for="Autore">Autore</label>
+					</div>
+				    <div class="col-md-10">
 				        <input class="form-control" placeholder="Autore" ng-model="item.autore"/>
 				    </div>
 				</div>
 	        </div>
 	        <div class="row">
 	            <div class="form-group">
-	                <label for="tag" class="col-xs-2">Tag</label>
-	
-	                <div class="col-xs-6">
+	            	<div class="col-md-2">
+		                <label for="tag">Tag</label>
+					</div>
+				    <div class="col-md-10">
 	                    <select multiple="multiple" size="3" name="tag"
 	                    ng-options="option.name for option in item.tagDisponibili track by option.id"
 	                     ng-model="item.tagSelezionati"
@@ -68,10 +73,10 @@
 	        </div>
 	        <div class="row">
 	            <div class="form-group">
-	                
-	                <label for="nuovoTag" class="col-xs-2">Nuovi Tag</label>
-	
-	                <div class="col-xs-6">
+	            	<div class="col-md-2">
+		                <label for="nuovoTag">Nuovi Tag</label>
+					</div>
+				    <div class="col-md-10">
 	                    <input class="form-control" placeholder="Nuovi tag" ng-model="item.nuoviTag"/>
 	                </div>
 	                
@@ -81,7 +86,7 @@
 	                    
 				<div style="display:block;">
 	
-	                <div class="col-md-9" style="margin-bottom: 40px">
+	                <div class="col-md-12" style="margin-bottom: 40px">
 	
 	                    <h3>Allegati</h3>
 	                   
@@ -146,17 +151,24 @@
 	            </div>
 	        </div>
 	        <div class="row">
-	                    
-	            
-				<button type="button" class="btn btn-danger btn-sm" ng-click="cancel()">
-					<span class=" glyphicon glyphicon-menu-left"></span>Annulla
-				</button>
-				<button type="button" class="btn btn-success btn-sm" ng-click="updateItem()">
-					<span class="glyphicon glyphicon-save"></span>Salva
-				</button>
-				
-				
-	
+	            <div class="col-md-5" style="text-align: center;">
+				</div>
+	            <div class="col-md-1" style="text-align: center;">
+					<button type="button" class="btn btn-danger btn-sm" ng-click="cancel()">
+						<span class=" glyphicon glyphicon-menu-left"></span>Annulla
+					</button>
+				</div>
+	            <div class="col-md-1" style="text-align: center;">
+					<button type="button" class="btn btn-success btn-sm" ng-click="updateItem()">
+						<span class="glyphicon glyphicon-save"></span>Salva
+					</button>
+				</div>
+	            <div class="col-md-5" style="text-align: center;">
+				</div>
+	        </div>
+	        <div class="row">
+	            <div class="col-md-5" style="text-align: center;">&nbsp;
+				</div>
 	        </div>
 		</form>
     </div>

@@ -5,151 +5,152 @@
 			<h1>Righe verticali</h1>
 			<p>Appunti di programmazione generalmente in java.</p>
 		</div>
-        <div class="row">
-            <div class="col-xs-12">
-                <form th:action="@{/rest/upload}" class="form-horizontal" method="post">
-                    <div class="form-group">
-                        <label for="nome" class="col-xs-2">Nome</label>
-
-                        <div class="col-xs-6">
-                            <input class="form-control" placeholder="Nome" ng-model="item.nome"/>
-                        </div>
+        <form th:action="@{/rest/upload}" class="form-horizontal" method="post">
+        	<div class="row">
+            	<div class="form-group">
+                	<div class="col-md-2">
+                        <label for="nome">Nome</label>
                     </div>
-                    <div class="form-group">
-                        <label for="titolo" class="col-xs-2">Titolo</label>
-
-                        <div class="col-xs-6">
+                    <div class="col-md-10">
+                        <input class="form-control" placeholder="Nome" ng-model="item.nome"/>
+                    </div>
+                </div>
+			</div>
+        	<div class="row">
+            	<div class="form-group">
+                	<div class="col-md-2">
+                        <label for="titolo">Titolo</label>
+                    </div>
+                    <div class="col-md-10">
                             <input class="form-control" placeholder="Titolo" ng-model="item.titolo"/>
-                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="testo" class="col-xs-2">Testo</label>
-
-                        <div class="col-xs-6">
+               	</div>
+           </div>    	
+        	<div class="row">
+            	<div class="form-group">
+                	<div class="col-md-2">
+                        <label for="testo">Testo</label>
+                    </div>
+                    <div class="col-md-10">
                             <textarea class="form-control" cols="20" rows="10" ng-model="item.testo" placeholder="Testo"></textarea>
-                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="riassunto" class="col-xs-2">Riassunto</label>
-
-                        <div class="col-xs-6">
+               	</div>
+           </div>    	
+        	<div class="row">
+            	<div class="form-group">
+                	<div class="col-md-2">
+                        <label for="riassunto">Riassunto</label>
+                    </div>
+                    <div class="col-md-10">
                             <input class="form-control" placeholder="Riassunto" ng-model="item.riassunto"/>
-                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="autore" class="col-xs-2">autore</label>
-
-                        <div class="col-xs-6">
-                            <input class="form-control" placeholder="Autore" ng-model="item.autore"/>
-                        </div>
+               	</div>
+           </div>    	
+        	<div class="row">
+            	<div class="form-group">
+                	<div class="col-md-2">
+                        <label for="autore">autore</label>
                     </div>
-                    <div class="form-group">
-                        <label for="file" class="col-xs-2">file</label>
-                        <ul>
-                            {{item.file.nome}}
-                        </ul>
+                    <div class="col-md-10">
+	                    <input class="form-control" placeholder="Autore" ng-model="item.autore"/>
                     </div>
-                    <div class="form-group">
-                        <label for="autore" class="col-xs-2">Tag</label>
-
-                        <div class="col-xs-6">
-                            
-                            
+               	</div>
+           </div>    	
+        	<div class="row">
+            	<div class="form-group">
+                	<div class="col-md-2">
+                        <label for="autore">Tag</label>
+                    </div>
+                    <div class="col-md-10">
                              <select multiple="multiple" size="3"
                             ng-options="option.name for option in listaTags track by option.id"
                              ng-model="item.tagSelezionati"
                             >
                             </select>
-                        </div>
-                        
-                        <label for="nuovoTag" class="col-xs-2">Nuovi Tag</label>
-
-                        <div class="col-xs-6">
-                            <input class="form-control" placeholder="Nuovi tag" ng-model="item.nuoviTag"/>
-                        </div>
-                        
                     </div>
-
-
-
-
-					<div style="display:block;">
+               	</div>
+           </div>    	
+        	<div class="row">
+            	<div class="form-group">
+                	<div class="col-md-2">
+                        <label for="nuovoTag">Nuovi Tag</label>
+                    </div>
+                    <div class="col-md-10">
+	                    <input class="form-control" placeholder="Nuovi tag" ng-model="item.nuoviTag"/>
+                    </div>
+               	</div>
+           </div>    	
+        	<div class="row">
+            	<div class="form-group">
+                	<div class="col-md-12">
 		
-		                <div class="col-md-9" style="margin-bottom: 40px">
-		
-		                    <h3>Allegati</h3>
-		                   
-		                    <input type="file" nv-file-select="" uploader="uploader" multiple="multiple"  /><br/>
-		
-		                    <table class="table">
-		                        <thead>
-		                            <tr>
-		                                <th style="width:30%;" >Nome</th>
-		                                <th ng-show="uploader.isHTML5">Dimensione</th>
-		                                <th ng-show="uploader.isHTML5">Tipo</th>
-		                                <th ng-show="uploader.isHTML5">Progress</th>
-		                                <th>Stato</th>
-		                                <th>Azioni</th>
-		                            </tr>
-		                        </thead>
-		                        <tbody>
-		                            <tr ng-repeat="item in uploader.queue">
-		                                <td><strong>{{ item.file.name }}</strong></td>
-		                                <td ng-show="uploader.isHTML5" nowrap="nowrap">{{ item.file.size/1024/1024|number:2 }} MB</td>
-		                                <td ng-show="uploader.isHTML5" nowrap="nowrap">{{ item.file.type }}</td>
-		                                <td ng-show="uploader.isHTML5">
-		                                    <div class="progress" style="margin-bottom: 0;">
-		                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
-		                                    </div>
-		                                </td>
-		                                <td class="text-center">
-		                                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-		                                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
-		                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-		                                </td>
-		                                <td nowrap="nowrap">
-		                                    <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
-		                                        <span class="glyphicon glyphicon-upload"></span> Upload
-		                                    </button>
-		                                    <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
-		                                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel
-		                                    </button>
-		                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-		                                        <span class="glyphicon glyphicon-trash"></span> Rimuovi
-		                                    </button>
-		                                </td>
-		                            </tr>
-		                        </tbody>
-		                    </table>
-		
-		                    <div>
-		                        <div>
-		                            Queue progress:
-		                            <div class="progress" style="">
-		                                <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
-		                            </div>
-		                        </div>
-		                        <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
-		                            <span class="glyphicon glyphicon-upload"></span> Upload tutto
-		                        </button>
-		                        <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
-		                            <span class="glyphicon glyphicon-ban-circle"></span> Cancel tutto
-		                        </button>
-		                        <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
-		                            <span class="glyphicon glyphicon-trash"></span> Rimuovi tutto
-		                        </button>
-		                    </div>
-		
-		                </div>
+	                    <h3>Allegati</h3>
+	                   
+	                    <input type="file" nv-file-select="" uploader="uploader" multiple="multiple"  /><br/>
+	
+	                    <table class="table">
+	                        <thead>
+	                            <tr>
+	                                <th style="width:30%;" >Nome</th>
+	                                <th ng-show="uploader.isHTML5">Dimensione</th>
+	                                <th ng-show="uploader.isHTML5">Tipo</th>
+	                                <th ng-show="uploader.isHTML5">Progress</th>
+	                                <th>Stato</th>
+	                                <th style="width:15%;">Azioni</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+	                            <tr ng-repeat="item in uploader.queue">
+	                                <td><strong>{{ item.file.name }}</strong></td>
+	                                <td ng-show="uploader.isHTML5" nowrap="nowrap">{{ item.file.size/1024/1024|number:2 }} MB</td>
+	                                <td ng-show="uploader.isHTML5" nowrap="nowrap">{{ item.file.type }}</td>
+	                                <td ng-show="uploader.isHTML5">
+	                                    <div class="progress" style="margin-bottom: 0;">
+	                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+	                                    </div>
+	                                </td>
+	                                <td class="text-center">
+	                                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+	                                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+	                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+	                                </td>
+	                                <td nowrap="nowrap">
+	                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+	                                        <span class="glyphicon glyphicon-trash"></span> Rimuovi
+	                                    </button>
+	                                </td>
+	                            </tr>
+	                        </tbody>
+	                    </table>
+	
+	 
 		
 		            </div>
-		            <div style="display:block;">
-                        <a class="btn btn-default" ng-click="createItem()">Salva</a>
-                        <a class="btn btn-default" ng-click="cancel()">Annulla</a>
-		            </div>
-                </form>
-            </div>
-        </div>
+				</div>
+		    </div>
+	        <div class="row">
+	            <div class="col-md-5" style="text-align: center;">
+				</div>
+	            <div class="col-md-1" style="text-align: center;">
+					<button type="button" class="btn btn-danger btn-sm" ng-click="cancel()">
+						<span class=" glyphicon glyphicon-menu-left"></span>Annulla
+					</button>
+				</div>
+	            <div class="col-md-1" style="text-align: center;">
+					<button type="button" class="btn btn-success btn-sm" ng-click="createItem()">
+						<span class="glyphicon glyphicon-save"></span>Salva
+					</button>
+				</div>
+	            <div class="col-md-5" style="text-align: center;">
+				</div>
+	        </div>
+	        <div class="row">
+	            <div class="col-md-5" style="text-align: center;">&nbsp;
+				</div>
+	        </div>
+		            
+		            
+        </form>
     </div>
 
 </html>

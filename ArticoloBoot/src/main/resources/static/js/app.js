@@ -97,6 +97,7 @@ app.factory("Item", function ($resource) {
 	var csrf_token = "";
 	if (document.querySelector('input[name="_csrf"]') !=null) 	
 		csrf_token = document.querySelector('input[name="_csrf"]').getAttribute('value');
+
     return $resource(URLS.items, {id: "@id"}, {
         update: {method: 'PUT', headers: {'X-CSRF-TOKEN': csrf_token}},
         save: {method: 'POST', headers: {'X-CSRF-TOKEN': csrf_token}}
@@ -318,25 +319,6 @@ app.controller("ItemCreateCtrl", function ($scope, Tag, Item, $state, $statePara
     }
 
     //salvataggio dell'item
-    $scope.updateItem = function() {
-       var item = new Item($scope.item);
-       
-       //se non ci sono upload ancora in sospeso
-       		//si aspetta che finisca poi si salva e si va verso la home di edit
-       if (uploader.getNotUploadedItems != null && uploader.getNotUploadedItems.length >0){
-    	   uploader.onCompleteAll = function() {
-	           item.$update().then(function() {
-	               $state.transitionTo("homeEditListItem");
-	           });
-    	   }	
-    	//altrimenti si salva e quindi si naviga verso la home di edit
-       }else{
-           item.$update().then(function() {
-               $state.transitionTo("homeEditListItem");
-           });
-       }
-    }
-
     $scope.createItem = function () {
         var item = new Item($scope.item);
 

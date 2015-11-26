@@ -21,6 +21,12 @@ CREATE  TABLE bg_Item (
   id_Tipo_Item INT NOT NULL ,
   PRIMARY KEY (id_item) );
 
+alter table dbo.bg_item add 
+data_inserimento datetime
+ ,data_hidden datetime
+ ,data_scadenza datetime;
+  
+  
 ALTER TABLE [dbo].[bg_Item]  WITH CHECK ADD  CONSTRAINT [FK_Item_TipoItem] FOREIGN KEY([id_Tipo_Item])
 REFERENCES [dbo].[bg_Tipo_Item] ([id_Tipo])
 GO

@@ -16,6 +16,24 @@
 							Edit item
 						</button>
 				  </a>
+			      <a ui-sref="delete({ itemId: item.id })">
+			      		<button class="btn btn-default btn-sm" aria-label="Left Align"  type="button">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"> </span>
+							Delete item
+						</button>
+				  </a>		
+			      <a ui-sref="edit({ itemId: item.id })">
+			      		<button class="btn btn-default btn-sm" aria-label="Left Align"  type="button">
+							<span class="glyphicon glyphicon-eye-close" aria-hidden="true"> </span>
+							Hide item
+						</button>
+				  </a>		
+			      <a ui-sref="edit({ itemId: item.id })">
+			      		<button class="btn btn-default btn-sm" aria-label="Left Align"  type="button">
+							<span class="glyphicon glyphicon-eye-open" aria-hidden="true"> </span>
+							Show item
+						</button>
+				  </a>		
 				  </h3>
 			      <p class="previewArticolo"><a ui-sref="view({ itemId: item.id })">{{item.riassunto}}</a></p>
 	

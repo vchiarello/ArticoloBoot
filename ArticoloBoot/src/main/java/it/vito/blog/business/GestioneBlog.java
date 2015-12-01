@@ -100,6 +100,14 @@ public class GestioneBlog {
 		return risultato;
 	}
 	
+	public void deleteItem(int id){
+		logger.info("cancellazione dell'item con id: " + id);
+		Item item = itemRepository.findById(id);
+		lkTagItemRepository.deleteByItem(item);
+		allegatoRepository.deleteByItem(item);
+		itemRepository.delete(item);
+		logger.info("Fine cancellazione dell'item con id: " + id);
+	}
 	
 	public ItemWeb saveItem(ItemWeb itemWeb){
 		ItemWeb risultato = new ItemWeb();
@@ -115,7 +123,9 @@ public class GestioneBlog {
 		}
 		
 		//salvataggio del nuovo item
-		Item itemSalvato = itemRepository.save(itemWeb.toItem());
+		Item it = itemWeb.toItem();
+		it.setDataModifica(new Date());
+		Item itemSalvato = itemRepository.save(it);
 		
 		//salvataggio degli allegati
 		if (itemWeb.getListaFile()!=null)
@@ -164,7 +174,7 @@ public class GestioneBlog {
 			alle.setNomeAllegato(nomeFile);
 			Item item = new Item();
 			item.setId(idItem);
-			alle.setArticolo(item);
+			alle.setItem(item);
 			
 			
 			

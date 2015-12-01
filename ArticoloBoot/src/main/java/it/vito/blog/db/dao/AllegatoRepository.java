@@ -1,6 +1,7 @@
 package it.vito.blog.db.dao;
 
 import it.vito.blog.db.bean.Allegato;
+import it.vito.blog.db.bean.Item;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -10,5 +11,6 @@ public interface AllegatoRepository extends CrudRepository<Allegato, Integer>{
 	public Allegato save(Allegato allegato);
 
 	public Allegato findOne(Integer id);
+	public void deleteByItem(Item item);
 
 }

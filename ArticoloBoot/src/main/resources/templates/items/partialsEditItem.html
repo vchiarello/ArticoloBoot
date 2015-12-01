@@ -1,14 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/sitelayout" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-	<script>
-    $('#dataPubblicazione').datepicker({
-        format: "dd/mm/yyyy",
-        weekStart: 1,
-        todayBtn: true,
-        language: "it",
-        daysOfWeekHighlighted: "0,6"
-    });
-    </script>
     <div th:fragment="content">
     	<div class="jumbotronVito">
 			<h1>Righe verticali</h1>
@@ -62,7 +53,27 @@
 					    <label for="riassunto">Data pubblicazione</label>
 					</div>
 				    <div class="col-md-10">
-				        <input class="form-control" placeholder="Data pubblicazione"  id="dataPubblicazione"/>
+				        <input class="form-control dataFormat" placeholder="Data pubblicazione"  id="dataPubblicazione" ng-model="item.dataPubblicazione"/>
+				    </div>
+				</div>
+	        </div>
+	        <div class="row">
+				<div class="form-group">
+	            	<div class="col-md-2">
+					    <label for="riassunto">Data scadenza</label>
+					</div>
+				    <div class="col-md-10">
+				        <input class="form-control dataFormat" placeholder="Data scadenza"  id="dataScadenza" ng-model="item.dataScadenza"/>
+				    </div>
+				</div>
+	        </div>
+	        <div class="row">
+				<div class="form-group">
+	            	<div class="col-md-2">
+					    <label for="riassunto">Data nascondi</label>
+					</div>
+				    <div class="col-md-10">
+				        <input class="form-control dataFormat" placeholder="Data nascondi"  id="dataHidden" ng-model="item.dataHidden"/>
 				    </div>
 				</div>
 	        </div>

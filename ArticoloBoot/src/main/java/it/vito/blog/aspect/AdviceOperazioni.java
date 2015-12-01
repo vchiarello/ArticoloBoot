@@ -32,23 +32,23 @@ public class AdviceOperazioni {
 		logger.debug("sei in adviceOperazione2");
     }
 
-	@After(value="it.vito.blog.aspect.PointcutOperazioni.removeIndexEntry() && args(articolo)")
-    public void deleteIndexEntryAdvice(Item articolo) {
+	@After(value="it.vito.blog.aspect.PointcutOperazioni.removeIndexEntry() && args(item)")
+    public void deleteIndexEntryAdvice(Item item) {
 		try {
-			if (articolo!=null)
-				index.deleteEntry(articolo);
+			if (item!=null)
+				index.deleteEntry(item);
 		} catch (IOException e) {
-			logger.error("Fallita cancellazione dell'articolo: " + articolo + " nell'indice Lucene.");
+			logger.error("Fallita cancellazione dell'item: " + item + " nell'indice Lucene.");
 			e.printStackTrace();
 		}
     }
 
-	@AfterReturning(pointcut="it.vito.blog.aspect.PointcutOperazioni.addIndex()",returning="articolo")
-    public void aggiungiNuovo(Item articolo) {
+	@AfterReturning(pointcut="it.vito.blog.aspect.PointcutOperazioni.addIndex()",returning="item")
+    public void aggiungiNuovo(Item item) {
 		try {
-			index.addEntry(articolo);
+			index.addEntry(item);
 		} catch (IOException e) {
-			logger.error("Fallito inserimento dell'articolo: " + articolo + " nell'indice Lucene.");
+			logger.error("Fallito inserimento dell'item: " + item + " nell'indice Lucene.");
 			e.printStackTrace();
 		}
     }

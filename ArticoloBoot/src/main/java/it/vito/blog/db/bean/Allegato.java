@@ -29,7 +29,7 @@ public class Allegato implements Serializable,Comparable<Allegato>{
 	
 	@ManyToOne
 	@JoinColumns({@JoinColumn(name="id_item", referencedColumnName="id_item")})
-	private Item articolo;
+	private Item item;
 	
 	@Lob
 	@Column(name="contenuto")
@@ -83,12 +83,12 @@ public class Allegato implements Serializable,Comparable<Allegato>{
 		this.dataModifica = dataModifica;
 	}
 
-	public Item getArticolo() {
-		return articolo;
+	public Item getItem() {
+		return item;
 	}
 
-	public void setArticolo(Item articolo) {
-		this.articolo = articolo;
+	public void setItem(Item item) {
+		this.item = item;
 	}
 	
 
@@ -125,7 +125,7 @@ public class Allegato implements Serializable,Comparable<Allegato>{
 	
 	@Override
 	public String toString() {
-		return "Allegato [id=" + id + ", articolo=" + articolo + ", testo="
+		return "Allegato [id=" + id + ", testo="
 				+ testo + ", dataPubblicazione=" + dataPubblicazione
 				+ ", dataModifica=" + dataModifica + ", nomeAllegato="
 				+ nomeAllegato + ", contentType=" + contentType + "]";

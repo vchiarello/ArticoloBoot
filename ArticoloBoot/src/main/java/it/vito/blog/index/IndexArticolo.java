@@ -71,45 +71,45 @@ public class IndexArticolo {
 		}
 	}
 
-	public boolean addEntry(Item articolo) throws IOException{
-		if (articolo == null)return false;
+	public boolean addEntry(Item item) throws IOException{
+		if (item == null)return false;
         Document doc = new Document();
 
-        Field pathField = new IntField("id", articolo.getId(), Field.Store.YES);
+        Field pathField = new IntField("id", item.getId(), Field.Store.YES);
         doc.add(pathField);
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         Long d = null;
-        if (articolo.getDataPubblicazione()!=null){
-        	d = new Long(sdf.format(articolo.getDataPubblicazione()));
+        if (item.getDataPubblicazione()!=null){
+        	d = new Long(sdf.format(item.getDataPubblicazione()));
             Field dataPubblicazioneField = new LongField("dataPubblicazione", d, Field.Store.YES);
         	doc.add(dataPubblicazioneField);
         }
         
-        Field contenuto = new TextField("contenuto", new BufferedReader(new InputStreamReader(new ByteArrayInputStream(articolo.getTesto().getBytes()),StandardCharsets.UTF_8)));
+        Field contenuto = new TextField("contenuto", new BufferedReader(new InputStreamReader(new ByteArrayInputStream(item.getTesto().getBytes()),StandardCharsets.UTF_8)));
         doc.add(contenuto);
 
-        Field titolo = new StringField("titolo", articolo.getTitolo(), Field.Store.YES);
+        Field titolo = new StringField("titolo", item.getTitolo(), Field.Store.YES);
         doc.add(titolo);
 
         if (writer.getConfig().getOpenMode() == OpenMode.CREATE) {
-			log.debug("adding articolo " + articolo.getId() + " to lucene.");
+			log.debug("adding item " + item.getId() + " to lucene.");
 			writer.addDocument(doc);
 			writer.commit();
         } else {
-			log.debug("updating articolo " + articolo.getId() + " to lucene.");
-			writer.updateDocument(new Term("id", articolo.getId()+""), doc);
+			log.debug("updating item " + item.getId() + " to lucene.");
+			writer.updateDocument(new Term("id", item.getId()+""), doc);
 			writer.commit();
         }
 		return true;
 	}
 	
-	public boolean deleteEntry(Item articolo) throws IOException{
-		if (articolo == null)return false;
+	public boolean deleteEntry(Item item) throws IOException{
+		if (item == null)return false;
         
-        Term termId = new Term("id", articolo.getId()+"");
+        Term termId = new Term("id", item.getId()+"");
         
-    	log.debug("sto per cancellare gli articoli con id: " + articolo.getId());
+    	log.debug("sto per cancellare gli articoli con id: " + item.getId());
 		writer.deleteDocuments(termId);
 		writer.commit();
 		return true;

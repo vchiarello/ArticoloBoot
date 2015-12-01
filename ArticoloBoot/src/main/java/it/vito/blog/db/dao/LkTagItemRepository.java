@@ -10,8 +10,9 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface LkTagItemRepository extends CrudRepository<LkTagItem, Integer> {
 	
-	List<LkTagItem> findByTagAndItem(Tag tag, Item item);
-	List<LkTagItem> findByItem(Item item);
+	public List<LkTagItem> findByTagAndItem(Tag tag, Item item);
+	public List<LkTagItem> findByItem(Item item);
+	public void deleteByItem(Item item);
 	
 	
 

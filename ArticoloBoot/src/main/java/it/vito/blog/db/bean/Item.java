@@ -31,7 +31,7 @@ public class Item implements Serializable, Comparable<Item>{
 	@JoinColumns({@JoinColumn(name="id_Tipo_Item", referencedColumnName="id_Tipo")})
 	private TipoItem tipoItem;
 	
-	@OneToMany(mappedBy="articolo", cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="item", cascade=CascadeType.REMOVE)
 	private Set<Allegato> allegati;
 	
 	@OneToMany(mappedBy="item", cascade=CascadeType.REMOVE)
@@ -57,6 +57,15 @@ public class Item implements Serializable, Comparable<Item>{
 	
 	@Column(name="data_modifica")
 	private Date dataModifica;
+
+	@Column(name="data_inserimento")
+	private Date dataInserimento;
+
+	@Column(name="data_hidden")
+	private Date dataHidden;
+	
+	@Column(name="data_scadenza")
+	private Date dataScadenza;
 
 	public Integer getId() {
 		return id;
@@ -146,6 +155,30 @@ public class Item implements Serializable, Comparable<Item>{
 
 	public void setTipoItem(TipoItem tipoItem) {
 		this.tipoItem = tipoItem;
+	}
+
+	public Date getDataInserimento() {
+		return dataInserimento;
+	}
+
+	public void setDataInserimento(Date dataInserimento) {
+		this.dataInserimento = dataInserimento;
+	}
+
+	public Date getDataHidden() {
+		return dataHidden;
+	}
+
+	public void setDataHidden(Date dataHidden) {
+		this.dataHidden = dataHidden;
+	}
+
+	public Date getDataScadenza() {
+		return dataScadenza;
+	}
+
+	public void setDataScadenza(Date dataScadenza) {
+		this.dataScadenza = dataScadenza;
 	}
 
 	@Override

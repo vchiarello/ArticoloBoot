@@ -54,6 +54,11 @@ public class ItemRestController {
 		return this.gestioneBlog.saveItem(itemWeb);
 	}
 
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public void delete(@PathVariable("id") int id) {
+		this.gestioneBlog.deleteItem(id);
+	}
+
 	
 /*
 	@RequestMapping(value="/lista", method = RequestMethod.GET)

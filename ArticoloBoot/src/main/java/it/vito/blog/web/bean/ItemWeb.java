@@ -6,6 +6,8 @@ import it.vito.blog.db.bean.LkTagItem;
 import it.vito.blog.db.bean.Tag;
 import it.vito.blog.db.bean.TipoItem;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -20,8 +22,11 @@ public class ItemWeb {
 	private String nome;
 	private String riassunto;
 	private String autore;
-	private Date dataPubblicazione;
-	private Date dataModifica;
+	private String dataPubblicazione;
+	private String dataScadenza;
+	private String dataHidden;
+	private String dataInserimento;
+	private String dataModifica;
 	private String nuoviTag;
 	private List<Option> tagDisponibili;
 	private List<Option> tagSelezionati;
@@ -36,9 +41,20 @@ public class ItemWeb {
 	
 	public ItemWeb(Item item, List<Tag> tags){
 		if (item==null) return; 
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		this.autore=item.getAutore();
-		this.dataModifica=item.getDataModifica();
-		this.dataPubblicazione=item.getDataPubblicazione();
+		if (item.getDataPubblicazione() !=null)
+			this.dataPubblicazione = sdf.format(item.getDataPubblicazione());
+		if (item.getDataHidden() !=null)
+			this.dataHidden = sdf.format(item.getDataHidden());
+		if (item.getDataInserimento() !=null)
+			this.dataInserimento = sdf.format(item.getDataInserimento());
+		if (item.getDataModifica() !=null)
+			this.dataModifica = sdf.format(item.getDataModifica());
+		if (item.getDataPubblicazione()!=null)
+			this.dataPubblicazione = sdf.format(item.getDataPubblicazione());
+		if (item.getDataScadenza()!=null)
+			this.dataScadenza = sdf.format(item.getDataScadenza());
 		this.id=item.getId();
 		this.nome=item.getNome();
 		this.riassunto=item.getRiassunto();
@@ -71,9 +87,22 @@ public class ItemWeb {
 	
 	public ItemWeb(Item item){
 		if (item==null) return; 
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		this.autore=item.getAutore();
-		this.dataModifica=item.getDataModifica();
-		this.dataPubblicazione=item.getDataPubblicazione();
+		
+		if (item.getDataPubblicazione() !=null)
+			this.dataPubblicazione = sdf.format(item.getDataPubblicazione());
+		if (item.getDataHidden() !=null)
+			this.dataHidden = sdf.format(item.getDataHidden());
+		if (item.getDataInserimento() !=null)
+			this.dataInserimento = sdf.format(item.getDataInserimento());
+		if (item.getDataModifica() !=null)
+			this.dataModifica = sdf.format(item.getDataModifica());
+		if (item.getDataPubblicazione()!=null)
+			this.dataPubblicazione = sdf.format(item.getDataPubblicazione());
+		if (item.getDataScadenza()!=null)
+			this.dataScadenza = sdf.format(item.getDataScadenza());
+			
 		this.id=item.getId();
 		this.nome=item.getNome();
 		this.riassunto=item.getRiassunto();
@@ -98,10 +127,45 @@ public class ItemWeb {
 	
 	public Item toItem(){
 		Item risultato = new Item();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		risultato.setAutore(this.autore);
-		risultato.setDataModifica(this.dataModifica);
-		if (this.dataPubblicazione!=null) risultato.setDataPubblicazione(this.dataPubblicazione);
+		try {
+			risultato.setDataModifica(sdf.parse(this.dataModifica));
+		} catch (ParseException e) {
+			risultato.setDataModifica(new Date());
+		}
+
+		if (this.dataPubblicazione!=null)
+			try {
+				risultato.setDataPubblicazione(sdf.parse(this.dataPubblicazione));
+			} catch (ParseException e) {
+				risultato.setDataPubblicazione(new Date());
+			}
 		else  risultato.setDataPubblicazione(new Date());
+		if (this.dataHidden!=null)
+			try {
+				risultato.setDataHidden(sdf.parse(this.dataHidden));
+			} catch (ParseException e) {
+				risultato.setDataHidden(null);
+			}
+		else  risultato.setDataHidden(null);
+		if (this.dataInserimento != null)
+			try {
+				risultato.setDataInserimento(sdf.parse(this.dataInserimento));
+			} catch (ParseException e) {
+				risultato.setDataInserimento(new Date());
+			}
+		else  risultato.setDataInserimento(new Date());
+
+		if (this.dataScadenza != null)
+			try {
+				risultato.setDataScadenza(sdf.parse(this.dataScadenza));
+			} catch (ParseException e) {
+				risultato.setDataScadenza(null);
+			}
+		else risultato.setDataScadenza(null);
+			
+		
 		risultato.setId(this.id);
 		risultato.setNome(this.nome);
 		risultato.setRiassunto(this.riassunto);
@@ -156,16 +220,16 @@ public class ItemWeb {
 	public void setAutore(String autore) {
 		this.autore = autore;
 	}
-	public Date getDataPubblicazione() {
+	public String getDataPubblicazione() {
 		return dataPubblicazione;
 	}
-	public void setDataPubblicazione(Date dataPubblicazione) {
+	public void setDataPubblicazione(String dataPubblicazione) {
 		this.dataPubblicazione = dataPubblicazione;
 	}
-	public Date getDataModifica() {
+	public String getDataModifica() {
 		return dataModifica;
 	}
-	public void setDataModifica(Date dataModifica) {
+	public void setDataModifica(String dataModifica) {
 		this.dataModifica = dataModifica;
 	}
 
@@ -218,15 +282,45 @@ public class ItemWeb {
 		this.nuoviTag = nuoviTag;
 	}
 
+	public String getDataScadenza() {
+		return dataScadenza;
+	}
+
+	public void setDataScadenza(String dataScadenza) {
+		this.dataScadenza = dataScadenza;
+	}
+
+	public String getDataHidden() {
+		return dataHidden;
+	}
+
+	public void setDataHidden(String dataHidden) {
+		this.dataHidden = dataHidden;
+	}
+
+	public String getDataInserimento() {
+		return dataInserimento;
+	}
+
+	public void setDataInserimento(String dataInserimento) {
+		this.dataInserimento = dataInserimento;
+	}
+
 	@Override
 	public String toString() {
-		return "ItemWeb [id=" + id + ", tipoItem=" + tipoItem + ", tag=" + tagSelezionati
-				+ ", testo=" + testo + ", titolo=" + titolo + ", nome=" + nome
+		return "ItemWeb [id=" + id + ", tipoItem=" + tipoItem + ", testo="
+				+ testo + ", titolo=" + titolo + ", nome=" + nome
 				+ ", riassunto=" + riassunto + ", autore=" + autore
 				+ ", dataPubblicazione=" + dataPubblicazione
-				+ ", dataModifica=" + dataModifica + ", listaFile=" + listaFile
-				+ "]";
+				+ ", dataScadenza=" + dataScadenza + ", dataHidden="
+				+ dataHidden + ", dataInserimento=" + dataInserimento
+				+ ", dataModifica=" + dataModifica + ", nuoviTag=" + nuoviTag
+				+ ", tagDisponibili=" + tagDisponibili + ", tagSelezionati="
+				+ tagSelezionati + ", listaFile=" + listaFile
+				+ ", listaFileSalvati=" + listaFileSalvati
+				+ ", listaFileDaCancellare=" + listaFileDaCancellare + "]";
 	}
+
 	
 	
 	

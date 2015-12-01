@@ -100,7 +100,8 @@ app.factory("Item", function ($resource) {
 
     return $resource(URLS.items, {id: "@id"}, {
         update: {method: 'PUT', headers: {'X-CSRF-TOKEN': csrf_token}},
-        save: {method: 'POST', headers: {'X-CSRF-TOKEN': csrf_token}}
+        save: {method: 'POST', headers: {'X-CSRF-TOKEN': csrf_token}},
+        delete: {method: 'DELETE', headers: {'X-CSRF-TOKEN': csrf_token}}
     });
 });
 
@@ -148,12 +149,31 @@ app.controller("EditListCtrl", function ($scope, Item, $state) {
     $scope.getItems = function () {
         $scope.items = Item.query();
     };
+	bootbox.alert({title: "I'm the title!",
+		    message: "I'm the message!"})
+
+    $scope.deleteItem = function (item) {
+    	var it = new Item(item);
+        it.$delete({id:item.id}, function(){
+        	var indice = $scope.items.indexOf(item);
+        	$scope.items.splice(indice,1);
+        	window.alert("Item cancellato");
+    	})
+    };
+
+    $scope.hideItem = function (id) {
+        window.alert("hideItem " + id)
+    };
+
+    $scope.showItem = function (id) {
+        window.alert("showItem " + id)
+    };
 
    
     init();
 });
 
-//controller per la visualizzaizone del singolo articolo
+//controller per la visualizzaizone del singolo item
 app.controller("ViewItemCtrl", function ($scope, Item, $stateParams, $state) {
     function init() {
         $scope.item = Item.get({id:$stateParams.itemId})
@@ -185,6 +205,16 @@ app.controller("ItemEditCtrl", function ($scope,  Tag, Item, $state, $stateParam
     });
 
 
+    $('.dataFormat').datepicker({
+        format: "dd/mm/yyyy",
+        weekStart: 1,
+        todayBtn: true,
+        language: "it",
+        daysOfWeekHighlighted: "0,6",
+        autoclose:true
+    });
+    
+    
     //metodo che preleva l'item dal database
 	function init() {
         $scope.item = Item.get({id:$stateParams.itemId})
@@ -205,7 +235,9 @@ app.controller("ItemEditCtrl", function ($scope,  Tag, Item, $state, $stateParam
 
     //salvataggio dell'item
     $scope.updateItem = function() {
-       var item = new Item($scope.item);
+
+    	
+    	var item = new Item($scope.item);
        
        //se non ci sono upload ancora in sospeso
        		//si aspetta che finisca poi si salva e si va verso la home di edit
@@ -300,6 +332,16 @@ app.controller("ItemCreateCtrl", function ($scope, Tag, Item, $state, $statePara
             }
     });
 
+    $('.dataFormat').datepicker({
+        format: "dd/mm/yyyy",
+        weekStart: 1,
+        todayBtn: true,
+        language: "it",
+        daysOfWeekHighlighted: "0,6",
+        autoclose:true
+    });
+    
+    
 	function init() {
 		getTags();
     }

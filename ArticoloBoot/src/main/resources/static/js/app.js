@@ -149,16 +149,24 @@ app.controller("EditListCtrl", function ($scope, Item, $state) {
     $scope.getItems = function () {
         $scope.items = Item.query();
     };
-	bootbox.alert({title: "I'm the title!",
-		    message: "I'm the message!"})
 
     $scope.deleteItem = function (item) {
     	var it = new Item(item);
-        it.$delete({id:item.id}, function(){
-        	var indice = $scope.items.indexOf(item);
-        	$scope.items.splice(indice,1);
-        	window.alert("Item cancellato");
+
+    	bootbox.confirm({
+    		title: "Conferma cancellazione.", 
+    		message: "Cancellare l'oggetto \"" + it.titolo +"\"?", 
+    		callback: function(result){
+    	        		it.$delete({id:item.id}, 
+    	        				function(){
+				    	        	var indice = $scope.items.indexOf(item);
+				    	        	$scope.items.splice(indice,1);
+				    	        	bootbox.alert({message: "Item cancellato!"})
+			    	        	})
+    		} 
     	})
+
+    	
     };
 
     $scope.hideItem = function (id) {

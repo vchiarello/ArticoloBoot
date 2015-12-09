@@ -145,7 +145,7 @@ public class GestioneBlog {
 			for (int i=0;i < itemWeb.getListaFileDaCancellare().size();i++)
 				this.allegatoRepository.delete(itemWeb.getListaFileDaCancellare().get(i));
 		
-		return risultato;
+		return itemWeb;
 	}
 	
 	public Tag[] salvaNuoviTag(String[] nuoviTag){

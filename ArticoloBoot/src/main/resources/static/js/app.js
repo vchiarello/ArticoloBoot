@@ -98,12 +98,43 @@ app.factory("Item", function ($resource) {
 	if (document.querySelector('input[name="_csrf"]') !=null) 	
 		csrf_token = document.querySelector('input[name="_csrf"]').getAttribute('value');
 
-    return $resource(URLS.items, {id: "@id"}, {
-        update: {method: 'PUT', headers: {'X-CSRF-TOKEN': csrf_token}},
-        save: {method: 'POST', headers: {'X-CSRF-TOKEN': csrf_token}},
-        delete: {method: 'DELETE', headers: {'X-CSRF-TOKEN': csrf_token}}
-    });
+    
+	return $resource(URLS.items, {id: "@id"}, {
+		  update: {method: 'PUT', headers: {'X-CSRF-TOKEN': csrf_token}},
+		  save: {method: 'POST', headers: {'X-CSRF-TOKEN': csrf_token}},
+		  delete: {method: 'DELETE', headers: {'X-CSRF-TOKEN': csrf_token}}
+	});
 });
+
+app.factory("ItemOperation", function (Item) {
+
+	var item;
+	function nascondiItem(data){
+		item = new Item(data);
+	    	bootbox.confirm({
+	    		message: "Nascondere l'item \"" + item.titolo +"\"?", 
+	    		callback: function(result){
+					if (result){
+		    			d = new Date()
+						var ds = ('0'+d.getDate()).substring(('0'+d.getDate()).length-2,('0'+d.getDate()).length)+'/'+
+						         ('0'+(d.getMonth()+1)).substring(('0'+(d.getMonth()+1)).length-2,('0'+(d.getMonth()+1)).length)+'/'+
+						         d.getFullYear();
+						item.dataHidden=ds;
+		    			item.$update().then(function() {
+						    	        	bootbox.alert({message: "Item nascoto!"})
+		    			})
+					}	
+	    		} 
+	    	})
+
+    }
+    
+	return {
+		nascondiItem:nascondiItem
+	};
+});
+
+
 
 //oggetto che tiene le operazioni sull'oggetto Tag. 
 //L'oggetto ritornato da questa factory è un oggetto $resource che permette
@@ -128,25 +159,24 @@ app.factory("mappingsFactory", function($http) {
 //controller della home page con la lista degli item
 app.controller("ItemCtrl", function ($scope, Item, $state) {
     function init() {
-        $scope.getItems();
+        getItems();
     }
-
-    $scope.getItems = function () {
+    
+    function getItems() {
         $scope.items = Item.query();
     };
 
-   
     init();
 });
 
 //controller della home che edit gli item solo per amministratori
-app.controller("EditListCtrl", function ($scope, Item, $state) {
+app.controller("EditListCtrl", function ($scope, Item, ItemOperation, $state) {
     function init() {
-        $scope.getItems();
+        getItems();
     }
 
 
-    $scope.getItems = function () {
+    function getItems() {
         $scope.items = Item.query();
     };
 
@@ -157,22 +187,36 @@ app.controller("EditListCtrl", function ($scope, Item, $state) {
     		title: "Conferma cancellazione.", 
     		message: "Cancellare l'oggetto \"" + it.titolo +"\"?", 
     		callback: function(result){
+    			if (result){
     	        		it.$delete({id:item.id}, 
     	        				function(){
 				    	        	var indice = $scope.items.indexOf(item);
 				    	        	$scope.items.splice(indice,1);
 				    	        	bootbox.alert({message: "Item cancellato!"})
 			    	        	})
+    			}
     		} 
     	})
 
     	
     };
 
-    $scope.hideItem = function (id) {
-        window.alert("hideItem " + id)
-    };
-
+	$scope.hideItem = function (item) {
+    	var it = new Item(item);
+    	ItemOperation.nascondiItem(it);
+		
+	}
+	
+	$scope.isNascosto = function (item){
+		if (item.dataHidden ==null)return false;
+		anno = item.dataHidden.substring(6,10);
+		mese = new Number(item.dataHidden.substring(3,5))-1;
+		giorno = item.dataHidden.substring(0,2)
+		d = new Date(anno,mese,giorno,0,0,0)
+		if (d <= new Date())return true;
+		return false;
+	}
+	
     $scope.showItem = function (id) {
         window.alert("showItem " + id)
     };

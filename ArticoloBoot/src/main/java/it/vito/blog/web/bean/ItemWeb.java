@@ -129,6 +129,8 @@ public class ItemWeb {
 		Item risultato = new Item();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		risultato.setAutore(this.autore);
+		
+		if (this.dataModifica !=null)
 		try {
 			risultato.setDataModifica(sdf.parse(this.dataModifica));
 		} catch (ParseException e) {

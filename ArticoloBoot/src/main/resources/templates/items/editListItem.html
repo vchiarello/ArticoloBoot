@@ -19,9 +19,9 @@
 						<span class="glyphicon glyphicon-remove" aria-hidden="true"> </span>
 						Delete item
 					</button>
-		      		<button class="btn btn-default btn-sm" aria-label="Left Align"  type="button" ng-click="hideItem(item.id)">
+		      		<button class="btn btn-default btn-sm" aria-label="Left Align"  type="button" ng-click="hideItem(item)">
 						<span class="glyphicon glyphicon-eye-close" aria-hidden="true"> </span>
-						Hide item
+						Hide item {{isNascosto(item)}}
 					</button>
 		      		<button class="btn btn-default btn-sm" aria-label="Left Align"  type="button" ng-click="showItem(item.id)">
 						<span class="glyphicon glyphicon-eye-open" aria-hidden="true"> </span>

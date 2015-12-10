@@ -108,19 +108,27 @@ app.factory("Item", function ($resource) {
 
 app.factory("ItemOperation", function (Item) {
 
-	var item;
+	function isNascosto(item){
+		if (item.dataHidden ==null)return false;
+		anno = item.dataHidden.substring(6,10);
+		mese = new Number(item.dataHidden.substring(3,5))-1;
+		giorno = item.dataHidden.substring(0,2)
+		d = new Date(anno,mese,giorno,0,0,0)
+		if (d <= new Date())return true;
+		return false;
+	}
+	
 	function nascondiItem(data){
-		item = new Item(data);
 	    	bootbox.confirm({
-	    		message: "Nascondere l'item \"" + item.titolo +"\"?", 
+	    		message: "Nascondere l'item \"" + data.titolo +"\"?", 
 	    		callback: function(result){
 					if (result){
 		    			d = new Date()
 						var ds = ('0'+d.getDate()).substring(('0'+d.getDate()).length-2,('0'+d.getDate()).length)+'/'+
 						         ('0'+(d.getMonth()+1)).substring(('0'+(d.getMonth()+1)).length-2,('0'+(d.getMonth()+1)).length)+'/'+
 						         d.getFullYear();
-						item.dataHidden=ds;
-		    			item.$update().then(function() {
+						data.dataHidden=ds;
+		    			data.$update().then(function() {
 						    	        	bootbox.alert({message: "Item nascoto!"})
 		    			})
 					}	
@@ -129,8 +137,47 @@ app.factory("ItemOperation", function (Item) {
 
     }
     
+
+	function showItem(data){
+	    	bootbox.confirm({
+	    		message: "Mostrare l'item \"" + data.titolo +"\"?", 
+	    		callback: function(result){
+					if (result){
+		    			
+						data.dataHidden=null;
+		    			data.$update().then(function() {
+						    	        	bootbox.alert({message: "Item è ora visibile!"})
+		    			})
+					}	
+	    		} 
+	    	})
+
+    }
+	
+	
+	function deleteItem (item) {
+    	var it = new Item(item);
+
+    	bootbox.confirm({
+    		message: "Cancellare l'oggetto \"" + it.titolo +"\"?", 
+    		callback: function(result){
+    			if (result){
+    	        		it.$delete({id:item.id}, 
+    	        				function(){
+				    	        	bootbox.alert({message: "Item cancellato!"})
+			    	        	})
+    			}
+    		} 
+    	})
+
+    	
+    };
+    
 	return {
-		nascondiItem:nascondiItem
+		nascondiItem:nascondiItem,
+		showItem:showItem,
+		isNascosto:isNascosto,
+		deleteItem:deleteItem
 	};
 });
 
@@ -181,44 +228,23 @@ app.controller("EditListCtrl", function ($scope, Item, ItemOperation, $state) {
     };
 
     $scope.deleteItem = function (item) {
-    	var it = new Item(item);
+    	ItemOperation.deleteItem(item);
+    	var indice = $scope.items.indexOf(item);
+    	$scope.items.splice(indice,1);
 
-    	bootbox.confirm({
-    		title: "Conferma cancellazione.", 
-    		message: "Cancellare l'oggetto \"" + it.titolo +"\"?", 
-    		callback: function(result){
-    			if (result){
-    	        		it.$delete({id:item.id}, 
-    	        				function(){
-				    	        	var indice = $scope.items.indexOf(item);
-				    	        	$scope.items.splice(indice,1);
-				    	        	bootbox.alert({message: "Item cancellato!"})
-			    	        	})
-    			}
-    		} 
-    	})
-
-    	
     };
 
 	$scope.hideItem = function (item) {
-    	var it = new Item(item);
-    	ItemOperation.nascondiItem(it);
-		
+    	ItemOperation.nascondiItem(item);
 	}
+	
 	
 	$scope.isNascosto = function (item){
-		if (item.dataHidden ==null)return false;
-		anno = item.dataHidden.substring(6,10);
-		mese = new Number(item.dataHidden.substring(3,5))-1;
-		giorno = item.dataHidden.substring(0,2)
-		d = new Date(anno,mese,giorno,0,0,0)
-		if (d <= new Date())return true;
-		return false;
+		return ItemOperation.isNascosto(item)
 	}
 	
-    $scope.showItem = function (id) {
-        window.alert("showItem " + id)
+    $scope.showItem = function (item) {
+    	ItemOperation.showItem(item);
     };
 
    

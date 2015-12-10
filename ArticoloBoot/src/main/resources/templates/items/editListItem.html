@@ -19,14 +19,16 @@
 						<span class="glyphicon glyphicon-remove" aria-hidden="true"> </span>
 						Delete item
 					</button>
-		      		<button class="btn btn-default btn-sm" aria-label="Left Align"  type="button" ng-click="hideItem(item)">
+		      		<button class="btn btn-default btn-sm" aria-label="Left Align"  type="button" ng-click="hideItem(item)" ng-show="!isNascosto(item)">
 						<span class="glyphicon glyphicon-eye-close" aria-hidden="true"> </span>
-						Hide item {{isNascosto(item)}}
+						Hide item 
 					</button>
-		      		<button class="btn btn-default btn-sm" aria-label="Left Align"  type="button" ng-click="showItem(item.id)">
+					
+		      		<button class="btn btn-default btn-sm" aria-label="Left Align"  type="button" ng-click="showItem(item)" ng-show="isNascosto(item)">
 						<span class="glyphicon glyphicon-eye-open" aria-hidden="true"> </span>
 						Show item
 					</button>
+					<span ng-show="isNascosto(item)">nascosto!</span>
 					  </h3>
 				      <p class="previewArticolo"><a ui-sref="view({ itemId: item.id })">{{item.riassunto}}</a></p>
 		

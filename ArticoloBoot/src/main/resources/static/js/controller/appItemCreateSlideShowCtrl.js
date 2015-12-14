@@ -46,15 +46,17 @@ angular.module("blogApp").controller("ItemCreateSlideShowCtrl", function ($scope
     $scope.createItem = function () {
         var item = new Item($scope.item);
 
-        //se non ci sono upload ancora in sospeso
+        
+        //se ci sono upload ancora in sospeso
    		//si aspetta che finisca poi si salva e si va verso la home di edit
-        if (uploader.getNotUploadedItems != null && uploader.getNotUploadedItems.length >0){
+       if (uploader.getNotUploadedItems != null && uploader.getNotUploadedItems.length >0){
+        	uploader.uploadAll();
         	uploader.onCompleteAll = function() {
  	           item.$save().then(function() {
 	               $state.transitionTo("homeEditListItem");
 	           });
     	   }	
-    	//altrimenti si salva e quindi si naviga verso la home di edit
+       //altrimenti si salva e quindi si naviga verso la home di edit
        }else{
            item.$save().then(function() {
                $state.transitionTo("homeEditListItem");

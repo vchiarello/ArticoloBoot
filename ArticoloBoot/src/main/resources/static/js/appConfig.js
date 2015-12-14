@@ -29,6 +29,10 @@ angular.module("blogApp").config(function ($stateProvider, $urlRouterProvider) {
             url:'/createItem',
             templateUrl: URLS.partialsCreateItem,
             controller: 'ItemCreateCtrl'
+        }).state('createSlideShowItem', {
+            url:'/createSlideShowItem',
+            templateUrl: URLS.partialsCreateSlideShowItem,
+            controller: 'ItemCreateSlideShowCtrl'
         }).state('viewItem', {
             url:'/viewItem',
             templateUrl: URLS.partialsCreateItem,

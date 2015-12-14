@@ -29,6 +29,11 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
         /*<![CDATA[*/
         var URLS = {};
         URLS.items = /*[[@{/rest/items/:id}]]*/ '/rest/items';
+        
+        URLS.partialsCreateSlideShowItem = /*[[@{/items/partialsCreateSlideShowItem}]]*/ '/items/partialsCreateSlideShowItem';
+        
+        
+        
         URLS.partialsListItem = /*[[@{/items/partialsListItem}]]*/ '/items/partialsListItem';
         URLS.partialsViewItem = /*[[@{/items/partialsViewItem}]]*/ '/items/partialsViewItem';
         URLS.partialsEditItem = /*[[@{/items/partialsEditItem}]]*/ '/items/partialsEditItem';
@@ -46,9 +51,6 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
     </script>
 <script th:src="@{/js/app1.js}" src="../../static/js/appConfig.js"></script>
 <script th:src="@{/js/appConfig.js}" src="../../static/js/appConfig.js"></script>
-<script th:src="@{/js/Class/appItem.js}" src="../../static/js/Class/appItem.js"></script>
-<script th:src="@{/js/Class/appItemOperation.js}" src="../../static/js/Class/appItemOperation.js"></script>
-<script th:src="@{/js/Class/appTag.js}" src="../../static/js/Class/appTag.js"></script>
 <script th:src="@{/js/controller/appEditListCtrl.js}" src="../../static/js/controller/appEditListCtrl.js"></script>
 <script th:src="@{/js/controller/appItemCreateCtrl.js}" src="../../static/js/controller/appItemCreateCtrl.js"></script>
 <script th:src="@{/js/controller/appItemCtrl.js}" src="../../static/js/controller/appItemCtrl.js"></script>
@@ -56,7 +58,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
 <script th:src="@{/js/controller/appLoginCtrl.js}" src="../../static/js/controller/appLoginCtrl.js"></script>
 <script th:src="@{/js/controller/appMappingCtrl.js}" src="../../static/js/controller/appMappingCtrl.js"></script>
 <script th:src="@{/js/controller/appViewItemCtrl.js}" src="../../static/js/controller/appViewItemCtrl.js"></script>
+<script th:src="@{/js/factory/appItem.js}" src="../../static/js/Class/appItem.js"></script>
+<script th:src="@{/js/factory/appItemOperation.js}" src="../../static/js/Class/appItemOperation.js"></script>
 <script th:src="@{/js/factory/appMapping.js}" src="../../static/js/factory/appMapping.js"></script>
+<script th:src="@{/js/factory/appTag.js}" src="../../static/js/Class/appTag.js"></script>
 
 <!--     <script th:src="@{/js/app.js}" src="../../static/js/app.js"></script> -->
 </head>
@@ -80,8 +85,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a ui-sref="createItem">New item</a></li>
                 <li><a ui-sref="homeEditListItem" href="">Edit list</a></li>
+                <li><a ui-sref="createItem">New item</a></li>
+                <li><a ui-sref="createSlideShowItem">New Slide show</a></li>
                 <li><a href="#">Another action</a></li>
                 <li><a href="#">Something else here</a></li>
                 <li role="separator" class="divider"></li>

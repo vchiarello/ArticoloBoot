@@ -130,7 +130,7 @@ public class GestioneBlog {
 		//salvataggio degli allegati
 		if (itemWeb.getListaFile()!=null)
 			for (int i = 0; i < itemWeb.getListaFile().size();i++)
-				salvaAllegato(itemWeb.getListaFile().get(i), itemSalvato.getId());
+				salvaAllegato(itemWeb.getListaFile().get(i).nomeAllegato, itemSalvato.getId());
 	
 		//assegnazione dei tag vecchi all'item
 		salvaLkTagItem(itemSalvato,itemWeb.getTagSelezionati());

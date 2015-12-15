@@ -1,16 +1,18 @@
 package it.vito.blog.web.bean;
 
-public class FileSalvato{
-	public FileSalvato(Integer idAllegato, String nomeAllegato){
+public class FileAllegato{
+	public FileAllegato(Integer idAllegato, String nomeAllegato, String note){
 		this.idAllegato=idAllegato;
 		this.nomeAllegato=nomeAllegato;
+		this.note=note;
 	}
 	
-	public FileSalvato(){
+	public FileAllegato(){
 	}
 	
 	public Integer idAllegato;
 	public String nomeAllegato;
+	public String note;
 	public Integer getIdAllegato() {
 		return idAllegato;
 	}
@@ -25,6 +27,14 @@ public class FileSalvato{
 
 	public void setNomeAllegato(String nomeAllegato) {
 		this.nomeAllegato = nomeAllegato;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
 	}
 	
 }

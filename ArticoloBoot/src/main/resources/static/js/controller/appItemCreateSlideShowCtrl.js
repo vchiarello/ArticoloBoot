@@ -30,6 +30,7 @@ angular.module("blogApp").controller("ItemCreateSlideShowCtrl", function ($scope
     
     
 	function init() {
+		$scope.note=[];
 		getTags();
     }
 
@@ -56,10 +57,10 @@ angular.module("blogApp").controller("ItemCreateSlideShowCtrl", function ($scope
        if (uploader.queue.length > 0){
         	uploader.uploadAll();
         	uploader.onCompleteAll = function() {
+        		
         		if ($scope.item.listaFile===undefined || $scope.item.listaFile==null) $scope.item.listaFile=new Array();
         		for (i = 0; i < uploader.queue.length; i++){
-        			var fa = new FileAllegato(uploader.queue[i]._file.name, uploader.queue[i].note)
-        			
+        			var fa = new FileAllegato(uploader.queue[i]._file.name, $scope.note[i])
         			$scope.item.listaFile[i]=fa
         		}
                var item = new Item($scope.item);
@@ -77,10 +78,9 @@ angular.module("blogApp").controller("ItemCreateSlideShowCtrl", function ($scope
     }
 
 
-    //appena si aggiunge un file questo viene immediatamenta uploadato sul server
-//    uploader.onAfterAddingFile = function(fileItem) {
-//        fileItem.upload();
-//    };
+	uploader.onAfterAddingFile = function(fileItem) {
+//		alert($scope.item.nome + ", " +$scope.note + "" + angular.isArray($scope.note));
+	};
     
     //all'aggiunta di un file questo viene immediatamente caricato sul server e viene aggiornata la lista dei file nuovi da inserire nel db
 //    uploader.onSuccessItem = function(fileItem, response, status, headers) {

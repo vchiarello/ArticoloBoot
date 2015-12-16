@@ -129,17 +129,20 @@
 	                            </tr>
 	                        </thead>
 	                        <tbody>
-	                            <tr ng-repeat="item in uploader.queue">
-	                                <td><strong>{{ item.file.name }}</strong></td>
-	                                <td ng-show="uploader.isHTML5" nowrap="nowrap">{{ item.file.size/1024/1024|number:2 }} MB</td>
-	                                <td ng-show="uploader.isHTML5" nowrap="nowrap">{{ item.file.type }}</td>
+	                            <tr ng-repeat="itemFile in uploader.queue">
+	                                <td><strong>{{ itemFile.file.name }}</strong></td>
+	                                <td ng-show="uploader.isHTML5" nowrap="nowrap">{{ itemFile.file.size/1024/1024|number:2 }} MB</td>
+	                                <td ng-show="uploader.isHTML5" nowrap="nowrap">{{ itemFile.file.type }}</td>
 	                                <td class="text-center">
-	                                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-	                                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
-	                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+	                                    <span ng-show="itemFile.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+	                                    <span ng-show="itemFile.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+	                                    <span ng-show="itemFile.isError"><i class="glyphicon glyphicon-remove"></i></span>
 	                                </td>
 	                                <td nowrap="nowrap">
-	                                	<textarea class="form-control" cols="80" rows="4" ng-model="item.file.note" placeholder="Note"></textarea>
+	                                	<textarea class="form-control" cols="80" rows="4" ng-model="note[$index]" placeholder="Note"></textarea>
+	                                </td>
+	                                <td nowrap="nowrap">
+	                                {{note[$index]}} 
 	                                </td>
 	                            </tr>
 	                        </tbody>

@@ -130,7 +130,7 @@ public class GestioneBlog {
 		//salvataggio degli allegati
 		if (itemWeb.getListaFile()!=null)
 			for (int i = 0; i < itemWeb.getListaFile().size();i++)
-				salvaAllegato(itemWeb.getListaFile().get(i).nomeAllegato, itemSalvato.getId());
+				salvaAllegato(itemWeb.getListaFile().get(i).nomeAllegato, itemWeb.getListaFile().get(i).getNote(), itemSalvato.getId());
 	
 		//assegnazione dei tag vecchi all'item
 		salvaLkTagItem(itemSalvato,itemWeb.getTagSelezionati());
@@ -157,7 +157,7 @@ public class GestioneBlog {
 		return risultato;
 	}
 	
-	public void salvaAllegato(String nomeFile, Integer idItem){
+	public void salvaAllegato(String nomeFile, String testo, Integer idItem){
 		Allegato alle = new Allegato();
 		try {
 			//FileInputStream fis = new FileInputStream(new File(itemWeb.getListaFile().get(i)));
@@ -172,6 +172,7 @@ public class GestioneBlog {
 			alle.setDataModifica(new Date());
 			alle.setDataPubblicazione(new Date());
 			alle.setNomeAllegato(nomeFile);
+			alle.setTesto(testo);
 			Item item = new Item();
 			item.setId(idItem);
 			alle.setItem(item);

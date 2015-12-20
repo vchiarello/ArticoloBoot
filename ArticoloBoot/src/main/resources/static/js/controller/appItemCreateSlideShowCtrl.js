@@ -55,19 +55,19 @@ angular.module("blogApp").controller("ItemCreateSlideShowCtrl", function ($scope
         //se ci sono upload ancora in sospeso
         //si aspetta che finisca poi si salva e si va verso la home di edit
        if (uploader.queue.length > 0){
-        	uploader.uploadAll();
-        	uploader.onCompleteAll = function() {
-        		
-        		if ($scope.item.listaFile===undefined || $scope.item.listaFile==null) $scope.item.listaFile=new Array();
-        		for (i = 0; i < uploader.queue.length; i++){
-        			var fa = new FileAllegato(uploader.queue[i]._file.name, $scope.note[i])
-        			$scope.item.listaFile[i]=fa
-        		}
-               var item = new Item($scope.item);
- 	           item.$save().then(function() {
-	               $state.transitionTo("homeEditListItem");
-	           });
-    	    }	
+       	uploader.onCompleteAll = function() {
+    		
+    		if ($scope.item.listaFile===undefined || $scope.item.listaFile==null) $scope.item.listaFile=new Array();
+    		for (i = 0; i < uploader.queue.length; i++){
+    			var fa = new FileAllegato(uploader.queue[i]._file.name, $scope.note[i])
+    			$scope.item.listaFile[i]=fa
+    		}
+           var item = new Item($scope.item);
+	           item.$save().then(function() {
+               $state.transitionTo("homeEditListItem");
+           });
+	    }	
+       	uploader.uploadAll();
        //altrimenti si salva e quindi si naviga verso la home di edit
        }else{
            var item = new Item($scope.item);

@@ -1,6 +1,11 @@
 //controller per la creazione degli slide show
 angular.module("blogApp").controller("ItemCreateSlideShowCtrl", function ($scope, Tag, Item, $state, $stateParams, FileUploader) {
 
+	function FileAllegato(name, note){
+		this.nomeAllegato=name;
+		this.note=note;
+	}
+	
     //calcolo del toker csrf_token
 	var csrf_token = "";
 	if (	document.querySelector('input[name="_csrf"]')!=null)
@@ -25,6 +30,7 @@ angular.module("blogApp").controller("ItemCreateSlideShowCtrl", function ($scope
     
     
 	function init() {
+		$scope.note=[];
 		getTags();
     }
 
@@ -44,20 +50,27 @@ angular.module("blogApp").controller("ItemCreateSlideShowCtrl", function ($scope
 
     //salvataggio dell'item
     $scope.createItem = function () {
-        var item = new Item($scope.item);
 
         
         //se ci sono upload ancora in sospeso
-   		//si aspetta che finisca poi si salva e si va verso la home di edit
-       if (uploader.getNotUploadedItems != null && uploader.getNotUploadedItems.length >0){
+        //si aspetta che finisca poi si salva e si va verso la home di edit
+       if (uploader.queue.length > 0){
         	uploader.uploadAll();
         	uploader.onCompleteAll = function() {
+        		
+        		if ($scope.item.listaFile===undefined || $scope.item.listaFile==null) $scope.item.listaFile=new Array();
+        		for (i = 0; i < uploader.queue.length; i++){
+        			var fa = new FileAllegato(uploader.queue[i]._file.name, $scope.note[i])
+        			$scope.item.listaFile[i]=fa
+        		}
+               var item = new Item($scope.item);
  	           item.$save().then(function() {
 	               $state.transitionTo("homeEditListItem");
 	           });
-    	   }	
+    	    }	
        //altrimenti si salva e quindi si naviga verso la home di edit
        }else{
+           var item = new Item($scope.item);
            item.$save().then(function() {
                $state.transitionTo("homeEditListItem");
            });
@@ -65,17 +78,16 @@ angular.module("blogApp").controller("ItemCreateSlideShowCtrl", function ($scope
     }
 
 
-    //appena si aggiunge un file questo viene immediatamenta uploadato sul server
-    uploader.onAfterAddingFile = function(fileItem) {
-        fileItem.upload();
-    };
+	uploader.onAfterAddingFile = function(fileItem) {
+//		alert($scope.item.nome + ", " +$scope.note + "" + angular.isArray($scope.note));
+	};
     
     //all'aggiunta di un file questo viene immediatamente caricato sul server e viene aggiornata la lista dei file nuovi da inserire nel db
-    uploader.onSuccessItem = function(fileItem, response, status, headers) {
-        console.info('onSuccessItem', fileItem, response, status, headers);
-		if ($scope.item.listaFile===undefined || $scope.item.listaFile==null) $scope.item.listaFile=new Array();
-		$scope.item.listaFile[uploader.queue.length]=fileItem._file.name;
-    };
+//    uploader.onSuccessItem = function(fileItem, response, status, headers) {
+//        console.info('onSuccessItem', fileItem, response, status, headers);
+//		if ($scope.item.listaFile===undefined || $scope.item.listaFile==null) $scope.item.listaFile=new Array();
+//		$scope.item.listaFile[uploader.queue.length]=fileItem._file.name;
+//    };
     
 	
 });

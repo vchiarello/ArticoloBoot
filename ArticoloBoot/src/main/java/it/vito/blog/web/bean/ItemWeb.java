@@ -30,8 +30,8 @@ public class ItemWeb {
 	private String nuoviTag;
 	private List<Option> tagDisponibili;
 	private List<Option> tagSelezionati;
-	private List<String> listaFile;
-	private List<FileSalvato> listaFileSalvati;
+	private List<FileAllegato> listaFile;
+	private List<FileAllegato> listaFileSalvati;
 	private List<Integer> listaFileDaCancellare;
 	
 	
@@ -74,10 +74,10 @@ public class ItemWeb {
 		}
 		
 		if (item.getAllegati()!=null)
-			this.listaFileSalvati=new LinkedList<FileSalvato>();
+			this.listaFileSalvati=new LinkedList<FileAllegato>();
 			for (Iterator<Allegato> i = item.getAllegati().iterator(); i.hasNext();){
 				Allegato a = i.next();
-				this.listaFileSalvati.add(new FileSalvato(a.getId(), a.getNomeAllegato()));
+				this.listaFileSalvati.add(new FileAllegato(a.getId(), a.getNomeAllegato(), a.getTesto()));
 			}
 		
 		this.testo=item.getTesto();
@@ -116,9 +116,9 @@ public class ItemWeb {
 		
 		if (item.getAllegati()!=null)
 			for (Iterator<Allegato> i = item.getAllegati().iterator(); i.hasNext();){
-				if (this.listaFileSalvati ==null)this.listaFileSalvati=new LinkedList<FileSalvato>();
+				if (this.listaFileSalvati ==null)this.listaFileSalvati=new LinkedList<FileAllegato>();
 				Allegato a = i.next();
-				this.listaFileSalvati.add(new FileSalvato(a.getId(), a.getNomeAllegato()));
+				this.listaFileSalvati.add(new FileAllegato(a.getId(), a.getNomeAllegato(), a.getTesto()));
 			}
 		this.testo=item.getTesto();
 		this.tipoItem=item.getTipoItem().getId();
@@ -235,20 +235,20 @@ public class ItemWeb {
 		this.dataModifica = dataModifica;
 	}
 
-	public List<String> getListaFile() {
+	public List<FileAllegato> getListaFile() {
 		return listaFile;
 	}
 
-	public void setListaFile(List<String> listaFile) {
+	public void setListaFile(List<FileAllegato> listaFile) {
 		this.listaFile = listaFile;
 	}
 	
 
-	public List<FileSalvato> getListaFileSalvati() {
+	public List<FileAllegato> getListaFileSalvati() {
 		return listaFileSalvati;
 	}
 
-	public void setListaFileSalvati(List<FileSalvato> listaFileSalvati) {
+	public void setListaFileSalvati(List<FileAllegato> listaFileSalvati) {
 		this.listaFileSalvati = listaFileSalvati;
 	}
 

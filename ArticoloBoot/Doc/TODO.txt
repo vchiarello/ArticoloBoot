@@ -1,10 +1,18 @@
-- Create: aggiustare la grafica
-- Edit: aggiustare la grafica
-- Visualizza: da creare ex novo
-- inserire la tipologia di item
-- validazione degli item, verificare cancellazioni massive di un eventuale hacker
-- multilanguage
-- visualizzazione corretta della data
-- inserimento transazioni
-- security con ldap
-pippo
+- Validazione dei campi nei form di edit e create
+- Abilitare/disabilitare i pulsanti di salvataggio quando i campi non sono validati e quando sono stati premuti
+- Creare una clessidra nel tempo che si attende l'arrivo delle info
+- Aggiustare il download in modo che non compaia l'id
+- Aggiustare il get dei valori in modo che oltre all'id ci sia il nome e si faccia una verifica nome+id
+- Creazione altri tipi di moduli
+- Documentazione
+- UNIFORMARE LA NAMING CONVENTION
+- Mettere il titolo in ogni pagina
+- Navigazione in alto con il path di dove ci si trova
+
+
+Per i bordi
+        border-color: red;
+border-style:solid;
+border-width:1px;
+    box-shadow:   0 5px 5px rgba(0, 0, 0, 0.075) inset,0 0 15px rgba(102, 175, 233, 0.6);
+  

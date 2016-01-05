@@ -38,6 +38,14 @@ angular.module("blogApp").controller("ItemEditCtrl", function ($scope,  Tag, Ite
         $scope.listaTags = Tag.query();
     };
 
+    //tutti i tag della combo Dei Tag
+    $scope.validaTitolo = function () {
+    	if ($scope.item.titolo == null || $scope.item.titolo.trim().length==0)
+    		$scope.erroreTitolo="Titolo campo obbligatorio.";
+		else		
+    		$scope.erroreTitolo="";
+    };
+
     //transizione in caso di premuta del pulsante di cancel
     $scope.cancel = function () {
         $state.transitionTo("homeEditListItem");

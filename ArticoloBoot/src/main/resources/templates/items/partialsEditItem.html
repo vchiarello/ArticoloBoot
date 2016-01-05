@@ -23,7 +23,8 @@
 		                <label for="titolo">Titolo</label>
 					</div>
 				    <div class="col-md-10">
-	                    <input class="form-control" placeholder="Titolo" ng-model="item.titolo"/>
+	                    <input class="form-control" placeholder="Titolo" ng-model="item.titolo" ng-blur="validaTitolo(item.titolo)"/>
+	                    <p style="color:red;">{{erroreTitolo}}</p>
 	                </div>
 	            </div>
 	        </div>

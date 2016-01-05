@@ -17,42 +17,42 @@ angular.module("blogApp").config(function ($stateProvider, $urlRouterProvider) {
 	        url:'/homeEditListItem',
 	        templateUrl: URLS.partialsEditList,
 	        controller: 'EditListCtrl'
-	    }).state('edit', {
-            url:'/edit/:itemId',
-            templateUrl: URLS.partialsEditItem,
-            controller: 'ItemEditCtrl'
-	    }).state('view', {
-            url:'/view/:itemId',
+	    }).state('viewItem', {
+            url:'/viewItem/:itemId',
             templateUrl: URLS.partialsViewItem,
             controller: 'ViewItemCtrl'
         }).state('createItem', {
             url:'/createItem',
             templateUrl: URLS.partialsCreateItem,
             controller: 'ItemCreateCtrl'
+	    }).state('editItem', {
+            url:'/editItem/:itemId',
+            templateUrl: URLS.partialsEditItem,
+            controller: 'ItemEditCtrl'
+	    }).state('viewSlideShowItem', {
+            url:'/viewSlideShowItem/:itemId',
+            templateUrl: URLS.partialsViewSlideShowItem,
+            controller: 'ViewSlideShowItemCtrl'
         }).state('createSlideShowItem', {
             url:'/createSlideShowItem',
             templateUrl: URLS.partialsCreateSlideShowItem,
             controller: 'ItemCreateSlideShowCtrl'
-        }).state('viewItem', {
-            url:'/viewItem',
-            templateUrl: URLS.partialsCreateItem,
-            controller: 'ItemCreateCtrl'
-        }).state('createItemw1', {
-            url:'/createItemw1',
-            templateUrl: URLS.partialsCreateItemw1,
-            controller: 'ItemCreateCtrl1'
-        }).state('createItemw2', {
-            url:'/createItemw2',
-            templateUrl: URLS.partialsCreateItemw2,
-            controller: 'ItemCreateCtrl2'
-        }).state('createItemw3', {
-            url:'/createItemw3',
-            templateUrl: URLS.partialsCreateItemw3,
-            controller: 'ItemCreateCtrl'
-        }).state('create', {
-            url:'/create',
-            templateUrl: URLS.partialsCreate,
-            controller: 'HotelCtrl'
+        }).state('editSlideShowItem', {
+            url:'/editSlideShowItem/:itemId',
+            templateUrl: URLS.partialsEditSlideShowItem,
+            controller: 'ItemEditSlideShowCtrl'
+//        }).state('createItemw1', {
+//            url:'/createItemw1',
+//            templateUrl: URLS.partialsCreateItemw1,
+//            controller: 'ItemCreateCtrl1'
+//        }).state('createItemw2', {
+//            url:'/createItemw2',
+//            templateUrl: URLS.partialsCreateItemw2,
+//            controller: 'ItemCreateCtrl2'
+//        }).state('createItemw3', {
+//            url:'/createItemw3',
+//            templateUrl: URLS.partialsCreateItemw3,
+//            controller: 'ItemCreateCtrl'
         }).state('endpoints', {
             url: '/endpoints',
             templateUrl: URLS.partialsMappings,

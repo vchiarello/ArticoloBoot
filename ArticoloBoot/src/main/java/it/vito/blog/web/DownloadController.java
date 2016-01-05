@@ -2,6 +2,7 @@ package it.vito.blog.web;
 
 
 import it.vito.blog.business.GestioneBlog;
+import it.vito.blog.db.bean.Allegato;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -36,7 +37,9 @@ public class DownloadController {
 	public void download(@RequestParam("idAllegato") Integer idAllegato,HttpServletResponse response) {
 		
 			try {
-				byte[] b = gestioneBlog.getAllegato(idAllegato);
+				Allegato allegato = gestioneBlog.getAllegato(idAllegato);
+				byte[] b = allegato.getDati();
+				response.setContentType(allegato.getContentType());
 				FileCopyUtils.copy(b, response.getOutputStream());
 				logger.debug("File scaricato. ");
 			} catch (IllegalStateException e) {

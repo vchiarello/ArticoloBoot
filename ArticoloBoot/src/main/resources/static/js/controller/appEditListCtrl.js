@@ -16,6 +16,24 @@ angular.module("blogApp").controller("EditListCtrl", function ($scope, Item, Ite
 
     };
 
+    $scope.editItem = function (item) {
+    	if (item.tipoItem==1)
+    		$state.transitionTo("editItem",{itemId: item.id});
+    	else if (item.tipoItem==2)
+    		$state.transitionTo("editSlideShowItem",{itemId: item.id});
+    	else
+    		window.alert("Tipo item non supportato")
+    };
+
+    $scope.viewItem = function (item) {
+    	if (item.tipoItem==1)
+    		$state.transitionTo("viewItem",{itemId: item.id});
+    	else if (item.tipoItem==2)
+    		$state.transitionTo("viewSlideShowItem",{itemId: item.id});
+    	else
+    		window.alert("Tipo item non supportato")
+    };
+
 	$scope.hideItem = function (item) {
     	ItemOperation.nascondiItem(item);
 	}

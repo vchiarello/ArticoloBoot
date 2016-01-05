@@ -31,7 +31,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
         URLS.items = /*[[@{/rest/items/:id}]]*/ '/rest/items';
         
         URLS.partialsCreateSlideShowItem = /*[[@{/items/partialsCreateSlideShowItem}]]*/ '/items/partialsCreateSlideShowItem';
-        
+        URLS.partialsEditSlideShowItem = /*[[@{/items/partialsEditSlideShowItem}]]*/ '/items/partialsEditSlideShowItem';
+        URLS.partialsViewSlideShowItem = /*[[@{/items/partialsViewSlideShowItem}]]*/ '/items/partialsViewSlideShowItem';
         
         
         URLS.partialsListItem = /*[[@{/items/partialsListItem}]]*/ '/items/partialsListItem';
@@ -52,12 +53,15 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
 <script th:src="@{/js/app1.js}" src="../../static/js/appConfig.js"></script>
 <script th:src="@{/js/appConfig.js}" src="../../static/js/appConfig.js"></script>
 <script th:src="@{/js/controller/appEditListCtrl.js}" src="../../static/js/controller/appEditListCtrl.js"></script>
-<script th:src="@{/js/controller/appItemCreateCtrl.js}" src="../../static/js/controller/appItemCreateCtrl.js"></script>
 <script th:src="@{/js/controller/appItemCtrl.js}" src="../../static/js/controller/appItemCtrl.js"></script>
-<script th:src="@{/js/controller/appItemEditCtrl.js}" src="../../static/js/controller/appItemEditCtrl.js"></script>
-<script th:src="@{/js/controller/appViewItemCtrl.js}" src="../../static/js/controller/appViewItemCtrl.js"></script>
 
+<script th:src="@{/js/controller/appItemViewCtrl.js}" src="../../static/js/controller/appItemViewCtrl.js"></script>
+<script th:src="@{/js/controller/appItemCreateCtrl.js}" src="../../static/js/controller/appItemCreateCtrl.js"></script>
+<script th:src="@{/js/controller/appItemEditCtrl.js}" src="../../static/js/controller/appItemEditCtrl.js"></script>
+
+<script th:src="@{/js/controller/appItemViewSlideShowCtrl.js}" src="../../static/js/controller/appItemViewSlideShowCtrl.js"></script>
 <script th:src="@{/js/controller/appItemCreateSlideShowCtrl.js}" src="../../static/js/controller/appItemCreateCtrl.js"></script>
+<script th:src="@{/js/controller/appItemEditSlideShowCtrl.js}" src="../../static/js/controller/appItemCreateCtrl.js"></script>
 
 <script th:src="@{/js/controller/appLoginCtrl.js}" src="../../static/js/controller/appLoginCtrl.js"></script>
 <script th:src="@{/js/controller/appMappingCtrl.js}" src="../../static/js/controller/appMappingCtrl.js"></script>

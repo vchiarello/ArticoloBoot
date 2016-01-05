@@ -129,6 +129,27 @@
 	                            </tr>
 	                        </thead>
 	                        <tbody>
+	                        
+	                            <tr ng-repeat="ffff in item.listaFileSalvati">
+	                                <td><strong><a href="/rest/download?idAllegato={{ffff.idAllegato}}" target="_blank">{{ffff.nomeAllegato}}</a></strong></td>
+	                                <td ng-show="uploader.isHTML5" nowrap="nowrap"></td>
+	                                <td ng-show="uploader.isHTML5" nowrap="nowrap"></td>
+	                                <td class="text-center">
+	                                    
+	                                </td>
+	                                <td nowrap="nowrap">
+	                                	<textarea class="form-control" cols="80" rows="4" ng-model="ffff.note" placeholder="Note"></textarea>
+	                                </td>
+	                                <td nowrap="nowrap">
+	                                    <button type="button" class="btn btn-danger btn-xs" ng-click="cancellaRipristina(ffff.idAllegato)" ng-show="!isCancellato(ffff.idAllegato)">
+	                                        <span class="glyphicon glyphicon-trash"></span> Rimuovi
+	                                    </button>
+	                                    <button type="button" class="btn btn-danger btn-xs" ng-click="cancellaRipristina(ffff.idAllegato)" ng-show="isCancellato(ffff.idAllegato)">
+	                                        <span class="glyphicon glyphicon-repeat"></span> Ripristina
+	                                    </button>
+	                                </td>
+	                            </tr>
+	                            
 	                            <tr ng-repeat="itemFile in uploader.queue">
 	                                <td><strong>{{ itemFile.file.name }}</strong></td>
 	                                <td ng-show="uploader.isHTML5" nowrap="nowrap">{{ itemFile.file.size/1024/1024|number:2 }} MB</td>
@@ -140,6 +161,11 @@
 	                                </td>
 	                                <td nowrap="nowrap">
 	                                	<textarea class="form-control" cols="80" rows="4" ng-model="note[$index]" placeholder="Note"></textarea>
+	                                </td>
+	                                <td nowrap="nowrap">
+	                                    <button type="button" class="btn btn-danger btn-xs" ng-click="rimuoviFile(itemFile)">
+	                                        <span class="glyphicon glyphicon-trash"></span> Rimuovi
+	                                    </button>
 	                                </td>
 	                            </tr>
 	                        </tbody>

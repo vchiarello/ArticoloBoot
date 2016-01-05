@@ -10,6 +10,9 @@ GO
 
 INSERT INTO "dbo"."bg_Tipo_Item" (descrizione) VALUES ('Tipo 1' )
 GO
+INSERT INTO "dbo"."bg_Tipo_Item" (descrizione) VALUES ('Slide show')
+GO
+
 
 INSERT INTO "dbo"."bg_tag" (nome_tag) VALUES ('Appunti' )
 GO

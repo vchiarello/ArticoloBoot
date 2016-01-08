@@ -1,5 +1,5 @@
 //controller usato nell'edit degli item
-angular.module("blogApp").controller("ItemEditCtrl", function ($scope,  Tag, Item, $state, $stateParams, FileUploader) {
+angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  Tag, Item, $state, $stateParams, FileUploader) {
 	
     //calcolo del toker csrf_token
 	var csrf_token = "";
@@ -38,27 +38,81 @@ angular.module("blogApp").controller("ItemEditCtrl", function ($scope,  Tag, Ite
         $scope.listaTags = Tag.query();
     };
 
-    //tutti i tag della combo Dei Tag
-    $scope.validaTitolo = function () {
-    	if ($scope.item.titolo == null || $scope.item.titolo.trim().length==0)
-    		$scope.erroreTitolo="Titolo campo obbligatorio.";
-		else		
-    		$scope.erroreTitolo="";
+
+    $scope.validaNome = function () {
+    	if(_campoErrore($scope.item.nome, "nome")){
+    		$scope.erroreNome = "Nome campo obbligatorio.";
+    		return false;
+    	}else
+    		$scope.erroreNome = "";
+    	return true;
     };
 
+    $scope.validaTitolo = function () {
+    	if(_campoErrore($scope.item.titolo, "titolo")){
+    		$scope.erroreTitolo = "Titolo campo obbligatorio.";
+			return false;
+		}else
+    		$scope.erroreTitolo = "";
+    };
+
+    $scope.validaTesto = function () {
+    	if(_campoErrore($scope.item.testo, "testo")){
+    		$scope.erroreTesto = "Testo campo obbligatorio.";
+			return false;
+		}else
+    		$scope.erroreTesto = "";
+    };
+
+    function _campoErrore(elemento, nomeCampo){
+    	if(elemento == null || elemento.trim().length==0){
+    		angular.element(document).find("#"+nomeCampo).addClass('inputErrore');
+    		return true;
+    	}else{
+    		angular.element(document).find("#"+nomeCampo).removeClass('inputErrore');
+    		return false;
+    	}
+    }
+    
     //transizione in caso di premuta del pulsante di cancel
     $scope.cancel = function () {
         $state.transitionTo("homeEditListItem");
     }
+    
+    function _validaAll(){
+    	
+    	return $scope.validaTitolo() && $scope.validaTitolo() && $scope.validaTesto();
+    }
 
     //salvataggio dell'item
     $scope.updateItem = function() {
-
-    	
     	var item = new Item($scope.item);
+    	
+    	var req = {
+        		method: 'POST',
+        		url: '/rest/validaItemWeb',
+        		headers : {'X-CSRF-TOKEN': csrf_token},
+        		data:{'itemWeb' : item}
+        	}
+        	
+//    	var req = {
+//        		method: 'GET',
+//        		url: '/rest/validaItemWeb/Ciao validate',
+//        		headers : {'X-CSRF-TOKEN': csrf_token},
+//        	}
+        	
+    	$http(req).then(function(){alert("Ok")},function(){alert("Ko")})
+    	
+    	if (!_validaAll()){
+    		
+    		alert("Impossibile salvare correggere gli errori!");
+    		return;
+    	}
+    	
+    	
        
-       //se non ci sono upload ancora in sospeso
-       		//si aspetta che finisca poi si salva e si va verso la home di edit
+		//se non ci sono upload ancora in sospeso
+		//si aspetta che finisca poi si salva e si va verso la home di edit
        if (uploader.getNotUploadedItems != null && uploader.getNotUploadedItems.length >0){
     	   uploader.onCompleteAll = function() {
 	           item.$update().then(function() {

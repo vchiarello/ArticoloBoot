@@ -10,10 +10,11 @@
 	        <div class="row">
 				<div class="form-group">
 					<div class="col-md-2">
-				    	<label for="name">Name</label>
+				    	<label for="name">Nome</label>
 					</div>
 				    <div class="col-md-10">
-				        <input class="form-control" placeholder="Name" ng-model="item.nome"/>
+				        <input id="nome" class="form-control" placeholder="Nome item" ng-model="item.nome" ng-blur="validaNome(item.nome)"/>
+				        <p style="color:red;">{{erroreNome}}</p>
 				    </div>
 	            </div>
     	    </div>
@@ -23,7 +24,7 @@
 		                <label for="titolo">Titolo</label>
 					</div>
 				    <div class="col-md-10">
-	                    <input class="form-control" placeholder="Titolo" ng-model="item.titolo" ng-blur="validaTitolo(item.titolo)"/>
+	                    <input id="titolo" class="form-control" placeholder="Titolo" ng-model="item.titolo" ng-blur="validaTitolo(item.titolo)"/>
 	                    <p style="color:red;">{{erroreTitolo}}</p>
 	                </div>
 	            </div>
@@ -34,7 +35,8 @@
 					    <label for="testo">Testo</label>
 					</div>
 				    <div class="col-md-10">
-				        <textarea class="form-control" cols="20" rows="10" ng-model="item.testo" placeholder="Testo"></textarea>
+				        <textarea id="testo" class="form-control" cols="20" rows="10" ng-model="item.testo" placeholder="Testo" ng-blur="validaTesto(item.testo)"></textarea>
+	                    <p style="color:red;">{{erroreTesto}}</p>
 				    </div>
 				</div>
 	        </div>

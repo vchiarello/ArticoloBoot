@@ -6,12 +6,16 @@ import it.vito.blog.db.bean.LkTagItem;
 import it.vito.blog.db.bean.Tag;
 import it.vito.blog.db.bean.TipoItem;
 
+import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+
+import com.mysql.jdbc.Field;
 
 public class ItemWeb {
 
@@ -124,6 +128,55 @@ public class ItemWeb {
 		this.tipoItem=item.getTipoItem().getId();
 		this.titolo=item.getTitolo();
 	}
+	
+	public ItemWeb (LinkedHashMap<String, Object> input){
+		ItemWeb risultato = new ItemWeb();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			java.lang.reflect.Method m = null;
+			m = ItemWeb.class.getMethod("setId", java.lang.Integer.class);
+			if (input.get("id") != null)
+			m.invoke(risultato, new Integer((String)input.get("id")));
+
+//			f = ItemWeb.class.getField("tipoItem");
+//			if (input.get("tipoItem") != null)
+//			f.set(risultato, input.get("tipoItem"));
+//
+//			f = ItemWeb.class.getField("testo");
+//			f.set(risultato, input.get("testo"));
+//
+//			f = ItemWeb.class.getField("titolo");
+//			f.set(risultato, input.get("titolo"));
+//
+//			f = ItemWeb.class.getField("nome");
+//			f.set(risultato, input.get("nome"));
+//
+//			f = ItemWeb.class.getField("riassunto");
+//			f.set(risultato, input.get("riassunto"));
+//
+//			f = ItemWeb.class.getField("autore");
+//			f.set(risultato, input.get("autore"));
+//
+//			f = ItemWeb.class.getField("dataPubblicazione");
+//			f.set(risultato, sdf.parse((String)input.get("dataPubblicazione")));
+//
+//			f = ItemWeb.class.getField("dataScadenza");
+//			f.set(risultato, sdf.parse((String)input.get("dataScadenza")));
+//
+//			f = ItemWeb.class.getField("dataHidden");
+//			f.set(risultato, sdf.parse((String)input.get("dataHidden")));
+
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public Item toItem(){
 		Item risultato = new Item();

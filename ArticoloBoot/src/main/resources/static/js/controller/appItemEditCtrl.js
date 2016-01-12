@@ -1,6 +1,11 @@
 //controller usato nell'edit degli item
 angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  Tag, Item, $state, $stateParams, FileUploader) {
-	
+
+	function FileAllegato(name, note){
+		this.nomeAllegato=name;
+		this.note=note;
+	}
+
     //calcolo del toker csrf_token
 	var csrf_token = "";
 	if (	document.querySelector('input[name="_csrf"]')!=null)
@@ -94,49 +99,49 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
         		headers : {'X-CSRF-TOKEN': csrf_token},
         		data:{'itemWeb' : item}
         	}
-        	
-//    	var req = {
-//        		method: 'GET',
-//        		url: '/rest/validaItemWeb/Ciao validate',
-//        		headers : {'X-CSRF-TOKEN': csrf_token},
-//        	}
-        	
-    	$http(req).then(function(){alert("Ok")},function(){alert("Ko")})
-    	
-    	if (!_validaAll()){
-    		
-    		alert("Impossibile salvare correggere gli errori!");
-    		return;
-    	}
+       	
+//    	$http(req).then(function(){alert("Ok")},function(){alert("Ko")})
+//    	
+//    	if (!_validaAll()){
+//    		
+//    		alert("Impossibile salvare correggere gli errori!");
+//    		return;
+//    	}
     	
     	
        
 		//se non ci sono upload ancora in sospeso
 		//si aspetta che finisca poi si salva e si va verso la home di edit
-       if (uploader.getNotUploadedItems != null && uploader.getNotUploadedItems.length >0){
-    	   uploader.onCompleteAll = function() {
-	           item.$update().then(function() {
-	               $state.transitionTo("homeEditListItem");
-	           });
-    	   }	
-    	//altrimenti si salva e quindi si naviga verso la home di edit
-       }else{
-           item.$update().then(function() {
-               $state.transitionTo("homeEditListItem");
-           });
-       }
+        if (uploader.queue.length > 0){
+           	uploader.onCompleteAll = function() {
+        		
+        		if ($scope.item.listaFile===undefined || $scope.item.listaFile==null) $scope.item.listaFile=new Array();
+        		for (i = 0; i < uploader.queue.length; i++){
+        			var fa = new FileAllegato(uploader.queue[i]._file.name, "")
+        			$scope.item.listaFile[i]=fa;
+        		}
+        		//TODO tipo Item dello slide show da verificare se codice va bene
+                $scope.item.tipoItem = 1;
+        		var item = new Item($scope.item);
+                
+    	        item.$update().then(function(itemWeb) {
+                   $state.transitionTo("homeEditListItem");
+                });
+    	    }	
+           	uploader.uploadAll();
+        }
     }
-
+    
     //appena si aggiunge un file questo viene immediatamenta uploadato sul server
     uploader.onAfterAddingFile = function(fileItem) {
-        fileItem.upload();
+//        fileItem.upload();
     };
     
     //all'aggiunta di un file questo viene immediatamente caricato sul server e viene aggiornata la lista dei file nuovi da inserire nel db
     uploader.onSuccessItem = function(fileItem, response, status, headers) {
         console.info('onSuccessItem', fileItem, response, status, headers);
-		if ($scope.item.listaFile===undefined || $scope.item.listaFile==null) $scope.item.listaFile=new Array();
-		$scope.item.listaFile[uploader.queue.length]=fileItem._file.name;
+//		if ($scope.item.listaFile===undefined || $scope.item.listaFile==null) $scope.item.listaFile=new Array();
+//		$scope.item.listaFile[uploader.queue.length]=fileItem._file.name;
     };
 
     //per i file già caricate c'è sia la funzionalità di cancellazione che quella di ripristina 

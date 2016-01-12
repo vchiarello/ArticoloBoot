@@ -1,3 +1,6 @@
+- Errore quando salvi un oggetto e la chiamata al salvataggio è dopo il complete all se il salvataggio va male non puoi risalvare
+  perché devi riallegare un file.
+
 - Validazione dei campi nei form di edit e create
 - Abilitare/disabilitare i pulsanti di salvataggio quando i campi non sono validati e quando sono stati premuti
 - Creare una clessidra nel tempo che si attende l'arrivo delle info

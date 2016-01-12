@@ -37,7 +37,7 @@ public class ItemWeb {
 	private List<FileAllegato> listaFile;
 	private List<FileAllegato> listaFileSalvati;
 	private List<Integer> listaFileDaCancellare;
-	
+	private ErroreWeb erroreWeb;
 	
 	public ItemWeb(){
 		
@@ -359,6 +359,14 @@ public class ItemWeb {
 
 	public void setDataInserimento(String dataInserimento) {
 		this.dataInserimento = dataInserimento;
+	}
+
+	public ErroreWeb getErroreWeb() {
+		return erroreWeb;
+	}
+
+	public void setErroreWeb(ErroreWeb erroreWeb) {
+		this.erroreWeb = erroreWeb;
 	}
 
 	@Override

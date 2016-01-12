@@ -1,6 +1,7 @@
 package it.vito.blog.web;
 
 import it.vito.blog.business.GestioneBlog;
+import it.vito.blog.web.bean.ErroreWeb;
 import it.vito.blog.web.bean.ItemWeb;
 
 import java.util.List;
@@ -51,7 +52,8 @@ public class ItemRestController {
 
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ItemWeb update(@PathVariable("id") int id, @RequestBody @Valid ItemWeb itemWeb) {
-		return this.gestioneBlog.saveItem(itemWeb);
+		if (this.valida(itemWeb)) return this.gestioneBlog.saveItem(itemWeb);
+		else return itemWeb;
 	}
 
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
@@ -59,6 +61,31 @@ public class ItemRestController {
 		this.gestioneBlog.deleteItem(id);
 	}
 
+
+	
+	private boolean valida(ItemWeb itemWeb){
+		boolean risultato = true;
+		ErroreWeb errore = null;
+		if (itemWeb.getNome()==null || itemWeb.getNome().trim().length()==0){
+			risultato = false;
+			if (errore==null)errore = new ErroreWeb();
+			errore.setErroreNome("Nome: campo obbligatorio");
+		}
+		if (itemWeb.getTitolo()==null || itemWeb.getTitolo().trim().length()==0){
+			risultato = false;
+			if (errore==null)errore = new ErroreWeb();
+			errore.setErroreTitolo("Titolo: campo obbligatorio");
+		}
+		if (itemWeb.getTesto()==null || itemWeb.getTesto().trim().length()==0){
+			risultato = false;
+			if (errore==null)errore = new ErroreWeb();
+			errore.setErroreTesto("Testo: campo obbligatorio");
+		}
+		
+		if (errore !=null) itemWeb.setErroreWeb(errore);
+		else itemWeb.setErroreWeb(null);
+		return risultato;
+	}
 	
 /*
 	@RequestMapping(value="/lista", method = RequestMethod.GET)

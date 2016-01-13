@@ -1,6 +1,8 @@
 //controller usato nell'edit degli item
 angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  Tag, Item, $state, $stateParams, FileUploader) {
 
+	alert (messaggiErrore['ciao.pippo'] );
+	
 	function FileAllegato(name, note){
 		this.nomeAllegato=name;
 		this.note=note;
@@ -115,21 +117,35 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
         if (uploader.queue.length > 0){
            	uploader.onCompleteAll = function() {
         		
-        		if ($scope.item.listaFile===undefined || $scope.item.listaFile==null) $scope.item.listaFile=new Array();
-        		for (i = 0; i < uploader.queue.length; i++){
-        			var fa = new FileAllegato(uploader.queue[i]._file.name, "")
-        			$scope.item.listaFile[i]=fa;
-        		}
-        		//TODO tipo Item dello slide show da verificare se codice va bene
-                $scope.item.tipoItem = 1;
-        		var item = new Item($scope.item);
-                
-    	        item.$update().then(function(itemWeb) {
-                   $state.transitionTo("homeEditListItem");
-                });
+           		_validaESalva();
     	    }	
            	uploader.uploadAll();
+        }else{
+        	_validaESalva();
         }
+    }
+
+    
+    function _validaESalva(){
+		if ($scope.item.listaFile===undefined || $scope.item.listaFile==null) $scope.item.listaFile=new Array();
+		for (i = 0; i < uploader.queue.length; i++){
+			var fa = new FileAllegato(uploader.queue[i]._file.name, "")
+			$scope.item.listaFile[i]=fa;
+		}
+		//TODO tipo Item dello slide show da verificare se codice va bene
+        $scope.item.tipoItem = 1;
+		var item = new Item($scope.item);
+        
+        item.$update().then(function(itemWeb) {
+            if (itemWeb.erroreWeb == null){
+            	$state.transitionTo("homeEditListItem");
+            }else{
+            	
+            	$scope.erroreNome=item.erroreWeb.erroreNome;
+            	$scope.erroreTitolo=item.erroreWeb.erroreTitolo;
+            	$scope.erroreTesto=item.erroreWeb.erroreTesto;
+            }
+        });
     }
     
     //appena si aggiunge un file questo viene immediatamenta uploadato sul server

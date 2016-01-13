@@ -24,53 +24,54 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
     <script th:src="@{/webjars/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.min.js}"></script>
     <script th:src="@{/webjars/bootstrap-datepicker/1.4.0/locales/bootstrap-datepicker.it.min.js}"></script>
     <script th:src="@{/webjars/bootbox/4.4.0/bootbox.js}"></script>	
+    <script th:src="@{/messaggiErrore}"></script>	
 
     <script th:inline="javascript">
         /*<![CDATA[*/
         var URLS = {};
-        URLS.items = /*[[@{/rest/items/:id}]]*/ '/rest/items';
+        URLS.items = /*[[@{/rest/items/:id}]]*/;
         
-        URLS.partialsCreateSlideShowItem = /*[[@{/items/partialsCreateSlideShowItem}]]*/ '/items/partialsCreateSlideShowItem';
-        URLS.partialsEditSlideShowItem = /*[[@{/items/partialsEditSlideShowItem}]]*/ '/items/partialsEditSlideShowItem';
-        URLS.partialsViewSlideShowItem = /*[[@{/items/partialsViewSlideShowItem}]]*/ '/items/partialsViewSlideShowItem';
+        URLS.partialsCreateSlideShowItem = /*[[@{/items/partialsCreateSlideShowItem}]]*/ ;
+        URLS.partialsEditSlideShowItem = /*[[@{/items/partialsEditSlideShowItem}]]*/ ;
+        URLS.partialsViewSlideShowItem = /*[[@{/items/partialsViewSlideShowItem}]]*/ ;
         
         
-        URLS.partialsListItem = /*[[@{/items/partialsListItem}]]*/ '/items/partialsListItem';
-        URLS.partialsViewItem = /*[[@{/items/partialsViewItem}]]*/ '/items/partialsViewItem';
-        URLS.partialsEditItem = /*[[@{/items/partialsEditItem}]]*/ '/items/partialsEditItem';
-        URLS.partialsEditList = /*[[@{/items/partialsEditList}]]*/ '/items/partialsEditList';
-        URLS.partialsCreateItem = /*[[@{/items/partialsCreateItem}]]*/ '/items/partialsCreateItem';
-        URLS.partialsCreateItemw1 = /*[[@{/items/partialsCreateItemw1}]]*/ '/items/partialsCreateItemw1';
-        URLS.partialsCreateItemw2 = /*[[@{/items/partialsCreateItemw2}]]*/ '/items/partialsCreateItemw2';
-        URLS.partialsCreateItemw3 = /*[[@{/items/partialsCreateItemw3}]]*/ '/items/partialsCreateItemw3';
-        URLS.login = /*[[@{/items/login}]]*/ '/items/login';
-        URLS.tags = /*[[@{/rest/tags}]]*/ '/rest/tags';
+        URLS.partialsListItem = /*[[@{/items/partialsListItem}]]*/ ;
+        URLS.partialsViewItem = /*[[@{/items/partialsViewItem}]]*/ ;
+        URLS.partialsEditItem = /*[[@{/items/partialsEditItem}]]*/ ;
+        URLS.partialsEditList = /*[[@{/items/partialsEditList}]]*/ ;
+        URLS.partialsCreateItem = /*[[@{/items/partialsCreateItem}]]*/ ;
+        URLS.partialsCreateItemw1 = /*[[@{/items/partialsCreateItemw1}]]*/;
+        URLS.partialsCreateItemw2 = /*[[@{/items/partialsCreateItemw2}]]*/ ;
+        URLS.partialsCreateItemw3 = /*[[@{/items/partialsCreateItemw3}]]*/ ;
+        URLS.login = /*[[@{/items/login}]]*/ ;
+        URLS.tags = /*[[@{/rest/tags}]]*/ ;
 
-        URLS.mappingsUrl = /*[[@{/mappings}]]*/ '/mappings';
-        URLS.partialsMappings = /*[[@{/mappings/partialsMappings}]]*/ '/mappings/partialsEndpoints';
+        URLS.mappingsUrl = /*[[@{/mappings}]]*/ ;
+        URLS.partialsMappings = /*[[@{/mappings/partialsMappings}]]*/ ;
         /*]]>*/
     </script>
-<script th:src="@{/js/app1.js}" src="../../static/js/appConfig.js"></script>
-<script th:src="@{/js/appConfig.js}" src="../../static/js/appConfig.js"></script>
-<script th:src="@{/js/controller/appEditListCtrl.js}" src="../../static/js/controller/appEditListCtrl.js"></script>
-<script th:src="@{/js/controller/appItemCtrl.js}" src="../../static/js/controller/appItemCtrl.js"></script>
+<script th:src="@{/js/app1.js}" ></script>
+<script th:src="@{/js/appConfig.js}" ></script>
+<script th:src="@{/js/controller/appEditListCtrl.js}" ></script>
+<script th:src="@{/js/controller/appItemCtrl.js}" ></script>
 
-<script th:src="@{/js/controller/appItemViewCtrl.js}" src="../../static/js/controller/appItemViewCtrl.js"></script>
-<script th:src="@{/js/controller/appItemCreateCtrl.js}" src="../../static/js/controller/appItemCreateCtrl.js"></script>
-<script th:src="@{/js/controller/appItemEditCtrl.js}" src="../../static/js/controller/appItemEditCtrl.js"></script>
+<script th:src="@{/js/controller/appItemViewCtrl.js}" ></script>
+<script th:src="@{/js/controller/appItemCreateCtrl.js}"></script>
+<script th:src="@{/js/controller/appItemEditCtrl.js}"></script>
 
-<script th:src="@{/js/controller/appItemViewSlideShowCtrl.js}" src="../../static/js/controller/appItemViewSlideShowCtrl.js"></script>
-<script th:src="@{/js/controller/appItemCreateSlideShowCtrl.js}" src="../../static/js/controller/appItemCreateCtrl.js"></script>
-<script th:src="@{/js/controller/appItemEditSlideShowCtrl.js}" src="../../static/js/controller/appItemCreateCtrl.js"></script>
+<script th:src="@{/js/controller/appItemViewSlideShowCtrl.js}" ></script>
+<script th:src="@{/js/controller/appItemCreateSlideShowCtrl.js}" ></script>
+<script th:src="@{/js/controller/appItemEditSlideShowCtrl.js}" ></script>
 
-<script th:src="@{/js/controller/appLoginCtrl.js}" src="../../static/js/controller/appLoginCtrl.js"></script>
-<script th:src="@{/js/controller/appMappingCtrl.js}" src="../../static/js/controller/appMappingCtrl.js"></script>
-<script th:src="@{/js/factory/appItem.js}" src="../../static/js/Class/appItem.js"></script>
-<script th:src="@{/js/factory/appItemOperation.js}" src="../../static/js/Class/appItemOperation.js"></script>
-<script th:src="@{/js/factory/appMapping.js}" src="../../static/js/factory/appMapping.js"></script>
-<script th:src="@{/js/factory/appTag.js}" src="../../static/js/Class/appTag.js"></script>
+<script th:src="@{/js/controller/appLoginCtrl.js}"></script>
+<script th:src="@{/js/controller/appMappingCtrl.js}"></script>
+<script th:src="@{/js/factory/appItem.js}"></script>
+<script th:src="@{/js/factory/appItemOperation.js}"></script>
+<script th:src="@{/js/factory/appMapping.js}"></script>
+<script th:src="@{/js/factory/appTag.js}"></script>
 
-<!--     <script th:src="@{/js/app.js}" src="../../static/js/app.js"></script> -->
+<!--     <script th:src="@{/js/app.js}"></script> -->
 </head>
 <body>
 

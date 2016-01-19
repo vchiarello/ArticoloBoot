@@ -1,7 +1,7 @@
 //controller usato nell'edit degli item
 angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  Tag, Item, $state, $stateParams, FileUploader) {
 
-	alert (messaggiErrore['ciao.pippo'] );
+
 	
 	function FileAllegato(name, note){
 		this.nomeAllegato=name;
@@ -48,7 +48,7 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
 
     $scope.validaNome = function () {
     	if(_campoErrore($scope.item.nome, "nome")){
-    		$scope.erroreNome = "Nome campo obbligatorio.";
+    		$scope.erroreNome = messaggiErrore['item.edit.name.required'];
     		return false;
     	}else
     		$scope.erroreNome = "";
@@ -57,7 +57,7 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
 
     $scope.validaTitolo = function () {
     	if(_campoErrore($scope.item.titolo, "titolo")){
-    		$scope.erroreTitolo = "Titolo campo obbligatorio.";
+    		$scope.erroreTitolo = messaggiErrore['item.edit.titolo.required'];
 			return false;
 		}else
     		$scope.erroreTitolo = "";
@@ -65,7 +65,7 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
 
     $scope.validaTesto = function () {
     	if(_campoErrore($scope.item.testo, "testo")){
-    		$scope.erroreTesto = "Testo campo obbligatorio.";
+    		$scope.erroreTesto = messaggiErrore['item.edit.testo.required'];
 			return false;
 		}else
     		$scope.erroreTesto = "";

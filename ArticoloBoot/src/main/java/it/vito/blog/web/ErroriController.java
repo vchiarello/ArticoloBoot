@@ -1,6 +1,8 @@
 package it.vito.blog.web;
 
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -20,12 +22,16 @@ public class ErroriController {
 	
 	@RequestMapping(value="/messaggiErrore", method = RequestMethod.GET,produces = "application/javascript; charset=utf-8")
 	@ResponseBody
-	public String messaggiErrore(HttpServletResponse response) {
+	public String messaggiErrore(HttpServletResponse response, Locale locale) {
 		logger.debug("Messaggi di errore. ");
 		response.setContentType("application/javascript");
 		//return "i18n/messaggi.errore";
-		return "var messaggiErrore = new Array();"+
-				"messaggiErrore['ciao.pippo'] = 'errore di ciao.pippo';";
+		return 
+		"var messaggiErrore = new Array();"+
+		"messaggiErrore['item.edit.name.required'] = 'Nome: campo obbligatorio';"+
+		"messaggiErrore['item.edit.titolo.required'] = 'Titolo: nome campo obbligatorio';"+
+		"messaggiErrore['item.edit.testo.required'] = 'Testo: campo obbligatorio';"+
+		"";
 	}
 
 }

@@ -1,7 +1,9 @@
 package it.vito.blog.web;
 
 
+import java.util.Enumeration;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,13 +27,23 @@ public class ErroriController {
 	public String messaggiErrore(HttpServletResponse response, Locale locale) {
 		logger.debug("Messaggi di errore. ");
 		response.setContentType("application/javascript");
+		ResourceBundle rb = ResourceBundle.getBundle("MessaggiErrore", locale);
+		logger.debug("Locale used is:"+rb.getLocale().toString());
+		logger.debug("valore per item.edit.name.required"+rb.getString("item.edit.name.required"));
 		//return "i18n/messaggi.errore";
-		return 
-		"var messaggiErrore = new Array();"+
-		"messaggiErrore['item.edit.name.required'] = 'Nome: campo obbligatorio';"+
-		"messaggiErrore['item.edit.titolo.required'] = 'Titolo: nome campo obbligatorio';"+
-		"messaggiErrore['item.edit.testo.required'] = 'Testo: campo obbligatorio';"+
-		"";
+
+		StringBuffer risultato = new StringBuffer("var messaggiErrore = new Array();");
+		for (Enumeration<String> e = rb.getKeys(); e.hasMoreElements();){
+			String chiave = e.nextElement();
+			String valore = rb.getString(chiave);
+			risultato = risultato.append("messaggiErrore['"+chiave+"'] = '"+valore+"';");
+		}
+		return risultato.toString();
+//		"var messaggiErrore = new Array();"+
+//		"messaggiErrore['item.edit.name.required'] = 'Nome: campo obbligatorio';"+
+//		"messaggiErrore['item.edit.titolo.required'] = 'Titolo: nome campo obbligatorio';"+
+//		"messaggiErrore['item.edit.testo.required'] = 'Testo: campo obbligatorio';"+
+//		"";
 	}
 
 }

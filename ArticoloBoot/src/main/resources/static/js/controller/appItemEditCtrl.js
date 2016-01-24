@@ -57,7 +57,7 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
 
     $scope.validaTitolo = function () {
     	if(_campoErrore($scope.item.titolo, "titolo")){
-    		$scope.erroreTitolo = messaggiErrore['item.edit.titolo.required'];
+    		$scope.erroreTitolo = messaggiErrore['item.edit.title.required'];
 			return false;
 		}else
     		$scope.erroreTitolo = "";
@@ -65,7 +65,7 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
 
     $scope.validaTesto = function () {
     	if(_campoErrore($scope.item.testo, "testo")){
-    		$scope.erroreTesto = messaggiErrore['item.edit.testo.required'];
+    		$scope.erroreTesto = messaggiErrore['item.edit.text.required'];
 			return false;
 		}else
     		$scope.erroreTesto = "";

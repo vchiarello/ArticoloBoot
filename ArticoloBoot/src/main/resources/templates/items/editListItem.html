@@ -22,24 +22,24 @@
 <!-- 								Edit item -->
 <!-- 							</button> -->
 <!-- 					  </a> -->
-		      		<button class="btn btn-default btn-sm" aria-label="Left Align"  type="button" ng-click="editItem(item)">
-						<span class="glyphicon glyphicon-remove" aria-hidden="true"> </span>
-						Edit item
+		      		<button class="btn btn-default btn-sm" aria-label="Left Align"  type="button" ng-click="editItem(item)" >
+						<span class="glyphicon glyphicon-edit" aria-hidden="true"> </span>
+						<span th:text="#{editListItem.button.editItem}">Edit item</span>
 					</button>
 		      		<button class="btn btn-default btn-sm" aria-label="Left Align"  type="button" ng-click="deleteItem(item)">
 						<span class="glyphicon glyphicon-remove" aria-hidden="true"> </span>
-						Delete item
+						<span th:text="#{editListItem.button.deleteItem}">Delete item</span>
 					</button>
 		      		<button class="btn btn-default btn-sm" aria-label="Left Align"  type="button" ng-click="hideItem(item)" ng-show="!isNascosto(item)">
 						<span class="glyphicon glyphicon-eye-close" aria-hidden="true"> </span>
-						Hide item 
+						<span th:text="#{editListItem.button.hideItem}">Hide item</span>
 					</button>
 					
 		      		<button class="btn btn-default btn-sm" aria-label="Left Align"  type="button" ng-click="showItem(item)" ng-show="isNascosto(item)">
 						<span class="glyphicon glyphicon-eye-open" aria-hidden="true"> </span>
-						Show item
+						<span th:text="#{editListItem.button.showItem}">Show item</span>
 					</button>
-					<span ng-show="isNascosto(item)">nascosto!</span>
+					<span ng-show="isNascosto(item)"  th:text="#{editListItem.label.hidden}">Hidden!</span>
 					  </h3>
 				      <p class="previewArticolo"><a ui-sref="view({ itemId: item.id })">{{item.riassunto}}</a></p>
 		

@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 
 @EnableAutoConfiguration
@@ -53,12 +54,12 @@ public class VitoSecurityLdapOracle  extends WebSecurityConfigurerAdapter{
     	
     	http
             .authorizeRequests()
-                .antMatchers("/items","/", "/home").permitAll()
-                .antMatchers("/items/partialsEditItem").hasRole("REDAZIONE")
+                .antMatchers("/messaggiErrore","/items","/","/items/partialsListItem","/items/login","/items/partialsViewSlideShowItem","/items/partialsViewItem","/rest/items").permitAll()
+                .antMatchers("/items/partialsEditItem","/items/partialsCreateItem", "/items/partialsEditList","/items/partialsCreateSlideShowItem","/items/partialsEditSlideShowItem").hasRole("REDAZIONE")
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
-                .loginPage("/login")
+                .loginPage("/login").successHandler(new SavedRequestAwareAuthenticationSuccessHandler())
                 .permitAll()
                 .and()
             .logout()

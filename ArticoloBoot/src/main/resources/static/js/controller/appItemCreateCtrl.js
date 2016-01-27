@@ -14,7 +14,7 @@ angular.module("blogApp").controller("ItemCreateCtrl", function ($scope, Tag, It
             }
     });
 
-    $('.dataFormat').datepicker({
+    $('.dateFormat').datepicker({
         format: "dd/mm/yyyy",
         weekStart: 1,
         todayBtn: true,

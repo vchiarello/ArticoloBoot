@@ -12,7 +12,7 @@ angular.module("blogApp").factory("ItemOperation", function (Item) {
 	
 	function nascondiItem(data){
 	    	bootbox.confirm({
-	    		message: "Nascondere l'item \"" + data.titolo +"\"?", 
+	    		message: messaggiErrore['editList.hideItem.function.Confirm'](data.titolo),//function(){return "Ciao Vito " + data.titolo},////"Nascondere l'item \"" + data.titolo +"\"?", 
 	    		callback: function(result){
 					if (result){
 		    			d = new Date()
@@ -32,7 +32,7 @@ angular.module("blogApp").factory("ItemOperation", function (Item) {
 
 	function showItem(data){
 	    	bootbox.confirm({
-	    		message: "Mostrare l'item \"" + data.titolo +"\"?", 
+	    		message: messaggiErrore['editList.showItem.function.Confirm'](data.titolo), 
 	    		callback: function(result){
 					if (result){
 		    			
@@ -51,7 +51,7 @@ angular.module("blogApp").factory("ItemOperation", function (Item) {
     	var it = new Item(item);
 
     	bootbox.confirm({
-    		message: "Cancellare l'oggetto \"" + it.titolo +"\"?", 
+    		message: messaggiErrore['editList.deleteItem.function.Confirm'](item.titolo), 
     		callback: function(result){
     			if (result){
     	        		it.$delete({id:item.id}, 

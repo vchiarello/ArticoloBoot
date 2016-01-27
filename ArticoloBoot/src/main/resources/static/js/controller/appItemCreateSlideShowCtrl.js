@@ -19,7 +19,7 @@ angular.module("blogApp").controller("ItemCreateSlideShowCtrl", function ($scope
             }
     });
 
-    $('.dataFormat').datepicker({
+    $('.dateFormat').datepicker({
         format: "dd/mm/yyyy",
         weekStart: 1,
         todayBtn: true,

@@ -22,7 +22,7 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
     });
 
 
-    $('.dataFormat').datepicker({
+    $('.dateFormat').datepicker({
         format: "dd/mm/yyyy",
         weekStart: 1,
         todayBtn: true,

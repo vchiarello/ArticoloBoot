@@ -36,7 +36,10 @@ public class ErroriController {
 		for (Enumeration<String> e = rb.getKeys(); e.hasMoreElements();){
 			String chiave = e.nextElement();
 			String valore = rb.getString(chiave);
-			risultato = risultato.append("messaggiErrore['"+chiave+"'] = '"+valore+"';");
+			if (chiave.indexOf("function")>=0)
+				risultato = risultato.append("messaggiErrore['"+chiave+"'] = "+valore+";");
+			else
+				risultato = risultato.append("messaggiErrore['"+chiave+"'] = '"+valore+"';");
 		}
 		return risultato.toString();
 //		"var messaggiErrore = new Array();"+

@@ -8,8 +8,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import mvctest.domain.Hotel;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-//pippo
 @RestController
 @RequestMapping("/rest/items")
 public class ItemRestController {
@@ -87,32 +84,6 @@ public class ItemRestController {
 		return risultato;
 	}
 	
-/*
-	@RequestMapping(value="/lista", method = RequestMethod.GET)
-	public Map<String,List<Item>> lista() {
-		logger.debug("Get lista item...");
-		Map<String,List<Item>> model = new HashMap<String,List<Item>>();
-		List<Item> l = itemRepository.findAll();
-		
-		if (l!=null) logger.debug("Trovati " + l.size() + " item...");
-		else logger.debug("Nessun item trovato");
-			
-		model.put("listItem", l);
-		return model;
-	}
 
-	@RequestMapping(value="/getItem", method = RequestMethod.GET)
-	public Map<String,Item> getItem(@RequestParam("id") Integer id) {
-		logger.debug("Get item...");
-		Map<String,Item> model = new HashMap<String,Item>();
-		Item item = itemRepository.findById(id);
-		
-		if (item!=null) logger.debug("item trovato " + item.toString());
-		else logger.debug("Item trovato");
-			
-		model.put("item", item);
-		return model;
-	}
-*/	
 
 }

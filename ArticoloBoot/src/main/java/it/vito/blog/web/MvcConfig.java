@@ -23,16 +23,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/items/partialsEditSlideShowItem").setViewName("items/partialsEditSlideShowItem::content");
 		registry.addViewController("/items/login").setViewName("/items/login::content");
 		registry.addViewController("/login").setViewName("/items/login::content");
-		
-//		registry.addViewController("/login").setViewName("login");
-//		
-//		
-//
-//		registry.addViewController("/items/partialsCreateItemw1").setViewName("items/partialsCreateItemw1::content");
-//		registry.addViewController("/items/partialsCreateItemw2").setViewName("items/partialsCreateItemw2::content");
-//		registry.addViewController("/items/partialsCreateItemw3").setViewName("items/partialsCreateItemw3::content");
-//		registry.addViewController("/vito").setViewName("vito");
-		
 	}
 	
 }

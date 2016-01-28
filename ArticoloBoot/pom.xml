@@ -126,6 +126,12 @@
 			<artifactId>angular-ui-router</artifactId>
 			<version>0.2.8</version>
 		</dependency>
+		<!-- angular sanitize per visualizzare html-->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>angular-sanitize</artifactId>
+			<version>1.3.11</version>
+		</dependency>
 		<!-- effetti grafici fatti con angular -->
 		<dependency>
 			<groupId>org.webjars</groupId>

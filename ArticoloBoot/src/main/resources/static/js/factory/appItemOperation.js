@@ -12,7 +12,7 @@ angular.module("blogApp").factory("ItemOperation", function (Item) {
 	
 	function nascondiItem(data){
 	    	bootbox.confirm({
-	    		message: messaggiErrore['editList.hideItem.function.Confirm'](data.titolo),//function(){return "Ciao Vito " + data.titolo},////"Nascondere l'item \"" + data.titolo +"\"?", 
+	    		message: messaggiErrore['editList.hideItem.function.Confirm'](data.titolo), 
 	    		callback: function(result){
 					if (result){
 		    			d = new Date()
@@ -21,7 +21,7 @@ angular.module("blogApp").factory("ItemOperation", function (Item) {
 						         d.getFullYear();
 						data.dataHidden=ds;
 		    			data.$update().then(function() {
-						    	        	bootbox.alert({message: "Item nascoto!"})
+						    	        	bootbox.alert({message: messaggiErrore['editList.hideItem.result']})
 		    			})
 					}	
 	    		} 
@@ -38,7 +38,7 @@ angular.module("blogApp").factory("ItemOperation", function (Item) {
 		    			
 						data.dataHidden=null;
 		    			data.$update().then(function() {
-						    	        	bootbox.alert({message: "Item è ora visibile!"})
+						    	        	bootbox.alert({message: messaggiErrore['editList.showItem.result']})
 		    			})
 					}	
 	    		} 
@@ -56,7 +56,7 @@ angular.module("blogApp").factory("ItemOperation", function (Item) {
     			if (result){
     	        		it.$delete({id:item.id}, 
     	        				function(){
-				    	        	bootbox.alert({message: "Item cancellato!"})
+				    	        	bootbox.alert({message: messaggiErrore['editList.deleteItem.result']})
 			    	        	})
     			}
     		} 

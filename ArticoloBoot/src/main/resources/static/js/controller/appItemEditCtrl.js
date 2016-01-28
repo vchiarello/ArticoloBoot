@@ -2,12 +2,6 @@
 angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  Tag, Item, $state, $stateParams, FileUploader) {
 
 
-	
-	function FileAllegato(name, note){
-		this.nomeAllegato=name;
-		this.note=note;
-	}
-
     //calcolo del toker csrf_token
 	var csrf_token = "";
 	if (	document.querySelector('input[name="_csrf"]')!=null)
@@ -47,39 +41,40 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
 
 
     $scope.validaNome = function () {
-    	if(_campoErrore($scope.item.nome, "nome")){
+    	if($scope.item === undefined || $scope.item.nome == null || $scope.item.nome.trim().length==0){
     		$scope.erroreNome = messaggiErrore['item.edit.name.required'];
+    		angular.element(document).find("#nome").addClass('inputErrore');
     		return false;
-    	}else
-    		$scope.erroreNome = "";
+    	}else{
+    		angular.element(document).find("#nome").removeClass('inputErrore');
+    		$scope.erroreNome = "";    		
+    	}
     	return true;
     };
 
     $scope.validaTitolo = function () {
-    	if(_campoErrore($scope.item.titolo, "titolo")){
+    	if($scope.item === undefined || $scope.item.titolo == null || $scope.item.titolo.trim().length==0 ){
     		$scope.erroreTitolo = messaggiErrore['item.edit.title.required'];
+    		angular.element(document).find("#titolo").addClass('inputErrore');
 			return false;
-		}else
+		}else{
+    		angular.element(document).find("#titolo").removeClass('inputErrore');
     		$scope.erroreTitolo = "";
+		}
+    	return true;
     };
 
     $scope.validaTesto = function () {
-    	if(_campoErrore($scope.item.testo, "testo")){
+    	if($scope.item === undefined || $scope.item.testo == null || $scope.item.testo.trim().length==0){
     		$scope.erroreTesto = messaggiErrore['item.edit.text.required'];
+    		angular.element(document).find("#testo").addClass('inputErrore');
 			return false;
-		}else
+		}else{
+    		angular.element(document).find("#testo").removeClass('inputErrore');
     		$scope.erroreTesto = "";
+		}
+    	return true;
     };
-
-    function _campoErrore(elemento, nomeCampo){
-    	if(elemento == null || elemento.trim().length==0){
-    		angular.element(document).find("#"+nomeCampo).addClass('inputErrore');
-    		return true;
-    	}else{
-    		angular.element(document).find("#"+nomeCampo).removeClass('inputErrore');
-    		return false;
-    	}
-    }
     
     //transizione in caso di premuta del pulsante di cancel
     $scope.cancel = function () {
@@ -88,30 +83,25 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
     
     function _validaAll(){
     	
-    	return $scope.validaTitolo() && $scope.validaTitolo() && $scope.validaTesto();
+    	return $scope.validaNome() && $scope.validaTitolo() && $scope.validaTesto();
     }
 
     //salvataggio dell'item
     $scope.updateItem = function() {
-    	var item = new Item($scope.item);
-    	
-    	var req = {
-        		method: 'POST',
-        		url: '/rest/validaItemWeb',
-        		headers : {'X-CSRF-TOKEN': csrf_token},
-        		data:{'itemWeb' : item}
-        	}
-       	
+//    	var req = {
+//        		method: 'POST',
+//        		url: '/rest/validaItemWeb',
+//        		headers : {'X-CSRF-TOKEN': csrf_token},
+//        		data:{'itemWeb' : item}
+//        	}
+//       	
 //    	$http(req).then(function(){alert("Ok")},function(){alert("Ko")})
 //    	
-//    	if (!_validaAll()){
-//    		
-//    		alert("Impossibile salvare correggere gli errori!");
-//    		return;
-//    	}
-    	
-    	
-       
+    	if (!_validaAll()){
+    		bootbox.alert({message: messaggiErrore['editItem.validateAll.alert']});
+    		return;
+    	}
+    	var item = new Item($scope.item);
 		//se non ci sono upload ancora in sospeso
 		//si aspetta che finisca poi si salva e si va verso la home di edit
         if (uploader.queue.length > 0){

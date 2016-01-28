@@ -12,7 +12,8 @@
                         <label for="nome" th:text="#{editItem.label.name}">Nome</label>
                     </div>
                     <div class="col-md-10">
-                        <input class="form-control" th:placeholder="#{editItem.placeholder.name}" ng-model="item.nome"/>
+                        <input id="nome" class="form-control" th:placeholder="#{editItem.placeholder.name}" ng-model="item.nome" ng-blur="validaNome(item.nome)"/>
+				        <p style="color:red;">{{erroreNome}}</p>
                     </div>
                 </div>
 			</div>
@@ -22,7 +23,8 @@
                         <label for="titolo" th:text="#{editItem.label.title}">Titolo</label>
                     </div>
                     <div class="col-md-10">
-                            <input class="form-control" th:placeholder="#{editItem.placeholder.name}" ng-model="item.titolo"/>
+                            <input id="titolo" class="form-control" th:placeholder="#{editItem.placeholder.name}" ng-model="item.titolo" ng-blur="validaTitolo(item.nome)"/>
+                            <p style="color:red;">{{erroreTitolo}}</p>
                     </div>
                	</div>
            </div>    	
@@ -32,7 +34,8 @@
                         <label for="testo" th:text="#{editItem.label.text}">Testo</label>
                     </div>
                     <div class="col-md-10">
-                            <textarea class="form-control" cols="20" rows="10" ng-model="item.testo" th:placeholder="#{editItem.placeholder.text}"></textarea>
+						<textarea id="testo" class="form-control" cols="20" rows="10" ng-model="item.testo" th:placeholder="#{editItem.placeholder.text}" ng-blur="validaTesto(item.testo)"></textarea>
+						<p style="color:red;">{{erroreTesto}}</p>
                     </div>
                	</div>
            </div>    	

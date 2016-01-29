@@ -15,8 +15,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.mysql.jdbc.Field;
-
 public class ItemWeb {
 
 	private Integer id;
@@ -131,7 +129,7 @@ public class ItemWeb {
 	
 	public ItemWeb (LinkedHashMap<String, Object> input){
 		ItemWeb risultato = new ItemWeb();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		try {
 			java.lang.reflect.Method m = null;
 			m = ItemWeb.class.getMethod("setId", java.lang.Integer.class);

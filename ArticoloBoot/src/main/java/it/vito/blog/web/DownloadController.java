@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import javax.imageio.stream.FileImageInputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -34,10 +33,10 @@ public class DownloadController {
 
 	
 	@RequestMapping(value="/rest/download", method = RequestMethod.GET)
-	public void download(@RequestParam("idAllegato") Integer idAllegato,HttpServletResponse response) {
+	public void download(@RequestParam("idAllegato") Integer idAllegato, @RequestParam("nomeAllegato") String nomeAllegato,HttpServletResponse response) {
 		
 			try {
-				Allegato allegato = gestioneBlog.getAllegato(idAllegato);
+				Allegato allegato = gestioneBlog.getAllegato(idAllegato,nomeAllegato);
 				byte[] b = allegato.getDati();
 				response.setContentType(allegato.getContentType());
 				FileCopyUtils.copy(b, response.getOutputStream());

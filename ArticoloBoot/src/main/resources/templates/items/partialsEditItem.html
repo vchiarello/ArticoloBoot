@@ -138,7 +138,7 @@
 	                        </thead>
 	                        <tbody>
 	                            <tr ng-repeat="ffff in item.listaFileSalvati" >
-	                            	<td><strong><a href="/rest/download?idAllegato={{ffff.idAllegato}}" target="_blank">{{ffff.nomeAllegato}}</a></strong></td>
+	                            	<td><strong><a href="/rest/download?idAllegato={{ffff.idAllegato}}&amp;nomeAllegato={{ffff.nomeAllegato}}" target="_blank">{{ffff.nomeAllegato}}</a></strong></td>
 	                                <td  nowrap="nowrap"></td>
 	                                <td ng-show="uploader.isHTML5" nowrap="nowrap"></td>
 	                                <td ng-show="uploader.isHTML5">

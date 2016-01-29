@@ -43,18 +43,6 @@ angular.module("blogApp").config(function ($stateProvider, $urlRouterProvider) {
             url:'/editSlideShowItem/:itemId',
             templateUrl: URLS.partialsEditSlideShowItem,
             controller: 'ItemEditSlideShowCtrl'
-//        }).state('createItemw1', {
-//            url:'/createItemw1',
-//            templateUrl: URLS.partialsCreateItemw1,
-//            controller: 'ItemCreateCtrl1'
-//        }).state('createItemw2', {
-//            url:'/createItemw2',
-//            templateUrl: URLS.partialsCreateItemw2,
-//            controller: 'ItemCreateCtrl2'
-//        }).state('createItemw3', {
-//            url:'/createItemw3',
-//            templateUrl: URLS.partialsCreateItemw3,
-//            controller: 'ItemCreateCtrl'
         }).state('endpoints', {
             url: '/endpoints',
             templateUrl: URLS.partialsMappings,

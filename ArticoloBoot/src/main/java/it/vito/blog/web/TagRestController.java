@@ -1,8 +1,6 @@
 package it.vito.blog.web;
 
 import it.vito.blog.business.GestioneBlog;
-import it.vito.blog.db.bean.Tag;
-import it.vito.blog.db.dao.TagRepository;
 import it.vito.blog.web.bean.Option;
 
 import java.util.List;

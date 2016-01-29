@@ -21,6 +21,7 @@ public interface ItemRepository extends CrudRepository<Item, Integer>{
 	@Query("select a from Item a where a.id > :idArticolo order by a.dataPubblicazione desc ")
 	public Stream<Item> streamAll(@Param("idArticolo") Integer idArticolo);
 	
+	@SuppressWarnings("unchecked")
 	public Item save(Item item);
 	
 }

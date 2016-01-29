@@ -11,6 +11,7 @@ public interface AllegatoRepository extends CrudRepository<Allegato, Integer>{
 	public Allegato save(Allegato allegato);
 
 	public Allegato findOne(Integer id);
+	public Allegato findByIdAndNomeAllegato(Integer id, String nomeAllegato);
 	public void deleteByItem(Item item);
 
 }

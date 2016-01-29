@@ -1,6 +1,5 @@
 - Abilitare/disabilitare i pulsanti di salvataggio quando i campi non sono validati e quando sono stati premuti
 - Creare una clessidra nel tempo che si attende l'arrivo delle info
-- Aggiustare il download in modo che non compaia l'id
 - Aggiustare il get dei valori in modo che oltre all'id ci sia il nome e si faccia una verifica nome+id
 - Creazione altri tipi di moduli
 - Documentazione

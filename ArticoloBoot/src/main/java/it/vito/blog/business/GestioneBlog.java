@@ -1,18 +1,5 @@
 package it.vito.blog.business;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-
-import javassist.bytecode.ByteArray;
 import it.vito.blog.db.bean.Allegato;
 import it.vito.blog.db.bean.Item;
 import it.vito.blog.db.bean.LkTagItem;
@@ -23,6 +10,15 @@ import it.vito.blog.db.dao.LkTagItemRepository;
 import it.vito.blog.db.dao.TagRepository;
 import it.vito.blog.web.bean.ItemWeb;
 import it.vito.blog.web.bean.Option;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,8 +46,10 @@ public class GestioneBlog {
 	@Value("${pathFile}")
 	String pathFile;
 
-	public Allegato getAllegato(Integer idAllegato){
-		return allegatoRepository.findOne(idAllegato);
+	public Allegato getAllegato(Integer idAllegato, String nomeAllegato){
+//		return allegatoRepository.findOne(idAllegato,nomeAllegato);
+		return allegatoRepository.findByIdAndNomeAllegato(idAllegato,nomeAllegato);
+		
 		//return allegato.getDati();
 	}
 
@@ -110,7 +108,6 @@ public class GestioneBlog {
 	}
 	
 	public ItemWeb saveItem(ItemWeb itemWeb){
-		ItemWeb risultato = new ItemWeb();
 		
 		logger.debug("Salvataggio Item...");
 

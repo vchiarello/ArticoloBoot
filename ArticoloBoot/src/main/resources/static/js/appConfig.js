@@ -20,7 +20,7 @@ angular.module("blogApp").config(function ($stateProvider, $urlRouterProvider) {
 	        templateUrl: URLS.partialsEditList,
 	        controller: 'EditListCtrl'
 	    }).state('viewItem', {
-            url:'/viewItem/:itemId',
+            url:'/viewItem/:id/:name',
             templateUrl: URLS.partialsViewItem,
             controller: 'ViewItemCtrl'
         }).state('createItem', {

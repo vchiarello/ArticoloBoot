@@ -33,8 +33,8 @@ public class ItemRestController {
 		return l;
 	}
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ItemWeb get(@PathVariable("id") int id) {
+	@RequestMapping(value="/{id}/{name}", method=RequestMethod.GET)
+	public ItemWeb get(@PathVariable("id") int id,@PathVariable("name") String name) {
 		logger.debug("Get item...");
 		ItemWeb item = gestioneBlog.getItem(id);
 		

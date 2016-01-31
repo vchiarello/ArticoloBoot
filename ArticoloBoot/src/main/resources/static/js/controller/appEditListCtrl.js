@@ -18,18 +18,18 @@ angular.module("blogApp").controller("EditListCtrl", function ($scope, Item, Ite
 
     $scope.editItem = function (item) {
     	if (item.tipoItem==1)
-    		$state.transitionTo("editItem",{itemId: item.id});
+    		$state.transitionTo("editItem",{itemId: item.id, itemName:item.name});
     	else if (item.tipoItem==2)
-    		$state.transitionTo("editSlideShowItem",{itemId: item.id});
+    		$state.transitionTo("editSlideShowItem",{itemId: item.id, itemName:item.name});
     	else
     		window.alert("Tipo item non supportato")
     };
 
     $scope.viewItem = function (item) {
     	if (item.tipoItem==1)
-    		$state.transitionTo("viewItem",{itemId: item.id});
+    		$state.transitionTo("viewItem",{itemId: item.id, itemName:item.name});
     	else if (item.tipoItem==2)
-    		$state.transitionTo("viewSlideShowItem",{itemId: item.id});
+    		$state.transitionTo("viewSlideShowItem",{itemId: item.id, itemName:item.name});
     	else
     		window.alert("Tipo item non supportato")
     };

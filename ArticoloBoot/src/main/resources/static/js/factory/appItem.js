@@ -8,7 +8,7 @@ angular.module("blogApp").factory("Item", function ($resource) {
 		csrf_token = document.querySelector('input[name="_csrf"]').getAttribute('value');
 
     
-	return $resource(URLS.items, {id: "@id"}, {
+	return $resource(URLS.items, {id: "@id", name: "@name"}, {
 		  update: {method: 'PUT', headers: {'X-CSRF-TOKEN': csrf_token}},
 		  save: {method: 'POST', headers: {'X-CSRF-TOKEN': csrf_token}},
 		  delete: {method: 'DELETE', headers: {'X-CSRF-TOKEN': csrf_token}}

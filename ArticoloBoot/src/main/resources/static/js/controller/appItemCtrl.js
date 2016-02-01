@@ -8,7 +8,7 @@ angular.module("blogApp").controller("ItemCtrl", function ($scope, Item, $state)
     	if (item.tipoItem==1)
     		$state.transitionTo("viewItem",{id: item.id, name: item.nome});
     	else if (item.tipoItem==2)
-    		$state.transitionTo("viewSlideShowItem",{itemId: item.id, name: item.nome});
+    		$state.transitionTo("viewSlideShowItem",{id: item.id, name: item.nome});
     	else
     		window.alert("Tipo item non supportato")
     };

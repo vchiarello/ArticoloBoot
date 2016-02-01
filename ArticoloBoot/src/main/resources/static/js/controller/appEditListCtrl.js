@@ -10,26 +10,37 @@ angular.module("blogApp").controller("EditListCtrl", function ($scope, Item, Ite
     };
 
     $scope.deleteItem = function (item) {
-    	ItemOperation.deleteItem(item);
-    	var indice = $scope.items.indexOf(item);
-    	$scope.items.splice(indice,1);
 
+    	var it = new Item(item);
+    	bootbox.confirm({
+    		message: messaggiErrore['editList.deleteItem.function.Confirm'](item.titolo), 
+    		callback: function(result){
+    			if (result){
+	        		it.$delete({id:item.id, name:item.nome}, 
+	    				function(){
+		        	    	var indice = $scope.items.indexOf(item);
+		        	    	$scope.items.splice(indice,1);
+		    	        	bootbox.alert({message: messaggiErrore['editList.deleteItem.result']})
+	    	        	})
+    			}
+    		} 
+    	})
     };
 
     $scope.editItem = function (item) {
     	if (item.tipoItem==1)
-    		$state.transitionTo("editItem",{itemId: item.id, itemName:item.name});
+    		$state.transitionTo("editItem",{id: item.id, name: item.nome});
     	else if (item.tipoItem==2)
-    		$state.transitionTo("editSlideShowItem",{itemId: item.id, itemName:item.name});
+    		$state.transitionTo("editSlideShowItem",{id: item.id, name: item.nome});
     	else
     		window.alert("Tipo item non supportato")
     };
 
     $scope.viewItem = function (item) {
     	if (item.tipoItem==1)
-    		$state.transitionTo("viewItem",{itemId: item.id, itemName:item.name});
+    		$state.transitionTo("viewItem",{id: item.id, name: item.nome});
     	else if (item.tipoItem==2)
-    		$state.transitionTo("viewSlideShowItem",{itemId: item.id, itemName:item.name});
+    		$state.transitionTo("viewSlideShowItem",{id: item.id, name: item.nome});
     	else
     		window.alert("Tipo item non supportato")
     };

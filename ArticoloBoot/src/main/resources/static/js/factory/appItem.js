@@ -7,8 +7,14 @@ angular.module("blogApp").factory("Item", function ($resource) {
 	if (document.querySelector('input[name="_csrf"]') !=null) 	
 		csrf_token = document.querySelector('input[name="_csrf"]').getAttribute('value');
 
-    
-	return $resource(URLS.items, {id: "@id", name: "@name"}, {
+
+	
+//	If the parameter value is prefixed with @ then the value for that parameter will be extracted from the corresponding property on 
+//	the data object (provided when calling an action method). For example, if the defaultParam object is 
+//	{someParam: '@someProp'} then the value of someParam will be data.someProp.
+	//ATTENZIONE: come scritto nelle righe sopra se il paramentro ha la @ vuol dire che viene preso dall'oggetto
+	//quindi deve avere lo stesso nome della proprietà dell'oggetto
+	return $resource(URLS.items, {id: "@id", name: "@nome"}, {
 		  update: {method: 'PUT', headers: {'X-CSRF-TOKEN': csrf_token}},
 		  save: {method: 'POST', headers: {'X-CSRF-TOKEN': csrf_token}},
 		  delete: {method: 'DELETE', headers: {'X-CSRF-TOKEN': csrf_token}}

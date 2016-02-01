@@ -54,7 +54,7 @@ angular.module("blogApp").factory("ItemOperation", function (Item) {
     		message: messaggiErrore['editList.deleteItem.function.Confirm'](item.titolo), 
     		callback: function(result){
     			if (result){
-    	        		it.$delete({id:item.id, name:item.name}, 
+    	        		it.$delete({id:item.id, name:item.nome}, 
     	        				function(){
 				    	        	bootbox.alert({message: messaggiErrore['editList.deleteItem.result']})
 			    	        	})

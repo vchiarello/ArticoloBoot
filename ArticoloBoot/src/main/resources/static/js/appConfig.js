@@ -28,11 +28,11 @@ angular.module("blogApp").config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: URLS.partialsCreateItem,
             controller: 'ItemCreateCtrl'
 	    }).state('editItem', {
-            url:'/editItem/:itemId',
+            url:'/editItem/:id/:name',
             templateUrl: URLS.partialsEditItem,
             controller: 'ItemEditCtrl'
 	    }).state('viewSlideShowItem', {
-            url:'/viewSlideShowItem/:itemId',
+            url:'/viewSlideShowItem/:id/:name',
             templateUrl: URLS.partialsViewSlideShowItem,
             controller: 'ViewSlideShowItemCtrl'
         }).state('createSlideShowItem', {
@@ -40,7 +40,7 @@ angular.module("blogApp").config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: URLS.partialsCreateSlideShowItem,
             controller: 'ItemCreateSlideShowCtrl'
         }).state('editSlideShowItem', {
-            url:'/editSlideShowItem/:itemId',
+            url:'/editSlideShowItem/:id/:name',
             templateUrl: URLS.partialsEditSlideShowItem,
             controller: 'ItemEditSlideShowCtrl'
         }).state('endpoints', {

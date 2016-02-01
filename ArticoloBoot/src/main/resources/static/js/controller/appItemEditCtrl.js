@@ -28,7 +28,7 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
     
     //metodo che preleva l'item dal database
 	function init() {
-        $scope.item = Item.get({id:$stateParams.itemId})
+        $scope.item = Item.get({id:$stateParams.id, name:$stateParams.name})
     }
 
 	//Appena si accede alla pagina si preleva l'item passato come parametro
@@ -124,9 +124,9 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
 		}
 		//TODO tipo Item dello slide show da verificare se codice va bene
         $scope.item.tipoItem = 1;
-		var item = new Item($scope.item);
+		//var item = new Item($scope.item);
         
-        item.$update().then(function(itemWeb) {
+        $scope.item.$update().then(function(itemWeb) {
             if (itemWeb.erroreWeb == null){
             	$state.transitionTo("homeEditListItem");
             }else{

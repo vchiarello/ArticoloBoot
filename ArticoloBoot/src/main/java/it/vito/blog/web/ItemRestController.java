@@ -54,7 +54,7 @@ public class ItemRestController {
 	}
 
 	@RequestMapping(value="/{id}/{name}", method=RequestMethod.DELETE)
-	public void delete(@PathVariable("id") int id) {
+	public void delete(@PathVariable("id") int id, @PathVariable("name") String name) {
 		this.gestioneBlog.deleteItem(id);
 	}
 

@@ -1,7 +1,9 @@
 //controller della home page con la lista degli item
-angular.module("blogApp").controller("ItemCtrl", function ($scope, Item, $state) {
+angular.module("blogApp").controller("ItemCtrl", function ($scope, Item, $state, spinnerService) {
     function init() {
-        getItems();
+    	spinnerService.show('booksSpinner');
+    	getItems();
+    	spinnerService.hide('booksSpinner');
     }
 
     $scope.viewItem = function (item) {

@@ -132,6 +132,12 @@
 			<artifactId>angular-sanitize</artifactId>
 			<version>1.3.11</version>
 		</dependency>
+		<!-- angular clessidra/Spinner per le attese html-->
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>angular-spinners</artifactId>
+			<version>3.0.4</version>
+		</dependency>
 		<!-- effetti grafici fatti con angular -->
 		<dependency>
 			<groupId>org.webjars</groupId>

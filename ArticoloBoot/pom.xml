@@ -138,6 +138,12 @@
 			<artifactId>angular-spinners</artifactId>
 			<version>3.0.4</version>
 		</dependency>
+		<!-- angular busy per far comparire una clessidra o uno spinner durante il caricamento-->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>angular-busy</artifactId>
+			<version>4.1.1</version>
+		</dependency>
 		<!-- effetti grafici fatti con angular -->
 		<dependency>
 			<groupId>org.webjars</groupId>

@@ -6,8 +6,9 @@
 			<p>Appunti di programmazione generalmente in java.</p>
 		</div>
 		<form th:action="@{/rest/upload}" class="form-horizontal" method="post">
-
-	        <div class="row">
+			<div cg-busy="promise">
+			
+	        <div class="row" >
 				<div class="form-group">
 					<div class="col-md-2">
 				    	<label for="name" th:text="#{editItem.label.name}">Name</label>
@@ -202,6 +203,7 @@
 	        <div class="row">
 	            <div class="col-md-5" style="text-align: center;">&nbsp;
 				</div>
+	        </div>
 	        </div>
 		</form>
     </div>

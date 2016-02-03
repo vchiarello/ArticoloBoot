@@ -1,5 +1,5 @@
 //controller usato nell'edit degli item
-angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  Tag, Item, $state, $stateParams, FileUploader) {
+angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  Tag, Item, $state, $stateParams, FileUploader, spinnerService,$q) {
 
 
     //calcolo del toker csrf_token
@@ -88,15 +88,6 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
 
     //salvataggio dell'item
     $scope.updateItem = function() {
-//    	var req = {
-//        		method: 'POST',
-//        		url: '/rest/validaItemWeb',
-//        		headers : {'X-CSRF-TOKEN': csrf_token},
-//        		data:{'itemWeb' : item}
-//        	}
-//       	
-//    	$http(req).then(function(){alert("Ok")},function(){alert("Ko")})
-//    	
     	if (!_validaAll()){
     		bootbox.alert({message: messaggiErrore['editItem.validateAll.alert']});
     		return;
@@ -105,12 +96,13 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
 		//se non ci sono upload ancora in sospeso
 		//si aspetta che finisca poi si salva e si va verso la home di edit
         if (uploader.queue.length > 0){
-           	uploader.onCompleteAll = function() {
-        		
+        	$scope.promise = $q.defer()
+        	uploader.onCompleteAll = function() {
            		_validaESalva();
     	    }	
-           	uploader.uploadAll();
+        	uploader.uploadAll();
         }else{
+        	$scope.promise = $q.defer()
         	_validaESalva();
         }
     }
@@ -129,8 +121,9 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
         $scope.item.$update().then(function(itemWeb) {
             if (itemWeb.erroreWeb == null){
             	$state.transitionTo("homeEditListItem");
+            	$scope.promise.resolve('finito');
             }else{
-            	
+            	$scope.promise.resolve('finito');
             	$scope.erroreNome=item.erroreWeb.erroreNome;
             	$scope.erroreTitolo=item.erroreWeb.erroreTitolo;
             	$scope.erroreTesto=item.erroreWeb.erroreTesto;

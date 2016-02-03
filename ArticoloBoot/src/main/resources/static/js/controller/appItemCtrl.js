@@ -1,10 +1,5 @@
 //controller della home page con la lista degli item
 angular.module("blogApp").controller("ItemCtrl", function ($scope, Item, $state, spinnerService) {
-    function init() {
-    	spinnerService.show('booksSpinner');
-    	getItems();
-    	spinnerService.hide('booksSpinner');
-    }
 
     $scope.viewItem = function (item) {
     	if (item.tipoItem==1)
@@ -15,9 +10,18 @@ angular.module("blogApp").controller("ItemCtrl", function ($scope, Item, $state,
     		window.alert("Tipo item non supportato")
     };
     
-    function getItems() {
-        $scope.items = Item.query();
+    $scope.getItems = function () {
+//    	spinnerService.show('booksSpinner');
+//      $scope.items = Item.query(function(){spinnerService.hide('booksSpinner');}, function(){spinnerService.hide('booksSpinner');});
+      $scope.items = Item.query();
+    };
+
+    function init () {
+//    	spinnerService.show('booksSpinner');
+//      $scope.items = Item.query(function(){spinnerService.hide('booksSpinner');}, function(){spinnerService.hide('booksSpinner');});
+      $scope.items = Item.query();
     };
 
     init();
+    
 });

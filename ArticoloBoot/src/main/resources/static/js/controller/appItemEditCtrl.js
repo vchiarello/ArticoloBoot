@@ -118,7 +118,7 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
         $scope.item.tipoItem = 1;
 		//var item = new Item($scope.item);
         
-        $scope.item.$update().then(function(itemWeb) {
+        $scope.item.$update(function(itemWeb) {
             if (itemWeb.erroreWeb == null){
             	$state.transitionTo("homeEditListItem");
             	$scope.promise.resolve('finito');
@@ -127,7 +127,9 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
             	$scope.erroreNome=item.erroreWeb.erroreNome;
             	$scope.erroreTitolo=item.erroreWeb.erroreTitolo;
             	$scope.erroreTesto=item.erroreWeb.erroreTesto;
-            }
+            }},function() {
+            	$scope.promise.resolve('finito');
+            	bootbox.alert({message: messaggiErrore['editItem.error.save']});
         });
     }
     

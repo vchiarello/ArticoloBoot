@@ -20,7 +20,7 @@ angular.module("blogApp").controller("EditListCtrl", function ($scope, Item, Ite
 	    				function(){
 		        	    	var indice = $scope.items.indexOf(item);
 		        	    	$scope.items.splice(indice,1);
-		    	        	bootbox.alert({message: messaggiErrore['editList.deleteItem.result']})
+		    	        	bootbox.alert({message: messaggiErrore['editList.deleteItem.result']});
 	    	        	})
     			}
     		} 

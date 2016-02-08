@@ -5,207 +5,209 @@
 			<h1>Righe verticali</h1>
 			<p>Appunti di programmazione generalmente in java.</p>
 		</div>
-		<form th:action="@{/rest/upload}" class="form-horizontal" method="post">
-			<div cg-busy="promise">
+		<div cg-busy="{promise:promessa.promise,message:messaggio,templateUrl:'/templateAttendere'}">
+		<!--<div cg-busy="{promise:promessa.promise}"> -->
+			<form th:action="@{/rest/upload}" class="form-horizontal" method="post">
 			
-	        <div class="row" >
-				<div class="form-group">
-					<div class="col-md-2">
-				    	<label for="name" th:text="#{editItem.label.name}">Name</label>
+		        <div class="row" >
+					<div class="form-group">
+						<div class="col-md-2">
+					    	<label for="name" th:text="#{editItem.label.name}">Name</label>
+						</div>
+					    <div class="col-md-10">
+					        <input id="nome" class="form-control" th:placeholder="#{editItem.placeholder.name}" ng-model="item.nome" ng-blur="validaNome(item.nome)"/>
+					        <p style="color:red;">{{erroreNome}}</p>
+					    </div>
+		            </div>
+	    	    </div>
+		        <div class="row">
+		            <div class="form-group">
+		            	<div class="col-md-2">
+			                <label for="titolo" th:text="#{editItem.label.title}">Titolo</label>
+						</div>
+					    <div class="col-md-10">
+		                    <input id="titolo" class="form-control" th:placeholder="#{editItem.placeholder.name}" ng-model="item.titolo" ng-blur="validaTitolo(item.titolo)"/>
+		                    <p style="color:red;">{{erroreTitolo}}</p>
+		                </div>
+		            </div>
+		        </div>
+		        <div class="row">
+					<div class="form-group">
+		            	<div class="col-md-2">
+						    <label for="testo" th:text="#{editItem.label.text}">Testo</label>
+						</div>
+					    <div class="col-md-10">
+					        <textarea id="testo" class="form-control" cols="20" rows="10" ng-model="item.testo" th:placeholder="#{editItem.placeholder.text}" ng-blur="validaTesto(item.testo)"></textarea>
+		                    <p style="color:red;">{{erroreTesto}}</p>
+					    </div>
 					</div>
-				    <div class="col-md-10">
-				        <input id="nome" class="form-control" th:placeholder="#{editItem.placeholder.name}" ng-model="item.nome" ng-blur="validaNome(item.nome)"/>
-				        <p style="color:red;">{{erroreNome}}</p>
-				    </div>
-	            </div>
-    	    </div>
-	        <div class="row">
-	            <div class="form-group">
-	            	<div class="col-md-2">
-		                <label for="titolo" th:text="#{editItem.label.title}">Titolo</label>
+		        </div>
+		        <div class="row">
+					<div class="form-group">
+		            	<div class="col-md-2">
+						    <label for="riassunto" th:text="#{editItem.label.summary}">Riassunto</label>
+						</div>
+					    <div class="col-md-10">
+					        <input class="form-control" th:placeholder="#{editItem.placeholder.summary}" ng-model="item.riassunto"/>
+					    </div>
 					</div>
-				    <div class="col-md-10">
-	                    <input id="titolo" class="form-control" th:placeholder="#{editItem.placeholder.name}" ng-model="item.titolo" ng-blur="validaTitolo(item.titolo)"/>
-	                    <p style="color:red;">{{erroreTitolo}}</p>
-	                </div>
-	            </div>
-	        </div>
-	        <div class="row">
-				<div class="form-group">
-	            	<div class="col-md-2">
-					    <label for="testo" th:text="#{editItem.label.text}">Testo</label>
+		        </div>
+		        <div class="row">
+					<div class="form-group">
+		            	<div class="col-md-2">
+						    <label for="dataPubblicazione" th:text="#{editItem.label.publishDate}">Data pubblicazione</label>
+						</div>
+					    <div class="col-md-10">
+					        <input class="form-control dateFormat" th:placeholder="#{editItem.placeholder.publishDate}" id="dataPubblicazione" ng-model="item.dataPubblicazione"/>
+					    </div>
 					</div>
-				    <div class="col-md-10">
-				        <textarea id="testo" class="form-control" cols="20" rows="10" ng-model="item.testo" th:placeholder="#{editItem.placeholder.text}" ng-blur="validaTesto(item.testo)"></textarea>
-	                    <p style="color:red;">{{erroreTesto}}</p>
-				    </div>
-				</div>
-	        </div>
-	        <div class="row">
-				<div class="form-group">
-	            	<div class="col-md-2">
-					    <label for="riassunto" th:text="#{editItem.label.summary}">Riassunto</label>
+		        </div>
+		        <div class="row">
+					<div class="form-group">
+		            	<div class="col-md-2">
+						    <label for="dataScadenza" th:text="#{editItem.label.expirationDate}">Data scadenza</label>
+						</div>
+					    <div class="col-md-10">
+					        <input class="form-control dateFormat" th:placeholder="#{editItem.placeholder.expirationDate}" id="dataScadenza" ng-model="item.dataScadenza"/>
+					    </div>
 					</div>
-				    <div class="col-md-10">
-				        <input class="form-control" th:placeholder="#{editItem.placeholder.summary}" ng-model="item.riassunto"/>
-				    </div>
-				</div>
-	        </div>
-	        <div class="row">
-				<div class="form-group">
-	            	<div class="col-md-2">
-					    <label for="dataPubblicazione" th:text="#{editItem.label.publishDate}">Data pubblicazione</label>
+		        </div>
+		        <div class="row">
+					<div class="form-group">
+		            	<div class="col-md-2">
+						    <label for="riassunto" th:text="#{editItem.label.hiddenDate}">Data nascondi</label>
+						</div>
+					    <div class="col-md-10">
+					        <input class="form-control dateFormat" th:placeholder="#{editItem.placeholder.hiddenDate}" id="dataHidden" ng-model="item.dataHidden"/>
+					    </div>
 					</div>
-				    <div class="col-md-10">
-				        <input class="form-control dateFormat" th:placeholder="#{editItem.placeholder.publishDate}" id="dataPubblicazione" ng-model="item.dataPubblicazione"/>
-				    </div>
-				</div>
-	        </div>
-	        <div class="row">
-				<div class="form-group">
-	            	<div class="col-md-2">
-					    <label for="dataScadenza" th:text="#{editItem.label.expirationDate}">Data scadenza</label>
+		        </div>
+		        <div class="row">
+					<div class="form-group">
+		            	<div class="col-md-2">
+						    <label for="Autore" th:text="#{editItem.label.author}">Autore</label>
+						</div>
+					    <div class="col-md-10">
+					        <input id="autore" class="form-control" th:placeholder="#{editItem.placeholder.author}" ng-model="item.autore"/>
+					        <p style="color:red;">{{erroreAutore}}</p>
+					    </div>
 					</div>
-				    <div class="col-md-10">
-				        <input class="form-control dateFormat" th:placeholder="#{editItem.placeholder.expirationDate}" id="dataScadenza" ng-model="item.dataScadenza"/>
-				    </div>
-				</div>
-	        </div>
-	        <div class="row">
-				<div class="form-group">
-	            	<div class="col-md-2">
-					    <label for="riassunto" th:text="#{editItem.label.hiddenDate}">Data nascondi</label>
+		        </div>
+		        <div class="row">
+		            <div class="form-group">
+		            	<div class="col-md-2">
+			                <label for="tag" th:text="#{editItem.label.tag}">Tag</label>
+						</div>
+					    <div class="col-md-10">
+		                    <select multiple="multiple" size="3" name="tag"
+		                    ng-options="option.name for option in item.tagDisponibili track by option.id"
+		                     ng-model="item.tagSelezionati"
+		                    >
+		                    </select>
+		                </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="form-group">
+		            	<div class="col-md-2">
+			                <label for="nuovoTag" th:text="#{editItem.label.newTag}">Nuovi Tag</label>
+						</div>
+					    <div class="col-md-10">
+		                    <input class="form-control" th:placeholder="#{editItem.placeholder.newTags}" ng-model="item.nuoviTag"/>
+		                </div>
+		                
+		            </div>
+		        </div>
+		        <div class="row">
+		                    
+					<div style="display:block;">
+		
+		                <div class="col-md-12" style="margin-bottom: 40px">
+		
+		                    <h3 th:text="#{editItem.label.resources}">Allegati</h3>
+		                   
+		                    <input type="file" nv-file-select="" uploader="uploader" multiple="multiple"  /><br/>
+		
+		                    <table class="table">
+		                        <thead>
+		                            <tr>
+		                                <th style="width:30%;" th:text="#{editItem.label.resources.name}"> </th>
+		                                <th ng-show="uploader.isHTML5" th:text="#{editItem.label.resources.size}">Dimensione</th>
+		                                <th ng-show="uploader.isHTML5" th:text="#{editItem.label.resources.type}">Tipo</th>
+		                                <th ng-show="uploader.isHTML5" th:text="#{editItem.label.resources.progress}">Progress</th>
+		                                <th th:text="#{editItem.label.resources.state}">Stato</th>
+		                                <th style="width:15%;" th:text="#{editItem.label.resources.actions}">Azioni</th>
+		                            </tr>
+		                        </thead>
+		                        <tbody>
+		                            <tr ng-repeat="ffff in item.listaFileSalvati" >
+		                            	<td><strong><a href="/rest/download?idAllegato={{ffff.idAllegato}}&amp;nomeAllegato={{ffff.nomeAllegato}}" target="_blank">{{ffff.nomeAllegato}}</a></strong></td>
+		                                <td  nowrap="nowrap"></td>
+		                                <td ng-show="uploader.isHTML5" nowrap="nowrap"></td>
+		                                <td ng-show="uploader.isHTML5">
+		                                </td>
+		                                <td class="text-center">
+		                                    <span><i class="glyphicon glyphicon-ok"></i></span>
+		                                </td>
+		                                <td nowrap="nowrap">
+		                                    <button type="button" class="btn btn-danger btn-xs" ng-click="cancellaRipristina(ffff.idAllegato)" ng-show="!isCancellato(ffff.idAllegato)">
+		                                        <span class="glyphicon glyphicon-trash"></span> <span th:text="#{editItem.label.resources.button.remove}"></span>
+		                                    </button>
+		                                    <button type="button" class="btn btn-danger btn-xs" ng-click="cancellaRipristina(ffff.idAllegato)" ng-show="isCancellato(ffff.idAllegato)">
+		                                        <span class="glyphicon glyphicon-repeat"></span> <span th:text="#{editItem.label.resources.button.restore}"></span>
+		                                    </button>
+		                                </td>
+		                            </tr>
+		                        
+		                            <tr ng-repeat="item in uploader.queue">
+		                                <td><strong><a href="/rest/downloadTemp?nomeAllegato={{item.file.name}}" target="_blank">{{ item.file.name }}</a></strong></td>
+		                                <td ng-show="uploader.isHTML5" nowrap="nowrap">{{ item.file.size/1024/1024|number:2 }} MB</td>
+		                                <td ng-show="uploader.isHTML5" nowrap="nowrap">{{ item.file.type }}</td>
+		                                <td ng-show="uploader.isHTML5">
+		                                    <div class="progress" style="margin-bottom: 0;">
+		                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+		                                    </div>
+		                                </td>
+		                                <td class="text-center">
+		                                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+		                                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+		                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+		                                </td>
+		                                <td nowrap="nowrap">
+		                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+		                                        <span class="glyphicon glyphicon-trash"></span> <span th:text="#{editItem.label.resources.button.remove}"></span>
+		                                    </button>
+		                                </td>
+		                            </tr>
+		                        </tbody>
+		                    </table>
+		
+		                </div>
+		
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-5" style="text-align: center;">
 					</div>
-				    <div class="col-md-10">
-				        <input class="form-control dateFormat" th:placeholder="#{editItem.placeholder.hiddenDate}" id="dataHidden" ng-model="item.dataHidden"/>
-				    </div>
-				</div>
-	        </div>
-	        <div class="row">
-				<div class="form-group">
-	            	<div class="col-md-2">
-					    <label for="Autore" th:text="#{editItem.label.author}">Autore</label>
+		            <div class="col-md-1" style="text-align: center;">
+						<button type="button" class="btn btn-danger btn-sm" ng-click="cancel()">
+							<span class=" glyphicon glyphicon-menu-left"></span><span th:text="#{editItem.button.cancel}"></span>
+						</button>
 					</div>
-				    <div class="col-md-10">
-				        <input class="form-control" th:placeholder="#{editItem.placeholder.author}" ng-model="item.autore"/>
-				    </div>
-				</div>
-	        </div>
-	        <div class="row">
-	            <div class="form-group">
-	            	<div class="col-md-2">
-		                <label for="tag" th:text="#{editItem.label.tag}">Tag</label>
+		            <div class="col-md-1" style="text-align: center;">
+						<button type="button" class="btn btn-success btn-sm" ng-click="updateItem()">
+							<span class="glyphicon glyphicon-save"></span><span th:text="#{editItem.button.save}"></span>
+						</button>
 					</div>
-				    <div class="col-md-10">
-	                    <select multiple="multiple" size="3" name="tag"
-	                    ng-options="option.name for option in item.tagDisponibili track by option.id"
-	                     ng-model="item.tagSelezionati"
-	                    >
-	                    </select>
-	                </div>
-	            </div>
-	        </div>
-	        <div class="row">
-	            <div class="form-group">
-	            	<div class="col-md-2">
-		                <label for="nuovoTag" th:text="#{editItem.label.newTag}">Nuovi Tag</label>
+		            <div class="col-md-5" style="text-align: center;">
 					</div>
-				    <div class="col-md-10">
-	                    <input class="form-control" th:placeholder="#{editItem.placeholder.newTags}" ng-model="item.nuoviTag"/>
-	                </div>
-	                
-	            </div>
-	        </div>
-	        <div class="row">
-	                    
-				<div style="display:block;">
-	
-	                <div class="col-md-12" style="margin-bottom: 40px">
-	
-	                    <h3 th:text="#{editItem.label.resources}">Allegati</h3>
-	                   
-	                    <input type="file" nv-file-select="" uploader="uploader" multiple="multiple"  /><br/>
-	
-	                    <table class="table">
-	                        <thead>
-	                            <tr>
-	                                <th style="width:30%;" th:text="#{editItem.label.resources.name}"> </th>
-	                                <th ng-show="uploader.isHTML5" th:text="#{editItem.label.resources.size}">Dimensione</th>
-	                                <th ng-show="uploader.isHTML5" th:text="#{editItem.label.resources.type}">Tipo</th>
-	                                <th ng-show="uploader.isHTML5" th:text="#{editItem.label.resources.progress}">Progress</th>
-	                                <th th:text="#{editItem.label.resources.state}">Stato</th>
-	                                <th style="width:15%;" th:text="#{editItem.label.resources.actions}">Azioni</th>
-	                            </tr>
-	                        </thead>
-	                        <tbody>
-	                            <tr ng-repeat="ffff in item.listaFileSalvati" >
-	                            	<td><strong><a href="/rest/download?idAllegato={{ffff.idAllegato}}&amp;nomeAllegato={{ffff.nomeAllegato}}" target="_blank">{{ffff.nomeAllegato}}</a></strong></td>
-	                                <td  nowrap="nowrap"></td>
-	                                <td ng-show="uploader.isHTML5" nowrap="nowrap"></td>
-	                                <td ng-show="uploader.isHTML5">
-	                                </td>
-	                                <td class="text-center">
-	                                    <span><i class="glyphicon glyphicon-ok"></i></span>
-	                                </td>
-	                                <td nowrap="nowrap">
-	                                    <button type="button" class="btn btn-danger btn-xs" ng-click="cancellaRipristina(ffff.idAllegato)" ng-show="!isCancellato(ffff.idAllegato)">
-	                                        <span class="glyphicon glyphicon-trash"></span> <span th:text="#{editItem.label.resources.button.remove}"></span>
-	                                    </button>
-	                                    <button type="button" class="btn btn-danger btn-xs" ng-click="cancellaRipristina(ffff.idAllegato)" ng-show="isCancellato(ffff.idAllegato)">
-	                                        <span class="glyphicon glyphicon-repeat"></span> <span th:text="#{editItem.label.resources.button.restore}"></span>
-	                                    </button>
-	                                </td>
-	                            </tr>
-	                        
-	                            <tr ng-repeat="item in uploader.queue">
-	                                <td><strong><a href="/rest/downloadTemp?nomeAllegato={{item.file.name}}" target="_blank">{{ item.file.name }}</a></strong></td>
-	                                <td ng-show="uploader.isHTML5" nowrap="nowrap">{{ item.file.size/1024/1024|number:2 }} MB</td>
-	                                <td ng-show="uploader.isHTML5" nowrap="nowrap">{{ item.file.type }}</td>
-	                                <td ng-show="uploader.isHTML5">
-	                                    <div class="progress" style="margin-bottom: 0;">
-	                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
-	                                    </div>
-	                                </td>
-	                                <td class="text-center">
-	                                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-	                                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
-	                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-	                                </td>
-	                                <td nowrap="nowrap">
-	                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-	                                        <span class="glyphicon glyphicon-trash"></span> <span th:text="#{editItem.label.resources.button.remove}"></span>
-	                                    </button>
-	                                </td>
-	                            </tr>
-	                        </tbody>
-	                    </table>
-	
-	                </div>
-	
-	            </div>
-	        </div>
-	        <div class="row">
-	            <div class="col-md-5" style="text-align: center;">
-				</div>
-	            <div class="col-md-1" style="text-align: center;">
-					<button type="button" class="btn btn-danger btn-sm" ng-click="cancel()">
-						<span class=" glyphicon glyphicon-menu-left"></span><span th:text="#{editItem.button.cancel}"></span>
-					</button>
-				</div>
-	            <div class="col-md-1" style="text-align: center;">
-					<button type="button" class="btn btn-success btn-sm" ng-click="updateItem()">
-						<span class="glyphicon glyphicon-save"></span><span th:text="#{editItem.button.save}"></span>
-					</button>
-				</div>
-	            <div class="col-md-5" style="text-align: center;">
-				</div>
-	        </div>
-	        <div class="row">
-	            <div class="col-md-5" style="text-align: center;">&nbsp;
-				</div>
-	        </div>
-	        </div>
-		</form>
+		        </div>
+		        <div class="row">
+		            <div class="col-md-5" style="text-align: center;">&nbsp;
+					</div>
+		        </div>
+			</form>
+	    </div>
     </div>
 
 </html>

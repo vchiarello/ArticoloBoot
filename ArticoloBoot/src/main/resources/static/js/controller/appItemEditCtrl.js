@@ -1,5 +1,5 @@
 //controller usato nell'edit degli item
-angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  Tag, Item, $state, $stateParams, FileUploader, spinnerService,$q) {
+angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  Tag, Item, $state, $stateParams, FileUploader, $q) {
 
 
     //calcolo del toker csrf_token
@@ -29,7 +29,12 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
     //metodo che preleva l'item dal database
 	function init() {
         $scope.item = Item.get({id:$stateParams.id, name:$stateParams.name})
+        $scope.promessa = new Object();
+        $scope.promessa.promise = $scope.item.$promise;
+        
     }
+	
+    $scope.messaggio = messaggiErrore['list.spinner.message'];
 
 	//Appena si accede alla pagina si preleva l'item passato come parametro
     init();
@@ -76,6 +81,18 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
     	return true;
     };
     
+    $scope.validaAutore = function () {
+    	if($scope.item === undefined || $scope.item.testo == null || $scope.item.testo.trim().length==0 ){
+			angular.element(document).find("#autore").addClass('inputErrore');
+    		$scope.erroreTesto = messaggiErrore['item.edit.author.required'];
+			return false;
+		}else{
+    		angular.element(document).find("#autore").removeClass('inputErrore');
+    		$scope.erroreTesto = "";
+		}
+    	return true;
+    };
+
     //transizione in caso di premuta del pulsante di cancel
     $scope.cancel = function () {
         $state.transitionTo("homeEditListItem");
@@ -96,13 +113,13 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
 		//se non ci sono upload ancora in sospeso
 		//si aspetta che finisca poi si salva e si va verso la home di edit
         if (uploader.queue.length > 0){
-        	$scope.promise = $q.defer()
+        	$scope.promessa = $q.defer()
         	uploader.onCompleteAll = function() {
            		_validaESalva();
     	    }	
         	uploader.uploadAll();
         }else{
-        	$scope.promise = $q.defer()
+        	$scope.promessa = $q.defer()
         	_validaESalva();
         }
     }
@@ -121,14 +138,14 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
         $scope.item.$update(function(itemWeb) {
             if (itemWeb.erroreWeb == null){
             	$state.transitionTo("homeEditListItem");
-            	$scope.promise.resolve('finito');
+            	$scope.promessa.resolve('finito');
             }else{
-            	$scope.promise.resolve('finito');
+            	$scope.promessa.resolve('finito');
             	$scope.erroreNome=item.erroreWeb.erroreNome;
             	$scope.erroreTitolo=item.erroreWeb.erroreTitolo;
             	$scope.erroreTesto=item.erroreWeb.erroreTesto;
             }},function() {
-            	$scope.promise.resolve('finito');
+            	$scope.promessa.resolve('finito');
             	bootbox.alert({message: messaggiErrore['editItem.error.save']});
         });
     }

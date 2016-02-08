@@ -1,10 +1,7 @@
 //controller per la creazione degli slide show
-angular.module("blogApp").controller("ItemCreateSlideShowCtrl", function ($scope, Tag, Item, $state, $stateParams, FileUploader) {
+angular.module("blogApp").controller("ItemCreateSlideShowCtrl", function ($scope, Tag, Item, $state, $stateParams, FileUploader, $q) {
 
-	function FileAllegato(name, note){
-		this.nomeAllegato=name;
-		this.note=note;
-	}
+    $scope.messaggio = messaggiErrore['list.spinner.message'];
 	
     //calcolo del toker csrf_token
 	var csrf_token = "";
@@ -50,33 +47,57 @@ angular.module("blogApp").controller("ItemCreateSlideShowCtrl", function ($scope
 
     //salvataggio dell'item
     $scope.createItem = function () {
-
         
-        //se ci sono upload ancora in sospeso
-        //si aspetta che finisca poi si salva e si va verso la home di edit
-       if (uploader.queue.length > 0){
-       	uploader.onCompleteAll = function() {
+    	if (uploader.queue.length > 0){
+    		uploader.onCompleteAll = function() {
     		
-    		if ($scope.item.listaFile===undefined || $scope.item.listaFile==null) $scope.item.listaFile=new Array();
-    		for (i = 0; i < uploader.queue.length; i++){
-    			var fa = new FileAllegato(uploader.queue[i]._file.name, $scope.note[i])
-    			$scope.item.listaFile[i]=fa;
-    		}
-    		//TODO tipo Item dello slide show da verificare se codice va bene
-            $scope.item.tipoItem = 2;
-    		var item = new Item($scope.item);
-            
-	        item.$save().then(function() {
-               $state.transitionTo("homeEditListItem");
-            });
-	    }	
-       	uploader.uploadAll();
+	    		if ($scope.item.listaFile===undefined || $scope.item.listaFile==null) $scope.item.listaFile=new Array();
+	    		
+	    		for (i = 0; i < uploader.queue.length; i++){
+	    			var fa = new FileAllegato(uploader.queue[i]._file.name, $scope.note[i])
+	    			$scope.item.listaFile[i]=fa;
+	    		}
+	    		//TODO tipo Item dello slide show da verificare se codice va bene
+	            $scope.item.tipoItem = 2;
+	    		var item = new Item($scope.item);
+	            
+		        item.$save(function(itemWeb) {
+					if (itemWeb.erroreWeb == null){
+						$state.transitionTo("homeEditListItem");
+						$scope.promessa.resolve('finito');
+					}else{
+						$scope.promessa.resolve('finito');
+						$scope.erroreNome=item.erroreWeb.erroreNome;
+						$scope.erroreTitolo=item.erroreWeb.erroreTitolo;
+						$scope.erroreTesto=item.erroreWeb.erroreTesto;
+					}
+				},function() {
+					$scope.promessa.resolve('finito');
+					bootbox.alert({message: messaggiErrore['createItem.error.save']});
+				});
+		    }	
+
+	       	$scope.promessa = $q.defer()
+	       	uploader.uploadAll();
+       	
        //altrimenti si salva e quindi si naviga verso la home di edit
        }else{
-           var item = new Item($scope.item);
-           item.$save().then(function() {
-               $state.transitionTo("homeEditListItem");
-           });
+			$scope.promessa = $q.defer()
+			var item = new Item($scope.item);
+			item.$save(function(itemWeb) {
+				if (itemWeb.erroreWeb == null){
+					$state.transitionTo("homeEditListItem");
+					$scope.promessa.resolve('finito');
+				}else{
+					$scope.promessa.resolve('finito');
+					$scope.erroreNome=item.erroreWeb.erroreNome;
+					$scope.erroreTitolo=item.erroreWeb.erroreTitolo;
+					$scope.erroreTesto=item.erroreWeb.erroreTesto;
+				}
+			},function() {
+				$scope.promessa.resolve('finito');
+				bootbox.alert({message: messaggiErrore['createItem.error.save']});
+			});
        }
     }
 
@@ -91,6 +112,4 @@ angular.module("blogApp").controller("ItemCreateSlideShowCtrl", function ($scope
 //		if ($scope.item.listaFile===undefined || $scope.item.listaFile==null) $scope.item.listaFile=new Array();
 //		$scope.item.listaFile[uploader.queue.length]=fileItem._file.name;
 //    };
-    
-	
 });

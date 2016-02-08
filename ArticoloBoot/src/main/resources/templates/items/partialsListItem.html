@@ -5,13 +5,11 @@
 			<h1>Righe verticali</h1>
 			<p>Appunti di programmazione generalmente in java.</p>
 		</div>
-		<div cg-busy="items.$promise">
-<!-- 		<spinner name="booksSpinner" img-src="/images/spinner.gif" on-loaded="getItems()"> -->
-<!--         </spinner> -->
+		<div cg-busy="{promise:items.$promise,message:messaggio,templateUrl:'/templateAttendere'}">
 			<div class="row"  ng-repeat="item in items" >
 				<div class="col-md-8">
 		
-				      <h3 class="titoloArticolo"><a href="" ng-click="viewItem(item)">{{item.titolo}} - {{item.nome}}</a></h3>
+				      <h3 class="titoloArticolo"><a href="" ng-click="viewItem(item)">{{item.titolo}}</a></h3>
 				      <p class="previewArticolo"><a href="" ng-click="viewItem(item)">{{item.riassunto}}</a></p>
 		
 		        </div>

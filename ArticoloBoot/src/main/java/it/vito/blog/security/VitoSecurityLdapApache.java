@@ -55,7 +55,7 @@ public class VitoSecurityLdapApache  extends WebSecurityConfigurerAdapter{
     	
     	http
             .authorizeRequests()
-                .antMatchers("/messaggiErrore","/items","/","/items/partialsListItem","/items/login","/items/partialsViewSlideShowItem","/items/partialsViewItem","/rest/items").permitAll()
+                .antMatchers("/templateAttendere","/messaggiErrore","/items","/","/items/partialsListItem","/items/login","/items/partialsViewSlideShowItem","/items/partialsViewItem","/rest/items").permitAll()
                 .antMatchers("/items/partialsEditItem","/items/partialsCreateItem", "/items/partialsEditList","/items/partialsCreateSlideShowItem","/items/partialsEditSlideShowItem").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()

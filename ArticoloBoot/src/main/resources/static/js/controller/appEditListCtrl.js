@@ -4,6 +4,8 @@ angular.module("blogApp").controller("EditListCtrl", function ($scope, Item, Ite
         getItems();
     }
 
+    $scope.messaggio = messaggiErrore['list.spinner.message'];
+
 
     function getItems() {
         $scope.items = Item.query();

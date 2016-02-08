@@ -5,6 +5,7 @@ public class ErroreWeb {
 	private String erroreNome;
 	private String erroreTitolo;
 	private String erroreTesto;
+	private String erroreAutore;
 	public String getErroreNome() {
 		return erroreNome;
 	}
@@ -22,6 +23,12 @@ public class ErroreWeb {
 	}
 	public void setErroreTesto(String erroreTesto) {
 		this.erroreTesto = erroreTesto;
+	}
+	public String getErroreAutore() {
+		return erroreAutore;
+	}
+	public void setErroreAutore(String erroreAutore) {
+		this.erroreAutore = erroreAutore;
 	}
 	
 }

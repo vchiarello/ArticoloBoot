@@ -1,5 +1,5 @@
 //controller per la creazione degli item
-angular.module("blogApp").controller("ItemCreateCtrl", function ($scope, Tag, Item, $state, $stateParams, FileUploader) {
+angular.module("blogApp").controller("ItemCreateCtrl", function ($scope, Tag, Item, $state, $stateParams, FileUploader, $q) {
 
     //calcolo del toker csrf_token
 	var csrf_token = "";
@@ -78,6 +78,18 @@ angular.module("blogApp").controller("ItemCreateCtrl", function ($scope, Tag, It
     	return true;
     };
 
+    $scope.validaAutore = function () {
+    	if($scope.item === undefined || $scope.item.testo == null || $scope.item.testo.trim().length==0 ){
+			angular.element(document).find("#autore").addClass('inputErrore');
+    		$scope.erroreTesto = messaggiErrore['item.edit.author.required'];
+			return false;
+		}else{
+    		angular.element(document).find("#autore").removeClass('inputErrore');
+    		$scope.erroreTesto = "";
+		}
+    	return true;
+    };
+
 	
     //transizione in caso di premuta del pulsante di cancel
     $scope.cancel = function () {
@@ -97,11 +109,12 @@ angular.module("blogApp").controller("ItemCreateCtrl", function ($scope, Tag, It
 		//si aspetta che finisca poi si salva e si va verso la home di edit
         if (uploader.queue.length > 0){
            	uploader.onCompleteAll = function() {
-        		
+            	$scope.promessa = $q.defer()
            		_validaESalva();
     	    }	
            	uploader.uploadAll();
         }else{
+        	$scope.promessa = $q.defer()
         	_validaESalva();
         }
     }
@@ -117,18 +130,21 @@ angular.module("blogApp").controller("ItemCreateCtrl", function ($scope, Tag, It
         $scope.item.tipoItem = 1;
 		var item = new Item($scope.item);
         
-        item.$save().then(function(itemWeb) {
+        item.$save(function(itemWeb) {
             if (itemWeb.erroreWeb == null){
             	$state.transitionTo("homeEditListItem");
+            	$scope.promessa.resolve('finito');
             }else{
-            	
+            	$scope.promessa.resolve('finito');
             	$scope.erroreNome=item.erroreWeb.erroreNome;
             	$scope.erroreTitolo=item.erroreWeb.erroreTitolo;
             	$scope.erroreTesto=item.erroreWeb.erroreTesto;
             }
-        });
+        },function() {
+        	$scope.promessa.resolve('finito');
+        	bootbox.alert({message: messaggiErrore['createItem.error.save']});
+    })
     }
-    
 
     //appena si aggiunge un file questo viene immediatamenta uploadato sul server
     uploader.onAfterAddingFile = function(fileItem) {

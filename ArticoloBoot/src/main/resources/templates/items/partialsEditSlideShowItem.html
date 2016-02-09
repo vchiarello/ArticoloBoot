@@ -9,87 +9,91 @@
         	<div class="row">
             	<div class="form-group">
                 	<div class="col-md-2">
-                        <label for="nome">Nome</label>
+                        <label for="nome" th:text="#{editSlideShowItem.label.name}">Nome</label>
                     </div>
                     <div class="col-md-10">
-                        <input class="form-control" placeholder="Nome" ng-model="item.nome"/>
+                        <input id="nome" class="form-control" th:placeholder="#{editSlideShowItem.placeholder.name}" ng-model="item.nome" ng-blur="validaNome(item.nome)"/>
+                        <p style="color:red;">{{erroreNome}}</p>
                     </div>
                 </div>
 			</div>
         	<div class="row">
             	<div class="form-group">
                 	<div class="col-md-2">
-                        <label for="titolo">Titolo</label>
+                        <label for="titolo" th:text="#{editSlideShowItem.label.title}">Titolo</label>
                     </div>
                     <div class="col-md-10">
-                            <input class="form-control" placeholder="Titolo" ng-model="item.titolo"/>
+						<input id="titolo" class="form-control" th:placeholder="#{editSlideShowItem.placeholder.title}" ng-model="item.titolo"  ng-blur="validaTitolo(item.titolo)"/>
+						<p style="color:red;">{{erroreTitolo}}</p>
                     </div>
                	</div>
            </div>    	
         	<div class="row">
             	<div class="form-group">
                 	<div class="col-md-2">
-                        <label for="testo">Testo</label>
+                        <label for="testo" th:text="#{editSlideShowItem.label.text}">Testo</label>
                     </div>
                     <div class="col-md-10">
-                            <textarea class="form-control" cols="20" rows="10" ng-model="item.testo" placeholder="Testo"></textarea>
+						<textarea id="testo" class="form-control" cols="20" rows="10" ng-model="item.testo" th:placeholder="#{editSlideShowItem.placeholder.text}"></textarea>
+						<p style="color:red;">{{erroreTesto}}</p>
                     </div>
                	</div>
            </div>    	
         	<div class="row">
             	<div class="form-group">
                 	<div class="col-md-2">
-                        <label for="riassunto">Riassunto</label>
+                        <label for="riassunto" th:text="#{editSlideShowItem.label.summary}">Riassunto</label>
                     </div>
                     <div class="col-md-10">
-                            <input class="form-control" placeholder="Riassunto" ng-model="item.riassunto"/>
+                        <input class="form-control" th:placeholder="#{editSlideShowItem.placeholder.summary}" ng-model="item.riassunto"/>
                     </div>
                	</div>
            </div>    	
 	        <div class="row">
 				<div class="form-group">
 	            	<div class="col-md-2">
-					    <label for="riassunto">Data pubblicazione</label>
+					    <label for="riassunto" th:text="#{editSlideShowItem.label.publishDate}">Data pubblicazione</label>
 					</div>
 				    <div class="col-md-10">
-				        <input class="form-control dataFormat" placeholder="Data pubblicazione"  id="dataPubblicazione" ng-model="item.dataPubblicazione"/>
+				        <input class="form-control dateFormat" th:placeholder="#{editSlideShowItem.placeholder.publishDate}" id="dataPubblicazione" ng-model="item.dataPubblicazione"/>
 				    </div>
 				</div>
 	        </div>
 	        <div class="row">
 				<div class="form-group">
 	            	<div class="col-md-2">
-					    <label for="riassunto">Data scadenza</label>
+					    <label for="riassunto" th:text="#{editSlideShowItem.label.expirationDate}">Data scadenza</label>
 					</div>
 				    <div class="col-md-10">
-				        <input class="form-control dataFormat" placeholder="Data scadenza"  id="dataScadenza" ng-model="item.dataScadenza"/>
+				        <input class="form-control dateFormat" th:placeholder="#{editSlideShowItem.placeholder.expirationDate}" id="dataScadenza" ng-model="item.dataScadenza"/>
 				    </div>
 				</div>
 	        </div>
 	        <div class="row">
 				<div class="form-group">
 	            	<div class="col-md-2">
-					    <label for="riassunto">Data nascondi</label>
+					    <label for="riassunto" th:text="#{editSlideShowItem.label.hiddenDate}">Data nascondi</label>
 					</div>
 				    <div class="col-md-10">
-				        <input class="form-control dataFormat" placeholder="Data nascondi"  id="dataHidden" ng-model="item.dataHidden"/>
+				        <input class="form-control dateFormat" th:placeholder="#{editSlideShowItem.placeholder.hiddenDate}"  id="dataHidden" ng-model="item.dataHidden"/>
 				    </div>
 				</div>
 	        </div>
         	<div class="row">
             	<div class="form-group">
                 	<div class="col-md-2">
-                        <label for="autore">Autore</label>
+                        <label for="autore" th:text="#{editSlideShowItem.label.author}">Autore</label>
                     </div>
                     <div class="col-md-10">
-	                    <input class="form-control" placeholder="Autore" ng-model="item.autore"/>
+	                    <input id="autore" class="form-control" th:placeholder="#{editSlideShowItem.placeholder.author}" ng-model="item.autore"/>
+	                    <p style="color:red;">{{erroreAutore}}</p>
                     </div>
                	</div>
            </div>    	
         	<div class="row">
             	<div class="form-group">
                 	<div class="col-md-2">
-                        <label for="autore">Tag</label>
+                        <label for="autore" th:text="#{editSlideShowItem.label.tag}">Tag</label>
                     </div>
                     <div class="col-md-10">
                              <select multiple="multiple" size="3"
@@ -103,10 +107,10 @@
         	<div class="row">
             	<div class="form-group">
                 	<div class="col-md-2">
-                        <label for="nuovoTag">Nuovi tag</label>
+                        <label for="nuovoTag" th:text="#{editSlideShowItem.label.newTag}">Nuovi tag</label>
                     </div>
                     <div class="col-md-10">
-	                    <input class="form-control" placeholder="Nuovi tag" ng-model="item.nuoviTag"/>
+	                    <input class="form-control" th:placeholder="#{editSlideShowItem.placeholder.newTags}" ng-model="item.nuoviTag"/>
                     </div>
                	</div>
            </div>    	
@@ -114,24 +118,24 @@
             	<div class="form-group">
                 	<div class="col-md-12">
 		
-	                    <h3>Allegati</h3>
+	                    <h3 th:text="#{editSlideShowItem.label.resources}">Allegati</h3>
 	                   
 	                    <input type="file" nv-file-select="" uploader="uploader" multiple="multiple"  /><br/>
 	
 	                    <table class="table">
 	                        <thead>
 	                            <tr>
-	                                <th style="width:30%;" >Nome</th>
-	                                <th ng-show="uploader.isHTML5">Dimensione</th>
-	                                <th ng-show="uploader.isHTML5">Tipo</th>
-	                                <th>Stato</th>
-	                                <th>Note</th>
+	                                <th style="width:30%;" th:text="#{editSlideShowItem.label.resources.name}">Nome</th>
+	                                <th ng-show="uploader.isHTML5" th:text="#{editSlideShowItem.label.resources.size}">Dimensione</th>
+	                                <th ng-show="uploader.isHTML5" th:text="#{editSlideShowItem.label.resources.type}">Tipo</th>
+	                                <th th:text="#{editSlideShowItem.label.resources.state}">Stato</th>
+	                                <th th:text="#{editSlideShowItem.label.resources.note}">Note</th>
 	                            </tr>
 	                        </thead>
 	                        <tbody>
 	                        
 	                            <tr ng-repeat="ffff in item.listaFileSalvati">
-	                                <td><strong><a href="/rest/download?idAllegato={{ffff.idAllegato}}" target="_blank">{{ffff.nomeAllegato}}</a></strong></td>
+	                                <td><strong><a href="/rest/download?idAllegato={{ffff.idAllegato}}&amp;nomeAllegato={{ffff.nomeAllegato}}" target="_blank">{{ffff.nomeAllegato}}</a></strong></td>
 	                                <td ng-show="uploader.isHTML5" nowrap="nowrap"></td>
 	                                <td ng-show="uploader.isHTML5" nowrap="nowrap"></td>
 	                                <td class="text-center">
@@ -142,10 +146,10 @@
 	                                </td>
 	                                <td nowrap="nowrap">
 	                                    <button type="button" class="btn btn-danger btn-xs" ng-click="cancellaRipristina(ffff.idAllegato)" ng-show="!isCancellato(ffff.idAllegato)">
-	                                        <span class="glyphicon glyphicon-trash"></span> Rimuovi
+	                                        <span class="glyphicon glyphicon-trash"></span> <span th:text="#{editSlideShowItem.label.resources.button.remove}"></span>
 	                                    </button>
 	                                    <button type="button" class="btn btn-danger btn-xs" ng-click="cancellaRipristina(ffff.idAllegato)" ng-show="isCancellato(ffff.idAllegato)">
-	                                        <span class="glyphicon glyphicon-repeat"></span> Ripristina
+	                                        <span class="glyphicon glyphicon-repeat"></span> <span th:text="#{editSlideShowItem.label.resources.button.restore}"></span>
 	                                    </button>
 	                                </td>
 	                            </tr>
@@ -163,8 +167,8 @@
 	                                	<textarea class="form-control" cols="80" rows="4" ng-model="note[$index]" placeholder="Note"></textarea>
 	                                </td>
 	                                <td nowrap="nowrap">
-	                                    <button type="button" class="btn btn-danger btn-xs" ng-click="rimuoviFile(itemFile)">
-	                                        <span class="glyphicon glyphicon-trash"></span> Rimuovi
+	                                    <button type="button" class="btn btn-danger btn-xs" ng-click="itemFile.remove()">
+	                                        <span class="glyphicon glyphicon-trash"></span> <span th:text="#{editSlideShowItem.label.resources.button.remove}"></span>
 	                                    </button>
 	                                </td>
 	                            </tr>
@@ -181,12 +185,12 @@
 				</div>
 	            <div class="col-md-1" style="text-align: center;">
 					<button type="button" class="btn btn-danger btn-sm" ng-click="cancel()">
-						<span class=" glyphicon glyphicon-menu-left"></span>Annulla
+						<span class=" glyphicon glyphicon-menu-left"></span><span th:text="#{editSlideShowItem.button.cancel}"></span>
 					</button>
 				</div>
 	            <div class="col-md-1" style="text-align: center;">
 					<button type="button" class="btn btn-success btn-sm" ng-click="createItem()">
-						<span class="glyphicon glyphicon-save"></span>Salva
+						<span class="glyphicon glyphicon-save"></span><span th:text="#{editSlideShowItem.button.save}"></span>
 					</button>
 				</div>
 	            <div class="col-md-5" style="text-align: center;">

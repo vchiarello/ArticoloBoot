@@ -81,11 +81,11 @@ angular.module("blogApp").controller("ItemCreateCtrl", function ($scope, Tag, It
     $scope.validaAutore = function () {
     	if($scope.item === undefined || $scope.item.testo == null || $scope.item.testo.trim().length==0 ){
 			angular.element(document).find("#autore").addClass('inputErrore');
-    		$scope.erroreTesto = messaggiErrore['item.edit.author.required'];
+    		$scope.erroreAutore = messaggiErrore['item.edit.author.required'];
 			return false;
 		}else{
     		angular.element(document).find("#autore").removeClass('inputErrore');
-    		$scope.erroreTesto = "";
+    		$scope.erroreAutore = "";
 		}
     	return true;
     };

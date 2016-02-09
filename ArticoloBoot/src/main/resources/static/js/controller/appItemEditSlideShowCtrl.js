@@ -1,10 +1,6 @@
 //controller per la creazione degli slide show
 angular.module("blogApp").controller("ItemEditSlideShowCtrl", function ($scope, Tag, Item, $state, $stateParams, FileUploader) {
 
-	function FileAllegato(name, note){
-		this.nomeAllegato=name;
-		this.note=note;
-	}
 	
     //calcolo del toker csrf_token
 	var csrf_token = "";
@@ -19,7 +15,7 @@ angular.module("blogApp").controller("ItemEditSlideShowCtrl", function ($scope, 
             }
     });
 
-    $('.dataFormat').datepicker({
+    $('.dateFormat').datepicker({
         format: "dd/mm/yyyy",
         weekStart: 1,
         todayBtn: true,
@@ -32,7 +28,7 @@ angular.module("blogApp").controller("ItemEditSlideShowCtrl", function ($scope, 
 	function init() {
 		$scope.note=[];
 		getTags();
-        $scope.item = Item.get({id:$stateParams.itemId})
+        $scope.item = Item.get({id:$stateParams.id, name:$stateParams.name})
 
     }
 

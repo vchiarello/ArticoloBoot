@@ -109,7 +109,7 @@ angular.module("blogApp").controller("ItemCreateSlideShowCtrl", function ($scope
 
     function _validaAll(){
     	
-    	return $scope.validaNome() && $scope.validaTitolo() && $scope.validaTesto();
+    	return $scope.validaNome() && $scope.validaTitolo() && $scope.validaTesto() && $scope.validaAutore();
     }
     
     $scope.validaNome = function () {
@@ -149,7 +149,7 @@ angular.module("blogApp").controller("ItemCreateSlideShowCtrl", function ($scope
     };
 
     $scope.validaAutore = function () {
-    	if($scope.item === undefined || $scope.item.testo == null || $scope.item.testo.trim().length==0 ){
+    	if($scope.item === undefined || $scope.item.autore == null || $scope.item.autore.trim().length==0 ){
 			angular.element(document).find("#autore").addClass('inputErrore');
     		$scope.erroreAutore = messaggiErrore['item.edit.author.required'];
 			return false;

@@ -45,63 +45,12 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
     };
 
 
-    $scope.validaNome = function () {
-    	if($scope.item === undefined || $scope.item.nome == null || $scope.item.nome.trim().length==0){
-    		$scope.erroreNome = messaggiErrore['item.edit.name.required'];
-    		angular.element(document).find("#nome").addClass('inputErrore');
-    		return false;
-    	}else{
-    		angular.element(document).find("#nome").removeClass('inputErrore');
-    		$scope.erroreNome = "";    		
-    	}
-    	return true;
-    };
-
-    $scope.validaTitolo = function () {
-    	if($scope.item === undefined || $scope.item.titolo == null || $scope.item.titolo.trim().length==0 ){
-    		$scope.erroreTitolo = messaggiErrore['item.edit.title.required'];
-    		angular.element(document).find("#titolo").addClass('inputErrore');
-			return false;
-		}else{
-    		angular.element(document).find("#titolo").removeClass('inputErrore');
-    		$scope.erroreTitolo = "";
-		}
-    	return true;
-    };
-
-    $scope.validaTesto = function () {
-    	if($scope.item === undefined || $scope.item.testo == null || $scope.item.testo.trim().length==0){
-    		$scope.erroreTesto = messaggiErrore['item.edit.text.required'];
-    		angular.element(document).find("#testo").addClass('inputErrore');
-			return false;
-		}else{
-    		angular.element(document).find("#testo").removeClass('inputErrore');
-    		$scope.erroreTesto = "";
-		}
-    	return true;
-    };
-    
-    $scope.validaAutore = function () {
-    	if($scope.item === undefined || $scope.item.testo == null || $scope.item.testo.trim().length==0 ){
-			angular.element(document).find("#autore").addClass('inputErrore');
-    		$scope.erroreAutore = messaggiErrore['item.edit.author.required'];
-			return false;
-		}else{
-    		angular.element(document).find("#autore").removeClass('inputErrore');
-    		$scope.erroreAutore = "";
-		}
-    	return true;
-    };
 
     //transizione in caso di premuta del pulsante di cancel
     $scope.cancel = function () {
         $state.transitionTo("homeEditListItem");
     }
     
-    function _validaAll(){
-    	
-    	return $scope.validaNome() && $scope.validaTitolo() && $scope.validaTesto();
-    }
 
     //salvataggio dell'item
     $scope.updateItem = function() {
@@ -207,6 +156,59 @@ angular.module("blogApp").controller("ItemEditCtrl", function ( $http, $scope,  
     	}
     }
 
+
+    function _validaAll(){
+    	
+    	return $scope.validaNome() && $scope.validaTitolo() && $scope.validaTesto() && $scope.validaAutore();
+    }
+    
+    $scope.validaNome = function () {
+    	if($scope.item === undefined || $scope.item.nome == null || $scope.item.nome.trim().length==0){
+    		$scope.erroreNome = messaggiErrore['item.edit.name.required'];
+    		angular.element(document).find("#nome").addClass('inputErrore');
+    		return false;
+    	}else{
+    		angular.element(document).find("#nome").removeClass('inputErrore');
+    		$scope.erroreNome = "";    		
+    	}
+    	return true;
+    };
+
+    $scope.validaTitolo = function () {
+    	if($scope.item === undefined || $scope.item.titolo == null || $scope.item.titolo.trim().length==0 ){
+    		$scope.erroreTitolo = messaggiErrore['item.edit.title.required'];
+    		angular.element(document).find("#titolo").addClass('inputErrore');
+			return false;
+		}else{
+    		angular.element(document).find("#titolo").removeClass('inputErrore');
+    		$scope.erroreTitolo = "";
+		}
+    	return true;
+    };
+
+    $scope.validaTesto = function () {
+    	if($scope.item === undefined || $scope.item.testo == null || $scope.item.testo.trim().length==0){
+    		$scope.erroreTesto = messaggiErrore['item.edit.text.required'];
+    		angular.element(document).find("#testo").addClass('inputErrore');
+			return false;
+		}else{
+    		angular.element(document).find("#testo").removeClass('inputErrore');
+    		$scope.erroreTesto = "";
+		}
+    	return true;
+    };
+    
+    $scope.validaAutore = function () {
+    	if($scope.item === undefined || $scope.item.autore == null || $scope.item.autore.trim().length==0 ){
+			angular.element(document).find("#autore").addClass('inputErrore');
+    		$scope.erroreAutore = messaggiErrore['item.edit.author.required'];
+			return false;
+		}else{
+    		angular.element(document).find("#autore").removeClass('inputErrore');
+    		$scope.erroreAutore = "";
+		}
+    	return true;
+    };
 
     
 });

@@ -5,18 +5,17 @@
 			<h1>Righe verticali</h1>
 			<p>Appunti di programmazione generalmente in java.</p>
 		</div>
-		<div class="row">
-			<div class="col-md-8">
-				<div class="row"  >
-	
-			    	<h3 class="titoloArticolo">{{item.titolo}}</h3>
-					<p class="previewArticolo">{{item.riassunto}}</p>
-					<div ng-bind-html="item.testo"></div>
-	          </div>
-	        </div>
-	        <div class="col-md-4">
-			</div>
-		</div> 
+		<div cg-busy="{promise:item.$promise,message:messaggio,templateUrl:'/templateAttendere'}">
+			<div class="row">
+				<div class="col-md-8">
 		
+				    	<h3 class="titoloArticolo">{{item.titolo}}</h3>
+						<p class="previewArticolo">{{item.riassunto}}</p>
+						<div ng-bind-html="item.testo"></div>
+		        </div>
+		        <div class="col-md-4">
+				</div>
+			</div> 
+		</div>
     </div>
 </html>

@@ -1,11 +1,13 @@
-- Abilitare/disabilitare i pulsanti di salvataggio quando i campi non sono validati e quando sono stati premuti
-- Creare una clessidra nel tempo che si attende l'arrivo delle info
-- Aggiustare il get dei valori in modo che oltre all'id ci sia il nome e si faccia una verifica nome+id
 - Creazione altri tipi di moduli
 - Documentazione
 - UNIFORMARE LA NAMING CONVENTION
 - Mettere il titolo in ogni pagina
 - Navigazione in alto con il path di dove ci si trova
+- Unificare le pagine di login in modo che in un caso prenda solo il content nell'altro tutta la pagina
+- verificare la ricerca e documentarla bene
+- mettere dei messaggi o icone di help da qualche parte
+- verificare che ci siano le label e i messaggi in inglese e italiano
+
 
 
 Per i bordi

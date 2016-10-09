@@ -15,7 +15,7 @@ body {
   background-color: transparent;
   color: inherit;
   margin-bottom: 30px;
-  padding-bottom: 30px;
+  padding-bottom: 0px;
   padding-top: 30px;
 }
 .jumbotronVito > h1{
@@ -45,6 +45,8 @@ body {
 }
 .previewArticolo{
   text-align:justify;
+  font-size: 14pt;
+  font-style: italic;
 }
 .previewArticolo > a, .previewArticolo > a:hover, .previewArticolo > a:visited{
   color:black;

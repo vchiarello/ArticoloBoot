@@ -1,5 +1,6 @@
 package it.vito.blog.business;
 
+import it.vito.blog.aspect.AddIndexEntryAnnotation;
 import it.vito.blog.db.bean.Allegato;
 import it.vito.blog.db.bean.Item;
 import it.vito.blog.db.bean.LkTagItem;
@@ -24,9 +25,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 
 @Component("gestioneBlog")
+@EnableAspectJAutoProxy
 public class GestioneBlog {
 
 	private Logger logger = LoggerFactory.getLogger(GestioneBlog.class);
@@ -53,6 +56,25 @@ public class GestioneBlog {
 		//return allegato.getDati();
 	}
 
+	public List<ItemWeb> getAllItemAttivi(){
+		logger.debug("Get lista item attivi...");
+		List<Item> l = itemRepository.findAllAttivi();
+		
+		if (l==null){
+			logger.debug("Nessun item trovato");
+			return null;
+		}
+		logger.debug("Trovati " + l.size() + " item...");
+		
+		List<ItemWeb> risultato = new LinkedList<ItemWeb>();
+		for (int i = 0; i < l.size(); i++){
+			risultato.add(new ItemWeb(l.get(i)));
+		}
+		
+		return risultato;
+		
+	}
+	
 	public List<ItemWeb>getAllItem(){
 		logger.debug("Get lista item...");
 		List<Item> l = itemRepository.findAll();
@@ -123,6 +145,7 @@ public class GestioneBlog {
 		Item it = itemWeb.toItem();
 		it.setDataModifica(new Date());
 		Item itemSalvato = itemRepository.save(it);
+		soloPerAdvice(itemSalvato);
 		
 		//salvataggio degli allegati
 		if (itemWeb.getListaFile()!=null)
@@ -183,6 +206,11 @@ public class GestioneBlog {
 		}
 	}
 	
+	@AddIndexEntryAnnotation
+	public Item soloPerAdvice(Item itemSalvato){
+		logger.debug("Metodo adviced per salvaItem...");
+		return itemSalvato;
+	}
 	private void salvaLkTagItem(Item itemSalvato, List<Option> tags ){
 		//se nessun tag è da salvare si esce
 		if (tags == null)return;

@@ -25,4 +25,8 @@ public class PointcutOperazioni {
     public void addIndex() {
     }
 	
+//	@Pointcut("execution(@it.vito.blog.business.GestioneBlog.saveItem(..))")
+//    public void addIndex2() {
+//    }
+	
 }

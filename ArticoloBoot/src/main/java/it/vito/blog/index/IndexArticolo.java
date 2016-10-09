@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.analysis.Analyzer;
@@ -36,19 +38,27 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
-
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+@Component("indexArticolo")
 public class IndexArticolo {
 
 	private static final Log log = LogFactory.getLog(IndexArticolo.class);
 
+	@Value("${path.index.lucene}")
 	private String path;
+
 	private IndexWriter writer;
 	
 	public void setPath(String path) throws IOException {
 		this.path = path;
-		this.creaIndice();
+		if (writer ==null)
+			this.creaIndice();
 	}
 	
+	public IndexArticolo() throws IOException {
+	}
+
 	public IndexArticolo(String path) throws IOException {
 		this.path = path;
 		this.creaIndice();

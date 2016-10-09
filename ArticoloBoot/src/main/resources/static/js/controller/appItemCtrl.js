@@ -18,7 +18,7 @@ angular.module("blogApp").controller("ItemCtrl", function ($scope, Item, $state)
     $scope.messaggio = messaggiErrore['list.spinner.message'];
 
     function init () {
-    	$scope.items = Item.query();
+    	$scope.items = Item.query({attivi:'si'});
     };
 
     init();

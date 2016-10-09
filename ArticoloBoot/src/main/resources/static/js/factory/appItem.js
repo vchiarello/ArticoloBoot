@@ -16,6 +16,7 @@ angular.module("blogApp").factory("Item", function ($resource) {
 	//quindi deve avere lo stesso nome della proprietà dell'oggetto
 	return $resource(URLS.items, {id: "@id", name: "@nome"}, {
 		  update: {method: 'PUT', headers: {'X-CSRF-TOKEN': csrf_token}},
+		  query:{method: 'GET', isArray:true},
 		  save: {method: 'POST', headers: {'X-CSRF-TOKEN': csrf_token}},
 		  delete: {method: 'DELETE', headers: {'X-CSRF-TOKEN': csrf_token}}
 	});

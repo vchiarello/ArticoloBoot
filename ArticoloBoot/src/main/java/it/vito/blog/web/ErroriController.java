@@ -29,7 +29,6 @@ public class ErroriController {
 		response.setContentType("application/javascript");
 		ResourceBundle rb = ResourceBundle.getBundle("MessaggiErrore", locale);
 		logger.debug("Locale used is:"+rb.getLocale().toString());
-		logger.debug("valore per item.edit.name.required"+rb.getString("item.edit.name.required"));
 		//return "i18n/messaggi.errore";
 
 		StringBuffer risultato = new StringBuffer("var messaggiErrore = new Array();");

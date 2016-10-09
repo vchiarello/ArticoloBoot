@@ -12,8 +12,8 @@ angular.module("blogApp").config(function ($stateProvider, $urlRouterProvider) {
 	        templateUrl: URLS.login,
 	        controller: 'LoginCtrl'
 	    }).state('homeItem', {
-	        url:'/homeItem',
-	        templateUrl: URLS.partialsListItem,
+	        url:'/partialsListItem.html',
+	        templateUrl: 'partialsListItem.html',
 	        controller: 'ItemCtrl'
 	    }).state('homeEditListItem', {
 	        url:'/homeEditListItem',

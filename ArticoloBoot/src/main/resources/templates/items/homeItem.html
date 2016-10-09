@@ -36,7 +36,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
     <script th:inline="javascript">
         /*<![CDATA[*/
         var URLS = {};
-        URLS.items = /*[[@{/rest/items/:id/:name}]]*/;
+        URLS.items = /*[[@{/rest/items/:id/:name/:attivi}]]*/;
         
         URLS.partialsCreateSlideShowItem = /*[[@{/items/partialsCreateSlideShowItem}]]*/ ;
         URLS.partialsEditSlideShowItem = /*[[@{/items/partialsEditSlideShowItem}]]*/ ;
@@ -117,7 +117,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
 
 
 <div class="container theme-showcase">
-    <div layout:fragment="content">
+    <div>
         <div class="ui-view"></div>
     </div>
 </div>

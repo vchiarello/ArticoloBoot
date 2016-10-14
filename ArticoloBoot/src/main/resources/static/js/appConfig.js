@@ -4,13 +4,17 @@ angular.module("blogApp").config(function ($stateProvider, $urlRouterProvider) {
 	
 	
 	
-    $urlRouterProvider.otherwise("homeItem");
+    $urlRouterProvider.otherwise("/");
 
     $stateProvider
 	    .state('login', {
 	        url:'/login',
 	        templateUrl: URLS.login,
 	        controller: 'LoginCtrl'
+	    }).state('/', {
+	        url:'/',
+	        templateUrl: 'partialsListItem.html',
+	        controller: 'ItemCtrl'
 	    }).state('homeItem', {
 	        url:'/partialsListItem.html',
 	        templateUrl: 'partialsListItem.html',

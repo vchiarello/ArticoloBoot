@@ -4,6 +4,7 @@ import it.vito.blog.aspect.AddIndexEntryAnnotation;
 import it.vito.blog.db.bean.Allegato;
 import it.vito.blog.db.bean.Item;
 import it.vito.blog.db.bean.LkTagItem;
+import it.vito.blog.db.bean.QItem;
 import it.vito.blog.db.bean.Tag;
 import it.vito.blog.db.dao.AllegatoRepository;
 import it.vito.blog.db.dao.ItemRepository;
@@ -27,6 +28,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
+
+import com.mysema.query.types.Predicate;
+import com.mysema.query.types.expr.BooleanExpression;
 
 @Component("gestioneBlog")
 @EnableAspectJAutoProxy
@@ -58,18 +62,27 @@ public class GestioneBlog {
 
 	public List<ItemWeb> getAllItemAttivi(){
 		logger.debug("Get lista item attivi...");
-		List<Item> l = itemRepository.findAllAttivi();
+		//BooleanExpression QItem.item.dataPubblicazione.in(new Date());
+		BooleanExpression dataPubblicazione = QItem.item.dataPubblicazione.before(new Date());
+		BooleanExpression dataHidden = QItem.item.dataHidden.isNull().or(QItem.item.dataHidden.after(new Date()));
+		BooleanExpression dataScadenza = QItem.item.dataScadenza.isNull().or(QItem.item.dataScadenza.after(new Date()));
+		Predicate p = dataPubblicazione.and(dataHidden).and(dataScadenza);
+		
+		Iterable<Item> l = itemRepository.findAll(p);
+		
 		
 		if (l==null){
 			logger.debug("Nessun item trovato");
 			return null;
 		}
-		logger.debug("Trovati " + l.size() + " item...");
 		
 		List<ItemWeb> risultato = new LinkedList<ItemWeb>();
-		for (int i = 0; i < l.size(); i++){
-			risultato.add(new ItemWeb(l.get(i)));
+		for (Item item : l) {
+			risultato.add(new ItemWeb(item));
 		}
+		
+		logger.debug("Trovati " + risultato.size() + " item...");
+		
 		
 		return risultato;
 		

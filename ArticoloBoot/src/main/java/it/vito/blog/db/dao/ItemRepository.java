@@ -6,10 +6,11 @@ import java.util.stream.Stream;
 import it.vito.blog.db.bean.Item;
 
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-public interface ItemRepository extends CrudRepository<Item, Integer>{
+public interface ItemRepository extends CrudRepository<Item, Integer>, QueryDslPredicateExecutor<Item>{
 
 	@Override
 	public List<Item> findAll();

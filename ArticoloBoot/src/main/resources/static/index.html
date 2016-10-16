@@ -32,6 +32,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
 <!--     <script src="/webjars/carousel.js"></script>	 -->
     
     <script src="/messaggiErrore"></script>	
+    <script src="/messaggi"></script>	
 
     <script th:inline="javascript">
         /*<![CDATA[*/
@@ -58,11 +59,17 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
         URLS.partialsMappings = "/mappings/partialsMappings" ;
         /*]]>*/
     </script>
+
 <script src="/js/app1.js" ></script>
 <script src="/js/staff.js" ></script>
 <script src="/js/appConfig.js" ></script>
+<script src="/js/controller/ListCtrl.js" ></script>
+<script src="/js/controller/IndexCtrl.js" ></script>
+
+
+
 <script src="/js/controller/appEditListCtrl.js" ></script>
-<script src="/js/controller/appItemCtrl.js" ></script>
+<script src="/js/controller/NewItemCtrl.js" ></script>
 
 <script src="/js/controller/appItemViewCtrl.js" ></script>
 <script src="/js/controller/appItemCreateCtrl.js"></script>
@@ -93,21 +100,21 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
             <span class="icon-bar"></span>
           </button>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+        <div id="navbar" class="navbar-collapse collapse" ng-controller="IndexCtrl">
           <ul class="nav navbar-nav">
-            <li><a ui-sref="homeItem" href="" th:text="#{toolbar.home}">Home</a></li>
-            <li><a href="#about" th:text="#{toolbar.about}" >About</a></li>
-            <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="#contact" th:text="#{toolbar.contact}">Contact</a></li>
+            <li><a ui-sref="homeItem" href="">{{labelHome}}</a></li>
+            <li><a href="#about">{{labelAbout}}</a></li>
+            <li><a href="#about">{{labelContact}}</a></li>
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" > <span  th:text="#{toolbar.action}"> Actions</span><span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" > <span> {{labelAction}}</span><span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a ui-sref="homeEditListItem" href="" th:text="#{toolbar.action.editList}">Edit list</a></li>
-                <li><a ui-sref="createItem" th:text="#{toolbar.action.newItem}">New item</a></li>
-                <li><a ui-sref="createSlideShowItem" th:text="#{toolbar.action.newSlideShow}">New Slide show</a></li>
-                <li><a href="#" th:text="#{toolbar.action.anotherAction}">Another action</a></li>
+                <li><a ui-sref="homeEditListItem" href=""">{{labelEditList}}</a></li>
+                <li><a ui-sref="createItem">{{labelNewItem}}</a></li>
+                <li><a ui-sref="createSlideShowItem">{{labelNewSlideShow}}</a></li>
+                <li><a href="#">{{labelAnotherAction}}</a></li>
                 <li role="separator" class="divider"></li>
-                <li class="dropdown-header" th:text="#{toolbar.action.navHeader}">Nav header</li>
-                <li><a href="#" th:text="#{toolbar.action.separatedLink}">Separated link</a></li>
+                <li class="dropdown-header">{{labelNavHeader}}</li>
+                <li><a href="#">{{labelSeparatedLink}}</a></li>
               </ul>
             </li>
           </ul>

@@ -13,8 +13,12 @@ angular.module("blogApp").config(function ($stateProvider, $urlRouterProvider) {
 	        controller: 'LoginCtrl'
 	    }).state('/', {
 	        url:'/',
-	        templateUrl: 'partialsListItem.html',
-	        controller: 'ItemCtrl'
+	        templateUrl: 'html/list.html',
+	        controller: 'ListCtrl'
+        }).state('createItem', {
+            url:'/createItem',
+            templateUrl: 'html/newItem.html',
+            controller: 'NewItemCtrl'
 	    }).state('homeItem', {
 	        url:'/partialsListItem.html',
 	        templateUrl: 'partialsListItem.html',
@@ -27,10 +31,6 @@ angular.module("blogApp").config(function ($stateProvider, $urlRouterProvider) {
             url:'/viewItem/:id/:name',
             templateUrl: URLS.partialsViewItem,
             controller: 'ViewItemCtrl'
-        }).state('createItem', {
-            url:'/createItem',
-            templateUrl: URLS.partialsCreateItem,
-            controller: 'ItemCreateCtrl'
 	    }).state('editItem', {
             url:'/editItem/:id/:name',
             templateUrl: URLS.partialsEditItem,

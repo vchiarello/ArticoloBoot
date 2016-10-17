@@ -3,9 +3,11 @@
 //di chiamare dei servizi rest che lo riguardano.
 //https://docs.angularjs.org/api/ngResource/service/$resource
 angular.module("blogApp").factory("Item", function ($resource) {
-	var csrf_token = "";
-	if (document.querySelector('input[name="_csrf"]') !=null) 	
-		csrf_token = document.querySelector('input[name="_csrf"]').getAttribute('value');
+
+// vecchia versione quando il csrf_token era gestito con thymeleaf	
+//	var csrf_token = "";
+//	if (document.querySelector('input[name="_csrf"]') !=null) 	
+//		csrf_token = document.querySelector('input[name="_csrf"]').getAttribute('value');
 
 
 	
@@ -15,9 +17,13 @@ angular.module("blogApp").factory("Item", function ($resource) {
 	//ATTENZIONE: come scritto nelle righe sopra se il paramentro ha la @ vuol dire che viene preso dall'oggetto
 	//quindi deve avere lo stesso nome della proprietà dell'oggetto
 	return $resource(URLS.items, {id: "@id", name: "@nome"}, {
-		  update: {method: 'PUT', headers: {'X-CSRF-TOKEN': csrf_token}},
 		  query:{method: 'GET', isArray:true},
-		  save: {method: 'POST', headers: {'X-CSRF-TOKEN': csrf_token}},
-		  delete: {method: 'DELETE', headers: {'X-CSRF-TOKEN': csrf_token}}
+//		  update: {method: 'PUT', headers: {'X-CSRF-TOKEN': csrf_token}},
+		  update: {method: 'PUT'},
+		  query:{method: 'GET', isArray:true},
+//		  save: {method: 'POST', headers: {'X-CSRF-TOKEN': csrf_token}},
+		  save: {method: 'POST', headers: {'X-CSRF-TOKEN': "pippo"}},
+//		  delete: {method: 'DELETE', headers: {'X-CSRF-TOKEN': csrf_token}}
+		  delete: {method: 'DELETE'}
 	});
 });

@@ -1,5 +1,5 @@
 //controller per la creazione degli item
-angular.module("blogApp").controller("ItemCreateCtrl", function ($scope, Tag, Item, $state, $stateParams, FileUploader, $q) {
+angular.module("blogApp").controller("ItemCreateCtrl", function ($scope, Tag, Item, $state, $stateParams, FileUploader, $q, $cookies) {
 
     //calcolo del toker csrf_token
 	var csrf_token = "";

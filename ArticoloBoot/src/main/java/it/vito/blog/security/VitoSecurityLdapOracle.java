@@ -57,7 +57,7 @@ public class VitoSecurityLdapOracle  extends WebSecurityConfigurerAdapter{
     	
     	http
             .authorizeRequests()
-                .antMatchers("/templateAttendere","/messaggiErrore","/items","/","/items/partialsListItem","/items/login","/items/partialsViewSlideShowItem","/items/partialsViewItem","/rest/items","/rest/items/*").permitAll()
+                .antMatchers("/","/index.html","/messaggi","/rest/upload","/rest/items/**","/templateAttendere","/messaggiErrore","/items","/","/items/partialsListItem","/items/login","/items/partialsViewSlideShowItem","/items/partialsViewItem","/rest/items","/rest/items/*").permitAll()
                 .antMatchers("/items/partialsEditItem","/items/partialsCreateItem", "/items/partialsEditList","/items/partialsCreateSlideShowItem","/items/partialsEditSlideShowItem").hasRole("REDAZIONE")
                 .anyRequest().authenticated()
                 .and()

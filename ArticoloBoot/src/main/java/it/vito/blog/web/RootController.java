@@ -23,10 +23,10 @@ public class RootController {
 	private HelloWorldService helloWorldService;
 
 	
-//	@RequestMapping("/")
-//	public String onRootAccess() {
-//		helloWorldService.getHelloMessage();
-//		logger.debug("Redirecting to /items...");
-//		return "redirect:/index.html";
-//	}
+	@RequestMapping("/")
+	public String onRootAccess() {
+		helloWorldService.getHelloMessage();
+		logger.debug("Redirecting to /items...");
+		return "redirect:/index.html";
+	}
 }

@@ -1,16 +1,18 @@
 //controller per la creazione degli item
-angular.module("blogApp").controller("NewItemCtrl", function ($scope, Tag, Item, $state, $stateParams, FileUploader, $q) {
+angular.module("blogApp").controller("NewItemCtrl", ['$scope', 'Tag', 'Item', '$state', '$stateParams', 'FileUploader', '$q', '$cookies', function ($scope, Tag, Item, $state, $stateParams, FileUploader, $q,$cookies
+		) {
 
     //calcolo del toker csrf_token
 	var csrf_token = "";
-	if (	document.querySelector('input[name="_csrf"]')!=null)
-		csrf_token = document.querySelector('input[name="_csrf"]').getAttribute('value');
-	
+	if ($cookies.get('XSRF-TOKEN')!=null){
+		csrf_token = $cookies.get('XSRF-TOKEN');
+	}
 	//definizione della variabile che esegue gli upload per evitare problemi con spring security si aggiunge nell'header della richista il csrf token
     var uploader = $scope.uploader = new FileUploader({
         url: '/rest/upload',
         headers : {
-        	'X-CSRF-TOKEN': csrf_token
+//        	'X-CSRF-TOKEN': csrf_token
+        	'X-XSRF-TOKEN': csrf_token
             }
     });
 
@@ -132,9 +134,11 @@ angular.module("blogApp").controller("NewItemCtrl", function ($scope, Tag, Item,
         
         item.$save(function(itemWeb) {
             if (itemWeb.erroreWeb == null){
+            	alert("pippoOK")
             	$state.transitionTo("homeEditListItem");
             	$scope.promessa.resolve('finito');
             }else{
+            	alert("pippoKO")
             	$scope.promessa.resolve('finito');
             	$scope.erroreNome=item.erroreWeb.erroreNome;
             	$scope.erroreTitolo=item.erroreWeb.erroreTitolo;
@@ -159,4 +163,4 @@ angular.module("blogApp").controller("NewItemCtrl", function ($scope, Tag, Item,
     };
     
 	
-});
+}]);

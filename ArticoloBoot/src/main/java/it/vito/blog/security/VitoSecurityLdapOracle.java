@@ -13,6 +13,9 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 
 @EnableAutoConfiguration
@@ -63,7 +66,12 @@ public class VitoSecurityLdapOracle  extends WebSecurityConfigurerAdapter{
                 .permitAll()
                 .and()
             .logout()
-                .permitAll();
+                .permitAll()
+                .and()
+            .csrf().csrfTokenRepository(csrfTokenRepository()).and()
+            .addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
+            
+            ;
     }
 
     @Autowired
@@ -88,4 +96,9 @@ public class VitoSecurityLdapOracle  extends WebSecurityConfigurerAdapter{
     	return new SpringSecurityDialect();
     }
     
+    private CsrfTokenRepository csrfTokenRepository() {
+    	HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+    	repository.setHeaderName("X-XSRF-TOKEN");
+    	return repository;
+    }    
 }

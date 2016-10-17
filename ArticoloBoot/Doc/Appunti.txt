@@ -1,3 +1,12 @@
 Pom.xml
 	i puntamenti ai js e css di terze parti: angular, bootstrap, jquery vengono presi direttamente con maven da webjars (www.webjars.org)
-	 
+
+
+- Thymeleaf è stato abbandonato, adesso la parte view è fatta completamente con angularjs
+- la parte che recupera i dati è fatta con spring
+- TODO da capire come gestire la sicurezza
+- L'internazionalizzazione è fatta con 2 array:
+	- uno che tiene i messaggi di errore /messaggiErrore
+	- uno con i messaggi delle label /messaggi
+
+Internazionalizzazione	 

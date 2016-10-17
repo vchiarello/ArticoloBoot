@@ -49,4 +49,30 @@ public class ErroriController {
 //		"";
 	}
 
+	@RequestMapping(value="/messaggi", method = RequestMethod.GET,produces = "application/javascript; charset=utf-8")
+	@ResponseBody
+	public String messaggi(HttpServletResponse response, Locale locale) {
+		logger.debug("Messaggi di errore. ");
+		response.setContentType("application/javascript");
+		ResourceBundle rb = ResourceBundle.getBundle("messages", locale);
+		logger.debug("Locale used is:"+rb.getLocale().toString());
+		//return "i18n/messaggi.errore";
+
+		StringBuffer risultato = new StringBuffer("var messaggi = new Array();");
+		for (Enumeration<String> e = rb.getKeys(); e.hasMoreElements();){
+			String chiave = e.nextElement();
+			String valore = rb.getString(chiave);
+			if (chiave.indexOf("function")>=0)
+				risultato = risultato.append("messaggi['"+chiave+"'] = "+valore+";");
+			else
+				risultato = risultato.append("messaggi['"+chiave+"'] = '"+valore+"';");
+		}
+		return risultato.toString();
+//		"var messaggiErrore = new Array();"+
+//		"messaggiErrore['item.edit.name.required'] = 'Nome: campo obbligatorio';"+
+//		"messaggiErrore['item.edit.titolo.required'] = 'Titolo: nome campo obbligatorio';"+
+//		"messaggiErrore['item.edit.testo.required'] = 'Testo: campo obbligatorio';"+
+//		"";
+	}
+	
 }

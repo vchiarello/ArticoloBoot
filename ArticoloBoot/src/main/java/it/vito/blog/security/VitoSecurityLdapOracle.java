@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
@@ -62,7 +63,8 @@ public class VitoSecurityLdapOracle  extends WebSecurityConfigurerAdapter{
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
-                .loginPage("/login").successHandler(new SavedRequestAwareAuthenticationSuccessHandler())
+                .loginPage("/login")//.successHandler(new SavedRequestAwareAuthenticationSuccessHandler())
+                .successHandler(createSimpleUrlAuthenticationSuccessHandler())
                 .permitAll()
                 .and()
             .logout()
@@ -100,5 +102,14 @@ public class VitoSecurityLdapOracle  extends WebSecurityConfigurerAdapter{
     	HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
     	repository.setHeaderName("X-XSRF-TOKEN");
     	return repository;
-    }    
+    } 
+
+    private SimpleUrlAuthenticationSuccessHandler createSimpleUrlAuthenticationSuccessHandler() {
+    	SimpleUrlAuthenticationSuccessHandler risultato = new SimpleUrlAuthenticationSuccessHandler();
+    	risultato.setAlwaysUseDefaultTargetUrl(true);
+    	risultato.setDefaultTargetUrl("/");
+    	return risultato;
+    } 
+    
+    
 }

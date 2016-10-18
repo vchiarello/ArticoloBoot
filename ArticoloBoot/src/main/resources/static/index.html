@@ -65,7 +65,11 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
 <script src="/js/staff.js" ></script>
 <script src="/js/appConfig.js" ></script>
 <script src="/js/controller/ListCtrl.js" ></script>
+<script src="/js/controller/EditListCtrl.js" ></script>
 <script src="/js/controller/IndexCtrl.js" ></script>
+
+<script src="/js/controller/ViewItemCtrl.js" ></script>
+<script src="/js/controller/EditItemCtrl.js" ></script>
 
 
 
@@ -103,13 +107,13 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
         </div>
         <div id="navbar" class="navbar-collapse collapse" ng-controller="IndexCtrl">
           <ul class="nav navbar-nav">
-            <li><a ui-sref="homeItem" href="">{{labelHome}}</a></li>
+            <li><a ui-sref="/" href="">{{labelHome}}</a></li>
             <li><a href="#about">{{labelAbout}}</a></li>
             <li><a href="#about">{{labelContact}}</a></li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" > <span> {{labelAction}}</span><span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a ui-sref="homeEditListItem" href=""">{{labelEditList}}</a></li>
+                <li><a ui-sref="editList" href=""">{{labelEditList}}</a></li>
                 <li><a ui-sref="createItem">{{labelNewItem}}</a></li>
                 <li><a ui-sref="createSlideShowItem">{{labelNewSlideShow}}</a></li>
                 <li><a href="#">{{labelAnotherAction}}</a></li>

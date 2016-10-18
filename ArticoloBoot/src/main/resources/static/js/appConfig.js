@@ -19,22 +19,22 @@ angular.module("blogApp").config(function ($stateProvider, $urlRouterProvider) {
             url:'/createItem',
             templateUrl: 'html/newItem.html',
             controller: 'NewItemCtrl'
-	    }).state('homeItem', {
-	        url:'/partialsListItem.html',
-	        templateUrl: 'partialsListItem.html',
-	        controller: 'ItemCtrl'
-	    }).state('homeEditListItem', {
-	        url:'/homeEditListItem',
-	        templateUrl: URLS.partialsEditList,
+	    }).state('list', {
+	        url:'/list',
+	        templateUrl: 'html/list.html',
+	        controller: 'ListCtrl'
+	    }).state('editList', {
+	        url:'/editList',
+	        templateUrl: 'html/editList.html',
 	        controller: 'EditListCtrl'
 	    }).state('viewItem', {
             url:'/viewItem/:id/:name',
-            templateUrl: URLS.partialsViewItem,
+            templateUrl: 'html/viewItem.html',
             controller: 'ViewItemCtrl'
 	    }).state('editItem', {
             url:'/editItem/:id/:name',
-            templateUrl: URLS.partialsEditItem,
-            controller: 'ItemEditCtrl'
+            templateUrl: 'html/editItem.html',
+            controller: 'EditItemCtrl'
 	    }).state('viewSlideShowItem', {
             url:'/viewSlideShowItem/:id/:name',
             templateUrl: URLS.partialsViewSlideShowItem,

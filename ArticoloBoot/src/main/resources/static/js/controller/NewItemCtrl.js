@@ -2,20 +2,22 @@
 angular.module("blogApp").controller("NewItemCtrl", ['$scope', 'Tag', 'Item', '$state', '$stateParams', 'FileUploader', '$q', '$cookies', function ($scope, Tag, Item, $state, $stateParams, FileUploader, $q,$cookies
 		) {
 
-    //calcolo del toker csrf_token
+    //calcolo del token csrf_token che viene passato da spring sul cookie XSRF-TOKEN, Filtro custom CsrfHeaderFilter 
 	var csrf_token = "";
 	if ($cookies.get('XSRF-TOKEN')!=null){
 		csrf_token = $cookies.get('XSRF-TOKEN');
 	}
-	//definizione della variabile che esegue gli upload per evitare problemi con spring security si aggiunge nell'header della richista il csrf token
+	
+	//definizione della variabile che esegue gli upload per evitare problemi con spring security 
+	//il token del fitlro CRSF viene passato nell'header e controllato dalla classe CrsfFilter di spring
     var uploader = $scope.uploader = new FileUploader({
         url: '/rest/upload',
         headers : {
-//        	'X-CSRF-TOKEN': csrf_token
         	'X-XSRF-TOKEN': csrf_token
-            }
+        }
     });
 
+    //formato dei campi data
     $('.dateFormat').datepicker({
         format: "dd/mm/yyyy",
         weekStart: 1,
@@ -36,7 +38,6 @@ angular.module("blogApp").controller("NewItemCtrl", ['$scope', 'Tag', 'Item', '$
         $scope.listaTags = Tag.query();
     };
 
-	//Appena si accede alla pagina si preleva l'item passato come parametro
     init();
 
     function _validaAll(){
@@ -95,7 +96,8 @@ angular.module("blogApp").controller("NewItemCtrl", ['$scope', 'Tag', 'Item', '$
 	
     //transizione in caso di premuta del pulsante di cancel
     $scope.cancel = function () {
-        $state.transitionTo("homeEditListItem");
+//      $state.transitionTo("homeEditListItem");
+      $state.transitionTo("editList");
     }
 
     //salvataggio dell'item
@@ -134,11 +136,9 @@ angular.module("blogApp").controller("NewItemCtrl", ['$scope', 'Tag', 'Item', '$
         
         item.$save(function(itemWeb) {
             if (itemWeb.erroreWeb == null){
-            	alert("pippoOK")
-            	$state.transitionTo("homeEditListItem");
+            	$state.transitionTo("editList");
             	$scope.promessa.resolve('finito');
             }else{
-            	alert("pippoKO")
             	$scope.promessa.resolve('finito');
             	$scope.erroreNome=item.erroreWeb.erroreNome;
             	$scope.erroreTitolo=item.erroreWeb.erroreTitolo;

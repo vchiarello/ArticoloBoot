@@ -1,5 +1,5 @@
 //controller per la creazione degli item
-angular.module("blogApp").controller("NewItemCtrl", ['$scope', 'Tag', 'Item', '$state', '$stateParams', 'FileUploader', '$q', '$cookies', function ($scope, Tag, Item, $state, $stateParams, FileUploader, $q,$cookies
+angular.module("blogApp").controller("NewItemCtrl", ['$scope', 'Tag', 'Item', '$state', '$stateParams', 'FileUploader', '$q', '$cookies', function ($scope, Tag, Item, $state, $stateParams, FileUploader, $q, $cookies
 		) {
 
     //calcolo del token csrf_token che viene passato da spring sul cookie XSRF-TOKEN, Filtro custom CsrfHeaderFilter 

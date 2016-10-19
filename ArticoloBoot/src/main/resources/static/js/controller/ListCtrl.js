@@ -5,7 +5,7 @@ angular.module("blogApp").controller("ListCtrl", function ($scope, Item, $state)
     	if (item.tipoItem==1)
     		$state.transitionTo("viewItem",{id: item.id, name: item.nome});
     	else if (item.tipoItem==2)
-    		$state.transitionTo("viewSlideShowItem",{id: item.id, name: item.nome});
+    		$state.transitionTo("viewSlideShow",{id: item.id, name: item.nome});
     	else
     		window.alert("Tipo item non supportato")
     };

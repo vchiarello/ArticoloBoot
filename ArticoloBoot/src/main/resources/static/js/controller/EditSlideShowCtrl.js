@@ -1,7 +1,7 @@
-//controller usato nell'edit degli item
-angular.module("blogApp").controller("EditItemCtrl", function ( $http, $scope,  Tag, Item, $state, $stateParams, FileUploader, $q, $cookies) {
+//controller per la creazione degli slide show
+angular.module("blogApp").controller("EditSlideShowCtrl", function ($scope, Tag, Item, $state, $stateParams, FileUploader, $q, $cookies) {
 
-
+	
     //calcolo del toker csrf_token
 	var csrf_token = "";
 	if ($cookies.get('XSRF-TOKEN')!=null){
@@ -16,7 +16,6 @@ angular.module("blogApp").controller("EditItemCtrl", function ( $http, $scope,  
             }
     });
 
-
     $('.dateFormat').datepicker({
         format: "dd/mm/yyyy",
         weekStart: 1,
@@ -27,31 +26,29 @@ angular.module("blogApp").controller("EditItemCtrl", function ( $http, $scope,  
     });
     
     
-    //metodo che preleva l'item dal database
 	function init() {
+		$scope.note=[];
+		getTags();
         $scope.item = Item.get({id:$stateParams.id, name:$stateParams.name})
         $scope.promessa = new Object();
         $scope.promessa.promise = $scope.item.$promise;
-        
     }
-	
     $scope.messaggio = messaggiErrore['list.spinner.message'];
 
-	//Appena si accede alla pagina si preleva l'item passato come parametro
-    init();
-
     //tutti i tag della combo Dei Tag
-    $scope.getTags = function () {
+    function getTags() {
         $scope.listaTags = Tag.query();
     };
 
+	//Appena si accede alla pagina si preleva l'item passato come parametro e si eseguono le inizializzazioni
+    init();
 
-
+	
     //transizione in caso di premuta del pulsante di cancel
     $scope.cancel = function () {
-        $state.transitionTo("editList");
+        $state.transitionTo("homeEditListItem");
     }
-    
+
 
     //salvataggio dell'item
     $scope.updateItem = function() {
@@ -74,20 +71,19 @@ angular.module("blogApp").controller("EditItemCtrl", function ( $http, $scope,  
         }
     }
 
-    
     function _validaESalva(){
 		if ($scope.item.listaFile===undefined || $scope.item.listaFile==null) $scope.item.listaFile=new Array();
 		for (i = 0; i < uploader.queue.length; i++){
-			var fa = new FileAllegato(uploader.queue[i]._file.name, "")
+			var fa = new FileAllegato(uploader.queue[i]._file.name, $scope.note[i])
 			$scope.item.listaFile[i]=fa;
 		}
 		//TODO tipo Item dello slide show da verificare se codice va bene
-        $scope.item.tipoItem = 1;
+        $scope.item.tipoItem = 2;
 		//var item = new Item($scope.item);
         
         $scope.item.$update(function(itemWeb) {
             if (itemWeb.erroreWeb == null){
-            	$state.transitionTo("editList");
+            	$state.transitionTo("homeEditListItem");
             	$scope.promessa.resolve('finito');
             }else{
             	$scope.promessa.resolve('finito');
@@ -100,19 +96,10 @@ angular.module("blogApp").controller("EditItemCtrl", function ( $http, $scope,  
         });
     }
     
-    //appena si aggiunge un file questo viene immediatamenta uploadato sul server
-    uploader.onAfterAddingFile = function(fileItem) {
-//        fileItem.upload();
-    };
     
-    //all'aggiunta di un file questo viene immediatamente caricato sul server e viene aggiornata la lista dei file nuovi da inserire nel db
-    uploader.onSuccessItem = function(fileItem, response, status, headers) {
-        console.info('onSuccessItem', fileItem, response, status, headers);
-//		if ($scope.item.listaFile===undefined || $scope.item.listaFile==null) $scope.item.listaFile=new Array();
-//		$scope.item.listaFile[uploader.queue.length]=fileItem._file.name;
-    };
 
-    //per i file già caricate c'è sia la funzionalità di cancellazione che quella di ripristina 
+
+    //per i file già caricati c'è sia la funzionalità di cancellazione che quella di ripristina 
     $scope.cancellaRipristina = function (id){
     	if (_isCancellato(id)){
     		ripristina(id);
@@ -127,7 +114,7 @@ angular.module("blogApp").controller("EditItemCtrl", function ( $http, $scope,  
     $scope.isCancellato = function (id){
     	return _isCancellato(id);	
     }
-    
+
     //funzione effettiva
     function _isCancellato (id){
     	if ($scope.item.listaFileDaCancellare==null) return false;
@@ -136,7 +123,7 @@ angular.module("blogApp").controller("EditItemCtrl", function ( $http, $scope,  
     	}
     	return false;
     }
-    
+
     //aggiunta dell'id nella list dei file da cancellare
     function cancella(id){
     	if ($scope.item.listaFileSalvati==null) return ;
@@ -157,7 +144,14 @@ angular.module("blogApp").controller("EditItemCtrl", function ( $http, $scope,  
     	}
     }
 
-
+    $scope.rimuoviFile = function (item){
+        uploader.removeFromQueue(item);
+    }
+    
+	uploader.onAfterAddingFile = function(fileItem) {
+//		alert($scope.item.nome + ", " +$scope.note + "" + angular.isArray($scope.note));
+	};
+    
     function _validaAll(){
     	
     	return $scope.validaNome() && $scope.validaTitolo() && $scope.validaTesto() && $scope.validaAutore();
@@ -212,5 +206,5 @@ angular.module("blogApp").controller("EditItemCtrl", function ( $http, $scope,  
     };
 
     
+	
 });
-

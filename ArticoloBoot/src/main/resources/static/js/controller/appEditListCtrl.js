@@ -1,5 +1,5 @@
 //controller della home che edit gli item solo per amministratori
-angular.module("blogApp").controller("EditListCtrl", function ($scope, Item, ItemOperation, $state) {
+angular.module("blogApp").controller("EditListCtrlOld", function ($scope, Item, ItemOperation, $state) {
     function init() {
         getItems();
     }

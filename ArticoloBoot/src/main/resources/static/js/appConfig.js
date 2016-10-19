@@ -35,18 +35,18 @@ angular.module("blogApp").config(function ($stateProvider, $urlRouterProvider) {
             url:'/editItem/:id/:name',
             templateUrl: 'html/editItem.html',
             controller: 'EditItemCtrl'
-	    }).state('viewSlideShowItem', {
-            url:'/viewSlideShowItem/:id/:name',
-            templateUrl: URLS.partialsViewSlideShowItem,
-            controller: 'ViewSlideShowItemCtrl'
-        }).state('createSlideShowItem', {
-            url:'/createSlideShowItem',
-            templateUrl: URLS.partialsCreateSlideShowItem,
-            controller: 'ItemCreateSlideShowCtrl'
-        }).state('editSlideShowItem', {
+	    }).state('viewSlideShow', {
+            url:'/viewSlideShow/:id/:name',
+            templateUrl: 'html/viewSlideShow.html',
+            controller: 'ViewSlideShowCtrl'
+        }).state('createSlideShow', {
+            url:'/createSlideShow',
+            templateUrl: 'html/newSlideShow.html',
+            controller: 'NewSlideShowCtrl'
+        }).state('editSlideShow', {
             url:'/editSlideShowItem/:id/:name',
-            templateUrl: URLS.partialsEditSlideShowItem,
-            controller: 'ItemEditSlideShowCtrl'
+            templateUrl: 'html/editSlideShow.html',
+            controller: 'EditSlideShowCtrl'
         }).state('endpoints', {
             url: '/endpoints',
             templateUrl: URLS.partialsMappings,

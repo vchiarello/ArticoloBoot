@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-directive-template-url-production</title>
+  
+
+<link rel="stylesheet" href='slideshow.css' type="text/css" />
+<script src="/webjars/jquery/2.1.0/jquery.js" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.zoom.js"></script>
+<script src="/webjars/angularjs/1.5.8/angular.js"></script>
+<script src="xfade51.js"></script>
+	<style>
+
+
+#slideshowPopup {
+	overflow: hidden;
+	position: relative;
+	width:700;
+	height:450;
+	text-align:center;
+	
+}
+
+
+.black_overlay {
+  display: none;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 1001;
+  -moz-opacity: 0.8;
+  opacity: .80;
+  filter: alpha(opacity=80);
+  
+}
+.white_content {
+  display: none;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 80%;
+  height: 90%;
+  border: 2px solid orange;
+  background-color: white;
+  z-index: 1002;
+  overflow: auto;
+}  
+  
+
+
+
+		/* these styles are for the demo, but are not required for the plugin */
+		.zoom {
+			display:inline-block;
+			position: relative;
+		}
+		
+
+		/* magnifying glass icon */
+
+		.zoom:after {
+			content:'';
+			display:block; 
+			width:33px; 
+			height:33px; 
+			position:absolute; 
+			top:0;
+			right:0;
+		}
+
+		.zoom img {
+			display: block;
+		}
+
+		.zoom img::selection { background-color: transparent; }
+	</style>  
+
+  
+</head>
+<body ng-app="slide">
+  <div ng-controller="slideController">
+  <slide-Direct></slide-Direct>
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<div style="margin: auto;width:400px; text-align:right;"><img src="Max.png" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"/></div>
+<div id="slideshow">
+	<span  ng-repeat="item in immagini" class='zoom' id='ex{{$index}}'>
+	<img class="imgSlide"
+		ng-src="{{item.indirizzo}}"
+		alt="{{item.titolo}}"
+		title="{{item.titolo}}"
+		height="300px"
+	/>
+	</span>
+</div>
+<div style="text-align:center;" id="navigatore">
+	<img src="FrecciaIndietro.png" id="bPrev" ng-click="so_xfade_prev()">
+	<img ng-repeat="item in immagini" ng-src="{{calcolaImmagine($index)}}" id="nav{{$index}}" ng-click="so_xfade_i($index)"/>
+	<img src="FrecciaAvanti.png" id="bSucc" ng-click="so_xfade_succ()">
+</div>
+
+<div id="thumbDiv" style="text-align:center;margin-top:10px;">
+	<img ng-repeat="item in immagini"
+		ng-src="{{item.indirizzo}}"
+		alt="{{item.titolo}}"
+		title="{{item.titolo}}"
+		height="100px"
+		id="thumb{{$index}}"
+		style="padding:5px;"
+		ng-mouseover="so_xfade_i($index)"
+	/>
+</div>
+

@@ -1,14 +1,17 @@
-<div style="margin: auto;width:400px; text-align:right;"><img src="Max.png" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"/></div>
+<div style="margin: auto;width:400px; text-align:right;"><img src="Max.png" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"   ng-click="displayImmagine()"/></div>
 <div id="slideshow">
-	<span  ng-repeat="item in immagini" class='zoom' id='ex{{$index}}'>
+	<span  ng-repeat="item in immagini" class='zoom' zoom="" id='ex{{$index}}'>
 	<img class="imgSlide"
 		ng-src="{{item.indirizzo}}"
 		alt="{{item.titolo}}"
 		title="{{item.titolo}}"
 		height="300px"
+		ng-mouseover="zoom()"
 	/>
 	</span>
 </div>
+
+
 <div style="text-align:center;" id="navigatore">
 	<img src="FrecciaIndietro.png" id="bPrev" ng-click="so_xfade_prev()">
 	<img ng-repeat="item in immagini" ng-src="{{calcolaImmagine($index)}}" id="nav{{$index}}" ng-click="so_xfade_i($index)"/>
@@ -27,3 +30,42 @@
 	/>
 </div>
 
+
+	<div id="light" class="white_content">
+		<div style="text-align:right;">
+			<a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'" ><img src="X.png"/> </a>
+		</div>
+	
+		<div id="thumbDivPop" style="float:left;text-align:left;margin-top:10px;width:200px;">
+			<img ng-repeat="item in immagini" style="padding:15px;position:relative;top: 0;" 
+				ng-src="{{item.indirizzo}}"
+				alt="{{item.titolo}}"
+				title="{{item.titolo}}"
+				height="100px"
+				id="thumbPop{{index}}"
+				ng-mouseover="so_xfade_i($index)"
+			/>
+			<br/>
+		</div>
+		<div id="content" style="float: left;text-align:center;margin: auto;width:700px;">
+			<div style="text-align:center;" id="navigatorePop">
+				<img src="FrecciaIndietro.png" id="bPrevPop" ng-click="so_xfade_prev()">
+			
+				<img ng-repeat="item in immagini" ng-src="{{calcolaImmagine($index)}}" id="nav{{$index}}" ng-click="so_xfade_i($index)"/>
+				
+				<img src="FrecciaAvanti.png" id="bSuccPop" ng-click="so_xfade_succ()">
+			</div>
+	
+			<div id="slideshowPopup" style="text-align:center;width:600;">
+				<img ng-repeat="item in immagini" class="imgSlide" id="sliPop{{$index}}" visualizza=""
+					ng-src="{{item.indirizzo}}"
+					alt="{{item.titolo}}"
+					title="{{item.titolo}}"
+					style="display:none"
+					
+				/>
+			</div>
+	
+		</div>
+	</div>
+	<div id="fade" class="black_overlay"></div>

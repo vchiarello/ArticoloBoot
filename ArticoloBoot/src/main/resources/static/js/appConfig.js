@@ -15,10 +15,6 @@ angular.module("blogApp").config(function ($stateProvider, $urlRouterProvider) {
 	        url:'/',
 	        templateUrl: 'html/list.html',
 	        controller: 'ListCtrl'
-        }).state('createItem', {
-            url:'/createItem',
-            templateUrl: 'html/newItem.html',
-            controller: 'NewItemCtrl'
 	    }).state('list', {
 	        url:'/list',
 	        templateUrl: 'html/list.html',
@@ -31,10 +27,18 @@ angular.module("blogApp").config(function ($stateProvider, $urlRouterProvider) {
             url:'/viewItem/:id/:name',
             templateUrl: 'html/viewItem.html',
             controller: 'ViewItemCtrl'
+        }).state('createItem', {
+            url:'/createItem',
+            templateUrl: 'html/newItem.html',
+            controller: 'NewItemCtrl'
 	    }).state('editItem', {
             url:'/editItem/:id/:name',
             templateUrl: 'html/editItem.html',
             controller: 'EditItemCtrl'
+	    }).state('createItemShop', {
+            url:'/createItemShop/:id/:name',
+            templateUrl: 'html/newItemShop.html',
+            controller: 'CreateItemShopCtrl'
 	    }).state('viewSlideShow', {
             url:'/viewSlideShow/:id/:name',
             templateUrl: 'html/viewSlideShow.html',

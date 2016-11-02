@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
@@ -58,12 +59,13 @@ public class VitoSecurityLdapApache  extends WebSecurityConfigurerAdapter{
     	
     	http
             .authorizeRequests()
-                .antMatchers("/","/index.html","/rest/upload","/rest/items/**","/messaggi","/templateAttendere","/messaggiErrore","/items","/","/items/partialsListItem","/items/login","/items/partialsViewSlideShowItem","/items/partialsViewItem","/rest/items","/rest/items/si").permitAll()
+                .antMatchers("/","/index.html","/html/list.html","/slide_dl/**","/rest/upload","/rest/items/**","/messaggi","/templateAttendere","/messaggiErrore","/items","/","/items/partialsListItem","/items/login","/items/partialsViewSlideShowItem","/items/partialsViewItem","/rest/items","/rest/items/si").permitAll()
                 .antMatchers("/items/partialsEditItem","/items/partialsCreateItem", "/items/partialsEditList","/items/partialsCreateSlideShowItem","/items/partialsEditSlideShowItem").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
-                .loginPage("/login")
+                .loginPage("/login")//.successHandler(new SavedRequestAwareAuthenticationSuccessHandler())
+                .successHandler(createSimpleUrlAuthenticationSuccessHandler())
                 .permitAll()
                 .and()
             .logout()
@@ -101,5 +103,12 @@ public class VitoSecurityLdapApache  extends WebSecurityConfigurerAdapter{
     	repository.setHeaderName("X-XSRF-TOKEN");
     	return repository;
     }    
+
+    private SimpleUrlAuthenticationSuccessHandler createSimpleUrlAuthenticationSuccessHandler() {
+    	SimpleUrlAuthenticationSuccessHandler risultato = new SimpleUrlAuthenticationSuccessHandler();
+    	risultato.setAlwaysUseDefaultTargetUrl(true);
+    	risultato.setDefaultTargetUrl("/");
+    	return risultato;
+    } 
     
 }

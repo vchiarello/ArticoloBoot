@@ -8,6 +8,7 @@ angular.module("blogApp").controller("IndexCtrl", function ($scope, Item, $state
 	$scope.labelAction=messaggi['toolbar.action'];
 	$scope.labelEditList=messaggi['toolbar.action.editList'];
 	$scope.labelNewItem=messaggi['toolbar.action.newItem'];
+	$scope.labelNewItemShop=messaggi['toolbar.action.newItemShop'];
 	$scope.labelNewSlideShow=messaggi['toolbar.action.newSlideShow'];
 	$scope.labelAnotherAction=messaggi['toolbar.action.anotherAction'];
 	$scope.labelSeparatedLink=messaggi['toolbar.action.separatedLink'];

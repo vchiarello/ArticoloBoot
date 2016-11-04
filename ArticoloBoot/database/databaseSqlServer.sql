@@ -3,7 +3,15 @@ drop table dbo.bg_tag;
 drop table dbo.bg_Allegato;
 drop table dbo.bg_Item;
 drop table dbo.bg_Tipo_Item;
+drop table dbo.bg_anag_proprieta;
 
+CREATE  TABLE bg_anag_proprieta (
+  id_anag_prop INT NOT NULL identity,
+  nome_proprieta varchar(1000) NOT NULL ,
+  valore_proprieta varchar(1000) not null,
+  flag_multiplo varchar(1),
+  PRIMARY KEY (id_anag_prop) );
+  
 CREATE  TABLE bg_Tipo_Item (
   id_Tipo INT NOT NULL identity,
   descrizione varchar(2000) NOT NULL ,

@@ -1,6 +1,14 @@
 
 
 
+CREATE  TABLE bg_anag_proprieta (
+  id_anag_prop INT primary key NOT NULL,
+  nome_proprieta varchar(1000) NOT NULL ,
+  valore_proprieta varchar(1000) NOT NULL ,
+  flag_multiplo varchar(1),
+  PRIMARY KEY (id_anag_prop) );
+  
+
 
 CREATE TABLE bg_item
 (

@@ -1,5 +1,5 @@
 //controller per la creazione degli item
-angular.module("blogApp").controller("NewItemShopCtrl", ['$scope', 'Tag', 'Item', '$state', '$stateParams', 'FileUploader', '$q', '$cookies', function ($scope, Tag, Item, $state, $stateParams, FileUploader, $q, $cookies
+angular.module("blogApp").controller("NewItemShopCtrl", ['$scope', 'Tag', 'Item', 'ItemProperty', '$state', '$stateParams', 'FileUploader', '$q', '$cookies', function ($scope, Tag, Item, ItemProperty, $state, $stateParams, FileUploader, $q, $cookies
 		) {
 	
 	//Label usate nella pagina
@@ -64,11 +64,23 @@ angular.module("blogApp").controller("NewItemShopCtrl", ['$scope', 'Tag', 'Item'
     
 	function init() {
 		getTags();
+		getColori();
+		getTaglie();
     }
 
     //tutti i tag della combo Dei Tag
     function getTags() {
         $scope.listaTags = Tag.query();
+    };
+
+    //tutti i colori
+    function getColori() {
+        $scope.listaColori = ItemProperty.query({nome:'Colore'});
+    };
+
+    //tutte le taglie
+    function getTaglie() {
+        $scope.listaTaglie = ItemProperty.query({nome:'Taglia'});
     };
 
 	

@@ -1,8 +1,9 @@
+drop table dbo.bg_anag_proprieta;
 
 
 
 CREATE  TABLE bg_anag_proprieta (
-  id_anag_prop INT primary key NOT NULL,
+  id_anag_prop INT NOT NULL auto_increment,
   nome_proprieta varchar(1000) NOT NULL ,
   valore_proprieta varchar(1000) NOT NULL ,
   flag_multiplo varchar(1),
@@ -37,4 +38,18 @@ alter table bg_item add (
 data_inserimento timestamp
  ,data_hidden timestamp
  ,data_scadenza timestamp);
+
  
+
+insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Colore','Rosso','S');
+insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Colore','Bianco','S');
+insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Colore','Nero','S');
+insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Colore','Blue','S');
+insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Colore','Verde','S');
+insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Colore','Giallo','S');
+ 
+insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Taglia','36','S');
+insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Taglia','38','S');
+insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Taglia','40','S');
+insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Taglia','42','S');
+insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Taglia','44','S');

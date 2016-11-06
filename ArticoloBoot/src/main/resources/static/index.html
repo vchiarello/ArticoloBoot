@@ -38,7 +38,13 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
     <script th:inline="javascript">
         /*<![CDATA[*/
         var URLS = {};
+
+        URLS.tags = "/rest/tags" ;
         URLS.items = "/rest/items/:id/:name/:attivi";
+        URLS.property = "/rest/property/:nome";
+
+        
+        
         
         URLS.partialsCreateSlideShowItem = "/items/partialsCreateSlideShowItem" ;
         URLS.partialsEditSlideShowItem = "/items/partialsEditSlideShowItem" ;
@@ -54,7 +60,6 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
         URLS.partialsCreateItemw2 = "/items/partialsCreateItemw2" ;
         URLS.partialsCreateItemw3 = "/items/partialsCreateItemw3" ;
         URLS.login = "/items/login" ;
-        URLS.tags = "/rest/tags" ;
 
         URLS.mappingsUrl = "/mappings" ;
         URLS.partialsMappings = "/mappings/partialsMappings" ;
@@ -97,6 +102,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
 <script src="/js/controller/appLoginCtrl.js"></script>
 <script src="/js/controller/appMappingCtrl.js"></script>
 <script src="/js/factory/appItem.js"></script>
+<script src="/js/factory/appProperty.js"></script>
 <script src="/js/factory/appItemOperation.js"></script>
 <script src="/js/factory/appMapping.js"></script>
 <script src="/js/factory/appTag.js"></script>

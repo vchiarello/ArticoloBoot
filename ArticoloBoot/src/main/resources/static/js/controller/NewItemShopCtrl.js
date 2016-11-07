@@ -32,6 +32,8 @@ angular.module("blogApp").controller("NewItemShopCtrl", ['$scope', 'Tag', 'Item'
 	$scope.labelResourceRemove = messaggi['createItemShop.label.resources.button.remove'];
 	$scope.buttonCancel = messaggi['createItemShop.button.cancel'];
 	$scope.buttonSave = messaggi['createItemShop.button.save'];
+	$scope.labelColori = messaggi['createItemShop.label.colori']
+	$scope.labelTaglie = messaggi['createItemShop.label.taglie']
 	
 	//chiamata ad init per avere l'elenco dei tag
     init();

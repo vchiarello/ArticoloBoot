@@ -2,14 +2,20 @@ package it.vito.blog.business;
 
 import it.vito.blog.aspect.AddIndexEntryAnnotation;
 import it.vito.blog.db.bean.Allegato;
+import it.vito.blog.db.bean.AnagraficaProprieta;
 import it.vito.blog.db.bean.Item;
+import it.vito.blog.db.bean.LkPropertyItem;
 import it.vito.blog.db.bean.LkTagItem;
 import it.vito.blog.db.bean.QItem;
 import it.vito.blog.db.bean.Tag;
 import it.vito.blog.db.dao.AllegatoRepository;
+import it.vito.blog.db.dao.AnagraficaProprietaRepository;
 import it.vito.blog.db.dao.ItemRepository;
+import it.vito.blog.db.dao.LkItemPropertyItemRepository;
 import it.vito.blog.db.dao.LkTagItemRepository;
 import it.vito.blog.db.dao.TagRepository;
+import it.vito.blog.web.bean.ItemPropertyWeb;
+import it.vito.blog.web.bean.ItemShopWeb;
 import it.vito.blog.web.bean.ItemWeb;
 import it.vito.blog.web.bean.Option;
 
@@ -49,6 +55,12 @@ public class GestioneBlog {
 	
 	@Autowired
 	AllegatoRepository allegatoRepository;
+	
+	@Autowired
+	AnagraficaProprietaRepository anagraficaProprietaRepository;
+	
+	@Autowired
+	LkItemPropertyItemRepository itemPropertyItemRepository;
 	
 	@Value("${pathFile}")
 	String pathFile;
@@ -178,7 +190,24 @@ public class GestioneBlog {
 			for (int i=0;i < itemWeb.getListaFileDaCancellare().size();i++)
 				this.allegatoRepository.delete(itemWeb.getListaFileDaCancellare().get(i));
 		
+		if (itemWeb.getTipoItem()==3){
+			saveProperty(itemSalvato,((ItemShopWeb)itemWeb).getColoriSelezionati());
+			saveProperty(itemSalvato,((ItemShopWeb)itemWeb).getTaglieSelezionate());
+		}
+			
+		
 		return itemWeb;
+	}
+	
+	private void saveProperty(Item itemsalvato, List<ItemPropertyWeb> itemPropertyWeb){
+		for (int i = 0; i<itemPropertyWeb.size();i++){
+			List<LkPropertyItem> l = this.itemPropertyItemRepository.findByPropAndItem(itemPropertyWeb.get(i).toItemProperty(), itemsalvato);
+			if (l==null || l.size()==0) continue;
+			LkPropertyItem pi = new LkPropertyItem();
+			pi.setItem(itemsalvato);
+			pi.setProp(itemPropertyWeb.get(i).toItemProperty());
+			this.itemPropertyItemRepository.save(pi);
+		}
 	}
 	
 	public Tag[] salvaNuoviTag(String[] nuoviTag){
@@ -262,5 +291,15 @@ public class GestioneBlog {
 		lkTagItemRepository.save(lk);
 	}
 	
-
+	public List<ItemPropertyWeb> getProprieta(String nomeProprieta){
+		List<AnagraficaProprieta> l = this.anagraficaProprietaRepository.findByNomeProprieta(nomeProprieta);
+		if (l==null || l.size()==0)return null;
+		List<ItemPropertyWeb> risultato = new LinkedList<ItemPropertyWeb>();
+		for (int i = 0; i < l.size();i++)
+			risultato.add(new ItemPropertyWeb(l.get(i)));
+		
+		return risultato;
+		
+	}
+	
 }

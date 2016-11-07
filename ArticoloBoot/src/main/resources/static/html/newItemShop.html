@@ -40,6 +40,34 @@
 	                    </div>
 	               	</div>
 	           </div> 
+	        	<div class="row">
+	            	<div class="form-group">
+	                	<div class="col-md-2">
+	                        <label for="autore">{{labelColori}}</label>
+	                    </div>
+	                    <div class="col-md-10">
+	                             <select multiple="multiple" size="4"
+	                            ng-options="option.valore for option in listaColori track by option.id"
+	                             ng-model="item.coloriSelezionati"
+	                            >
+	                            </select>
+	                    </div>
+	               	</div>
+	           </div>    	
+	        	<div class="row">
+	            	<div class="form-group">
+	                	<div class="col-md-2">
+	                        <label for="autore">{{labelTaglie}}</label>
+	                    </div>
+	                    <div class="col-md-10">
+	                             <select multiple="multiple" size="3"
+	                            ng-options="option.valore for option in listaTaglie track by option.id"
+	                             ng-model="item.taglieSelezionati"
+	                            >
+	                            </select>
+	                    </div>
+	               	</div>
+	           </div>    	
 	              	
 	        	<div class="row">
 	            	<div class="form-group">

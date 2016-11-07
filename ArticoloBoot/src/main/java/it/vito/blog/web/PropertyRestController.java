@@ -1,6 +1,7 @@
 package it.vito.blog.web;
 
 import it.vito.blog.business.GestioneBlog;
+import it.vito.blog.web.bean.ItemPropertyWeb;
 import it.vito.blog.web.bean.Option;
 
 import java.util.List;
@@ -24,10 +25,10 @@ public class PropertyRestController {
 	
 
 	@RequestMapping(value="/{nome}", method=RequestMethod.GET)
-	public List<Option> list(@PathVariable("nome") String nomeProprieta) {
+	public List<ItemPropertyWeb> list(@PathVariable("nome") String nomeProprieta) {
 		logger.debug("Get lista valori proprieta "+nomeProprieta + "...");
-//		List<Option> l = gestioneBlog.getAllTag();
-		return null;
+		List<ItemPropertyWeb> l = gestioneBlog.getProprieta(nomeProprieta);
+		return l;
 	}
 	
 

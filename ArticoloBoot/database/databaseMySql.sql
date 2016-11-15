@@ -18,6 +18,7 @@ CREATE TABLE bg_item
    titolo text NOT NULL,
    nome varchar(100) NOT NULL,
    riassunto text,
+   quantita int NULL ,
    autore varchar(100) NOT NULL,
    data_pubblicazione timestamp NOT NULL,
    data_modifica timestamp,

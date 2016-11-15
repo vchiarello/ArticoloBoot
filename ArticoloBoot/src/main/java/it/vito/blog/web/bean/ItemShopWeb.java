@@ -13,8 +13,10 @@ public class ItemShopWeb extends ItemWeb implements Serializable{
 	 */
 	private static final long serialVersionUID = -8582050919513532112L;
 	private List<ItemPropertyWeb> coloriSelezionati;
-	private List<ItemPropertyWeb> taglieSelezionate;
+	private List<ItemPropertyWeb> taglieSelezionati;
 
+	public ItemShopWeb(){
+	}
 	public ItemShopWeb(Item item, List<Tag> tags){
 		super(item,tags);
 	}
@@ -27,11 +29,11 @@ public class ItemShopWeb extends ItemWeb implements Serializable{
 	public void setColoriSelezionati(List<ItemPropertyWeb> coloriSelezionati) {
 		this.coloriSelezionati = coloriSelezionati;
 	}
-	public List<ItemPropertyWeb> getTaglieSelezionate() {
-		return taglieSelezionate;
+	public List<ItemPropertyWeb> getTaglieSelezionati() {
+		return taglieSelezionati;
 	}
-	public void setTaglieSelezionate(List<ItemPropertyWeb> taglieSelezionate) {
-		this.taglieSelezionate = taglieSelezionate;
+	public void setTaglieSelezionati(List<ItemPropertyWeb> taglieSelezionati) {
+		this.taglieSelezionati = taglieSelezionati;
 	}
 
 	

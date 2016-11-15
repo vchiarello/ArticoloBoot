@@ -41,6 +41,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
 
         URLS.tags = "/rest/tags" ;
         URLS.items = "/rest/items/:id/:name/:attivi";
+        URLS.itemShop = "/rest/itemShop/:id/:name/:attivi";
         URLS.property = "/rest/property/:nome";
 
         
@@ -80,8 +81,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
 <script src="/js/controller/NewItemCtrl.js" ></script>
 
 <script src="/js/controller/NewItemShopCtrl.js" ></script>
+<script src="/js/controller/EditItemShopCtrl.js" ></script>
 <!-- <script src="/js/controller/ViewSlideShowCtrl.js" ></script> -->
-<!-- <script src="/js/controller/EditSlideShowCtrl.js" ></script> -->
 
 <script src="/js/controller/NewSlideShowCtrl.js" ></script>
 <script src="/js/controller/ViewSlideShowCtrl.js" ></script>
@@ -101,6 +102,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
 
 <script src="/js/controller/appLoginCtrl.js"></script>
 <script src="/js/controller/appMappingCtrl.js"></script>
+<script src="/js/factory/ItemShop.js"></script>
 <script src="/js/factory/appItem.js"></script>
 <script src="/js/factory/appProperty.js"></script>
 <script src="/js/factory/appItemOperation.js"></script>

@@ -24,6 +24,7 @@ CREATE  TABLE bg_Item (
   titolo VARCHAR(2000) NOT NULL ,
   nome VARCHAR(100) NOT NULL ,
   riassunto VARCHAR(4000) NULL ,
+  quantita int NULL ,
   autore VARCHAR(100) NOT NULL ,
   data_pubblicazione DATETIME NOT NULL ,
   data_modifica DATETIME NULL ,

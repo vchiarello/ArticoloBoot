@@ -14,5 +14,7 @@ public interface LkItemPropertyItemRepository extends CrudRepository<LkPropertyI
 	public List<LkPropertyItem> findByItem(Item item);
 	public void deleteByItem(Item item);
 	public void deleteByItemAndProp(Item item, AnagraficaProprieta prop);
+	@SuppressWarnings("unchecked")
+	public LkPropertyItem save(LkPropertyItem lk);
 	
 }

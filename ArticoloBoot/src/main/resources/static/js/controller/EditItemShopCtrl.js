@@ -1,5 +1,5 @@
 //controller per la creazione degli item
-angular.module("blogApp").controller("NewItemShopCtrl", ['$scope', 'Tag', 'ItemShop', 'ItemProperty', '$state', '$stateParams', 'FileUploader', '$q', '$cookies', function ($scope, Tag, ItemShop, ItemProperty, $state, $stateParams, FileUploader, $q, $cookies
+angular.module("blogApp").controller("EditItemShopCtrl", ['$scope', 'Tag', 'ItemShop', 'ItemProperty', '$state', '$stateParams', 'FileUploader', '$q', '$cookies', function ($scope, Tag, ItemShop, ItemProperty, $state, $stateParams, FileUploader, $q, $cookies
 		) {
 	
 	//Label usate nella pagina
@@ -65,6 +65,9 @@ angular.module("blogApp").controller("NewItemShopCtrl", ['$scope', 'Tag', 'ItemS
     
     
 	function init() {
+        $scope.item = ItemShop.get({id:$stateParams.id, name:$stateParams.name})
+        $scope.promessa = new Object();
+        $scope.promessa.promise = $scope.item.$promise;
 		getTags();
 		getColori();
 		getTaglie();

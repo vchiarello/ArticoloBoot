@@ -1,6 +1,16 @@
 //controller della home che edit gli item solo per amministratori
 angular.module("blogApp").controller("EditListCtrl", function ($scope, Item, ItemOperation, $state) {
-    function init() {
+
+	
+	$scope.buttonEditItem=messaggi['editListItem.button.editItem'];
+	$scope.buttonDeleteItem=messaggi['editListItem.button.deleteItem'];
+	$scope.buttonHideItem=messaggi['editListItem.button.hideItem'];
+	$scope.buttonShowItem=messaggi['editListItem.button.showItem'];
+	$scope.labelHidden = messaggi['editListItem.label.hidden'];
+	
+	
+	
+	function init() {
         getItems();
     }
 
@@ -34,6 +44,8 @@ angular.module("blogApp").controller("EditListCtrl", function ($scope, Item, Ite
     		$state.transitionTo("editItem",{id: item.id, name: item.nome});
     	else if (item.tipoItem==2)
     		$state.transitionTo("editSlideShow",{id: item.id, name: item.nome});
+    	else if (item.tipoItem==3)
+    		$state.transitionTo("editItemShop",{id: item.id, name: item.nome});
     	else
     		window.alert("Tipo item non supportato")
     };

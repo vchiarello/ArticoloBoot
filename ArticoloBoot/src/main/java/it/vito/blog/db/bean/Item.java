@@ -49,6 +49,9 @@ public class Item implements Serializable, Comparable<Item>{
 	@Column(name="riassunto")
 	private String riassunto;
 	
+	@Column(name="quantita")
+	private Integer quantita;
+	
 	@Column(name="autore")
 	private String autore;
 	
@@ -105,6 +108,14 @@ public class Item implements Serializable, Comparable<Item>{
 
 	public void setRiassunto(String riassunto) {
 		this.riassunto = riassunto;
+	}
+
+	public Integer getQuantita() {
+		return quantita;
+	}
+
+	public void setQuantita(Integer quantita) {
+		this.quantita = quantita;
 	}
 
 	public String getAutore() {

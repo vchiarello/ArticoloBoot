@@ -35,6 +35,7 @@ public class ItemWeb {
 	private List<FileAllegato> listaFile;
 	private List<FileAllegato> listaFileSalvati;
 	private List<Integer> listaFileDaCancellare;
+	private Integer quantita;
 	private ErroreWeb erroreWeb;
 	
 	public ItemWeb(){
@@ -85,6 +86,7 @@ public class ItemWeb {
 		this.testo=item.getTesto();
 		this.tipoItem=item.getTipoItem().getId();
 		this.titolo=item.getTitolo();
+		this.quantita=item.getQuantita();
 	}
 	
 	public ItemWeb(Item item){
@@ -125,6 +127,7 @@ public class ItemWeb {
 		this.testo=item.getTesto();
 		this.tipoItem=item.getTipoItem().getId();
 		this.titolo=item.getTitolo();
+		this.quantita=item.getQuantita();
 	}
 	
 	public ItemWeb (LinkedHashMap<String, Object> input){
@@ -228,6 +231,7 @@ public class ItemWeb {
 		else t.setId(1);
 		risultato.setTipoItem(t);
 		risultato.setTitolo(this.titolo);
+		risultato.setQuantita(this.quantita);
 		return risultato;
 	}
 	
@@ -359,6 +363,14 @@ public class ItemWeb {
 		this.dataInserimento = dataInserimento;
 	}
 
+	public Integer getQuantita() {
+		return quantita;
+	}
+
+	public void setQuantita(Integer quantita) {
+		this.quantita = quantita;
+	}
+
 	public ErroreWeb getErroreWeb() {
 		return erroreWeb;
 	}
@@ -369,18 +381,15 @@ public class ItemWeb {
 
 	@Override
 	public String toString() {
-		return "ItemWeb [id=" + id + ", tipoItem=" + tipoItem + ", testo="
-				+ testo + ", titolo=" + titolo + ", nome=" + nome
-				+ ", riassunto=" + riassunto + ", autore=" + autore
-				+ ", dataPubblicazione=" + dataPubblicazione
-				+ ", dataScadenza=" + dataScadenza + ", dataHidden="
-				+ dataHidden + ", dataInserimento=" + dataInserimento
-				+ ", dataModifica=" + dataModifica + ", nuoviTag=" + nuoviTag
-				+ ", tagDisponibili=" + tagDisponibili + ", tagSelezionati="
-				+ tagSelezionati + ", listaFile=" + listaFile
-				+ ", listaFileSalvati=" + listaFileSalvati
-				+ ", listaFileDaCancellare=" + listaFileDaCancellare + "]";
+		return "ItemWeb [id=" + id + ", tipoItem=" + tipoItem + ", testo=" + testo + ", titolo=" + titolo + ", nome="
+				+ nome + ", riassunto=" + riassunto + ", autore=" + autore + ", dataPubblicazione=" + dataPubblicazione
+				+ ", dataScadenza=" + dataScadenza + ", dataHidden=" + dataHidden + ", dataInserimento="
+				+ dataInserimento + ", dataModifica=" + dataModifica + ", nuoviTag=" + nuoviTag + ", tagDisponibili="
+				+ tagDisponibili + ", tagSelezionati=" + tagSelezionati + ", listaFile=" + listaFile
+				+ ", listaFileSalvati=" + listaFileSalvati + ", listaFileDaCancellare=" + listaFileDaCancellare
+				+ ", quantita=" + quantita + ", erroreWeb=" + erroreWeb + "]";
 	}
+
 
 	
 	

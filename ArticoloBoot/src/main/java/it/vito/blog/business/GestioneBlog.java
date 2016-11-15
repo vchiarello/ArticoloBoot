@@ -19,12 +19,15 @@ import it.vito.blog.web.bean.ItemShopWeb;
 import it.vito.blog.web.bean.ItemWeb;
 import it.vito.blog.web.bean.Option;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -123,9 +126,40 @@ public class GestioneBlog {
 		Item item = itemRepository.findById(idItem);
 	
 		if (item!=null) logger.debug("item trovato " + item.toString());
-		else logger.debug("Item trovato");
+		else {
+			logger.debug("Item non trovato"); return null;
+		}
 		
 		return new ItemWeb(item, tagRepository.findAll());
+	}
+	
+	public ItemShopWeb getItemShop(Integer idItem){
+		Item item = itemRepository.findById(idItem);
+	
+		if (item!=null) logger.debug("item shop trovato " + item.toString());
+		else {
+			logger.debug("Item non trovato"); return null;
+		}
+		
+		ItemShopWeb risultato = new ItemShopWeb(item, tagRepository.findAll());
+		
+		List<LkPropertyItem> props = this.itemPropertyItemRepository.findByItem(item);
+		Hashtable<String, List<ItemPropertyWeb>> propsXNome = new Hashtable<String, List<ItemPropertyWeb>>();
+		for (int i = 0; i < props.size();i++){
+			ItemPropertyWeb ipw = new ItemPropertyWeb(props.get(i).getProp());
+			
+			List<ItemPropertyWeb> lPropWeb = propsXNome.get(ipw.getNome());
+			if (lPropWeb == null){
+				lPropWeb = new LinkedList<ItemPropertyWeb>();
+				propsXNome.put(ipw.getNome(), lPropWeb);
+			}
+			lPropWeb.add(ipw);
+		}
+		
+		if (propsXNome.get("Colore")!= null) risultato.setColoriSelezionati(propsXNome.get("Colore"));
+		if (propsXNome.get("Taglia")!= null) risultato.setTaglieSelezionati(propsXNome.get("Taglia"));
+		
+		return risultato;
 	}
 	
 	public List<Option> getAllTag() {
@@ -192,7 +226,7 @@ public class GestioneBlog {
 		
 		if (itemWeb.getTipoItem()==3){
 			saveProperty(itemSalvato,((ItemShopWeb)itemWeb).getColoriSelezionati());
-			saveProperty(itemSalvato,((ItemShopWeb)itemWeb).getTaglieSelezionate());
+			saveProperty(itemSalvato,((ItemShopWeb)itemWeb).getTaglieSelezionati());
 		}
 			
 		
@@ -200,9 +234,9 @@ public class GestioneBlog {
 	}
 	
 	private void saveProperty(Item itemsalvato, List<ItemPropertyWeb> itemPropertyWeb){
-		for (int i = 0; i<itemPropertyWeb.size();i++){
+		for (int i = 0; itemPropertyWeb != null && i<itemPropertyWeb.size();i++){
 			List<LkPropertyItem> l = this.itemPropertyItemRepository.findByPropAndItem(itemPropertyWeb.get(i).toItemProperty(), itemsalvato);
-			if (l==null || l.size()==0) continue;
+			if (l!=null && l.size()>0) continue;
 			LkPropertyItem pi = new LkPropertyItem();
 			pi.setItem(itemsalvato);
 			pi.setProp(itemPropertyWeb.get(i).toItemProperty());

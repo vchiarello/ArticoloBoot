@@ -3,37 +3,38 @@ angular.module("blogApp").controller("EditItemShopCtrl", ['$scope', 'Tag', 'Item
 		) {
 	
 	//Label usate nella pagina
-	$scope.labelNome=messaggi['createItemShop.label.name'];
-	$scope.placeHolderNome=messaggi['createItemShop.placeholder.name'];
-	$scope.labelTitle=messaggi['createItemShop.label.title'];
-	$scope.placeHolderTitle=messaggi['createItemShop.placeholder.title'];
-	$scope.labelText = messaggi['createItemShop.label.text'];
-	$scope.placeHolderText = messaggi['createItemShop.placeholder.text'];
-	$scope.labelQuantita = messaggi['createItemShop.label.quantity'];
-	$scope.placeHolderQuantita = messaggi['createItemShop.placeholder.quantity'];
-	$scope.labelPublishDate = messaggi['createItemShop.label.publishDate'];
-	$scope.placeHolderPublishDate = messaggi['createItemShop.placeholder.publishDate'];
-	$scope.labelExpirationDate = messaggi['createItemShop.label.expirationDate'];
-	$scope.placeHolderExpirationDate = messaggi['createItemShop.placeholder.expirationDate'];
-	$scope.labelHiddenDate = messaggi['createItemShop.label.hiddenDate'];
-	$scope.placeHolderHiddenDate = messaggi['createItemShop.placeholder.hiddenDate'];
-	$scope.labelAuthor=messaggi['createItemShop.label.author'];
-	$scope.placeholderAuthor=messaggi['createItemShop.placeholder.author'];
-	$scope.labelTag = messaggi['createItemShop.label.tag'];
-	$scope.labelNewTag = messaggi['createItemShop.label.newTag'];
-	$scope.placeholderNewTag = messaggi['createItemShop.placeholder.newTags'];
-	$scope.labelResource = messaggi['createItemShop.label.resources'];
-	$scope.labelResourceName = messaggi['createItemShop.label.resources.name'];
-	$scope.labelResourceSize = messaggi['createItemShop.label.resources.size'];
-	$scope.labelResourceType = messaggi['createItemShop.label.resources.type'];
-	$scope.labelResourceProgress = messaggi['createItemShop.label.resources.progress'];
-	$scope.labelResourceState = messaggi['createItemShop.label.resources.state'];
-	$scope.labelResourceActions = messaggi['createItemShop.label.resources.actions'];
-	$scope.labelResourceRemove = messaggi['createItemShop.label.resources.button.remove'];
-	$scope.buttonCancel = messaggi['createItemShop.button.cancel'];
-	$scope.buttonSave = messaggi['createItemShop.button.save'];
-	$scope.labelColori = messaggi['createItemShop.label.colori']
-	$scope.labelTaglie = messaggi['createItemShop.label.taglie']
+	$scope.labelNome=messaggi['editItemShop.label.name'];
+	$scope.placeHolderNome=messaggi['editItemShop.placeholder.name'];
+	$scope.labelTitle=messaggi['editItemShop.label.title'];
+	$scope.placeHolderTitle=messaggi['editItemShop.placeholder.title'];
+	$scope.labelText = messaggi['editItemShop.label.text'];
+	$scope.placeHolderText = messaggi['editItemShop.placeholder.text'];
+	$scope.labelQuantita = messaggi['editItemShop.label.quantity'];
+	$scope.placeHolderQuantita = messaggi['editItemShop.placeholder.quantity'];
+	$scope.labelPublishDate = messaggi['editItemShop.label.publishDate'];
+	$scope.placeHolderPublishDate = messaggi['editItemShop.placeholder.publishDate'];
+	$scope.labelExpirationDate = messaggi['editItemShop.label.expirationDate'];
+	$scope.placeHolderExpirationDate = messaggi['editItemShop.placeholder.expirationDate'];
+	$scope.labelHiddenDate = messaggi['editItemShop.label.hiddenDate'];
+	$scope.placeHolderHiddenDate = messaggi['editItemShop.placeholder.hiddenDate'];
+	$scope.labelAuthor=messaggi['editItemShop.label.author'];
+	$scope.placeholderAuthor=messaggi['editItemShop.placeholder.author'];
+	$scope.labelTag = messaggi['editItemShop.label.tag'];
+	$scope.labelNewTag = messaggi['editItemShop.label.newTag'];
+	$scope.placeholderNewTag = messaggi['editItemShop.placeholder.newTags'];
+	$scope.labelResource = messaggi['editItemShop.label.resources'];
+	$scope.labelResourceName = messaggi['editItemShop.label.resources.name'];
+	$scope.labelResourceSize = messaggi['editItemShop.label.resources.size'];
+	$scope.labelResourceType = messaggi['editItemShop.label.resources.type'];
+	$scope.labelResourceProgress = messaggi['editItemShop.label.resources.progress'];
+	$scope.labelResourceState = messaggi['editItemShop.label.resources.state'];
+	$scope.labelResourceActions = messaggi['editItemShop.label.resources.actions'];
+	$scope.labelResourceRemove = messaggi['editItemShop.label.resources.button.remove'];
+	$scope.labelResourceRestore = messaggi['editItemShop.label.resources.button.restore'];
+	$scope.buttonCancel = messaggi['editItemShop.button.cancel'];
+	$scope.buttonSave = messaggi['editItemShop.button.save'];
+	$scope.labelColori = messaggi['editItemShop.label.colori']
+	$scope.labelTaglie = messaggi['editItemShop.label.taglie']
 	
 	//chiamata ad init per avere l'elenco dei tag
     init();
@@ -105,7 +106,7 @@ angular.module("blogApp").controller("EditItemShopCtrl", ['$scope', 'Tag', 'Item
 
 		//se non ci sono upload ancora in sospeso
 		//si aspetta che finisca poi si salva e si va verso la home di edit
-        if (uploader.queue.length > 0){
+        if (uploader.queue.length > 0 && uploader.progress < 100){
         	uploader.onCompleteAll = function() {
         		//quando finisce l'upload eseguirà il salvataggio
             	$scope.promessa = $q.defer()
@@ -131,7 +132,7 @@ angular.module("blogApp").controller("EditItemShopCtrl", ['$scope', 'Tag', 'Item
         $scope.item.tipoItem = 3;
 		var item = new ItemShop($scope.item);
         
-        item.$save(function(itemWeb) {
+        item.$update(function(itemWeb) {
             if (itemWeb.erroreWeb == null){
             	$state.transitionTo("editList");
             	$scope.promessa.resolve('finito');
@@ -211,6 +212,51 @@ angular.module("blogApp").controller("EditItemShopCtrl", ['$scope', 'Tag', 'Item
 		}
     	return true;
     };
+    //per i file già caricati c'è sia la funzionalità di cancellazione che quella di ripristina 
+    $scope.cancellaRipristina = function (id){
+    	if (_isCancellato(id)){
+    		ripristina(id);
+    		
+    	}else{ 
+    		cancella(id);
+    	
+    	}
+    }
+
+    //function per capire se un elemento è stato contrassegnato per la cancellazione oppure no
+    $scope.isCancellato = function (id){
+    	return _isCancellato(id);	
+    }
+    
+    //funzione effettiva
+    function _isCancellato (id){
+    	if ($scope.item.listaFileDaCancellare==null) return false;
+    	for (i = 0; i < $scope.item.listaFileDaCancellare.length; i++){
+    		if ($scope.item.listaFileDaCancellare[i]==id)return true;
+    	}
+    	return false;
+    }
+    
+    //aggiunta dell'id nella list dei file da cancellare
+    function cancella(id){
+    	if ($scope.item.listaFileSalvati==null) return ;
+    	
+    	if ($scope.item.listaFileDaCancellare==null) $scope.item.listaFileDaCancellare= new Array();
+        	$scope.item.listaFileDaCancellare.push(id);
+    }
+
+    //ripristino dell'id tra i file che saranno ancora associati all'item
+    function ripristina (id){
+    	if ($scope.item.listaFileSalvati==null||$scope.item.listaFileDaCancellare==null) return ;
+
+    	for (i = 0; i < $scope.item.listaFileDaCancellare.length; i++){
+    		if ($scope.item.listaFileDaCancellare[i]==id){
+    			$scope.item.listaFileDaCancellare.splice(i,1);
+    			return;
+    		}
+    	}
+    }
+
 
 	
 }]);

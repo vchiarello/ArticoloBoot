@@ -102,7 +102,7 @@ angular.module("blogApp").controller("NewItemShopCtrl", ['$scope', 'Tag', 'ItemS
 
 		//se non ci sono upload ancora in sospeso
 		//si aspetta che finisca poi si salva e si va verso la home di edit
-        if (uploader.queue.length > 0){
+        if (uploader.queue.length > 0 && uploader.progress < 100){
         	uploader.onCompleteAll = function() {
         		//quando finisce l'upload eseguirà il salvataggio
             	$scope.promessa = $q.defer()

@@ -49,7 +49,7 @@ angular.module("blogApp").controller("NewSlideShowCtrl", function ($scope, Tag, 
     //salvataggio dell'item
     $scope.createItem = function () {
         
-    	if (uploader.queue.length > 0){
+    	if (uploader.queue.length > 0 && uploader.progress < 100){
     		uploader.onCompleteAll = function() {
     		
 	    		if ($scope.item.listaFile===undefined || $scope.item.listaFile==null) $scope.item.listaFile=new Array();

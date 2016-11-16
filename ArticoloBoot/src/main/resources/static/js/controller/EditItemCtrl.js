@@ -62,7 +62,7 @@ angular.module("blogApp").controller("EditItemCtrl", function ( $http, $scope,  
     	var item = new Item($scope.item);
 		//se non ci sono upload ancora in sospeso
 		//si aspetta che finisca poi si salva e si va verso la home di edit
-        if (uploader.queue.length > 0){
+        if (uploader.queue.length > 0 && uploader.progress < 100){
         	$scope.promessa = $q.defer()
         	uploader.onCompleteAll = function() {
            		_validaESalva();
@@ -112,7 +112,7 @@ angular.module("blogApp").controller("EditItemCtrl", function ( $http, $scope,  
 //		$scope.item.listaFile[uploader.queue.length]=fileItem._file.name;
     };
 
-    //per i file già caricate c'è sia la funzionalità di cancellazione che quella di ripristina 
+    //per i file già caricati c'è sia la funzionalità di cancellazione che quella di ripristina 
     $scope.cancellaRipristina = function (id){
     	if (_isCancellato(id)){
     		ripristina(id);

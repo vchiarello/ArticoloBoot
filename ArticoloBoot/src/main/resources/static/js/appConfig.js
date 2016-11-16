@@ -35,6 +35,10 @@ angular.module("blogApp").config(function ($stateProvider, $urlRouterProvider) {
             url:'/editItem/:id/:name',
             templateUrl: 'html/editItem.html',
             controller: 'EditItemCtrl'
+	    }).state('viewItem', {
+            url:'/viewItemShop/:id/:name',
+            templateUrl: 'html/viewItemShop.html',
+            controller: 'ViewItemShopCtrl'
 	    }).state('createItemShop', {
             url:'/createItemShop',
             templateUrl: 'html/newItemShop.html',

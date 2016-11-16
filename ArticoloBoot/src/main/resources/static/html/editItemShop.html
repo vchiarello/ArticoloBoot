@@ -157,13 +157,33 @@
 		                            <tr>
 		                                <th style="width:30%;">{{labelResourceName}}</th>
 		                                <th ng-show="uploader.isHTML5">{{labelResourceSize}}</th>
-		                                <th ng-show="uploader.isHTML5">{{labelResourceSize}}</th>
+		                                <th ng-show="uploader.isHTML5">{{labelResourceType}}</th>
 		                                <th ng-show="uploader.isHTML5">{{labelResourceProgress}}</th>
 		                                <th>{{labelResourceState}}</th>
 		                                <th style="width:15%;">{{labelResourceActions}}</th>
 		                            </tr>
 		                        </thead>
 		                        <tbody>
+		                        
+		                            <tr ng-repeat="ffff in item.listaFileSalvati" >
+		                            	<td><strong><a href="/rest/download?idAllegato={{ffff.idAllegato}}&amp;nomeAllegato={{ffff.nomeAllegato}}" target="_blank">{{ffff.nomeAllegato}}</a></strong></td>
+		                                <td  nowrap="nowrap"></td>
+		                                <td ng-show="uploader.isHTML5" nowrap="nowrap"></td>
+		                                <td ng-show="uploader.isHTML5">
+		                                </td>
+		                                <td class="text-center">
+		                                    <span><i class="glyphicon glyphicon-ok"></i></span>
+		                                </td>
+		                                <td nowrap="nowrap">
+		                                    <button type="button" class="btn btn-danger btn-xs" ng-click="cancellaRipristina(ffff.idAllegato)" ng-show="!isCancellato(ffff.idAllegato)">
+		                                        <span class="glyphicon glyphicon-trash"></span> <span>{{labelResourceRemove}}</span>
+		                                    </button>
+		                                    <button type="button" class="btn btn-danger btn-xs" ng-click="cancellaRipristina(ffff.idAllegato)" ng-show="isCancellato(ffff.idAllegato)">
+		                                        <span class="glyphicon glyphicon-repeat"></span> <span>{{labelResourceRestore}}</span>
+		                                    </button>
+		                                </td>
+		                            </tr>
+		                        
 		                            <tr ng-repeat="item in uploader.queue">
 		                                <td><strong>{{ item.file.name }}</strong></td>
 		                                <td ng-show="uploader.isHTML5" nowrap="nowrap">{{ item.file.size/1024/1024|number:2 }} MB</td>

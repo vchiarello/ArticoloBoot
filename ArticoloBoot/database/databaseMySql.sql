@@ -3,7 +3,7 @@ drop table dbo.bg_anag_proprieta;
 
 
 CREATE  TABLE bg_anag_proprieta (
-  id_anag_prop INT NOT NULL auto_increment,
+  id_prop INT NOT NULL auto_increment,
   nome_proprieta varchar(1000) NOT NULL ,
   valore_proprieta varchar(1000) NOT NULL ,
   flag_multiplo varchar(1),
@@ -40,7 +40,17 @@ data_inserimento timestamp
  ,data_hidden timestamp
  ,data_scadenza timestamp);
 
- 
+CREATE  TABLE bg_lk_item_property (
+  id_lk_item_prop INT NOT NULL auto_increment,
+  id_prop INT NOT NULL ,
+  id_item INT NOT NULL ,
+  PRIMARY KEY (id_lk_item_prop));
+
+ALTER TABLE bg_lk_item_property   ADD  CONSTRAINT FK_lk_item_property_item FOREIGN KEY(id_prop)
+REFERENCES bg_property (id_prop);
+
+ALTER TABLE bg_lk_item_property ADD  CONSTRAINT FK_lk_item_property_property FOREIGN KEY(id_item)
+REFERENCES bg_item (id_item);  
 
 insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Colore','Rosso','S');
 insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Colore','Bianco','S');
@@ -54,3 +64,5 @@ insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)val
 insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Taglia','40','S');
 insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Taglia','42','S');
 insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Taglia','44','S');
+
+INSERT INTO bg_Tipo_Item (descrizione) VALUES ('Item shop type' )

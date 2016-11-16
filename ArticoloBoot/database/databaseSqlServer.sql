@@ -84,9 +84,9 @@ CREATE  TABLE bg_lk_item_property (
   id_lk_item_prop INT NOT NULL identity ,
   id_prop INT NOT NULL ,
   id_item INT NOT NULL ,
-  PRIMARY KEY (id_lk_item_property));
+  PRIMARY KEY (id_lk_item_prop));
 
-ALTER TABLE [dbo].[bg_lk_item_property]  WITH CHECK ADD  CONSTRAINT [FK_lk_item_property_item] FOREIGN KEY([id_tag])
+ALTER TABLE [dbo].[bg_lk_item_property]  WITH CHECK ADD  CONSTRAINT [FK_lk_item_property_item] FOREIGN KEY([id_prop])
 REFERENCES [dbo].[bg_property] ([id_prop])
 GO
 ALTER TABLE [dbo].[bg_lk_item_property]  WITH CHECK ADD  CONSTRAINT [FK_lk_item_property_property] FOREIGN KEY([id_item])

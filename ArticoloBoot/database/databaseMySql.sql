@@ -1,4 +1,5 @@
 drop table dbo.bg_anag_proprieta;
+drop view  bg_allegato_vw;
 
 
 
@@ -51,6 +52,14 @@ REFERENCES bg_property (id_prop);
 
 ALTER TABLE bg_lk_item_property ADD  CONSTRAINT FK_lk_item_property_property FOREIGN KEY(id_item)
 REFERENCES bg_item (id_item);  
+
+Create view bg_allegato_vw as
+SELECT id_Allegato,a.id_item,i.nome, nome_Allegato,content_type,contenuto,contenuto_Testo,a.data_pubblicazione,a.data_modifica 
+FROM 
+	dbo.bg_Allegato a
+	, dbo.bg_item i
+where 
+a.id_item=i.id_item
 
 insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Colore','Rosso','S');
 insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Colore','Bianco','S');

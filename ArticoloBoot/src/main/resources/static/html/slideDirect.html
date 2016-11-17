@@ -1,0 +1,84 @@
+<div id="thumbDiv" style="margin:15px;width:200px;float:left;text-align:center;border-style: solid; border-width: 1px;border-color: black;	">
+	<img ng-repeat="item in immagini"
+		ng-src="{{item.indirizzo}}"
+		alt="{{item.titolo}}"
+		title="{{item.titolo}}"
+		height="100px"
+		id="thumb{{$index}}"
+		style="padding:5px;"
+		ng-mouseover="so_xfade_i($index)"
+	>
+	<br>
+	</img>
+</div>
+
+<div style="float:left;margin:15px;">
+	
+	<div style="margin: auto;width:400px; text-align:right;border-style: solid; border-width: 1px;border-color: black;"><img src="Max.png" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"   ng-click="displayImmagine()"/></div>
+	
+	<div style="margin: auto;width:400px;text-align:center;border-style: solid; border-width: 1px;border-color: black;" id="navigatore">
+		<img src="FrecciaIndietro.png" id="bPrev" ng-click="so_xfade_prev()">
+		<img ng-repeat="item in immagini" ng-src="{{calcolaImmagine($index)}}" id="nav{{$index}}" ng-click="so_xfade_i($index)"/>
+		<img src="FrecciaAvanti.png" id="bSucc" ng-click="so_xfade_succ()">
+	</div>
+	<div id="slideshow" style="border-style: solid; border-width: 1px;border-color: black;">
+		<span  ng-repeat="item in immagini" class='zoom' zoom="" id='ex{{$index}}'>
+		<img class="imgSlide"
+			ng-src="{{item.indirizzo}}"
+			alt="{{item.titolo}}"
+			title="{{item.titolo}}"
+			height="300px"
+			ng-mouseover="zoom()"
+		/>
+		</span>
+	</div>
+</div>
+<div style="padding:5px;margin:15px;float:left;width:400px;border-style: solid; border-width: 1px;border-color: black;font-family:tahoma, sans serif;">
+	<h1>Esempio di titolo</h1>
+	<p style="font-size: 10pt">Esempio di costo € 10</p>
+	<p style="font-size: 10pt">Disponibilità: 10</p>
+	<p style="font-size: 10pt">Esempio taglie/colori</p>
+	<p style="font-size: 10pt"><input type="button" value="Aggiungi al carrello"></p>
+	<p style="font-size: 10pt">Descrizione del prodotto in dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio</p>
+</div>
+
+
+	<div id="light" class="white_content">
+		<div style="text-align:right;">
+			<a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'" ><img src="X.png"/> </a>
+		</div>
+	
+		<div id="thumbDivPop" style="float:left;text-align:left;margin-top:10px;width:200px;">
+			<img ng-repeat="item in immagini" style="padding:15px;position:relative;top: 0;" 
+				ng-src="{{item.indirizzo}}"
+				alt="{{item.titolo}}"
+				title="{{item.titolo}}"
+				height="100px"
+				id="thumbPop{{index}}"
+				ng-mouseover="so_xfade_i($index)"
+			>
+			<br/>
+			</img>
+		</div>
+		<div id="content" style="float: left;text-align:center;margin: auto;width:700px;">
+			<div style="text-align:center;" id="navigatorePop">
+				<img src="FrecciaIndietro.png" id="bPrevPop" ng-click="so_xfade_prev()">
+			
+				<img ng-repeat="item in immagini" ng-src="{{calcolaImmagine($index)}}" id="nav{{$index}}" ng-click="so_xfade_i($index)"/>
+				
+				<img src="FrecciaAvanti.png" id="bSuccPop" ng-click="so_xfade_succ()">
+			</div>
+	
+			<div id="slideshowPopup" style="text-align:center;width:600;">
+				<img ng-repeat="item in immagini" class="imgSlide" id="sliPop{{$index}}" visualizza=""
+					ng-src="{{item.indirizzo}}"
+					alt="{{item.titolo}}"
+					title="{{item.titolo}}"
+					style="display:none"
+					
+				/>
+			</div>
+	
+		</div>
+	</div>
+	<div id="fade" class="black_overlay"></div>

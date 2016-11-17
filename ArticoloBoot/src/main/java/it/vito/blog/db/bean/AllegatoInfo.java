@@ -10,34 +10,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="bg_allegato")
-public class Allegato implements Serializable,Comparable<Allegato>{
+@Table(name="bg_allegato_vw")
+public class AllegatoInfo implements Serializable,Comparable<AllegatoInfo>{
 
-
-	private static final long serialVersionUID = -6907447629654592210L;
-
+	private static final long serialVersionUID = 5666239928559661579L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_Allegato")
 	private int id;
-	
+
+	@Column(name="nome")
+	private String nome;
+
 	@ManyToOne
 	@JoinColumns({@JoinColumn(name="id_item", referencedColumnName="id_item")})
 	private Item item;
 	
-	@Lob
-	@Column(name="contenuto")
-	private byte[] dati;
-		
-	@Column(name="contenuto_Testo")
-	private String testo;
-		
 	@Column(name="data_pubblicazione")
 	private Date dataPubblicazione;
 	
@@ -58,13 +51,14 @@ public class Allegato implements Serializable,Comparable<Allegato>{
 		this.id = id;
 	}
 
-	public String getTesto() {
-		return testo;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setTesto(String testo) {
-		this.testo = testo;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
+
 
 
 	public Date getDataPubblicazione() {
@@ -92,13 +86,6 @@ public class Allegato implements Serializable,Comparable<Allegato>{
 	}
 	
 
-	public byte[] getDati() {
-		return dati;
-	}
-
-	public void setDati(byte[] dati) {
-		this.dati = dati;
-	}
 
 	public String getNomeAllegato() {
 		return nomeAllegato;
@@ -117,7 +104,7 @@ public class Allegato implements Serializable,Comparable<Allegato>{
 	}
 
 	@Override
-	public int compareTo(Allegato arg0) {
+	public int compareTo(AllegatoInfo arg0) {
 		if (this.id > arg0.id)return 1;
 		if (this.id < arg0.id)return -1;
 		return 0;
@@ -125,10 +112,9 @@ public class Allegato implements Serializable,Comparable<Allegato>{
 	
 	@Override
 	public String toString() {
-		return "Allegato [id=" + id + ", testo="
-				+ testo + ", dataPubblicazione=" + dataPubblicazione
-				+ ", dataModifica=" + dataModifica + ", nomeAllegato="
-				+ nomeAllegato + ", contentType=" + contentType + "]";
+		return "AllegatoInfo [id=" + id + ", nome=" + nome + ", item=" + item + 
+				", dataPubblicazione=" + dataPubblicazione + ", dataModifica=" + dataModifica
+				+ ", nomeAllegato=" + nomeAllegato + ", contentType=" + contentType + "]";
 	}
 
 	

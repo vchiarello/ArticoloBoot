@@ -5,6 +5,7 @@ drop table dbo.bg_Allegato;
 drop table dbo.bg_Item;
 drop table dbo.bg_Tipo_Item;
 drop table dbo.bg_anag_proprieta;
+drop view  bg_allegato_vw;
 
 CREATE  TABLE bg_property (
   id_prop INT NOT NULL identity,
@@ -92,6 +93,14 @@ GO
 ALTER TABLE [dbo].[bg_lk_item_property]  WITH CHECK ADD  CONSTRAINT [FK_lk_item_property_property] FOREIGN KEY([id_item])
 REFERENCES [dbo].[bg_item] ([id_item])
 GO
+
+Create view bg_allegato_vw as
+SELECT id_Allegato,a.id_item,i.nome, nome_Allegato,content_type,contenuto,contenuto_Testo,a.data_pubblicazione,a.data_modifica 
+FROM 
+	dbo.bg_Allegato a
+	, dbo.bg_item i
+where 
+a.id_item=i.id_item
 
 
 insert into test.dbo.bg_property(nome_proprieta, valore_proprieta,flag_multiplo)values('Colore','Rosso','S');

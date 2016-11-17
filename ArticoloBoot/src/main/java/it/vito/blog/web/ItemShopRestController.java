@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.vito.blog.business.GestioneBlog;
+import it.vito.blog.db.bean.AllegatoInfo;
 import it.vito.blog.web.bean.ErroreWeb;
 import it.vito.blog.web.bean.ItemShopWeb;
 import it.vito.blog.web.bean.ItemWeb;
@@ -67,6 +68,11 @@ public class ItemShopRestController {
 	@RequestMapping(value="/{id}/{name}", method=RequestMethod.DELETE)
 	public void delete(@PathVariable("id") int id, @PathVariable("name") String name) {
 		this.gestioneBlog.deleteItem(id);
+	}
+
+	@RequestMapping(value="/{id}/{name}", method=RequestMethod.GET)
+	public List<AllegatoInfo> getImagesInfo(@PathVariable("id") int id, @PathVariable("name") String name) {
+		return this.gestioneBlog.getResourceInfo(id,name);
 	}
 
 

@@ -2,12 +2,14 @@ package it.vito.blog.business;
 
 import it.vito.blog.aspect.AddIndexEntryAnnotation;
 import it.vito.blog.db.bean.Allegato;
+import it.vito.blog.db.bean.AllegatoInfo;
 import it.vito.blog.db.bean.AnagraficaProprieta;
 import it.vito.blog.db.bean.Item;
 import it.vito.blog.db.bean.LkPropertyItem;
 import it.vito.blog.db.bean.LkTagItem;
 import it.vito.blog.db.bean.QItem;
 import it.vito.blog.db.bean.Tag;
+import it.vito.blog.db.dao.AllegatoInfoRepository;
 import it.vito.blog.db.dao.AllegatoRepository;
 import it.vito.blog.db.dao.AnagraficaProprietaRepository;
 import it.vito.blog.db.dao.ItemRepository;
@@ -60,6 +62,9 @@ public class GestioneBlog {
 	AllegatoRepository allegatoRepository;
 	
 	@Autowired
+	AllegatoInfoRepository allegatoInfoRepository;
+	
+	@Autowired
 	AnagraficaProprietaRepository anagraficaProprietaRepository;
 	
 	@Autowired
@@ -102,6 +107,11 @@ public class GestioneBlog {
 		return risultato;
 		
 	}
+	
+	public List<AllegatoInfo> getResourceInfo(Integer idItem, String itemName){
+		return allegatoInfoRepository.findByIdAndNome(idItem,itemName);
+	}
+	
 	
 	public List<ItemWeb>getAllItem(){
 		logger.debug("Get lista item...");

@@ -9,31 +9,45 @@
 
 
 
-angular.module("blogApp").controller('ViewItemShopCtrl', ['$scope','ItemShop', '$stateParams', function($scope, ItemShop, $stateParams) {
+angular.module("blogApp").controller('ViewItemShopCtrl', ['$scope','ItemShop', '$stateParams','$http', function($scope, ItemShop, $stateParams,$http) {
 	
 	zoomOk=false;
 	
-	$scope.item = ItemShop.get({id:$stateParams.id,name:$stateParams.name});
+	$http.get("/rest/itemShop/infoAllegati/"+$stateParams.id+"/"+$stateParams.name).
+		then(function(data){
+			//$scope.info = data;
+			$scope.immagini = new Array();
+			for (i = 0; i < data.data.length;i++){
+				$scope.immagini[i] = new Object();
+				$scope.immagini[i].indirizzo = "/rest/download?idAllegato="+data.data[i].id+"&nomeAllegato="+data.data[i].nomeAllegato;
+				$scope.immagini[i].titolo = data.data[i].nomeAllegato;
+			}
+		},
+		function(data){
+			$scope.info = data
+		})
+	
+	//$scope.item = ItemShop.get({id:$stateParams.id,name:$stateParams.name});
 
 	$scope.pippo = function(indirizzo){
 	alert(indirizzo);
 	}
 
-	$scope.immagini=[
-	  {indirizzo:'Blu.png',
-		  titolo:'Blu'
-	  },
-	  {indirizzo:'Rosso.png',
-		  titolo:'Rosso'
-	  },
-	  {indirizzo:'Giallo.png',
-		  titolo:'Giallo'
-	  },
-	  {indirizzo:'Verde.png',
-		  titolo:'Verde'
-	  }
-	  
-  ]
+//	$scope.immagini=[
+//	  {indirizzo:'Blu.png',
+//		  titolo:'Blu'
+//	  },
+//	  {indirizzo:'Rosso.png',
+//		  titolo:'Rosso'
+//	  },
+//	  {indirizzo:'Giallo.png',
+//		  titolo:'Giallo'
+//	  },
+//	  {indirizzo:'Verde.png',
+//		  titolo:'Verde'
+//	  }
+//	  
+//  ]
   
   current=0;
   

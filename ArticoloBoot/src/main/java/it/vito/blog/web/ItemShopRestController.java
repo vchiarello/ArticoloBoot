@@ -70,9 +70,10 @@ public class ItemShopRestController {
 		this.gestioneBlog.deleteItem(id);
 	}
 
-	@RequestMapping(value="/{id}/{name}", method=RequestMethod.GET)
+	@RequestMapping(value="/infoAllegati/{id}/{name}", method=RequestMethod.GET)
 	public List<AllegatoInfo> getImagesInfo(@PathVariable("id") int id, @PathVariable("name") String name) {
-		return this.gestioneBlog.getResourceInfo(id,name);
+		List<AllegatoInfo> l = this.gestioneBlog.getResourceInfo(id,name);
+		return l;
 	}
 
 

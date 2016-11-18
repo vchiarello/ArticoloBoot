@@ -109,7 +109,7 @@ public class GestioneBlog {
 	}
 	
 	public List<AllegatoInfo> getResourceInfo(Integer idItem, String itemName){
-		return allegatoInfoRepository.findByIdAndNome(idItem,itemName);
+		return allegatoInfoRepository.findByIdItemAndNome(idItem,itemName);
 	}
 	
 	

@@ -27,9 +27,8 @@ public class AllegatoInfo implements Serializable,Comparable<AllegatoInfo>{
 	@Column(name="nome")
 	private String nome;
 
-	@ManyToOne
-	@JoinColumns({@JoinColumn(name="id_item", referencedColumnName="id_item")})
-	private Item item;
+	@Column(name="id_item")
+	private Integer idItem;
 	
 	@Column(name="data_pubblicazione")
 	private Date dataPubblicazione;
@@ -77,12 +76,12 @@ public class AllegatoInfo implements Serializable,Comparable<AllegatoInfo>{
 		this.dataModifica = dataModifica;
 	}
 
-	public Item getItem() {
-		return item;
+	public Integer getIdItem() {
+		return idItem;
 	}
 
-	public void setItem(Item item) {
-		this.item = item;
+	public void setIdItem(Integer idItem) {
+		this.idItem = idItem;
 	}
 	
 
@@ -112,7 +111,7 @@ public class AllegatoInfo implements Serializable,Comparable<AllegatoInfo>{
 	
 	@Override
 	public String toString() {
-		return "AllegatoInfo [id=" + id + ", nome=" + nome + ", item=" + item + 
+		return "AllegatoInfo [id=" + id + ", nome=" + nome + ", idItem=" + idItem + 
 				", dataPubblicazione=" + dataPubblicazione + ", dataModifica=" + dataModifica
 				+ ", nomeAllegato=" + nomeAllegato + ", contentType=" + contentType + "]";
 	}

@@ -14,12 +14,12 @@
 
 <div style="float:left;margin:15px;">
 	
-	<div style="margin: auto;width:400px; text-align:right;border-style: solid; border-width: 1px;border-color: black;"><img src="Max.png" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"   ng-click="displayImmagine()"/></div>
+	<div style="margin: auto;width:400px; text-align:right;border-style: solid; border-width: 1px;border-color: black;"><img src="../images/Max.png" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"   ng-click="displayImmagine()"/></div>
 	
 	<div style="margin: auto;width:400px;text-align:center;border-style: solid; border-width: 1px;border-color: black;" id="navigatore">
-		<img src="FrecciaIndietro.png" id="bPrev" ng-click="so_xfade_prev()">
-		<img ng-repeat="item in immagini" ng-src="{{calcolaImmagine($index)}}" id="nav{{$index}}" ng-click="so_xfade_i($index)"/>
-		<img src="FrecciaAvanti.png" id="bSucc" ng-click="so_xfade_succ()">
+		<img src="../images/FrecciaIndietro.png" id="bPrev" ng-click="so_xfade_prev()">
+		<img ng-repeat="item in immagini" ng-src="../images/{{calcolaImmagine($index)}}" id="nav{{$index}}" ng-click="so_xfade_i($index)"/>
+		<img src="../images/FrecciaAvanti.png" id="bSucc" ng-click="so_xfade_succ()">
 	</div>
 	<div id="slideshow" style="border-style: solid; border-width: 1px;border-color: black;">
 		<span  ng-repeat="item in immagini" class='zoom' zoom="" id='ex{{$index}}'>
@@ -45,7 +45,7 @@
 
 	<div id="light" class="white_content">
 		<div style="text-align:right;">
-			<a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'" ><img src="X.png"/> </a>
+			<a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'" ><img src="../images/X.png"/> </a>
 		</div>
 	
 		<div id="thumbDivPop" style="float:left;text-align:left;margin-top:10px;width:200px;">
@@ -62,11 +62,11 @@
 		</div>
 		<div id="content" style="float: left;text-align:center;margin: auto;width:700px;">
 			<div style="text-align:center;" id="navigatorePop">
-				<img src="FrecciaIndietro.png" id="bPrevPop" ng-click="so_xfade_prev()">
+				<img src="../images/FrecciaIndietro.png" id="bPrevPop" ng-click="so_xfade_prev()">
 			
-				<img ng-repeat="item in immagini" ng-src="{{calcolaImmagine($index)}}" id="nav{{$index}}" ng-click="so_xfade_i($index)"/>
+				<img ng-repeat="item in immagini" ng-src="../images/{{calcolaImmagine($index)}}" id="nav{{$index}}" ng-click="so_xfade_i($index)"/>
 				
-				<img src="FrecciaAvanti.png" id="bSuccPop" ng-click="so_xfade_succ()">
+				<img src="../images/FrecciaAvanti.png" id="bSuccPop" ng-click="so_xfade_succ()">
 			</div>
 	
 			<div id="slideshowPopup" style="text-align:center;width:600;">

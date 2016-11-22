@@ -1,14 +1,3 @@
-//controller per la visualizzazione del singolo item
-//angular.module("blogApp").controller("ViewItemShopCtrl", function ($scope, Item, $stateParams, $state) {
-//    function init() {
-//        $scope.item = Item.get({id:$stateParams.id,name:$stateParams.name});
-//    }
-//			   
-//    init();
-//});
-
-
-
 angular.module("blogApp").controller('ViewItemShopCtrl', ['$scope','ItemShop', '$stateParams','$http', function($scope, ItemShop, $stateParams,$http) {
 	
 	zoomOk=false;
@@ -27,27 +16,10 @@ angular.module("blogApp").controller('ViewItemShopCtrl', ['$scope','ItemShop', '
 			$scope.info = data
 		})
 	
-	//$scope.item = ItemShop.get({id:$stateParams.id,name:$stateParams.name});
+	$scope.item = ItemShop.get({id:$stateParams.id,name:$stateParams.name});
 
-	$scope.pippo = function(indirizzo){
-	alert(indirizzo);
-	}
 
-//	$scope.immagini=[
-//	  {indirizzo:'Blu.png',
-//		  titolo:'Blu'
-//	  },
-//	  {indirizzo:'Rosso.png',
-//		  titolo:'Rosso'
-//	  },
-//	  {indirizzo:'Giallo.png',
-//		  titolo:'Giallo'
-//	  },
-//	  {indirizzo:'Verde.png',
-//		  titolo:'Verde'
-//	  }
-//	  
-//  ]
+
   
   current=0;
   
@@ -66,7 +38,7 @@ angular.module("blogApp").controller('ViewItemShopCtrl', ['$scope','ItemShop', '
 
   $scope.so_xfade_i = function(i){
 	  if (current==i)return;
-		current = i;
+		current = i; //ciao Vito
 		attivaImmagine();
 	}
 

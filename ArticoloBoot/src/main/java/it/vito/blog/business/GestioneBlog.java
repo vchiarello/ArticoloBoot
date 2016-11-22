@@ -140,7 +140,7 @@ public class GestioneBlog {
 			logger.debug("Item non trovato"); return null;
 		}
 		
-		return new ItemWeb(item, tagRepository.findAll());
+		return new ItemWeb(item);
 	}
 	
 	public ItemShopWeb getItemShop(Integer idItem){
@@ -151,12 +151,14 @@ public class GestioneBlog {
 			logger.debug("Item non trovato"); return null;
 		}
 		
-		ItemShopWeb risultato = new ItemShopWeb(item, tagRepository.findAll());
+		ItemShopWeb risultato = new ItemShopWeb(item);
 		
 		List<LkPropertyItem> props = this.itemPropertyItemRepository.findByItem(item);
 		Hashtable<String, List<ItemPropertyWeb>> propsXNome = new Hashtable<String, List<ItemPropertyWeb>>();
 		for (int i = 0; i < props.size();i++){
 			ItemPropertyWeb ipw = new ItemPropertyWeb(props.get(i).getProp());
+			//se in lk è segnato il valore si prende da lk
+			if (props.get(i).getValue()!=null)ipw.setValore(props.get(i).getValue());
 			
 			List<ItemPropertyWeb> lPropWeb = propsXNome.get(ipw.getNome());
 			if (lPropWeb == null){
@@ -168,6 +170,7 @@ public class GestioneBlog {
 		
 		if (propsXNome.get("Colore")!= null) risultato.setColoriSelezionati(propsXNome.get("Colore"));
 		if (propsXNome.get("Taglia")!= null) risultato.setTaglieSelezionati(propsXNome.get("Taglia"));
+		if (propsXNome.get("Prezzo")!= null && propsXNome.get("Prezzo").get(0)!=null) risultato.setPrezzo(propsXNome.get("Prezzo").get(0));
 		
 		return risultato;
 	}
@@ -237,6 +240,7 @@ public class GestioneBlog {
 		if (itemWeb.getTipoItem()==3){
 			saveProperty(itemSalvato,((ItemShopWeb)itemWeb).getColoriSelezionati());
 			saveProperty(itemSalvato,((ItemShopWeb)itemWeb).getTaglieSelezionati());
+			saveProperty(itemSalvato,((ItemShopWeb)itemWeb).getPrezzo());
 		}
 			
 		
@@ -245,13 +249,25 @@ public class GestioneBlog {
 	
 	private void saveProperty(Item itemsalvato, List<ItemPropertyWeb> itemPropertyWeb){
 		for (int i = 0; itemPropertyWeb != null && i<itemPropertyWeb.size();i++){
-			List<LkPropertyItem> l = this.itemPropertyItemRepository.findByPropAndItem(itemPropertyWeb.get(i).toItemProperty(), itemsalvato);
-			if (l!=null && l.size()>0) continue;
-			LkPropertyItem pi = new LkPropertyItem();
-			pi.setItem(itemsalvato);
-			pi.setProp(itemPropertyWeb.get(i).toItemProperty());
-			this.itemPropertyItemRepository.save(pi);
+			saveProperty(itemsalvato,itemPropertyWeb.get(i));
 		}
+	}
+	
+	private void saveProperty(Item itemsalvato, ItemPropertyWeb itemPropertyWeb){
+
+			List<LkPropertyItem> l = this.itemPropertyItemRepository.findByPropAndItem(itemPropertyWeb.toItemProperty(), itemsalvato);
+			LkPropertyItem pi = null;
+			if (l!=null && l.size()>0) {
+				pi = l.get(0);
+			}else{
+				pi = new LkPropertyItem();
+				pi.setDataInserimento(new Date());
+				pi.setProp(itemPropertyWeb.toItemProperty());
+				pi.setItem(itemsalvato);
+			}
+			pi.setValue(itemPropertyWeb.getValore());
+			pi.setDataModifica(new Date());
+			this.itemPropertyItemRepository.save(pi);
 	}
 	
 	public Tag[] salvaNuoviTag(String[] nuoviTag){

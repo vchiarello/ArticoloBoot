@@ -11,6 +11,8 @@ angular.module("blogApp").controller("NewItemShopCtrl", ['$scope', 'Tag', 'ItemS
 	$scope.placeHolderText = messaggi['createItemShop.placeholder.text'];
 	$scope.labelQuantita = messaggi['createItemShop.label.quantity'];
 	$scope.placeHolderQuantita = messaggi['createItemShop.placeholder.quantity'];
+	$scope.labelPrezzo = messaggi['createItemShop.label.prezzo'];
+	$scope.placeHolderPrezzo = messaggi['createItemShop.placeholder.prezzo'];
 	$scope.labelPublishDate = messaggi['createItemShop.label.publishDate'];
 	$scope.placeHolderPublishDate = messaggi['createItemShop.placeholder.publishDate'];
 	$scope.labelExpirationDate = messaggi['createItemShop.label.expirationDate'];
@@ -68,6 +70,7 @@ angular.module("blogApp").controller("NewItemShopCtrl", ['$scope', 'Tag', 'ItemS
 		getTags();
 		getColori();
 		getTaglie();
+		getPrezzo();
     }
 
     //tutti i tag della combo Dei Tag
@@ -85,6 +88,11 @@ angular.module("blogApp").controller("NewItemShopCtrl", ['$scope', 'Tag', 'ItemS
         $scope.listaTaglie = ItemProperty.query({nome:'Taglia'});
     };
 
+    //tutte le taglie
+    function getPrezzo() {
+    	$scope.prezzi = ItemProperty.query({nome:'Prezzo'});
+    };
+
 	
     //transizione in caso di premuta del pulsante di cancel
     $scope.cancel = function () {
@@ -98,7 +106,6 @@ angular.module("blogApp").controller("NewItemShopCtrl", ['$scope', 'Tag', 'ItemS
     		return;
     	}
 
-    	var item = new ItemShop($scope.item);
 
 		//se non ci sono upload ancora in sospeso
 		//si aspetta che finisca poi si salva e si va verso la home di edit
@@ -127,6 +134,7 @@ angular.module("blogApp").controller("NewItemShopCtrl", ['$scope', 'Tag', 'ItemS
 		//TODO tipo Item dello slide show da verificare se codice va bene
         $scope.item.tipoItem = 3;
 		var item = new ItemShop($scope.item);
+    	item.prezzo=$scope.prezzi[0];
         
         item.$save(function(itemWeb) {
             if (itemWeb.erroreWeb == null){

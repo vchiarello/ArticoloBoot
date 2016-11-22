@@ -14,11 +14,9 @@ public class ItemShopWeb extends ItemWeb implements Serializable{
 	private static final long serialVersionUID = -8582050919513532112L;
 	private List<ItemPropertyWeb> coloriSelezionati;
 	private List<ItemPropertyWeb> taglieSelezionati;
+	private ItemPropertyWeb prezzo;
 
 	public ItemShopWeb(){
-	}
-	public ItemShopWeb(Item item, List<Tag> tags){
-		super(item,tags);
 	}
 	public ItemShopWeb(Item item){
 		super(item);
@@ -34,6 +32,17 @@ public class ItemShopWeb extends ItemWeb implements Serializable{
 	}
 	public void setTaglieSelezionati(List<ItemPropertyWeb> taglieSelezionati) {
 		this.taglieSelezionati = taglieSelezionati;
+	}
+	public ItemPropertyWeb getPrezzo() {
+		return prezzo;
+	}
+	public void setPrezzo(ItemPropertyWeb prezzo) {
+		this.prezzo = prezzo;
+	}
+	@Override
+	public String toString() {
+		return "ItemShopWeb [coloriSelezionati=" + coloriSelezionati + ", taglieSelezionati=" + taglieSelezionati
+				+ ", prezzo=" + prezzo + "]" + super.toString();
 	}
 
 	

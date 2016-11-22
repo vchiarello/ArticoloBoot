@@ -1,8 +1,8 @@
 <div id="thumbDiv" style="margin:15px;width:200px;float:left;text-align:center;border-style: solid; border-width: 1px;border-color: black;	">
-	<img ng-repeat="item in immagini"
-		ng-src="{{item.indirizzo}}"
-		alt="{{item.titolo}}"
-		title="{{item.titolo}}"
+	<img ng-repeat="img in immagini"
+		ng-src="{{img.indirizzo}}"
+		alt="{{img.titolo}}"
+		title="{{img.titolo}}"
 		height="100px"
 		id="thumb{{$index}}"
 		style="padding:5px;"
@@ -22,11 +22,11 @@
 		<img src="../images/FrecciaAvanti.png" id="bSucc" ng-click="so_xfade_succ()">
 	</div>
 	<div id="slideshow" style="border-style: solid; border-width: 1px;border-color: black;">
-		<span  ng-repeat="item in immagini" class='zoom' zoom="" id='ex{{$index}}'>
+		<span  ng-repeat="img in immagini" class='zoom' zoom="" id='ex{{$index}}'>
 		<img class="imgSlide"
-			ng-src="{{item.indirizzo}}"
-			alt="{{item.titolo}}"
-			title="{{item.titolo}}"
+			ng-src="{{img.indirizzo}}"
+			alt="{{img.titolo}}"
+			title="{{img.titolo}}"
 			height="300px"
 			ng-mouseover="zoom()"
 		/>
@@ -34,12 +34,21 @@
 	</div>
 </div>
 <div style="padding:5px;margin:15px;float:left;width:400px;border-style: solid; border-width: 1px;border-color: black;font-family:tahoma, sans serif;">
-	<h1>Esempio di titolo</h1>
-	<p style="font-size: 10pt">Esempio di costo € 10</p>
-	<p style="font-size: 10pt">Disponibilità: 10</p>
-	<p style="font-size: 10pt">Esempio taglie/colori</p>
+	<h1>{{item.titolo}}</h1>
+	<p style="font-size: 10pt">Prezzo: {{item.prezzo.valore}}</p>
+	<p style="font-size: 10pt">Disponibilità: {{item.quantita}}</p>
+	<p style="font-size: 10pt"> Colori:
+		<ul ng-repeat="colore in item.coloriSelezionati">
+			<li>{{colore.valore}}
+		</ul>
+	</p>
+	<p style="font-size: 10pt"> Taglie:
+		<ul ng-repeat="taglia in item.taglieSelezionati">
+			<li>{{taglia.valore}}
+		</ul>
+	</p>
 	<p style="font-size: 10pt"><input type="button" value="Aggiungi al carrello"></p>
-	<p style="font-size: 10pt">Descrizione del prodotto in dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio</p>
+	<p style="font-size: 10pt">{{item.testo}}</p>
 </div>
 
 

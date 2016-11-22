@@ -85,6 +85,9 @@ CREATE  TABLE bg_lk_item_property (
   id_lk_item_prop INT NOT NULL identity ,
   id_prop INT NOT NULL ,
   id_item INT NOT NULL ,
+  value varchar(100) ,
+  data_modifica DATETIME NULL ,
+  data_inserimento DATETIME NULL ,
   PRIMARY KEY (id_lk_item_prop));
 
 ALTER TABLE [dbo].[bg_lk_item_property]  WITH CHECK ADD  CONSTRAINT [FK_lk_item_property_item] FOREIGN KEY([id_prop])
@@ -115,3 +118,6 @@ insert into test.dbo.bg_property(nome_proprieta, valore_proprieta,flag_multiplo)
 insert into test.dbo.bg_property(nome_proprieta, valore_proprieta,flag_multiplo)values('Taglia','40','S');
 insert into test.dbo.bg_property(nome_proprieta, valore_proprieta,flag_multiplo)values('Taglia','42','S');
 insert into test.dbo.bg_property(nome_proprieta, valore_proprieta,flag_multiplo)values('Taglia','44','S');
+
+
+insert into test.dbo.bg_property(nome_proprieta, valore_proprieta,flag_multiplo)values('Prezzo','','N');

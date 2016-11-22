@@ -42,52 +42,6 @@ public class ItemWeb {
 		
 	}
 	
-	public ItemWeb(Item item, List<Tag> tags){
-		if (item==null) return; 
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		this.autore=item.getAutore();
-		if (item.getDataPubblicazione() !=null)
-			this.dataPubblicazione = sdf.format(item.getDataPubblicazione());
-		if (item.getDataHidden() !=null)
-			this.dataHidden = sdf.format(item.getDataHidden());
-		if (item.getDataInserimento() !=null)
-			this.dataInserimento = sdf.format(item.getDataInserimento());
-		if (item.getDataModifica() !=null)
-			this.dataModifica = sdf.format(item.getDataModifica());
-		if (item.getDataPubblicazione()!=null)
-			this.dataPubblicazione = sdf.format(item.getDataPubblicazione());
-		if (item.getDataScadenza()!=null)
-			this.dataScadenza = sdf.format(item.getDataScadenza());
-		this.id=item.getId();
-		this.nome=item.getNome();
-		this.riassunto=item.getRiassunto();
-		
-		if (tags !=null){
-			this.tagDisponibili = new LinkedList<Option>();
-			for (int i = 0; i < tags.size();i++)
-				this.tagDisponibili.add(new Option(tags.get(i).getId(), tags.get(i).getNomeTag()));
-		}
-		
-		if (item.getTag()!=null){
-			this.tagSelezionati= new LinkedList<Option>();
-			for (Iterator<LkTagItem> i = item.getTag().iterator(); i.hasNext();){
-				Tag t = i.next().getTag();
-				this.tagSelezionati.add(new Option(t.getId(),t.getNomeTag()));
-			}
-		}
-		
-		if (item.getAllegati()!=null)
-			this.listaFileSalvati=new LinkedList<FileAllegato>();
-			for (Iterator<Allegato> i = item.getAllegati().iterator(); i.hasNext();){
-				Allegato a = i.next();
-				this.listaFileSalvati.add(new FileAllegato(a.getId(), a.getNomeAllegato(), a.getTesto()));
-			}
-		
-		this.testo=item.getTesto();
-		this.tipoItem=item.getTipoItem().getId();
-		this.titolo=item.getTitolo();
-		this.quantita=item.getQuantita();
-	}
 	
 	public ItemWeb(Item item){
 		if (item==null) return; 

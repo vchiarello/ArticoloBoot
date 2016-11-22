@@ -11,6 +11,8 @@ angular.module("blogApp").controller("EditItemShopCtrl", ['$scope', 'Tag', 'Item
 	$scope.placeHolderText = messaggi['editItemShop.placeholder.text'];
 	$scope.labelQuantita = messaggi['editItemShop.label.quantity'];
 	$scope.placeHolderQuantita = messaggi['editItemShop.placeholder.quantity'];
+	$scope.labelPrezzo = messaggi['editItemShop.label.prezzo'];
+	$scope.placeHolderPrezzo = messaggi['editItemShop.placeholder.prezzo'];
 	$scope.labelPublishDate = messaggi['editItemShop.label.publishDate'];
 	$scope.placeHolderPublishDate = messaggi['editItemShop.placeholder.publishDate'];
 	$scope.labelExpirationDate = messaggi['editItemShop.label.expirationDate'];

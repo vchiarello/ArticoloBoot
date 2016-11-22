@@ -1,6 +1,7 @@
 package it.vito.blog.db.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,6 +36,15 @@ public class LkPropertyItem implements Serializable, Comparable<LkPropertyItem> 
 	@JoinColumns({@JoinColumn(name="id_item", referencedColumnName="id_item")})
 	private Item item;
 
+	@Column(name="value")
+	private String value;
+
+	@Column(name="data_modifica")
+	private Date dataInserimento;
+
+	@Column(name="data_inserimento")
+	private Date dataModifica;
+
 	public int getId() {
 		return id;
 	}
@@ -58,6 +68,30 @@ public class LkPropertyItem implements Serializable, Comparable<LkPropertyItem> 
 
 	public void setItem(Item item) {
 		this.item = item;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public Date getDataInserimento() {
+		return dataInserimento;
+	}
+
+	public void setDataInserimento(Date dataInserimento) {
+		this.dataInserimento = dataInserimento;
+	}
+
+	public Date getDataModifica() {
+		return dataModifica;
+	}
+
+	public void setDataModifica(Date dataModifica) {
+		this.dataModifica = dataModifica;
 	}
 
 	@Override

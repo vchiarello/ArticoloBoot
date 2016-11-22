@@ -45,6 +45,9 @@ CREATE  TABLE bg_lk_item_property (
   id_lk_item_prop INT NOT NULL auto_increment,
   id_prop INT NOT NULL ,
   id_item INT NOT NULL ,
+  value varchar(100) ,
+  data_modifica timestamp,
+  data_inserimento timestamp,
   PRIMARY KEY (id_lk_item_prop));
 
 ALTER TABLE bg_lk_item_property   ADD  CONSTRAINT FK_lk_item_property_item FOREIGN KEY(id_prop)
@@ -60,6 +63,12 @@ FROM
 	, dbo.bg_item i
 where 
 a.id_item=i.id_item
+
+--da cancellare dopo il lancio
+alter table bg_lk_item_property add value varchar(100);
+alter table bg_lk_item_property add data_modifica timestamp;
+alter table bg_lk_item_property add data_inserimento timestamp;
+--Fine da cancellare dopo il lancio
 
 insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Colore','Rosso','S');
 insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Colore','Bianco','S');

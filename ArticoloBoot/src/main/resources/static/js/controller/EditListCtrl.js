@@ -23,8 +23,14 @@ angular.module("blogApp").controller("EditListCtrl", function ($scope, Item, Ite
 
     $scope.deleteItem = function (item) {
 
-    	var it = new Item(item);
-    	bootbox.confirm({
+    	var it = null;
+
+    	if (item.tipoItem==3)
+    		it = new ItemShop(item)
+    	else
+    		it = new Item(item);
+
+    		bootbox.confirm({
     		message: messaggiErrore['editList.deleteItem.function.Confirm'](item.titolo), 
     		callback: function(result){
     			if (result){

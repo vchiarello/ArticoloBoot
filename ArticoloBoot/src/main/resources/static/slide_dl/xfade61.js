@@ -1,0 +1,1 @@
+angular.module('slide', []).controller('slideController',		function slideController($scope){			$scope.echo = "ciao"		});angular.module('slide').component('slideDirect', {    templateUrl: 'slideDirect61.html',    controller: function (){this.user="ciao"}  });

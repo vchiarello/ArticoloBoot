@@ -197,6 +197,7 @@ public class GestioneBlog {
 		Item item = itemRepository.findById(id);
 		lkTagItemRepository.deleteByItem(item);
 		allegatoRepository.deleteByItem(item);
+		itemPropertyItemRepository.deleteByItem(item);
 		itemRepository.delete(item);
 		logger.info("Fine cancellazione dell'item con id: " + id);
 	}

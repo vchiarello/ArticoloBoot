@@ -21,7 +21,10 @@
 		<img src="FrecciaAvanti.png" id="bSucc" ng-click="$ctrl.so_xfade_succ()">
 	</div>
 	<div id="slideshow" style="border-style: solid; border-width: 1px;border-color: black;">
-		<span  ng-repeat="item in $ctrl.immagini" class='zoom' zoom="" id='ex{{$index}}'>
+		<span  ng-repeat="item in $ctrl.immagini">
+		
+		<slide-zoom indirizzo="item.indirizzo" titolo="item.titolo" ident="$index" primo="true"></slide-zoom>
+<!-- 		
 		<img class="imgSlide"
 			ng-src="{{item.indirizzo}}"
 			alt="{{item.titolo}}"
@@ -29,6 +32,7 @@
 			height="300px"
 			ng-mouseover="zoom()"
 		/>
+		-->
 		</span>
 	</div>
 </div>
@@ -40,3 +44,8 @@
 	<p style="font-size: 10pt"><input type="button" value="Aggiungi al carrello"></p>
 	<p style="font-size: 10pt">Descrizione del prodotto in dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio dettaglio</p>
 </div>
+<script>
+$(document).ready(function(){
+	  $('#ex0').zoom();
+	});
+</script>

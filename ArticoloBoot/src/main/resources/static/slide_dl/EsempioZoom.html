@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - zoom</title>
+  
+
+<script src="/webjars/jquery/2.1.0/jquery.js" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.zoom.js"></script>
+<style type="text/css">
+		/* these styles are for the demo, but are not required for the plugin */
+		.zoom {
+			display:inline-block;
+			position: relative;
+		}
+		
+
+		/* magnifying glass icon */
+
+		.zoom:after {
+			content:'';
+			display:block; 
+			width:33px; 
+			height:33px; 
+			position:absolute; 
+			top:0;
+			right:0;
+		}
+
+		.zoom img {
+			display: block;
+		}
+
+		.zoom img::selection { background-color: transparent; }
+	</style>  
+
+</head>
+<body >
+<span  class='zoom'  id='ex0'>
+<img class="imgSlide"
+	src="http://localhost:8080/slide_dl/Rosso.png"
+	alt="Rosso"
+	title="Rossi"
+	height="300px"
+	id="exaaa"
+/>
+</span>
+<script type="text/javascript">
+$(".zoom").zoom();
+</script>
+</body>
+</html>

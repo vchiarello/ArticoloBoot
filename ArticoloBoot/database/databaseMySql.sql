@@ -83,4 +83,7 @@ insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)val
 insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Taglia','42','S');
 insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Taglia','44','S');
 
+insert into blog.bg_property(nome_proprieta, valore_proprieta,flag_multiplo)values('Prezzo','','N');
+
+
 INSERT INTO bg_Tipo_Item (descrizione) VALUES ('Item shop type' )

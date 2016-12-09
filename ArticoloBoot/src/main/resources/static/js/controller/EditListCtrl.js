@@ -1,5 +1,5 @@
 //controller della home che edit gli item solo per amministratori
-angular.module("blogApp").controller("EditListCtrl", function ($scope, Item, ItemOperation, $state) {
+angular.module("blogApp").controller("EditListCtrl", function ($scope, Item, ItemShop, ItemOperation, $state) {
 
 	
 	$scope.buttonEditItem=messaggi['editListItem.button.editItem'];

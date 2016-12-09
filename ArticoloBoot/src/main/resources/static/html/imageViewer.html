@@ -37,23 +37,6 @@
 
 
 </div>
-<div style="padding:5px;margin:15px;float:left;width:400px;border-style: solid; border-width: 1px;border-color: black;font-family:tahoma, sans serif;">
-	<h1>{{$ctrl.item.titolo}}</h1>
-	<p style="font-size: 10pt">Prezzo: {{$ctrl.item.prezzo.valore}}</p>
-	<p style="font-size: 10pt">Disponibilità: {{$ctrl.item.quantita}}</p>
-	<p style="font-size: 10pt"> Colori:
-		<ul ng-repeat="colore in $ctrl.item.coloriSelezionati">
-			<li>{{colore.valore}}
-		</ul>
-	</p>
-	<p style="font-size: 10pt"> Taglie:
-		<ul ng-repeat="taglia in $ctrl.item.taglieSelezionati">
-			<li>{{taglia.valore}}
-		</ul>
-	</p>
-	<p style="font-size: 10pt"><input type="button" value="Aggiungi al carrello" ng-click="aggiungiCarrello()"></p>
-	<p style="font-size: 10pt">{{$ctrl.item.testo}}</p>
-</div>
 
 	<div id="light" class="white_content">
 		<div style="text-align:right;">

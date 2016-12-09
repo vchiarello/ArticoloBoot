@@ -73,5 +73,22 @@
 
 
   <div style="margin-top:50px;">
-  <image-viewer immagini="immagini" item="item"></image-viewer>
+	<image-viewer immagini="immagini"></image-viewer>
+	<div style="padding:5px;margin:15px;float:left;width:400px;border-style: solid; border-width: 1px;border-color: black;font-family:tahoma, sans serif;">
+		<h1>{{item.titolo}}</h1>
+		<p style="font-size: 10pt">Prezzo: {{item.prezzo.valore}}</p>
+		<p style="font-size: 10pt">Disponibilità: {{item.quantita}}</p>
+		<p style="font-size: 10pt"> Colori:
+			<ul ng-repeat="colore in item.coloriSelezionati">
+				<li>{{colore.valore}}
+			</ul>
+		</p>
+		<p style="font-size: 10pt"> Taglie:
+			<ul ng-repeat="taglia in item.taglieSelezionati">
+				<li>{{taglia.valore}}
+			</ul>
+		</p>
+		<p style="font-size: 10pt"><input type="button" value="Aggiungi al carrello" ng-click="aggiungiCarrello()"></p>
+		<p style="font-size: 10pt">{{item.testo}}</p>
+	</div>
   </div>

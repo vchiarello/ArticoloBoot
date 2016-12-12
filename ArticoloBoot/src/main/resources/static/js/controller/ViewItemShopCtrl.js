@@ -27,6 +27,11 @@ angular.module('blogApp').controller('ViewItemShopCtrl',['$scope','ItemShop', '$
 	$scope.aggiungiCarrello = function(){
 		alert("aggiungi carrello")
 	}
+	
+	
+	$scope.figliImgSlide = function(){
+		$(".imgSlide").zoom();
+	}
 
 }]);
 

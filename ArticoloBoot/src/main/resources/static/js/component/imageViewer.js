@@ -1,5 +1,19 @@
 function imageViewerCompCtrl(){
 	
+	this.$postLink=function(){
+		console.log("$postLink:" + $(".imgSlide").length);
+	}
+	
+	this.$doCheck=function(){
+		console.log("$doCheck:" + $(".imgSlide").length);
+		if ($(".imgSlide").length>0){
+			$(".imgSlide").zoom();
+		}	
+	}
+	
+	this.$postLink=function(){
+		console.log("$postLink:" + $(".imgSlide").length);
+	}
 	current=0;
 	  
 	this.so_xfade_prev=function(){
@@ -57,13 +71,3 @@ angular.module('blogApp').component('imageViewer', {
     }
 });
 
-function imageZoomCtrl(){
-	$(".imgSlide").zoom();
-}
-
-//questo component si rende necessario al solo scopoo di fare in modo di chiamare il metodo zoom() dopo che l'html
-//generato dal component imageViewer sia stato inserito nel DOM della pagina html
-angular.module('blogApp').component('imageZoom', {
-    templateUrl: 'html/imageZoom.html',
-    controller: imageZoomCtrl
-});

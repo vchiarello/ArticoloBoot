@@ -6,6 +6,10 @@ drop table dbo.bg_Item;
 drop table dbo.bg_Tipo_Item;
 drop table dbo.bg_anag_proprieta;
 drop view  bg_allegato_vw;
+drop table bg_cart_detail
+drop table bg_cart;
+drop table bg_order_detail;
+drop table bg_order;
 
 CREATE  TABLE bg_property (
   id_prop INT NOT NULL identity,
@@ -104,6 +108,55 @@ FROM
 	, dbo.bg_item i
 where 
 a.id_item=i.id_item
+
+
+CREATE  TABLE bg_cart (
+  id_carrello INT NOT NULL identity,
+  utente varchar(1000) NOT NULL ,
+  data_inserimento DATETIME not NULL ,
+  data_modifica DATETIME NULL, 
+  PRIMARY KEY (id_carrello) );
+
+CREATE  TABLE bg_cart_detail (
+  id_carrello INT NOT NULL,
+  progressivo int not null,
+  id_item int not null,
+  quantita int not null,
+  costo float,
+  data_inserimento DATETIME not NULL ,
+  data_modifica DATETIME NULL, 
+  PRIMARY KEY (id_carrello, progressivo) );
+
+ALTER TABLE [dbo].bg_cart_detail  WITH CHECK ADD  CONSTRAINT [FK_bg_cart_detail] FOREIGN KEY([id_item])
+REFERENCES [dbo].[bg_item] ([id_item])
+GO
+ALTER TABLE [dbo].bg_cart_detail  WITH CHECK ADD  CONSTRAINT [FK1_bg_cart_detail] FOREIGN KEY(id_carrello)
+REFERENCES [dbo].[bg_cart] ([id_carrello])
+GO
+
+CREATE  TABLE bg_order (
+  id_ordine INT NOT NULL identity,
+  utente varchar(1000) NOT NULL ,
+  data_inserimento DATETIME not NULL ,
+  data_modifica DATETIME NULL, 
+  PRIMARY KEY (id_ordine) );
+
+CREATE  TABLE bg_order_detail (
+  id_ordine INT NOT NULL,
+  progressivo int not null,
+  id_item int not null,
+  quantita int not null,
+  costo float,
+  data_inserimento DATETIME not NULL ,
+  data_modifica DATETIME NULL, 
+  PRIMARY KEY (id_ordine,progressivo) );
+
+ALTER TABLE [dbo].[bg_order_detail]  WITH CHECK ADD  CONSTRAINT [FK_bg_order_detail] FOREIGN KEY([id_item])
+REFERENCES [dbo].[bg_item] ([id_item])
+GO
+ALTER TABLE [dbo].[bg_order_detail]  WITH CHECK ADD  CONSTRAINT [FK1_bg_order_detail] FOREIGN KEY([id_ordine])
+REFERENCES [dbo].[bg_order] ([id_ordine])
+GO
 
 
 insert into test.dbo.bg_property(nome_proprieta, valore_proprieta,flag_multiplo)values('Colore','Rosso','S');

@@ -131,7 +131,4 @@ public class Allegato implements Serializable,Comparable<Allegato>{
 				+ nomeAllegato + ", contentType=" + contentType + "]";
 	}
 
-	
-	
-
 }

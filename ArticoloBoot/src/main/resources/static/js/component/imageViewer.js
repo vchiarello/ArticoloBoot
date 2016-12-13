@@ -4,6 +4,11 @@ function imageViewerCompCtrl(){
 		console.log("$postLink:" + $(".imgSlide").length);
 	}
 	
+	
+	this.$onInit=function(){
+		console.log("$onInit:" + $(".imgSlide").length);
+	}
+	
 	this.$doCheck=function(){
 		console.log("$doCheck:" + $(".imgSlide").length);
 		if ($(".imgSlide").length>0){

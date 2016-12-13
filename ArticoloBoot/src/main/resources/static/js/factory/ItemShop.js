@@ -12,7 +12,6 @@ angular.module("blogApp").factory("ItemShop", function ($resource) {
 	return $resource(URLS.itemShop, {id: "@id", name: "@nome"}, {
 		  query:{method: 'GET', isArray:true},
 		  update: {method: 'PUT'},
-		  query:{method: 'GET', isArray:true},
 		  save: {method: 'POST'},
 		  delete: {method: 'DELETE'}
 	});

@@ -2,12 +2,15 @@ package it.vito.blog.db.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -21,8 +24,8 @@ public class Order implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_carrello")
-	private int idCarrello;
+	@Column(name="id_order")
+	private Integer idOrder;
 	
 	@Column(name="utente")
 	private String utente;
@@ -32,13 +35,27 @@ public class Order implements Serializable{
 	
 	@Column(name="data_modifica")
 	private Date dataModifica;
+	
+	@OneToMany(targetEntity=it.vito.blog.db.bean.OrderDetail.class, mappedBy="idOrderDetail.order")
+	@OrderBy("idOrderDetail.progressivo ASC")
+	private List<OrderDetail> orderDetail;
 
-	public int getIdCarrello() {
-		return idCarrello;
+
+
+	public Integer getIdOrder() {
+		return idOrder;
 	}
 
-	public void setIdCarrello(int idCarrello) {
-		this.idCarrello = idCarrello;
+	public void setIdOrder(Integer idOrder) {
+		this.idOrder = idOrder;
+	}
+
+	public List<OrderDetail> getOrderDetail() {
+		return orderDetail;
+	}
+
+	public void setOrderDetail(List<OrderDetail> orderDetail) {
+		this.orderDetail = orderDetail;
 	}
 
 	public String getUtente() {
@@ -67,8 +84,9 @@ public class Order implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Order [idCarrello=" + idCarrello + ", utente=" + utente + ", dataInserimento=" + dataInserimento
-				+ ", dataModifica=" + dataModifica + "]";
+		return "Order [idOrder=" + idOrder + ", utente=" + utente + ", dataInserimento=" + dataInserimento
+				+ ", dataModifica=" + dataModifica + ", orderDetail=" + orderDetail + "]";
 	}
+
 	
 }

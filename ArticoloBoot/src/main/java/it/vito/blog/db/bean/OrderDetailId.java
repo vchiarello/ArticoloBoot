@@ -18,17 +18,18 @@ public class OrderDetailId implements Serializable{
 
 	@ManyToOne
 	@JoinColumns({@JoinColumn(name="id_Order", referencedColumnName="id_Order")})
-	private int idOrder;
+	private Order order;
 	
  	@Column(name="progressivo")
 	private Integer progressivo;
 
-	public int getIdOrder() {
-		return idOrder;
+
+	public Order getOrder() {
+		return order;
 	}
 
-	public void setIdOrder(int idOrder) {
-		this.idOrder = idOrder;
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 	public Integer getProgressivo() {
@@ -41,7 +42,7 @@ public class OrderDetailId implements Serializable{
 
 	@Override
 	public String toString() {
-		return "OrderDetailId [idOrder=" + idOrder + ", progressivo=" + progressivo + "]";
+		return "OrderDetailId [order=" + order.getIdOrder() + ", progressivo=" + progressivo + "]";
 	}
 	
 }

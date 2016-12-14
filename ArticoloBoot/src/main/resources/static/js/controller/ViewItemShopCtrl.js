@@ -28,7 +28,7 @@ angular.module('blogApp').controller('ViewItemShopCtrl',['$scope','ItemShop', '$
 		alert("aggiungi carrello");
 		cc = new Cart();
 		cc.id=125;
-		cc.name='primo item shop';
+		cc.nome='primo item shop';
 		cc.$save()
 	}
 	

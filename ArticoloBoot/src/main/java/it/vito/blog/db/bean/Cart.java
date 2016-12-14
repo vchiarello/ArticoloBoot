@@ -26,7 +26,7 @@ public class Cart implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_carrello")
-	private int idCart;
+	private Integer idCart;
 	
 	@Column(name="utente")
 	private String utente;
@@ -37,15 +37,15 @@ public class Cart implements Serializable{
 	@Column(name="data_modifica")
 	private Date dataModifica;
 
-	@OneToMany(targetEntity=it.vito.blog.db.bean.CartDetail.class, mappedBy="idCartDetail.idCarrello")
+	@OneToMany(targetEntity=it.vito.blog.db.bean.CartDetail.class, mappedBy="idCartDetail.cart")
 	@OrderBy("idCartDetail.progressivo ASC")
 	private List<CartDetail> cartDetail;
 
-	public int getIdCart() {
+	public Integer getIdCart() {
 		return idCart;
 	}
 
-	public void setIdCart(int idCart) {
+	public void setIdCart(Integer idCart) {
 		this.idCart = idCart;
 	}
 
@@ -71,6 +71,14 @@ public class Cart implements Serializable{
 
 	public void setDataModifica(Date dataModifica) {
 		this.dataModifica = dataModifica;
+	}
+
+	public List<CartDetail> getCartDetail() {
+		return cartDetail;
+	}
+
+	public void setCartDetail(List<CartDetail> cartDetail) {
+		this.cartDetail = cartDetail;
 	}
 
 	@Override

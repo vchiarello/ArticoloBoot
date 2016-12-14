@@ -9,7 +9,7 @@ angular.module("blogApp").factory("Cart", function ($resource) {
 //	{someParam: '@someProp'} then the value of someParam will be data.someProp.
 	//ATTENZIONE: come scritto nelle righe sopra se il paramentro ha la @ vuol dire che viene preso dall'oggetto
 	//quindi deve avere lo stesso nome della proprietà dell'oggetto
-	return $resource(URLS.itemShop, {id: "@id", name: "@nome"}, {
+	return $resource(URLS.cart, {id: "@id", name: "@nome"}, {
 		  query:{method: 'GET'},
 		  update: {method: 'PUT'},
 		  save: {method: 'POST'},

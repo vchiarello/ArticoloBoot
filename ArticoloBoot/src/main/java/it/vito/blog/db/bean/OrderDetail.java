@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -12,8 +11,8 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-//@Entity
-//@Table(name="bg_order_detail")
+@Entity
+@Table(name="bg_order_detail")
 public class OrderDetail implements Serializable{
 
 
@@ -28,9 +27,6 @@ public class OrderDetail implements Serializable{
 	@ManyToOne
 	@JoinColumns({@JoinColumn(name="id_item", referencedColumnName="id_item")})
 	private Item item;
-	
-	@Column(name="utente")
-	private String utente;
 	
 	@Column(name="quantita")
 	private int quantita;
@@ -59,14 +55,6 @@ public class OrderDetail implements Serializable{
 
 	public void setItem(Item item) {
 		this.item = item;
-	}
-
-	public String getUtente() {
-		return utente;
-	}
-
-	public void setUtente(String utente) {
-		this.utente = utente;
 	}
 
 	public int getQuantita() {
@@ -103,7 +91,7 @@ public class OrderDetail implements Serializable{
 
 	@Override
 	public String toString() {
-		return "OrderDetail [idOrderDetail=" + idOrderDetail + ", item=" + item.getId() + ", utente=" + utente + ", quantita="
+		return "OrderDetail [idOrderDetail=" + idOrderDetail + ", item=" + item.getId() + ", quantita="
 				+ quantita + ", costo=" + costo + ", dataInserimento=" + dataInserimento + ", dataModifica="
 				+ dataModifica + "]";
 	}

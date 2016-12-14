@@ -2,7 +2,6 @@ package it.vito.blog.db.bean;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -29,8 +28,6 @@ public class CartDetail implements Serializable{
 	@JoinColumns({@JoinColumn(name="id_item", referencedColumnName="id_item")})
 	private Item item;
 	
-	@Column(name="utente")
-	private String utente;
 	
 	@Column(name="quantita")
 	private int quantita;
@@ -59,14 +56,6 @@ public class CartDetail implements Serializable{
 
 	public void setItem(Item item) {
 		this.item = item;
-	}
-
-	public String getUtente() {
-		return utente;
-	}
-
-	public void setUtente(String utente) {
-		this.utente = utente;
 	}
 
 	public int getQuantita() {
@@ -103,7 +92,7 @@ public class CartDetail implements Serializable{
 
 	@Override
 	public String toString() {
-		return "CartDetail [idCartDetail=" + idCartDetail + ", item=" + item.getId() + ", utente=" + utente + ", quantita="
+		return "CartDetail [idCartDetail=" + idCartDetail + ", item=" + item.getId() + ", quantita="
 				+ quantita + ", costo=" + costo + ", dataInserimento=" + dataInserimento + ", dataModifica="
 				+ dataModifica + "]";
 	}

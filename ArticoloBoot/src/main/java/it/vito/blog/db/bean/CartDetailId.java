@@ -18,14 +18,31 @@ public class CartDetailId implements Serializable{
 
  	@ManyToOne
 	@JoinColumns({@JoinColumn(name="id_carrello", referencedColumnName="id_carrello")})
-	private Integer idCarrello;
+	private Cart cart;
 	
 	@Column(name="progressivo")
 	private Integer progressivo;
 
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+
+	public Integer getProgressivo() {
+		return progressivo;
+	}
+
+	public void setProgressivo(Integer progressivo) {
+		this.progressivo = progressivo;
+	}
+
 	@Override
 	public String toString() {
-		return "CartDetailId [idCarrello=" + idCarrello + ", progressivo=" + progressivo + "]";
+		return "CartDetailId [Carrello=" + cart.getIdCart() + ", progressivo=" + progressivo + "]";
 	}
 	
 }

@@ -13,5 +13,9 @@ angular.module("blogApp").controller("IndexCtrl", function ($scope, Item, $state
 	$scope.labelAnotherAction=messaggi['toolbar.action.anotherAction'];
 	$scope.labelSeparatedLink=messaggi['toolbar.action.separatedLink'];
 	$scope.labelNavHeader=messaggi['toolbar.action.navHeader'];
+	
+	$scope.carrello=function(){
+		alert("visualizza carello");
+	}
 
 });

@@ -25,10 +25,10 @@ angular.module('blogApp').controller('ViewItemShopCtrl',['$scope','ItemShop', '$
 	});
 
 	$scope.aggiungiCarrello = function(){
-		alert("aggiungi carrello");
+		//alert("aggiungi carrello");
 		cc = new Cart();
-		cc.id=125;
-		cc.nome='primo item shop';
+		cc.id=$stateParams.id;
+		cc.nome=$stateParams.name;
 		cc.$save()
 	}
 	

@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
-@Entity
+//@Entity
 @Table(name="bg_order")
 public class Order implements Serializable{
 

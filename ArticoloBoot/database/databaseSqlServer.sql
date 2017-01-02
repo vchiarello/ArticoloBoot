@@ -111,52 +111,51 @@ a.id_item=i.id_item
 
 
 CREATE  TABLE bg_cart (
-  id_carrello INT NOT NULL identity,
+  id_cart INT NOT NULL identity,
   utente varchar(1000) NOT NULL ,
   data_inserimento DATETIME not NULL ,
   data_modifica DATETIME NULL, 
-  PRIMARY KEY (id_carrello) );
+  PRIMARY KEY (id_cart) );
 
 CREATE  TABLE bg_cart_detail (
-  id_carrello INT NOT NULL,
-  progressivo int not null,
+  id_cart_detail INT NOT NULL identity,
+  id_cart int not null,
   id_item int not null,
   quantita int not null,
   costo float,
   data_inserimento DATETIME not NULL ,
   data_modifica DATETIME NULL, 
-  PRIMARY KEY (id_carrello, progressivo) );
+  PRIMARY KEY (id_cart_detail) );
 
 ALTER TABLE [dbo].bg_cart_detail  WITH CHECK ADD  CONSTRAINT [FK_bg_cart_detail] FOREIGN KEY([id_item])
-REFERENCES [dbo].[bg_item] ([id_item])
-GO
-ALTER TABLE [dbo].bg_cart_detail  WITH CHECK ADD  CONSTRAINT [FK1_bg_cart_detail] FOREIGN KEY(id_carrello)
-REFERENCES [dbo].[bg_cart] ([id_carrello])
-GO
+REFERENCES [dbo].[bg_item] ([id_item]);
+
+ALTER TABLE [dbo].bg_cart_detail  WITH CHECK ADD  CONSTRAINT [FK1_bg_cart_detail] FOREIGN KEY(id_cart)
+REFERENCES [dbo].[bg_cart] ([id_cart]);
+
 
 CREATE  TABLE bg_order (
-  id_ordine INT NOT NULL identity,
+  id_order INT NOT NULL identity,
   utente varchar(1000) NOT NULL ,
   data_inserimento DATETIME not NULL ,
   data_modifica DATETIME NULL, 
-  PRIMARY KEY (id_ordine) );
+  PRIMARY KEY (id_order) );
 
 CREATE  TABLE bg_order_detail (
-  id_ordine INT NOT NULL,
-  progressivo int not null,
+  id_order_detail INT NOT NULL identity,
+  id_order INT NOT NULL,
   id_item int not null,
   quantita int not null,
   costo float,
   data_inserimento DATETIME not NULL ,
   data_modifica DATETIME NULL, 
-  PRIMARY KEY (id_ordine,progressivo) );
+  PRIMARY KEY (id_order) );
 
 ALTER TABLE [dbo].[bg_order_detail]  WITH CHECK ADD  CONSTRAINT [FK_bg_order_detail] FOREIGN KEY([id_item])
-REFERENCES [dbo].[bg_item] ([id_item])
-GO
-ALTER TABLE [dbo].[bg_order_detail]  WITH CHECK ADD  CONSTRAINT [FK1_bg_order_detail] FOREIGN KEY([id_ordine])
-REFERENCES [dbo].[bg_order] ([id_ordine])
-GO
+REFERENCES [dbo].[bg_item] ([id_item]);
+
+ALTER TABLE [dbo].[bg_order_detail]  WITH CHECK ADD  CONSTRAINT [FK1_bg_order_detail] FOREIGN KEY([id_order])
+REFERENCES [dbo].[bg_order] ([id_order]);
 
 
 insert into test.dbo.bg_property(nome_proprieta, valore_proprieta,flag_multiplo)values('Colore','Rosso','S');

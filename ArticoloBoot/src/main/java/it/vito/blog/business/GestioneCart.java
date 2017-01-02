@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import it.vito.blog.db.bean.Cart;
 import it.vito.blog.db.bean.CartDetail;
-import it.vito.blog.db.bean.CartDetailId;
 import it.vito.blog.db.bean.Item;
 import it.vito.blog.db.dao.CartDetailRepository;
 import it.vito.blog.db.dao.CartRepository;
@@ -26,28 +25,52 @@ public class GestioneCart {
 	CartDetailRepository cartDetailRepository;
 	
 	public CartWeb addToCart(Integer itemId, String itemName, String utente){
-		//si prende il carrello associato all'utente
+		//se si tratta di un utente loggato il carrello si salva sempre sul db in modo che in 
+		//sessioni successive si prende il carrello salvato
+		//per utenti non loggati si può pensare di tenere il carrello solo in memoria fino al login
+
+		
 		Cart c = cartRepository.findByUtente(utente);
+		Item item = new Item();
+		item.setId(itemId);
+		//non c'è alcun carrello salvato per l'utente
 		if (c==null){
-			Cart cart = new Cart();
-			//cart.setIdCart(new Integer(1));
-			cart.setDataInserimento(new Date());
-			cart.setUtente(utente);
-			//cart.setDataModifica(new Date());
-			cartRepository.save(cart);
-			CartDetail cd = new CartDetail();
-			CartDetailId cdId =new CartDetailId();
-			cdId.setCart(cart);
-			cdId.setProgressivo(1);
-			cd.setIdCartDetail(cdId);
-			cd.setDataInserimento(new Date());
-			Item item = new Item();
-			item.setId(itemId);
-			cd.setItem(item);
-			cd.setQuantita(1);
-			cartDetailRepository.save(cd);
+			c = initCart(utente);
+			initCartDetail(item, c, utente);
+		//C'è già un carrello salvato per l'utente	
+		}else{
+			List<CartDetail> lc = cartDetailRepository.findByCartAndItem(c, item);
+			//il prodotto non era presente nel carrello
+			if (lc.size() == 0)
+				initCartDetail(item, c, utente);
+			//il prodotto non era presente nel carrello si aggiunge la quantita'
+			else{
+				CartDetail cd = lc.get(0);
+				cd.setQuantita(cd.getQuantita()+1);
+				cartDetailRepository.save(cd);
+			}
 		}
-		return null;
+		return getCart(utente);
+	}
+	
+	private Cart initCart(String utente){
+		Cart cart = new Cart();
+		cart.setDataInserimento(new Date());
+		cart.setUtente(utente);
+		cartRepository.save(cart);
+		return cart;
+	}
+	
+	private CartDetail initCartDetail(Item item, Cart c, String utente){
+		CartDetail cd = new CartDetail();
+
+		cd.setCart(c);
+		cd.setItem(item);
+
+		cd.setDataInserimento(new Date());
+		cd.setQuantita(1);
+		cartDetailRepository.save(cd);
+		return cd;
 	}
 	
 	public CartWeb removeFromCart(Integer itemId, String itemName, String utente){

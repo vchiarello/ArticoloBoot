@@ -88,7 +88,9 @@
 				<li>{{taglia.valore}}
 			</ul>
 		</p>
-		<p style="font-size: 10pt"><input type="button" value="Aggiungi al carrello" ng-click="aggiungiCarrello()"></p>
+		<p style="font-size: 10pt"><input type="button" value="Aggiungi al carrello" ng-click="aggiungiCarrello(item.id,item.nome)"></p>
+		<p style="font-size: 10pt"><input type="button" value="Rimuovi da carrello" ng-click="rimuoviCarrello(item.id,item.nome)"></p>
+		<p style="font-size: 10pt"><input type=""><input type="button" value="aggiorna carrello" ng-click="aggiornaCarrello(item.id,item.nome)"></p>
 		<p style="font-size: 10pt">{{item.testo}}</p>
 	</div>
   </div>

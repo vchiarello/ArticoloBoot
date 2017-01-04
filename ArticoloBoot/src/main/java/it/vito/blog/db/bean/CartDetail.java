@@ -107,7 +107,8 @@ public class CartDetail implements Serializable{
 
 	@Override
 	public String toString() {
-		return "CartDetail [idCartDetail=" + idCartDetail + ", cart=" + cart + ", item=" + item + ", quantita="
+		return "CartDetail [idCartDetail=" + idCartDetail + ", cart=" + cart + 
+				", item=" + item + ", quantita="
 				+ quantita + ", costo=" + costo + ", dataInserimento=" + dataInserimento + ", dataModifica="
 				+ dataModifica + "]";
 	}

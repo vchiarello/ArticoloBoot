@@ -37,8 +37,8 @@ public class Cart implements Serializable{
 	@Column(name="data_modifica")
 	private Date dataModifica;
 
-	@OneToMany(targetEntity=it.vito.blog.db.bean.CartDetail.class, mappedBy="idCartDetail.cart")
-	@OrderBy("idCartDetail.progressivo ASC")
+	@OneToMany(targetEntity=it.vito.blog.db.bean.CartDetail.class, mappedBy="cart")
+	@OrderBy("idCartDetail ASC")
 	private List<CartDetail> cartDetail;
 
 	public Integer getIdCart() {

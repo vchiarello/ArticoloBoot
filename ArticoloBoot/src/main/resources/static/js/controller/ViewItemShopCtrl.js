@@ -1,5 +1,5 @@
-angular.module('blogApp').controller('ViewItemShopCtrl',['$scope','ItemShop', '$stateParams','$http','Cart',
-	function ($scope, ItemShop, $stateParams,$http,Cart){
+angular.module('blogApp').controller('ViewItemShopCtrl',['$scope','ItemShop', '$stateParams','$http','Cart','CartOperations',
+	function ($scope, ItemShop, $stateParams,$http,Cart,CartOperations){
 	
 //	$http.get("/rest/itemShop/infoAllegati/"+$stateParams.id+"/"+$stateParams.name).
 //	then(function(data){
@@ -24,12 +24,14 @@ angular.module('blogApp').controller('ViewItemShopCtrl',['$scope','ItemShop', '$
 		}
 	});
 
-	$scope.aggiungiCarrello = function(){
-		alert("aggiungi carrello");
-		cc = new Cart();
-		cc.id=125;
-		cc.nome='primo item shop';
-		cc.$save()
+	$scope.cart = CartOperations.getCart($stateParams.id,$stateParams.name);
+	
+	$scope.aggiungiCarrello = function(idItem, nameItem){
+		CartOperations.addToCart(idItem, nameItem);
+	}
+	
+	$scope.rimuoviCarrello = function(idItem, nameItem){
+		CartOperations.removeFromCart(idItem, nameItem);
 	}
 	
 	

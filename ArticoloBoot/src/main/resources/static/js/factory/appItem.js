@@ -4,11 +4,6 @@
 //https://docs.angularjs.org/api/ngResource/service/$resource
 angular.module("blogApp").factory("Item", function ($resource) {
 
-// vecchia versione quando il csrf_token era gestito con thymeleaf	
-//	var csrf_token = "";
-//	if (document.querySelector('input[name="_csrf"]') !=null) 	
-//		csrf_token = document.querySelector('input[name="_csrf"]').getAttribute('value');
-
 
 	
 //	If the parameter value is prefixed with @ then the value for that parameter will be extracted from the corresponding property on 
@@ -18,11 +13,8 @@ angular.module("blogApp").factory("Item", function ($resource) {
 	//quindi deve avere lo stesso nome della proprietà dell'oggetto
 	return $resource(URLS.items, {id: "@id", name: "@nome"}, {
 		  query:{method: 'GET', isArray:true},
-//		  update: {method: 'PUT', headers: {'X-CSRF-TOKEN': csrf_token}},
 		  update: {method: 'PUT'},
-//		  save: {method: 'POST', headers: {'X-CSRF-TOKEN': csrf_token}},
 		  save: {method: 'POST'},
-//		  delete: {method: 'DELETE', headers: {'X-CSRF-TOKEN': csrf_token}}
 		  delete: {method: 'DELETE'}
 	});
 });

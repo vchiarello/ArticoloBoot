@@ -13,7 +13,7 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-//@Entity
+@Entity
 @Table(name="bg_order_detail")
 public class OrderDetail implements Serializable{
 

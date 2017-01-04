@@ -39,6 +39,8 @@ public class GestioneCart {
 			initCartDetail(item, c, utente);
 		//C'è già un carrello salvato per l'utente	
 		}else{
+			c.setDataModifica(new Date());
+			cartRepository.save(c);
 			List<CartDetail> lc = cartDetailRepository.findByCartAndItem(c, item);
 			//il prodotto non era presente nel carrello
 			if (lc.size() == 0)
@@ -47,6 +49,7 @@ public class GestioneCart {
 			else{
 				CartDetail cd = lc.get(0);
 				cd.setQuantita(cd.getQuantita()+1);
+				cd.setDataModifica(new Date());
 				cartDetailRepository.save(cd);
 			}
 		}
@@ -74,15 +77,34 @@ public class GestioneCart {
 	}
 	
 	public CartWeb removeFromCart(Integer itemId, String itemName, String utente){
-		return null;
+		Cart c = cartRepository.findByUtente(utente);
+		Item item = new Item();
+		item.setId(itemId);
+		//non c'è alcun carrello salvato per l'utente, non viene cancellata alcuna riga
+		if (c==null){
+			c = initCart(utente);
+		//C'è già un carrello salvato per l'utente	
+		}else{
+			c.setDataModifica(new Date());
+			cartRepository.save(c);
+			List<CartDetail> lc = cartDetailRepository.findByCartAndItem(c, item);
+			
+			if (lc.size() != 0){
+				CartDetail cd = lc.get(0);
+				cartDetailRepository.delete(cd.getIdCartDetail());
+			}
+		}
+		return getCart(utente);
 	}
 	
 	public CartWeb updateCart(Integer itemId, String itemName, String utente){
-		return null;
+		return getCart(utente);
 	}
 	
 	public CartWeb getCart(String utente){
-		return null;
+		Cart c = cartRepository.findByUtente(utente);
+		CartWeb risultato = new CartWeb();
+		return risultato.fromCartToCartWeb(c);
 	}
 	
 	public CartWeb saveCart(CartWeb cartWeb){

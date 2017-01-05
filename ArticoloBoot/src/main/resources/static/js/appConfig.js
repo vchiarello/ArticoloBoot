@@ -59,6 +59,10 @@ angular.module("blogApp").config(function ($stateProvider, $urlRouterProvider) {
             url:'/editSlideShowItem/:id/:name',
             templateUrl: 'html/editSlideShow.html',
             controller: 'EditSlideShowCtrl'
+        }).state('viewCart', {
+            url:'/viewCart',
+            templateUrl: 'html/viewCart.html',
+            controller: 'ViewCartCtrl'
         }).state('endpoints', {
             url: '/endpoints',
             templateUrl: URLS.partialsMappings,

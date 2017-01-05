@@ -70,6 +70,51 @@ alter table bg_lk_item_property add data_modifica timestamp;
 alter table bg_lk_item_property add data_inserimento timestamp;
 --Fine da cancellare dopo il lancio
 
+
+
+CREATE  TABLE bg_cart (
+  id_carrello INT NOT NULL auto_increment,
+  utente varchar(1000) NOT NULL ,
+  data_inserimento timestamp not NULL ,
+  data_modifica timestamp NULL, 
+  PRIMARY KEY (id_carrello) );
+
+CREATE  TABLE bg_cart_detail (
+  id_carrello INT NOT NULL,
+  progressivo int not null,
+  id_item int not null,
+  quantita int not null,
+  costo float,
+  data_inserimento timestamp not NULL ,
+  data_modifica timestamp NULL, 
+  PRIMARY KEY (id_carrello, progressivo) );
+
+ALTER TABLE bg_cart_detail ADD  CONSTRAINT FK_bg_cart_detail FOREIGN KEY(id_item) REFERENCES bg_item (id_item);
+
+ALTER TABLE bg_cart_detail ADD CONSTRAINT FK1_bg_cart_detail FOREIGN KEY(id_carrello) REFERENCES bg_cart(id_carrello);
+
+CREATE  TABLE bg_order (
+  id_ordine INT NOT NULL auto_increment,
+  utente varchar(1000) NOT NULL ,
+  data_inserimento timestamp not NULL ,
+  data_modifica timestamp NULL, 
+  PRIMARY KEY (id_ordine) );
+
+CREATE  TABLE bg_order_detail (
+  id_ordine INT NOT NULL,
+  progressivo int not null,
+  id_item int not null,
+  quantita int not null,
+  costo float,
+  data_inserimento timestamp not NULL ,
+  data_modifica timestamp NULL, 
+  PRIMARY KEY (id_ordine,progressivo) );
+
+ALTER TABLE bg_order_detail ADD CONSTRAINT FK_bg_order_detail FOREIGN KEY(id_item) REFERENCES bg_item (id_item);
+ALTER TABLE bg_order_detail ADD CONSTRAINT FK1_bg_order_detail FOREIGN KEY(id_ordine) REFERENCES bg_order(id_ordine);
+
+
+
 insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Colore','Rosso','S');
 insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Colore','Bianco','S');
 insert into bg_anag_proprieta(nome_proprieta, valore_proprieta,flag_multiplo)values('Colore','Nero','S');

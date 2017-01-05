@@ -18,9 +18,10 @@ angular.module("blogApp").factory("CartOperations", function (Cart) {
 		cc.$delete()
 	}
 
-	function getCart(idItem, nomeItem){
+	function getCart(){
 		cc = new Cart();
-		cc.$get()
+		cc.$get(null,function(){console.log("cart:" + cc.idCart);});
+		return cc;
 	}
 
 	return {

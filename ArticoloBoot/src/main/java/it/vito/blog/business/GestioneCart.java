@@ -104,7 +104,8 @@ public class GestioneCart {
 	public CartWeb getCart(String utente){
 		Cart c = cartRepository.findByUtente(utente);
 		CartWeb risultato = new CartWeb();
-		return risultato.fromCartToCartWeb(c);
+		risultato.fromCartToCartWeb(c);
+		return risultato;
 	}
 	
 	public CartWeb saveCart(CartWeb cartWeb){

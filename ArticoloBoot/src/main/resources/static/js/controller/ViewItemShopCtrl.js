@@ -24,7 +24,7 @@ angular.module('blogApp').controller('ViewItemShopCtrl',['$scope','ItemShop', '$
 		}
 	});
 
-	$scope.cart = CartOperations.getCart($stateParams.id,$stateParams.name);
+	$scope.cart = CartOperations.getCart();
 	
 	$scope.aggiungiCarrello = function(idItem, nameItem){
 		CartOperations.addToCart(idItem, nameItem);

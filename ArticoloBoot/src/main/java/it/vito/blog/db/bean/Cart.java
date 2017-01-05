@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,7 +38,7 @@ public class Cart implements Serializable{
 	@Column(name="data_modifica")
 	private Date dataModifica;
 
-	@OneToMany(targetEntity=it.vito.blog.db.bean.CartDetail.class, mappedBy="cart")
+	@OneToMany(targetEntity=it.vito.blog.db.bean.CartDetail.class, mappedBy="cart",fetch=FetchType.EAGER)
 	@OrderBy("idCartDetail ASC")
 	private List<CartDetail> cartDetail;
 

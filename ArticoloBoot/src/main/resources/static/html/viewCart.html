@@ -1,0 +1,28 @@
+  <div style="margin-top:50px;" cg-busy="{promise:cart.$promise,message:messaggio,templateUrl:'/templateAttendere'}">
+	<table>
+		<tr>
+			<th>
+				Prodotto
+			</th>
+			<th>
+				Quantità
+			</th>
+			<th>
+				Costo
+			</th>
+			<th>
+				Totale
+			</th>
+		</tr>
+		<tr  ng-repeat="d in cart.cartDetailWeb">
+			<td>{{d.idCartDetail}}
+			</td>
+			<td>{{d.quantita}}
+			</td>
+			<td>{{d.price}}
+			</td>
+			<td>{{d.price*d.quantita}}
+			</td>
+		</tr>
+	</table>
+  </div>

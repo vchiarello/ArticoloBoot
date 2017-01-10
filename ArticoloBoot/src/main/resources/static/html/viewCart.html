@@ -15,9 +15,9 @@
 			</th>
 		</tr>
 		<tr  ng-repeat="d in cart.cartDetailWeb">
-			<td>{{d.idCartDetail}}
+			<td>{{d.descrizione}}
 			</td>
-			<td>{{d.quantita}}
+			<td><input type="text" ng-model="d.quantita" ng-blur="validateQuantity(d.quantita)">
 			</td>
 			<td>{{d.price}}
 			</td>
@@ -25,4 +25,9 @@
 			</td>
 		</tr>
 	</table>
+    <div style="text-align: center;">
+		<button type="button" class="btn btn-success btn-sm" ng-click="updateCart()">
+			<span class="glyphicon glyphicon-save"></span><span>{{buttonSave}}</span>
+		</button>
+	</div>
   </div>

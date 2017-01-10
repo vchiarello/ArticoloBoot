@@ -9,8 +9,10 @@ import org.springframework.stereotype.Component;
 
 import it.vito.blog.db.bean.Cart;
 import it.vito.blog.db.bean.CartDetail;
+import it.vito.blog.db.bean.CartDetailVW;
 import it.vito.blog.db.bean.Item;
 import it.vito.blog.db.dao.CartDetailRepository;
+import it.vito.blog.db.dao.CartDetailVWRepository;
 import it.vito.blog.db.dao.CartRepository;
 import it.vito.blog.web.bean.CartWeb;
 
@@ -23,6 +25,9 @@ public class GestioneCart {
 	
 	@Autowired
 	CartDetailRepository cartDetailRepository;
+	
+	@Autowired
+	CartDetailVWRepository cartDetailVWRepository;
 	
 	public CartWeb addToCart(Integer itemId, String itemName, String utente){
 		//se si tratta di un utente loggato il carrello si salva sempre sul db in modo che in 
@@ -102,9 +107,9 @@ public class GestioneCart {
 	}
 	
 	public CartWeb getCart(String utente){
-		Cart c = cartRepository.findByUtente(utente);
+		List<CartDetailVW> l = cartDetailVWRepository.findByUtente(utente);
 		CartWeb risultato = new CartWeb();
-		risultato.fromCartToCartWeb(c);
+		risultato.fromCartDetailVWToCartWeb(l);
 		return risultato;
 	}
 	

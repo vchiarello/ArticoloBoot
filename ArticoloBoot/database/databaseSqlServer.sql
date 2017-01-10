@@ -157,6 +157,26 @@ REFERENCES [dbo].[bg_item] ([id_item]);
 ALTER TABLE [dbo].[bg_order_detail]  WITH CHECK ADD  CONSTRAINT [FK1_bg_order_detail] FOREIGN KEY([id_order])
 REFERENCES [dbo].[bg_order] ([id_order]);
 
+create view bg_cart_detail_vw as
+select id_cart_detail, cd.id_item, cd.quantita, lip.value price, i.titolo descrizione, c.utente, c.id_cart
+from  dbo.bg_cart_detail cd
+, dbo.bg_Item i
+, dbo.bg_cart c
+, dbo.bg_lk_item_property lip
+, dbo.bg_property p
+where cd.id_item = i.id_item
+and c.id_cart=cd.id_cart
+and lip.id_item=i.id_item
+and lip.id_prop=p.id_prop
+and p.nome_proprieta='Prezzo';
+
+create view bg_order_detail_vw as
+select id_order_detail, cd.id_item, cd.quantita, cd.costo, i.titolo descrizione, o.utente, o.id_order
+from  dbo.bg_order_detail cd
+, dbo.bg_Item i
+, dbo.bg_order o
+where cd.id_item = i.id_item
+and cd.id_order=o.id_order;
 
 insert into test.dbo.bg_property(nome_proprieta, valore_proprieta,flag_multiplo)values('Colore','Rosso','S');
 insert into test.dbo.bg_property(nome_proprieta, valore_proprieta,flag_multiplo)values('Colore','Bianco','S');

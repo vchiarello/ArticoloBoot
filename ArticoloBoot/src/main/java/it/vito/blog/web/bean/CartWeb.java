@@ -6,6 +6,7 @@ import java.util.List;
 
 import it.vito.blog.db.bean.Cart;
 import it.vito.blog.db.bean.CartDetail;
+import it.vito.blog.db.bean.CartDetailVW;
 
 
 public class CartWeb implements Serializable {
@@ -47,6 +48,21 @@ public class CartWeb implements Serializable {
 				
 			}
 		}	
+	}
+	
+	public void fromCartDetailVWToCartWeb (List<CartDetailVW> l){
+		if (l==null)return;
+		for (int i = 0; i < l.size(); i++){
+			CartDetailVW cdvw = l.get(i);
+			this.idCart = cdvw.getIdCart();
+			if (cartDetailWeb==null) cartDetailWeb = new LinkedList<CartDetailWeb>();
+			CartDetailWeb cdw = new CartDetailWeb();
+			cdw.setIdCartDetail(cdvw.getIdCartDetail());
+			cdw.setPrice(cdvw.getPrice());
+			cdw.setQuantita(cdvw.getQuantita());
+			cdw.setDescrizione(cdvw.getDescrizione());
+			this.cartDetailWeb.add(cdw);
+		}
 	}
 
 	@Override

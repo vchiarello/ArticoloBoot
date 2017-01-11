@@ -2,11 +2,14 @@ package it.vito.blog.web;
 
 import java.util.Locale;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,10 +42,10 @@ public class CartRestController {
 		return cart;
 	}
 
-	@RequestMapping(value="/{id}/{name}", method=RequestMethod.PUT)
-	public CartWeb update(@PathVariable("id") int itemId, @PathVariable("name") String itemName,Locale locale) {
-		CartWeb cart = gestioneCart.updateCart(itemId,itemName, SecurityContextHolder.getContext().getAuthentication().getName());
-		return cart;
+	@RequestMapping( method=RequestMethod.PUT)
+	public CartWeb update(@RequestBody @Valid CartWeb cart, Locale locale) {
+		CartWeb cart1 = gestioneCart.updateCart(CartWeb cart, SecurityContextHolder.getContext().getAuthentication().getName());
+		return cart1;
 	}
 
 	@RequestMapping(value="/{id}/{name}", method=RequestMethod.DELETE)

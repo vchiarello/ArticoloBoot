@@ -102,7 +102,19 @@ public class GestioneCart {
 		return getCart(utente);
 	}
 	
-	public CartWeb updateCart(Integer itemId, String itemName, String utente){
+	public CartWeb updateCart(CartWeb cart, String utente){
+		Cart c = cartRepository.findByUtente(utente);
+		for (int i = 0; i < cart.getCartDetailWeb().size(); i++){
+			for (int j = 0; j < c.getCartDetail().size(); j++){
+				if (cart.getCartDetailWeb().get(i).getIdCartDetail()==c.getCartDetail().get(j).getIdCartDetail()){
+					c.getCartDetail().get(j).setQuantita(cart.getCartDetailWeb().get(i).getQuantita());
+					cartDetailRepository.save(c.getCartDetail().get(j));
+					break;
+				}
+			}
+		}
+		c.setDataModifica(new Date());
+
 		return getCart(utente);
 	}
 	

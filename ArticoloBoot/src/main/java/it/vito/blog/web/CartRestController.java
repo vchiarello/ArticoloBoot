@@ -44,7 +44,7 @@ public class CartRestController {
 
 	@RequestMapping( method=RequestMethod.PUT)
 	public CartWeb update(@RequestBody @Valid CartWeb cart, Locale locale) {
-		CartWeb cart1 = gestioneCart.updateCart(CartWeb cart, SecurityContextHolder.getContext().getAuthentication().getName());
+		CartWeb cart1 = gestioneCart.updateCart(cart, SecurityContextHolder.getContext().getAuthentication().getName());
 		return cart1;
 	}
 

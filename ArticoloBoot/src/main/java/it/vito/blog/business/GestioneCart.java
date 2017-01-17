@@ -81,10 +81,9 @@ public class GestioneCart {
 		return cd;
 	}
 	
-	public CartWeb removeFromCart(Integer itemId, String itemName, String utente){
+	public CartWeb removeFromCart(Integer idCartDetail, String utente){
 		Cart c = cartRepository.findByUtente(utente);
-		Item item = new Item();
-		item.setId(itemId);
+
 		//non c'è alcun carrello salvato per l'utente, non viene cancellata alcuna riga
 		if (c==null){
 			c = initCart(utente);
@@ -92,10 +91,9 @@ public class GestioneCart {
 		}else{
 			c.setDataModifica(new Date());
 			cartRepository.save(c);
-			List<CartDetail> lc = cartDetailRepository.findByCartAndItem(c, item);
+			CartDetail cd = cartDetailRepository.findByIdCartDetail(idCartDetail);
 			
-			if (lc.size() != 0){
-				CartDetail cd = lc.get(0);
+			if (cd != null){
 				cartDetailRepository.delete(cd.getIdCartDetail());
 			}
 		}

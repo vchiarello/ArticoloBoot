@@ -23,6 +23,11 @@
 			</td>
 			<td>{{d.price*d.quantita}}
 			</td>
+			<td>
+				<button type="button" class="btn btn-danger btn-xs" ng-click="removeRow(d.idCartDetail,d.descrizione)">
+                   <span class="glyphicon glyphicon-trash"></span> <span>{{buttonDelete}}</span>
+                </button>
+			</td>
 		</tr>
 	</table>
     <div style="text-align: center;">

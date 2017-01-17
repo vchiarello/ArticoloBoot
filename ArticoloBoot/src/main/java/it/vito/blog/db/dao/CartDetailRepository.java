@@ -11,7 +11,7 @@ import it.vito.blog.db.bean.Item;
 
 public interface CartDetailRepository extends CrudRepository<CartDetail,Integer>{
 
-	public Cart findByIdCartDetail(Integer id);
+	public CartDetail findByIdCartDetail(Integer id);
 	public List<CartDetail> findByCartAndItem(Cart c, Item i);
 	
 }

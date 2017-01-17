@@ -30,9 +30,6 @@ angular.module('blogApp').controller('ViewItemShopCtrl',['$scope','ItemShop', '$
 		CartOperations.addToCart(idItem, nameItem);
 	}
 	
-	$scope.rimuoviCarrello = function(idItem, nameItem){
-		CartOperations.removeFromCart(idItem, nameItem);
-	}
 	
 	
 

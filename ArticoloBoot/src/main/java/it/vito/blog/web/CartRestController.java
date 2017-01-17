@@ -48,9 +48,9 @@ public class CartRestController {
 		return cart1;
 	}
 
-	@RequestMapping(value="/{id}/{name}", method=RequestMethod.DELETE)
-	public CartWeb delete(@PathVariable("id") int itemId, @PathVariable("name") String itemName) {
-		CartWeb cart = gestioneCart.removeFromCart(itemId,itemName, SecurityContextHolder.getContext().getAuthentication().getName());
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public CartWeb delete(@PathVariable("id") int idCartDetail) {
+		CartWeb cart = gestioneCart.removeFromCart(idCartDetail, SecurityContextHolder.getContext().getAuthentication().getName());
 		return cart;
 	}
 

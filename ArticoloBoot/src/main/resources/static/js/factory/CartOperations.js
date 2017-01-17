@@ -11,11 +11,21 @@ angular.module("blogApp").factory("CartOperations", function (Cart) {
 		cc.$save()
 	}
 
-	function removeFromCart(idItem, nomeItem){
+	function removeFromCart(idCartDetail){
 		cc = new Cart();
-		cc.id=idItem;
-		cc.nome=nomeItem;
-		cc.$delete()
+		cc.id=idCartDetail;
+		cc.$delete(null,function(){cc = cc.$get()});
+		return cc;
+	}
+
+	function updateCart(cart){
+		var C = new Cart(cart);
+		var cc=null;
+		C.$update(null,
+				function(){cc = C.$get(); alert("finito di salvare")},
+				function(){cc = C.$get(); alert("errore di salvataggio")}
+				);
+		return cc;
 	}
 
 	function getCart(){
@@ -27,7 +37,8 @@ angular.module("blogApp").factory("CartOperations", function (Cart) {
 	return {
 		addToCart:addToCart,
 		removeFromCart:removeFromCart,
-		getCart:getCart
+		getCart:getCart,
+		updateCart:updateCart
 	};
 
 

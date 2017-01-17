@@ -1,6 +1,11 @@
 //controller per la visualizzaizone del singolo item
 angular.module("blogApp").controller("ViewCartCtrl", function ($scope, Item, $stateParams, $state,Cart,CartOperations) {
-    function init() {
+
+	//label per l'internazionalizzazione dell'applicativo
+	$scope.buttonDelete=messaggi['viewCart.button.deleteRow'];
+	$scope.buttonSave=messaggi['viewCart.button.saveCart'];
+	
+	function init() {
     	$scope.cart = CartOperations.getCart();
     }
    
@@ -10,13 +15,21 @@ angular.module("blogApp").controller("ViewCartCtrl", function ($scope, Item, $st
     	//array con i nomi dei file
 		if ($scope.cart===undefined || $scope.cart==null) return;
 		cart = new Cart($scope.cart);
-        cart.$update(function(cart) {
-            alert("finito di salvare")
-        },function() {
-            alert("errore di salvataggio")
-        })
+		CartOperations.updateCart(cart);
+//		$scope.cart = cart.$update(function(cart) {
+//        	cc = cart.$get()
+//        	alert("finito di salvare")
+//        	return cc
+//        },function() {
+//            alert("errore di salvataggio")
+//            return $scope.cart;
+//        })
     }
 
+	$scope.removeRow = function(idItem, nameItem){
+		$scope.cart = CartOperations.removeFromCart(idItem, nameItem);
+	}
+    
     
     $scope.validateQuantity=function(quantita){
     	

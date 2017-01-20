@@ -15,6 +15,9 @@ angular.module('blogApp').controller('ViewItemShopCtrl',['$scope','ItemShop', '$
 //		$scope.info = data
 //	})
 
+	$scope.buttonAddCart=messaggi['viewItemShop.button.addCart'];
+	
+	
 	$scope.item = ItemShop.get({id:$stateParams.id,name:$stateParams.name},function(item){
 		$scope.immagini = new Array();
 		for (i = 0; i < item.listaFileSalvati.length;i++){

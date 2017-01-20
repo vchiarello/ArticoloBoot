@@ -4,6 +4,10 @@ angular.module("blogApp").controller("ViewCartCtrl", function ($scope, Item, $st
 	//label per l'internazionalizzazione dell'applicativo
 	$scope.buttonDelete=messaggi['viewCart.button.deleteRow'];
 	$scope.buttonSave=messaggi['viewCart.button.saveCart'];
+	$scope.labelProduct=messaggi['viewCart.label.product'];
+	$scope.labelQuantity=messaggi['viewCart.label.quantinty'];
+	$scope.labelPrice=messaggi['viewCart.button.price'];
+	$scope.labelTotale=messaggi['viewCart.button.totale'];
 	
 	function init() {
     	$scope.cart = CartOperations.getCart();

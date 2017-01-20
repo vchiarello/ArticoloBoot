@@ -1,36 +1,36 @@
   <div style="margin-top:50px;" cg-busy="{promise:cart.$promise,message:messaggio,templateUrl:'/templateAttendere'}">
 	<table>
 		<tr>
-			<th>
-				Prodotto
+			<th style="width:250px;">
+				{{labelProduct}}
 			</th>
-			<th>
-				Quantità
+			<th style="width:90px;">
+				{{labelQuantity}}
 			</th>
-			<th>
-				Costo
+			<th style="width:100px;">
+				{{labelPrice}}
 			</th>
-			<th>
-				Totale
+			<th style="width:100px;">
+				{{labelTotale}}
 			</th>
 		</tr>
 		<tr  ng-repeat="d in cart.cartDetailWeb">
 			<td>{{d.descrizione}}
 			</td>
-			<td><input type="text" ng-model="d.quantita" ng-blur="validateQuantity(d.quantita)">
+			<td><input type="text" style="width:50px;" ng-model="d.quantita" ng-blur="validateQuantity(d.quantita)">
 			</td>
 			<td>{{d.price}}
 			</td>
 			<td>{{d.price*d.quantita}}
 			</td>
-			<td>
+			<td >
 				<button type="button" class="btn btn-danger btn-xs" ng-click="removeRow(d.idCartDetail,d.descrizione)">
                    <span class="glyphicon glyphicon-trash"></span> <span>{{buttonDelete}}</span>
                 </button>
 			</td>
 		</tr>
 	</table>
-    <div style="text-align: center;">
+    <div style="text-align: center;padding-top:20px;">
 		<button type="button" class="btn btn-success btn-sm" ng-click="updateCart()">
 			<span class="glyphicon glyphicon-save"></span><span>{{buttonSave}}</span>
 		</button>

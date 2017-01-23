@@ -117,6 +117,7 @@ CREATE  TABLE bg_cart (
   data_modifica DATETIME NULL, 
   PRIMARY KEY (id_cart) );
 
+  
 CREATE  TABLE bg_cart_detail (
   id_cart_detail INT NOT NULL identity,
   id_cart int not null,

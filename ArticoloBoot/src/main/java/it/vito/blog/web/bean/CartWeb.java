@@ -42,6 +42,8 @@ public class CartWeb implements Serializable {
 				CartDetail cd = c.getCartDetail().get(i);
 				CartDetailWeb cdw = new CartDetailWeb();
 				cdw.setIdCartDetail(cd.getIdCartDetail());
+				cdw.setIdItem(cd.getItem().getId());
+				cdw.setDescrizione(cd.getItem().getNome());
 				cdw.setPrice(cd.getCosto());
 				cdw.setQuantita(cd.getQuantita());;
 				this.cartDetailWeb.add(cdw);
@@ -58,6 +60,7 @@ public class CartWeb implements Serializable {
 			if (cartDetailWeb==null) cartDetailWeb = new LinkedList<CartDetailWeb>();
 			CartDetailWeb cdw = new CartDetailWeb();
 			cdw.setIdCartDetail(cdvw.getIdCartDetail());
+			cdw.setIdItem(cdvw.getIdItem());
 			cdw.setPrice(cdvw.getPrice());
 			cdw.setQuantita(cdvw.getQuantita());
 			cdw.setDescrizione(cdvw.getDescrizione());

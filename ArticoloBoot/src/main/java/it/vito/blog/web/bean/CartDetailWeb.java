@@ -9,14 +9,27 @@ public class CartDetailWeb implements Serializable{
 	 */
 	private static final long serialVersionUID = -2694748867549797453L;
 	private Integer idCartDetail;
-	private Integer quantita;
+	private Integer idItem;
 	private String descrizione;
+	private Integer quantita;
 	private Float price;
 	public Integer getIdCartDetail() {
 		return idCartDetail;
 	}
 	public void setIdCartDetail(Integer idCartDetail) {
 		this.idCartDetail = idCartDetail;
+	}
+	public Integer getIdItem() {
+		return idItem;
+	}
+	public void setIdItem(Integer idItem) {
+		this.idItem = idItem;
+	}
+	public String getDescrizione() {
+		return descrizione;
+	}
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
 	public Integer getQuantita() {
 		return quantita;
@@ -30,16 +43,10 @@ public class CartDetailWeb implements Serializable{
 	public void setPrice(Float price) {
 		this.price = price;
 	}
-	public String getDescrizione() {
-		return descrizione;
-	}
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
 	@Override
 	public String toString() {
-		return "CartDetailWeb [idCartDetail=" + idCartDetail + ", quantita=" + quantita + ", descrizione=" + descrizione
-				+ ", price=" + price + "]";
+		return "CartDetailWeb [idCartDetail=" + idCartDetail + ", idItem=" + idItem + ", descrizione=" + descrizione
+				+ ", quantita=" + quantita + ", price=" + price + "]";
 	}
 	
 }

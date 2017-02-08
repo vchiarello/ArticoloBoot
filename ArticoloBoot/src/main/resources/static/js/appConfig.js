@@ -63,9 +63,5 @@ angular.module("blogApp").config(function ($stateProvider, $urlRouterProvider) {
             url:'/viewCart',
             templateUrl: 'html/viewCart.html',
             controller: 'ViewCartCtrl'
-        }).state('endpoints', {
-            url: '/endpoints',
-            templateUrl: URLS.partialsMappings,
-            controller: 'MappingsCtrl'
-        });
+         });
 });

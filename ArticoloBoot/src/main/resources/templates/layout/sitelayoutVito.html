@@ -3,43 +3,7 @@
 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title th:text="#{app.name}">Righe verticali</title>
-    <link rel="icon" th:href="@{/css/favicon.ico}" 	/>
-    
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
-          href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap-theme.css}"
-          href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.css"/>
-    
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" th:href="@{/css/themeVito.css}"/>
-    
-    <script th:src="@{/webjars/jquery/2.1.0/jquery.js}" src="jquery.js"></script>
-    <script th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.js}"
-            src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-    <script th:src="@{/webjars/angularjs/1.3.0/angular.min.js}"
-            src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
-    <script th:src="@{/webjars/nervgh-angular-file-upload/1.1.5/angular-file-upload.min.js}"
-            src="//ajax.googleapis.com/nervgh-angular-file-upload/1.1.5/angular-file-upload.min.js"></script>
-    <script th:src="@{/webjars/angularjs/1.3.0/angular-resource.min.js}" src="#"></script>
-    <script th:src="@{/webjars/angular-ui-router/0.2.8/angular-ui-router.min.js}" src="#"></script>
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        var URLS = {};
-        URLS.items = /*[[@{/rest/items/:id}]]*/ '/rest/items';
-        URLS.partialsListItem = /*[[@{/items/partialsListItem}]]*/ '/items/partialsListItem';
-        URLS.partialsEditItem = /*[[@{/items/partialsEditItem}]]*/ '/items/partialsEditItem';
-        URLS.partialsCreateItem = /*[[@{/items/partialsCreateItem}]]*/ '/items/partialsCreateItem';
-        URLS.partialsCreateItemw1 = /*[[@{/items/partialsCreateItemw1}]]*/ '/items/partialsCreateItemw1';
-        URLS.partialsCreateItemw2 = /*[[@{/items/partialsCreateItemw2}]]*/ '/items/partialsCreateItemw2';
-        URLS.partialsCreateItemw3 = /*[[@{/items/partialsCreateItemw3}]]*/ '/items/partialsCreateItemw3';
-        URLS.login = /*[[@{/items/login}]]*/ '/items/login';
-        URLS.tags = /*[[@{/rest/tags}]]*/ '/rest/tags';
 
-        URLS.mappingsUrl = /*[[@{/mappings}]]*/ '/mappings';
-        URLS.partialsMappings = /*[[@{/mappings/partialsMappings}]]*/ '/mappings/partialsEndpoints';
-        /*]]>*/
-    </script>
-    <script th:src="@{/js/app.js}" src="../../static/js/app.js"></script>
 </head>
 <body>
 

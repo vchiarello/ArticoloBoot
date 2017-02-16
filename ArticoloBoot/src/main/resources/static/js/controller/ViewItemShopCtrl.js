@@ -1,5 +1,5 @@
-angular.module('blogApp').controller('ViewItemShopCtrl',['$scope','ItemShop', '$stateParams','$http','Cart','CartOperations',
-	function ($scope, ItemShop, $stateParams,$http,Cart,CartOperations){
+angular.module('blogApp').controller('ViewItemShopCtrl',['$scope','ItemShop', '$stateParams','$http','Cart','CartOperations', '$q',
+	function ($scope, ItemShop, $stateParams,$http,Cart,CartOperations,$q){
 	
 //	$http.get("/rest/itemShop/infoAllegati/"+$stateParams.id+"/"+$stateParams.name).
 //	then(function(data){
@@ -16,6 +16,10 @@ angular.module('blogApp').controller('ViewItemShopCtrl',['$scope','ItemShop', '$
 //	})
 
 	$scope.buttonAddCart=messaggi['viewItemShop.button.addCart'];
+
+	function init() {
+        $scope.promessa = new Object();
+    }
 	
 	
 	$scope.item = ItemShop.get({id:$stateParams.id,name:$stateParams.name},function(item){
@@ -30,7 +34,9 @@ angular.module('blogApp').controller('ViewItemShopCtrl',['$scope','ItemShop', '$
 	$scope.cart = CartOperations.getCart();
 	
 	$scope.aggiungiCarrello = function(idItem, nameItem){
-		CartOperations.addToCart(idItem, nameItem);
+		$scope.promessa = $q.defer();
+		CartOperations.addToCart(idItem, nameItem,$scope.promessa);
+		$scope.promessa.resolve('finito');
 	}
 	
 	

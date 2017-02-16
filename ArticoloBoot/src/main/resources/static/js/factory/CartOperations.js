@@ -8,7 +8,8 @@ angular.module("blogApp").factory("CartOperations", function (Cart) {
 		cc = new Cart();
 		cc.id=idItem;
 		cc.nome=nomeItem;
-		cc.$save()
+		cc.$save();
+		
 	}
 
 	function removeFromCart(idCartDetail){

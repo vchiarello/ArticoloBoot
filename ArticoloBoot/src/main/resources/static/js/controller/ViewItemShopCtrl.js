@@ -18,8 +18,10 @@ angular.module('blogApp').controller('ViewItemShopCtrl',['$scope','ItemShop', '$
 	$scope.buttonAddCart=messaggi['viewItemShop.button.addCart'];
 
 	function init() {
-        $scope.promessa = new Object();
+		//a = new Cart();
+        //$scope.promessa = a.$get(null,function(){console.log("cart:" + cc.idCart);});
     }
+	init();
 	
 	
 	$scope.item = ItemShop.get({id:$stateParams.id,name:$stateParams.name},function(item){
@@ -34,9 +36,24 @@ angular.module('blogApp').controller('ViewItemShopCtrl',['$scope','ItemShop', '$
 	$scope.cart = CartOperations.getCart();
 	
 	$scope.aggiungiCarrello = function(idItem, nameItem){
-		$scope.promessa = $q.defer();
-		CartOperations.addToCart(idItem, nameItem,$scope.promessa);
-		$scope.promessa.resolve('finito');
+//		$scope.promessa = $q(function(resolve, reject) {
+//		    setTimeout(function() {
+//			      if (false) {
+//			        resolve('Hello, ' + name + '!');
+//			      } else {
+//			        reject('Greeting ' + name + ' is not allowed.');
+//			      }
+//			    }, 10000);
+//			  });
+//		
+//		CartOperations.addToCart(idItem, nameItem,$scope.promessa);
+//		
+//		
+		cc = new Cart();
+		cc.id=idItem;
+		cc.nome=nameItem;
+		$scope.promessa = cc.$save();
+
 	}
 	
 	

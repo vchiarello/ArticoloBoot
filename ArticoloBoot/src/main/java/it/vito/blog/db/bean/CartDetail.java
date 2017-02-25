@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
@@ -21,8 +23,14 @@ public class CartDetail implements Serializable{
 	 */
 	private static final long serialVersionUID = 4224673751798520212L;
 
-	@EmbeddedId
-	private CartDetailId idCartDetail;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_cart_detail")
+	private Integer idCartDetail;
+
+ 	@ManyToOne
+	@JoinColumns({@JoinColumn(name="id_cart", referencedColumnName="id_cart")})
+	private Cart cart;
 	
 	@ManyToOne
 	@JoinColumns({@JoinColumn(name="id_item", referencedColumnName="id_item")})
@@ -41,13 +49,20 @@ public class CartDetail implements Serializable{
 	@Column(name="data_modifica")
 	private Date dataModifica;
 
-	
-	public CartDetailId getIdCartDetail() {
+	public Integer getIdCartDetail() {
 		return idCartDetail;
 	}
 
-	public void setIdCartDetail(CartDetailId idCartDetail) {
+	public void setIdCartDetail(Integer idCartDetail) {
 		this.idCartDetail = idCartDetail;
+	}
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
 
 	public Item getItem() {
@@ -92,7 +107,8 @@ public class CartDetail implements Serializable{
 
 	@Override
 	public String toString() {
-		return "CartDetail [idCartDetail=" + idCartDetail + ", item=" + item.getId() + ", quantita="
+		return "CartDetail [idCartDetail=" + idCartDetail + ", cart=" + cart + 
+				", item=" + item + ", quantita="
 				+ quantita + ", costo=" + costo + ", dataInserimento=" + dataInserimento + ", dataModifica="
 				+ dataModifica + "]";
 	}

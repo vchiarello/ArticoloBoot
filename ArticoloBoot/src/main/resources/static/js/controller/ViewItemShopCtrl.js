@@ -1,5 +1,5 @@
-angular.module('blogApp').controller('ViewItemShopCtrl',['$scope','ItemShop', '$stateParams','$http','Cart',
-	function ($scope, ItemShop, $stateParams,$http,Cart){
+angular.module('blogApp').controller('ViewItemShopCtrl',['$scope','ItemShop', '$stateParams','$http','Cart','CartOperations', '$q',
+	function ($scope, ItemShop, $stateParams,$http,Cart,CartOperations,$q){
 	
 //	$http.get("/rest/itemShop/infoAllegati/"+$stateParams.id+"/"+$stateParams.name).
 //	then(function(data){
@@ -15,6 +15,15 @@ angular.module('blogApp').controller('ViewItemShopCtrl',['$scope','ItemShop', '$
 //		$scope.info = data
 //	})
 
+	$scope.buttonAddCart=messaggi['viewItemShop.button.addCart'];
+
+	function init() {
+		//a = new Cart();
+        //$scope.promessa = a.$get(null,function(){console.log("cart:" + cc.idCart);});
+    }
+	init();
+	
+	
 	$scope.item = ItemShop.get({id:$stateParams.id,name:$stateParams.name},function(item){
 		$scope.immagini = new Array();
 		for (i = 0; i < item.listaFileSalvati.length;i++){
@@ -24,13 +33,29 @@ angular.module('blogApp').controller('ViewItemShopCtrl',['$scope','ItemShop', '$
 		}
 	});
 
-	$scope.aggiungiCarrello = function(){
-		//alert("aggiungi carrello");
+	$scope.cart = CartOperations.getCart();
+	
+	$scope.aggiungiCarrello = function(idItem, nameItem){
+//		$scope.promessa = $q(function(resolve, reject) {
+//		    setTimeout(function() {
+//			      if (false) {
+//			        resolve('Hello, ' + name + '!');
+//			      } else {
+//			        reject('Greeting ' + name + ' is not allowed.');
+//			      }
+//			    }, 10000);
+//			  });
+//		
+//		CartOperations.addToCart(idItem, nameItem,$scope.promessa);
+//		
+//		
 		cc = new Cart();
-		cc.id=$stateParams.id;
-		cc.nome=$stateParams.name;
-		cc.$save()
+		cc.id=idItem;
+		cc.nome=nameItem;
+		$scope.promessa = cc.$save();
+
 	}
+	
 	
 	
 

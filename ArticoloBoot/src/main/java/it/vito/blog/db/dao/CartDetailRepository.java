@@ -1,14 +1,17 @@
 package it.vito.blog.db.dao;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 import it.vito.blog.db.bean.Cart;
 import it.vito.blog.db.bean.CartDetail;
-import it.vito.blog.db.bean.CartDetailId;
+import it.vito.blog.db.bean.Item;
 
 
-public interface CartDetailRepository extends CrudRepository<CartDetail,CartDetailId>{
+public interface CartDetailRepository extends CrudRepository<CartDetail,Integer>{
 
-	public Cart findByIdCartDetail(CartDetailId id);
-
+	public CartDetail findByIdCartDetail(Integer id);
+	public List<CartDetail> findByCartAndItem(Cart c, Item i);
+	
 }

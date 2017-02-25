@@ -147,7 +147,7 @@ angular.module("blogApp").controller("EditItemShopCtrl", ['$scope', 'Tag', 'Item
         },function() {
         	$scope.promessa.resolve('finito');
         	bootbox.alert({message: messaggiErrore['createItem.error.save']});
-    })
+        })
     }
 
     //appena si aggiunge un file questo viene immediatamenta uploadato sul server

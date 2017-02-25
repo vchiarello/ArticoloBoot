@@ -72,7 +72,7 @@
 
 
 
-  <div style="margin-top:50px;">
+  <div style="margin-top:50px;" cg-busy="{promise:promessa,message:messaggio,templateUrl:'/templateAttendere'}">
 	<image-viewer immagini="immagini"></image-viewer>
 	<div style="padding:5px;margin:15px;float:left;width:400px;border-style: solid; border-width: 1px;border-color: black;font-family:tahoma, sans serif;">
 		<h1>{{item.titolo}}</h1>
@@ -88,7 +88,15 @@
 				<li>{{taglia.valore}}
 			</ul>
 		</p>
-		<p style="font-size: 10pt"><input type="button" value="Aggiungi al carrello" ng-click="aggiungiCarrello()"></p>
+		<p style="font-size: 10pt">
+		
+				<button type="button" class="btn btn-success btn-sm" ng-click="aggiungiCarrello(item.id,item.nome)">
+                   <span class="glyphicon glyphicon-save"></span> <span>{{buttonAddCart}}</span>
+                </button>
+		
+		
+		
+		</p>
 		<p style="font-size: 10pt">{{item.testo}}</p>
 	</div>
   </div>

@@ -36,8 +36,8 @@ public class Order implements Serializable{
 	@Column(name="data_modifica")
 	private Date dataModifica;
 	
-	@OneToMany(targetEntity=it.vito.blog.db.bean.OrderDetail.class, mappedBy="idOrderDetail.order")
-	@OrderBy("idOrderDetail.progressivo ASC")
+	@OneToMany(targetEntity=it.vito.blog.db.bean.OrderDetail.class, mappedBy="order")
+	@OrderBy("idOrderDetail ASC")
 	private List<OrderDetail> orderDetail;
 
 

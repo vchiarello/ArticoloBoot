@@ -47,26 +47,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
         URLS.cart = "/rest/cart/:id/:name";
         URLS.property = "/rest/property/:nome";
 
-        
-        
-        
-        URLS.partialsCreateSlideShowItem = "/items/partialsCreateSlideShowItem" ;
-        URLS.partialsEditSlideShowItem = "/items/partialsEditSlideShowItem" ;
-        URLS.partialsViewSlideShowItem = "/items/partialsViewSlideShowItem" ;
-        
-        
-        URLS.partialsListItem = "/items/partialsListItem" ;
-        URLS.partialsViewItem = "/items/partialsViewItem" ;
-        URLS.partialsEditItem = "/items/partialsEditItem" ;
-        URLS.partialsEditList = "/items/partialsEditList" ;
-        URLS.partialsCreateItem = "/items/partialsCreateItem" ;
-        URLS.partialsCreateItemw1 = "/items/partialsCreateItemw1";
-        URLS.partialsCreateItemw2 = "/items/partialsCreateItemw2" ;
-        URLS.partialsCreateItemw3 = "/items/partialsCreateItemw3" ;
         URLS.login = "/items/login" ;
 
-        URLS.mappingsUrl = "/mappings" ;
-        URLS.partialsMappings = "/mappings/partialsMappings" ;
         /*]]>*/
     </script>
 
@@ -85,42 +67,32 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
 
 <script src="/js/controller/NewItemShopCtrl.js" ></script>
 <script src="/js/controller/EditItemShopCtrl.js" ></script>
-<!-- <script src="/js/controller/ViewSlideShowCtrl.js" ></script> -->
+<!-- javascript per la view di itemShop -->
+<script type="text/javascript" src="/js/jquery.zoom.js"></script>
+<script type="text/javascript" src="/js/component/imageViewer.js"></script>
+<script type="text/javascript" src="/js/controller/ViewItemShopCtrl.js" ></script>
 
 <script src="/js/controller/NewSlideShowCtrl.js" ></script>
 <script src="/js/controller/ViewSlideShowCtrl.js" ></script>
 <script src="/js/controller/EditSlideShowCtrl.js" ></script>
 
 
-<script src="/js/controller/appEditListCtrl.js" ></script>
 
-<!-- VECCHIE VERSIONI NON PIU' DA IMPORTARE -->
-<!-- <script src="/js/controller/appItemViewCtrl.js" ></script> -->
-<!-- <script src="/js/controller/appItemCreateCtrl.js"></script> -->
-<!-- <script src="/js/controller/appItemEditCtrl.js"></script> -->
 
-<!-- <script src="/js/controller/appItemViewSlideShowCtrl.js" ></script> -->
-<!-- <script src="/js/controller/appItemCreateSlideShowCtrl.js" ></script> -->
-<!-- <script src="/js/controller/appItemEditSlideShowCtrl.js" ></script> -->
-
-<script src="/js/controller/appLoginCtrl.js"></script>
-<script src="/js/controller/appMappingCtrl.js"></script>
+<script src="/js/controller/LoginCtrl.js"></script>
 <script src="/js/factory/ItemShop.js"></script>
-<script src="/js/factory/appItem.js"></script>
-<script src="/js/factory/appProperty.js"></script>
-<script src="/js/factory/appItemOperation.js"></script>
-<script src="/js/factory/appMapping.js"></script>
-<script src="/js/factory/appTag.js"></script>
-
-<!--     <script th:src="@{/js/app.js}"></script> -->
+<script src="/js/factory/Item.js"></script>
+<script src="/js/factory/Property.js"></script>
+<script src="/js/factory/ItemOperation.js"></script>
+<script src="/js/factory/Tag.js"></script>
 
 
-<!-- javascript per la view di itemShop -->
-<script type="text/javascript" src="/js/jquery.zoom.js"></script>
-<script type="text/javascript" src="/js/component/imageViewer.js"></script>
+
+
+<!-- javascript per Cart -->
+<script type="text/javascript" src="/js/controller/ViewCartCtrl.js"></script>
+<script type="text/javascript" src="/js/factory/CartOperations.js"></script>
 <script type="text/javascript" src="/js/factory/Cart.js"></script>
-<script src="/js/controller/ViewItemShopCtrl.js" ></script>
-
 
 
 </head>
@@ -150,14 +122,12 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
                 <li><a ui-sref="createItemShop">{{labelNewItemShop}}</a></li>
                 <li><a href="#">{{labelAnotherAction}}</a></li>
                 <li role="separator" class="divider"></li>
-                <li class="dropdown-header">{{labelNavHeader}}</li>
+                <li><a ui-sref="viewCart">{{labelViewCart}}</a></li>
                 <li><a href="#">{{labelSeparatedLink}}</a></li>
               </ul>
             </li>
           </ul>
-          <div style="width:300px;text-align:right;display:inline;">
-          	<a ui-sref="#" ng-click="carrello()">Carrello</a>
-          </div>
+          
         </div><!--/.nav-collapse -->
       </div>
     </nav>

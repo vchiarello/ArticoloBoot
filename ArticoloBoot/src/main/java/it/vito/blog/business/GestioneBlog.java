@@ -168,9 +168,22 @@ public class GestioneBlog {
 			lPropWeb.add(ipw);
 		}
 		
-		if (propsXNome.get("Colore")!= null) risultato.setColoriSelezionati(propsXNome.get("Colore"));
+		if (propsXNome.get("Colore")!= null) 
+			risultato.setColoriSelezionati(propsXNome.get("Colore"));
 		if (propsXNome.get("Taglia")!= null) risultato.setTaglieSelezionati(propsXNome.get("Taglia"));
-		if (propsXNome.get("Prezzo")!= null && propsXNome.get("Prezzo").get(0)!=null) risultato.setPrezzo(propsXNome.get("Prezzo").get(0));
+		
+		
+		if (propsXNome.get("Prezzo")!= null && propsXNome.get("Prezzo").get(0)!=null) 
+			risultato.setPrezzo(propsXNome.get("Prezzo").get(0));
+		else {
+			//se non si era salvato alcun colore allora si prende la proprietà dall'anagrafica.
+			//per le proprietà sopra non è necessario perché la combo viene popolata prendendo tutti i valori dall'anagrafica
+			List<AnagraficaProprieta> l = this.anagraficaProprietaRepository.findByNomeProprieta("Prezzo");
+			ItemPropertyWeb ipw = new ItemPropertyWeb();
+			ipw.setId(l.get(0).getId());
+			ipw.setNome("Prezzo");
+			risultato.setPrezzo(ipw);
+		}
 		
 		return risultato;
 	}

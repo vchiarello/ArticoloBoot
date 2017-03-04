@@ -132,3 +132,43 @@ insert into blog.bg_property(nome_proprieta, valore_proprieta,flag_multiplo)valu
 
 
 INSERT INTO bg_Tipo_Item (descrizione) VALUES ('Item shop type' )
+
+
+drop table bg_cart_detail;
+drop table bg_cart;
+CREATE  TABLE bg_cart (
+  id_cart INT NOT NULL auto_increment,
+  utente varchar(1000) NOT NULL ,
+  data_inserimento DATETIME not NULL ,
+  data_modifica DATETIME NULL, 
+  PRIMARY KEY (id_cart) );
+
+  
+CREATE  TABLE bg_cart_detail (
+  id_cart_detail INT NOT NULL auto_increment,
+  id_cart int not null,
+  id_item int not null,
+  quantita int not null,
+  costo float,
+  data_inserimento DATETIME not NULL ,
+  data_modifica DATETIME NULL, 
+  PRIMARY KEY (id_cart_detail) );
+
+ALTER TABLE bg_cart_detail ADD  CONSTRAINT FK_bg_cart_detail FOREIGN KEY(id_item)
+REFERENCES bg_item (id_item);
+
+ALTER TABLE bg_cart_detail ADD  CONSTRAINT FK1_bg_cart_detail FOREIGN KEY(id_cart)
+REFERENCES bg_cart (id_cart);
+
+create view bg_cart_detail_vw as
+select id_cart_detail, cd.id_item, cd.quantita, lip.value price, i.titolo descrizione, c.utente, c.id_cart
+from  bg_cart_detail cd
+, bg_Item i
+, bg_cart c
+, bg_lk_item_property lip
+, bg_property p
+where cd.id_item = i.id_item
+and c.id_cart=cd.id_cart
+and lip.id_item=i.id_item
+and lip.id_prop=p.id_prop
+and p.nome_proprieta='Prezzo';

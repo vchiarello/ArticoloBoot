@@ -104,20 +104,19 @@ angular.module("blogApp").controller("EditItemShopCtrl", ['$scope', 'Tag', 'Item
     		return;
     	}
 
-    	var item = new ItemShop($scope.item);
-
 		//se non ci sono upload ancora in sospeso
 		//si aspetta che finisca poi si salva e si va verso la home di edit
         if (uploader.queue.length > 0 && uploader.progress < 100){
         	uploader.onCompleteAll = function() {
+        		$scope.promessa.resolve("ciao")
         		//quando finisce l'upload eseguirà il salvataggio
-            	$scope.promessa = $q.defer()
            		_validaESalva();
     	    }	
         	//esegue l'upload
+        	$scope.promessa = $q.defer();
+        	$scope.promessa.promise.then(function(greeting) {console.log('Upload eseguito correttamente');})
            	uploader.uploadAll();
         }else{
-        	$scope.promessa = $q.defer()
         	_validaESalva();
         }
     }
@@ -133,19 +132,17 @@ angular.module("blogApp").controller("EditItemShopCtrl", ['$scope', 'Tag', 'Item
 		//TODO tipo Item dello slide show da verificare se codice va bene
         $scope.item.tipoItem = 3;
 		var item = new ItemShop($scope.item);
-        
-        item.$update(function(itemWeb) {
+
+    	$scope.promessa.promise = item.$update(function(itemWeb) {
             if (itemWeb.erroreWeb == null){
+            	//commentare se non si vuole che torni alla lista
             	$state.transitionTo("editList");
-            	$scope.promessa.resolve('finito');
             }else{
-            	$scope.promessa.resolve('finito');
             	$scope.erroreNome=item.erroreWeb.erroreNome;
             	$scope.erroreTitolo=item.erroreWeb.erroreTitolo;
             	$scope.erroreTesto=item.erroreWeb.erroreTesto;
             }
         },function() {
-        	$scope.promessa.resolve('finito');
         	bootbox.alert({message: messaggiErrore['createItem.error.save']});
         })
     }

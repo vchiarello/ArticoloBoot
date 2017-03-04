@@ -20,7 +20,8 @@ public class ItemPropertyWeb implements Serializable{
 	}
 	public AnagraficaProprieta toItemProperty(){
 		AnagraficaProprieta risultato = new AnagraficaProprieta();
-		risultato.setId(this.getId());
+		if (this.getId() !=null)
+			risultato.setId(this.getId());
 		risultato.setNomeProprieta(this.getNome());
 		risultato.setValoreProprieta(this.valore);
 		return risultato;

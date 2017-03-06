@@ -34,7 +34,11 @@ angular.module("blogApp").controller("EditItemShopCtrl", ['$scope', 'Tag', 'Item
 	$scope.labelResourceRemove = messaggi['editItemShop.label.resources.button.remove'];
 	$scope.labelResourceRestore = messaggi['editItemShop.label.resources.button.restore'];
 	$scope.buttonCancel = messaggi['editItemShop.button.cancel'];
-	$scope.buttonSave = messaggi['editItemShop.button.save'];
+	$scope.buttonOk = messaggi['editItemShop.button.Ok'];
+	$scope.apply = messaggi['editItemShop.button.apply'];
+	$scope.preview = messaggi['editItemShop.button.preview'];
+	
+	
 	$scope.labelColori = messaggi['editItemShop.label.colori']
 	$scope.labelTaglie = messaggi['editItemShop.label.taglie']
 	
@@ -98,31 +102,39 @@ angular.module("blogApp").controller("EditItemShopCtrl", ['$scope', 'Tag', 'Item
     }
 
     //salvataggio dell'itemShop
-    $scope.createItem = function () {
+    $scope.createItem = function (remain,preview) {
     	if (!_validaAll()){
     		bootbox.alert({message: messaggiErrore['createItem.validateAll.alert']});
     		return;
     	}
-
+    	
+    	var errore = false;
 		//se non ci sono upload ancora in sospeso
 		//si aspetta che finisca poi si salva e si va verso la home di edit
         if (uploader.queue.length > 0 && uploader.progress < 100){
         	uploader.onCompleteAll = function() {
-        		$scope.promessa.resolve("ciao")
+
         		//quando finisce l'upload eseguirà il salvataggio
-           		_validaESalva();
+        		if (!errore){
+            		$scope.promessa.resolve('Upload eseguito correttamente')
+               		_validaESalva(remain,preview);
+        		}
     	    }	
+        	uploader.onErrorItem = function(item, response, status, headers) {
+        		errore = true;
+        		$scope.promessa.reject("Errore di upload")
+        	}
         	//esegue l'upload
         	$scope.promessa = $q.defer();
-        	$scope.promessa.promise.then(function(greeting) {console.log('Upload eseguito correttamente');})
+        	$scope.promessa.promise.then(function(messaggio) {console.log(messaggio);},function(messaggio) {bootbox.alert({message: messaggio});})
            	uploader.uploadAll();
         }else{
-        	_validaESalva();
+        	_validaESalva(remain,preview);
         }
     }
 
     
-    function _validaESalva(){
+    function _validaESalva(remain,preview){
     	//array con i nomi dei file
 		if ($scope.item.listaFile===undefined || $scope.item.listaFile==null) $scope.item.listaFile=new Array();
 		for (i = 0; i < uploader.queue.length; i++){
@@ -135,9 +147,20 @@ angular.module("blogApp").controller("EditItemShopCtrl", ['$scope', 'Tag', 'Item
 
     	$scope.promessa.promise = item.$update(function(itemWeb) {
             if (itemWeb.erroreWeb == null){
-            	//commentare se non si vuole che torni alla lista
-            	$state.transitionTo("editList");
+
+            	if (!remain)
+            		$state.transitionTo("editList");
+            	else if (preview){
+            		$state.transitionTo($state.current,{id: $stateParams.id, name: $stateParams.name},{reload:true});
+            		var url ="/index.html#"+ $state.href("viewItemShop", {id: $stateParams.id, name: $stateParams.name});
+            		window.open(url,'_blank');
+            	}
+            	else{
+            		bootbox.alert({message: messaggiErrore['createItem.success.save']});
+            		$state.transitionTo($state.current,{id: $stateParams.id, name: $stateParams.name},{reload:true});
+            	}
             }else{
+            	bootbox.alert({message: messaggiErrore['createItem.error.save']});
             	$scope.erroreNome=item.erroreWeb.erroreNome;
             	$scope.erroreTitolo=item.erroreWeb.erroreTitolo;
             	$scope.erroreTesto=item.erroreWeb.erroreTesto;

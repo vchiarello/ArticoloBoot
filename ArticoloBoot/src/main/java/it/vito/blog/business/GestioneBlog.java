@@ -231,6 +231,7 @@ public class GestioneBlog {
 		Item it = itemWeb.toItem();
 		it.setDataModifica(new Date());
 		Item itemSalvato = itemRepository.save(it);
+		itemWeb.setId(itemSalvato.getId());
 		soloPerAdvice(itemSalvato);
 		
 		//salvataggio degli allegati

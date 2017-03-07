@@ -37,6 +37,8 @@ angular.module("blogApp").controller("EditItemShopCtrl", ['$scope', 'Tag', 'Item
 	$scope.buttonOk = messaggi['editItemShop.button.Ok'];
 	$scope.apply = messaggi['editItemShop.button.apply'];
 	$scope.preview = messaggi['editItemShop.button.preview'];
+	$scope.uploadError = messaggi['editItemShop.upload.error'];
+	$scope.uploadSuccess = messaggi['editItemShop.upload.success'];
 	
 	
 	$scope.labelColori = messaggi['editItemShop.label.colori']
@@ -113,16 +115,15 @@ angular.module("blogApp").controller("EditItemShopCtrl", ['$scope', 'Tag', 'Item
 		//si aspetta che finisca poi si salva e si va verso la home di edit
         if (uploader.queue.length > 0 && uploader.progress < 100){
         	uploader.onCompleteAll = function() {
-
         		//quando finisce l'upload eseguirà il salvataggio
         		if (!errore){
-            		$scope.promessa.resolve('Upload eseguito correttamente')
+            		$scope.promessa.resolve(messaggi['editItemShop.upload.success'])
                		_validaESalva(remain,preview);
         		}
-    	    }	
+    	    }
         	uploader.onErrorItem = function(item, response, status, headers) {
         		errore = true;
-        		$scope.promessa.reject("Errore di upload")
+        		$scope.promessa.reject(messaggi['editItemShop.upload.error'])
         	}
         	//esegue l'upload
         	$scope.promessa = $q.defer();

@@ -203,7 +203,7 @@
 					</div>
 			    </div>
 		        <div class="row">
-		            <div class="col-md-5" style="text-align: center;">
+		            <div class="col-md-4" style="text-align: center;">
 					</div>
 		            <div class="col-md-1" style="text-align: center;">
 						<button type="button" class="btn btn-danger btn-sm" ng-click="cancel()">
@@ -211,11 +211,21 @@
 						</button>
 					</div>
 		            <div class="col-md-1" style="text-align: center;">
-						<button type="button" class="btn btn-success btn-sm" ng-click="createItem()">
-							<span class="glyphicon glyphicon-save"></span><span>{{buttonSave}}</span>
+						<button type="button" class="btn btn-success btn-sm" ng-click="createItem(false,false)">
+							<span class="glyphicon glyphicon-save"></span><span>{{buttonOk}}</span>
 						</button>
 					</div>
-		            <div class="col-md-5" style="text-align: center;">
+		            <div class="col-md-1" style="text-align: center;">
+						<button type="button" class="btn btn-success btn-sm" ng-click="createItem(true,false)">
+							<span class="glyphicon glyphicon-save"></span><span>{{apply}}</span>
+						</button>
+					</div>
+		            <div class="col-md-1" style="text-align: center;">
+						<button type="button" class="btn btn-success btn-sm" ng-click="createItem(false,true)">
+							<span class="glyphicon glyphicon-eye-open"></span><span>{{preview}}</span>
+						</button>
+					</div>
+		            <div class="col-md-4" style="text-align: center;">
 					</div>
 		        </div>
 		        <div class="row">

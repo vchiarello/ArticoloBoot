@@ -1,18 +1,14 @@
 package it.vito.blog.index;
 
-import it.vito.blog.db.bean.Item;
-
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,8 +16,8 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
-import org.apache.lucene.document.IntField;
-import org.apache.lucene.document.LongField;
+import org.apache.lucene.document.IntPoint;
+import org.apache.lucene.document.LongPoint;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.DirectoryReader;
@@ -37,9 +33,13 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.apache.lucene.util.Version;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+
+import it.vito.blog.db.bean.Item;
+import it.vito.blog.web.bean.ItemWeb;
+@Configuration
 @Component("indexArticolo")
 public class IndexArticolo {
 
@@ -67,32 +67,32 @@ public class IndexArticolo {
 	public void creaIndice() throws IOException{
 		 Directory dir;
 		try {
-			dir = FSDirectory.open(new File(path));
-			// :Post-Release-Update-Version.LUCENE_XY:
-			Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_48);
-			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_48, analyzer);
+			dir = FSDirectory.open(Paths.get(path));
+
+			Analyzer analyzer = new StandardAnalyzer();
+			IndexWriterConfig iwc = new IndexWriterConfig(analyzer);
 			iwc.setOpenMode(OpenMode.CREATE_OR_APPEND);
 			
 			writer = new IndexWriter(dir, iwc);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (IOException e) {		
+			e.printStackTrace();	
 			throw e;
 		}
 	}
 
 	public boolean addEntry(Item item) throws IOException{
+		if (this.writer==null)creaIndice();
 		if (item == null)return false;
         Document doc = new Document();
 
-        Field pathField = new IntField("id", item.getId(), Field.Store.YES);
+        Field pathField = new IntPoint("id", item.getId());
         doc.add(pathField);
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         Long d = null;
         if (item.getDataPubblicazione()!=null){
         	d = new Long(sdf.format(item.getDataPubblicazione()));
-            Field dataPubblicazioneField = new LongField("dataPubblicazione", d, Field.Store.YES);
+            Field dataPubblicazioneField = new LongPoint("dataPubblicazione", d);
         	doc.add(dataPubblicazioneField);
         }
         
@@ -127,11 +127,11 @@ public class IndexArticolo {
 	
 	public List<Item> cerca(String cosaCercare)throws IOException,org.apache.lucene.queryparser.classic.ParseException{
 		List<Item> risultato = null;
-		IndexReader reader = DirectoryReader.open(FSDirectory.open(new File(this.path)));
+		IndexReader reader = DirectoryReader.open(FSDirectory.open(Paths.get(this.path)));
 	    IndexSearcher searcher = new IndexSearcher(reader);
 
-	    Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_48);
-	    QueryParser parser = new QueryParser(Version.LUCENE_48, "contenuto", analyzer);
+	    Analyzer analyzer = new StandardAnalyzer();
+	    QueryParser parser = new QueryParser("contenuto", analyzer);
 		Query query = parser.parse(cosaCercare);
 	    TopDocs results = searcher.search(query, 25);
 	    ScoreDoc[] hits = results.scoreDocs;
@@ -148,7 +148,7 @@ public class IndexArticolo {
 
 	public List<Item> getAll()throws IOException,org.apache.lucene.queryparser.classic.ParseException{
 		List<Item> risultato = null;
-		IndexReader reader = DirectoryReader.open(FSDirectory.open(new File(this.path)));
+		IndexReader reader = DirectoryReader.open(FSDirectory.open(Paths.get(this.path)));
 	    
 	    for (int i = 0; i < reader.maxDoc(); i++){
 	    	Item art = new Item();

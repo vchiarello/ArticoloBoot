@@ -51,8 +51,8 @@ public class AdviceOperazioni {
     public void aggiungiNuovo(Item item) {
 		try {
 			logger.debug("Si sta per aggiungere un item: " + item + " nell'indice Lucene.");
-			indexArticolo.addEntry(item);
-		} catch (IOException e) {
+			//indexArticolo.addEntry(item);
+		} catch (Exception e) {
 			logger.error("Fallito inserimento dell'item: " + item + " nell'indice Lucene.");
 			e.printStackTrace();
 		}

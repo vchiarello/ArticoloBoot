@@ -55,13 +55,17 @@ public class ItemShopRestController {
 	
 	@RequestMapping(value="/{name}", method=RequestMethod.POST)
 	public ItemWeb create(@RequestBody @Valid ItemShopWeb itemShopWeb ,@PathVariable("name") String name, Locale locale) {
-		if (this.valida(itemShopWeb,locale)) return this.gestioneBlog.saveItem(itemShopWeb);
+		if (this.valida(itemShopWeb,locale)) {
+			return this.gestioneBlog.saveItem(itemShopWeb);
+		}
 		else return itemShopWeb;
 	}
 
 	@RequestMapping(value="/{id}/{name}", method=RequestMethod.PUT)
 	public ItemWeb update(@PathVariable("id") int id, @PathVariable("name") String name, @RequestBody @Valid ItemShopWeb itemShopWeb,Locale locale) {
-		if (this.valida(itemShopWeb,locale)) return this.gestioneBlog.saveItem(itemShopWeb);
+		if (this.valida(itemShopWeb,locale)){
+			return this.gestioneBlog.saveItem(itemShopWeb);
+		}
 		else return itemShopWeb;
 	}
 

@@ -323,7 +323,6 @@ public class GestioneBlog {
 		}
 	}
 	
-	@AddIndexEntryAnnotation
 	public Item soloPerAdvice(Item itemSalvato){
 		logger.debug("Metodo adviced per salvaItem...");
 		return itemSalvato;

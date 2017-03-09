@@ -54,13 +54,19 @@ public class ItemRestController {
 	
 	@RequestMapping(value="/{name}", method=RequestMethod.POST)
 	public ItemWeb create(@RequestBody @Valid ItemWeb itemWeb ,@PathVariable("name") String name, Locale locale) {
-		if (this.valida(itemWeb,locale)) return this.gestioneBlog.saveItem(itemWeb);
+		if (this.valida(itemWeb,locale)) {
+			
+			return this.gestioneBlog.saveItem(itemWeb);
+		}
 		else return itemWeb;
 	}
 
 	@RequestMapping(value="/{id}/{name}", method=RequestMethod.PUT)
 	public ItemWeb update(@PathVariable("id") int id, @PathVariable("name") String name, @RequestBody @Valid ItemWeb itemWeb,Locale locale) {
-		if (this.valida(itemWeb,locale)) return this.gestioneBlog.saveItem(itemWeb);
+		if (this.valida(itemWeb,locale)){
+			
+			return this.gestioneBlog.saveItem(itemWeb);
+		}
 		else return itemWeb;
 	}
 

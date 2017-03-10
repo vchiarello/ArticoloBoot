@@ -19,6 +19,10 @@ angular.module("blogApp").config(function ($stateProvider, $urlRouterProvider) {
 	        url:'/list',
 	        templateUrl: 'html/list.html',
 	        controller: 'ListCtrl'
+	    }).state('searchItem', {
+	        url:'/searchItem/:querySearch',
+	        templateUrl: 'html/search.html',
+	        controller: 'SearchCtrl'
 	    }).state('editList', {
 	        url:'/editList',
 	        templateUrl: 'html/editList.html',

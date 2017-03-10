@@ -59,6 +59,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
 <script src="/js/controller/IndexCtrl.js" ></script>
 
 <script src="/js/controller/ListCtrl.js" ></script>
+<script src="/js/controller/SearchCtrl.js" ></script>
 <script src="/js/controller/EditListCtrl.js" ></script>
 
 <script src="/js/controller/ViewItemCtrl.js" ></script>
@@ -127,7 +128,20 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
               </ul>
             </li>
           </ul>
-          
+          <form>
+          <ul class="nav navbar-nav" style="float:right;">
+	          <li style="position:relative;padding-top:10px;">
+	          	<div class="input-group">
+			      <input type="text" class="form-control" ng-model="querySearch" placeholder="{{placeHolderQuerySearch}}">
+			      <span class="input-group-btn">
+			        <button class="btn btn-default" type="button" ng-click="search()"><span class="glyphicon glyphicon-search"></span></button>
+			      </span>
+			    </div>
+	          
+	          </li>
+	          
+          </ul>
+          </form>
         </div><!--/.nav-collapse -->
       </div>
     </nav>

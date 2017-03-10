@@ -14,11 +14,20 @@ angular.module("blogApp").controller("IndexCtrl", function ($scope, Item, $state
 	$scope.labelSeparatedLink=messaggi['toolbar.action.separatedLink'];
 	$scope.labelNavHeader=messaggi['toolbar.action.navHeader'];
 	$scope.labelViewCart=messaggi['toolbar.action.viewCart'];
-	
+	$scope.placeHolderQuerySearch=messaggi['toolbar.placeHolder.querySearch'];
 	
 	
 	$scope.carrello=function(){
 		alert("visualizza carello");
+	}
+	
+	$scope.querySearch="";
+	
+	$scope.search = function(){
+		if ($scope.querySearch != null && $scope.querySearch.trim().length>0)
+		alert($scope.querySearch);
+
+		$state.transitionTo("searchItem",{query: $scope.querySearch});
 	}
 
 });

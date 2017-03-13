@@ -129,18 +129,17 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
             </li>
           </ul>
           <form>
-          <ul class="nav navbar-nav" style="float:right;">
-	          <li style="position:relative;padding-top:10px;">
-	          	<div class="input-group">
-			      <input type="text" class="form-control" ng-model="querySearch" placeholder="{{placeHolderQuerySearch}}">
-			      <span class="input-group-btn">
-			        <button class="btn btn-default" type="button" ng-click="search()"><span class="glyphicon glyphicon-search"></span></button>
-			      </span>
-			    </div>
-	          
-	          </li>
-	          
-          </ul>
+          <div style="float:right;padding-top:10px;max-height: 50px;display:inline;">
+          	<div class="input-group" style="width:200px;">
+				<input type="text" class="form-control" ng-model="querySearch" placeholder="{{placeHolderQuerySearch}}">
+				<span class="input-group-btn">
+		        <button class="btn btn-default" type="button" ng-click="search()"><span class="glyphicon glyphicon-search"></span></button>
+		      </span>
+		    </div>
+          </div>
+          <div style="float:right;padding-top:10px;padding-right:20px;max-height: 50px;display:inline;color:#9d9d9d;">
+          	<img style="height:30px" src="images/cart.png">
+          </div>
           </form>
         </div><!--/.nav-collapse -->
       </div>

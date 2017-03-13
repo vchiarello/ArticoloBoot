@@ -47,7 +47,8 @@ public class ItemShopRestController {
 	@RequestMapping(value="/search/{querySearch}", method=RequestMethod.GET)
 	public List<ItemWeb> search(@PathVariable("querySearch") String querySearch) {
 		logger.debug("Search tra la lista degli item attivi...");
-		List<ItemWeb> l = gestioneBlog.getAllItemAttivi();
+//		List<ItemWeb> l = gestioneBlog.getAllItemAttivi();
+		List<ItemWeb> l = gestioneBlog.cercaItem(querySearch);
 		return l;
 	}
 	

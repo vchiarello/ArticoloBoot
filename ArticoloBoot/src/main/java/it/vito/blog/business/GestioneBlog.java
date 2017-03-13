@@ -16,6 +16,7 @@ import it.vito.blog.db.dao.ItemRepository;
 import it.vito.blog.db.dao.LkItemPropertyItemRepository;
 import it.vito.blog.db.dao.LkTagItemRepository;
 import it.vito.blog.db.dao.TagRepository;
+import it.vito.blog.index.IndexArticolo;
 import it.vito.blog.web.bean.ItemPropertyWeb;
 import it.vito.blog.web.bean.ItemShopWeb;
 import it.vito.blog.web.bean.ItemWeb;
@@ -33,6 +34,7 @@ import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.lucene.queryparser.classic.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +72,9 @@ public class GestioneBlog {
 	@Autowired
 	LkItemPropertyItemRepository itemPropertyItemRepository;
 	
+	@Autowired
+	IndexArticolo indexArticolo;
+	
 	@Value("${pathFile}")
 	String pathFile;
 
@@ -87,6 +92,38 @@ public class GestioneBlog {
 		BooleanExpression dataHidden = QItem.item.dataHidden.isNull().or(QItem.item.dataHidden.after(new Date()));
 		BooleanExpression dataScadenza = QItem.item.dataScadenza.isNull().or(QItem.item.dataScadenza.after(new Date()));
 		Predicate p = dataPubblicazione.and(dataHidden).and(dataScadenza);
+		
+		Iterable<Item> l = itemRepository.findAll(p);
+		
+		
+		if (l==null){
+			logger.debug("Nessun item trovato");
+			return null;
+		}
+		
+		List<ItemWeb> risultato = new LinkedList<ItemWeb>();
+		for (Item item : l) {
+			risultato.add(new ItemWeb(item));
+		}
+		
+		logger.debug("Trovati " + risultato.size() + " item...");
+		
+		
+		return risultato;
+		
+	}
+	
+	public List<ItemWeb> getSearchItemAttivi(List<Integer> idTrovati){
+		logger.debug("Search item attivi...");
+		if (idTrovati == null || idTrovati.size()==0)return null;
+		//BooleanExpression QItem.item.dataPubblicazione.in(new Date());
+		BooleanExpression dataPubblicazione = QItem.item.dataPubblicazione.before(new Date());
+		BooleanExpression dataHidden = QItem.item.dataHidden.isNull().or(QItem.item.dataHidden.after(new Date()));
+		BooleanExpression dataScadenza = QItem.item.dataScadenza.isNull().or(QItem.item.dataScadenza.after(new Date()));
+		BooleanExpression listaIdCercati = QItem.item.id.in(idTrovati);
+		
+		Predicate p = dataPubblicazione.and(dataHidden).and(dataScadenza).and(listaIdCercati);
+		
 		
 		Iterable<Item> l = itemRepository.findAll(p);
 		
@@ -374,6 +411,22 @@ public class GestioneBlog {
 		
 		return risultato;
 		
+	}
+	
+	public List<ItemWeb> cercaItem(String daRicercare){
+		try {
+			List<Integer> idList = this.indexArticolo.cerca(daRicercare);
+			List<ItemWeb> risultato = this.getSearchItemAttivi(idList);
+			
+			return risultato;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 }

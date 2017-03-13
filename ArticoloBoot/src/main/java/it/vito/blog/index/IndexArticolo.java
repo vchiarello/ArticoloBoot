@@ -18,6 +18,7 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.IntPoint;
 import org.apache.lucene.document.LongPoint;
+import org.apache.lucene.document.StoredField;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.DirectoryReader;
@@ -85,14 +86,14 @@ public class IndexArticolo {
 		if (item == null)return false;
         Document doc = new Document();
 
-        Field pathField = new IntPoint("id", item.getId());
+        Field pathField = new StoredField("id", item.getId());
         doc.add(pathField);
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         Long d = null;
         if (item.getDataPubblicazione()!=null){
         	d = new Long(sdf.format(item.getDataPubblicazione()));
-            Field dataPubblicazioneField = new LongPoint("dataPubblicazione", d);
+            Field dataPubblicazioneField = new StoredField("dataPubblicazione", d);
         	doc.add(dataPubblicazioneField);
         }
         
@@ -125,8 +126,8 @@ public class IndexArticolo {
 		return true;
 	}
 	
-	public List<Item> cerca(String cosaCercare)throws IOException,org.apache.lucene.queryparser.classic.ParseException{
-		List<Item> risultato = null;
+	public List<Integer> cerca(String cosaCercare)throws IOException,org.apache.lucene.queryparser.classic.ParseException{
+		List<Integer> risultato = null;
 		IndexReader reader = DirectoryReader.open(FSDirectory.open(Paths.get(this.path)));
 	    IndexSearcher searcher = new IndexSearcher(reader);
 
@@ -136,11 +137,11 @@ public class IndexArticolo {
 	    TopDocs results = searcher.search(query, 25);
 	    ScoreDoc[] hits = results.scoreDocs;
 	    for (int i = 0; i < hits.length; i++){
-	    	Item art = new Item();
-	        Document doc = searcher.doc(hits[i].doc);
-	    	art.setId(new Integer(doc.get("id")));
-	    	if (risultato == null)risultato = new LinkedList<Item>();
-	    	risultato.add(art);
+	    	Document doc = searcher.doc(hits[i].doc);
+	    	//per i documenti per i quali non c'è l'id si va avanti
+	    	if (doc.get("id") == null)continue;
+	    	if (risultato == null)risultato = new LinkedList<Integer>();
+	    	risultato.add(new Integer(doc.get("id")));
 	    }
 
 		return risultato;

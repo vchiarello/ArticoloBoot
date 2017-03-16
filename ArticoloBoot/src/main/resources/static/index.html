@@ -97,7 +97,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
 
 
 </head>
-<body>
+<body style="margin-top:50px;">
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -138,7 +138,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
 		    </div>
           </div>
           <div style="float:right;padding-top:10px;padding-right:20px;max-height: 50px;display:inline;color:#9d9d9d;">
-          	<img style="height:30px" src="images/cart.png">
+          	<a ui-sref="viewCart"><img style="height:30px" src="images/cart.png" title="{{labelViewCart}}"></a>
           </div>
           </form>
         </div><!--/.nav-collapse -->

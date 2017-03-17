@@ -76,8 +76,14 @@ angular.module("blogApp").controller("NewItemShopCtrl", ['$scope', 'Tag', 'ItemS
 		getColori();
 		getTaglie();
 		getPrezzo();
+//		setTimeout(function() {
+//		      window.scrollTo(0,0);
+//		    }, 1000);
     }
 
+	$scope.debug=function(){
+		alert(document.activeElement)
+	}
     //tutti i tag della combo Dei Tag
     function getTags() {
         $scope.listaTags = Tag.query();

@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html 
 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="blogApp">
 <head>
     <title th:text="#{app.name}">Righe verticali </title>
@@ -97,7 +97,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
 
 
 </head>
-<body style="margin-top:50px;">
+<body>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -146,11 +146,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" ng-app="bl
     </nav>
 
 
-<div class="container theme-showcase">
-    <div>
-        <div class="ui-view"></div>
-    </div>
-</div>
+	<div class="container theme-showcase" style="padding-top:50px;">
+	        <div class="ui-view" autoscroll="false"></div>
+	</div>
 
 </body>
 </html>

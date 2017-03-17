@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/sitelayoutVito" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <div th:fragment="content">
+    <div>
     	<div class="jumbotronVito">
-			<h1>Righe verticali</h1>
+			<h1 id="titolo">Righe verticali</h1>
 			<p>Appunti di programmazione generalmente in java.</p>
 		</div>
-		
 		<div cg-busy="{promise:promessa.promise,message:messaggio,templateUrl:'/templateAttendere'}">
-	        <form th:action="@{/rest/upload}" class="form-horizontal" method="post">
+	        <form action="@{/rest/upload}" method="post">
 	        	<div class="row">
 	            	<div class="form-group">
 	                	<div class="col-md-2">
@@ -235,10 +232,7 @@
 					</div>
 		        </div>
 			            
-			            
 	        </form>
 		</div>
 
     </div>
-
-</html>

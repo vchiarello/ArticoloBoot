@@ -70,7 +70,34 @@ alter table bg_lk_item_property add data_modifica timestamp;
 alter table bg_lk_item_property add data_inserimento timestamp;
 --Fine da cancellare dopo il lancio
 
+CREATE  TABLE bg_category (
+  id_category INT NOT NULL auto_increment,
+  category_name varchar(1000) NOT NULL ,
+  id_parent_category INT null,
+  date_ins DATETIME not null,
+  user_ins varchar(100) not null,
+  date_edit DATETIME,
+  user_edit varchar(100),
+  PRIMARY KEY (id_category) );
 
+CREATE  TABLE bg_lk_item_category (
+  id_item_category INT NOT NULL auto_increment,
+  id_category INT NOT NULL,
+  id_item INT NOT NULL ,
+  date_ins DATETIME not null,
+  user_ins varchar(100) not null,
+  date_edit DATETIME,
+  user_edit varchar(100),
+  PRIMARY KEY (id_item_category) );
+
+
+ALTER TABLE bg_lk_item_category  WITH CHECK ADD  CONSTRAINT FK_lk_item_category_1 FOREIGN KEY(id_category)
+REFERENCES bg_category (id_category)
+GO
+ALTER TABLE bg_lk_item_category  WITH CHECK ADD  CONSTRAINT FK_lk_item_category_2 FOREIGN KEY(id_item)
+REFERENCES bg_item (id_item)
+GO
+  
 
 CREATE  TABLE bg_cart (
   id_carrello INT NOT NULL auto_increment,

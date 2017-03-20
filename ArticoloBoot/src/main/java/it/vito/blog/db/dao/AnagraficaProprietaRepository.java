@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import it.vito.blog.db.bean.AnagraficaProprieta;
+import it.vito.blog.db.bean.Property;
 
-public interface AnagraficaProprietaRepository extends CrudRepository<AnagraficaProprieta, Integer>{
+public interface AnagraficaProprietaRepository extends CrudRepository<Property, Integer>{
 
 	@Override
-	public List<AnagraficaProprieta> findAll();
+	public List<Property> findAll();
 	
-	public List<AnagraficaProprieta> findByNomeProprieta(String nome);
+	public List<Property> findByNomeProprieta(String nome);
 
 }

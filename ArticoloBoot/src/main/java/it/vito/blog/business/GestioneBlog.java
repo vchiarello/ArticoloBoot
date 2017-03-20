@@ -3,8 +3,9 @@ package it.vito.blog.business;
 import it.vito.blog.aspect.AddIndexEntryAnnotation;
 import it.vito.blog.db.bean.Allegato;
 import it.vito.blog.db.bean.AllegatoInfo;
-import it.vito.blog.db.bean.AnagraficaProprieta;
+import it.vito.blog.db.bean.Property;
 import it.vito.blog.db.bean.Item;
+import it.vito.blog.db.bean.LkCategoryItem;
 import it.vito.blog.db.bean.LkPropertyItem;
 import it.vito.blog.db.bean.LkTagItem;
 import it.vito.blog.db.bean.QItem;
@@ -13,10 +14,12 @@ import it.vito.blog.db.dao.AllegatoInfoRepository;
 import it.vito.blog.db.dao.AllegatoRepository;
 import it.vito.blog.db.dao.AnagraficaProprietaRepository;
 import it.vito.blog.db.dao.ItemRepository;
+import it.vito.blog.db.dao.LkCategoryItemRepository;
 import it.vito.blog.db.dao.LkItemPropertyItemRepository;
-import it.vito.blog.db.dao.LkTagItemRepository;
+import it.vito.blog.db.dao.LkTagItemRepositoryRepository;
 import it.vito.blog.db.dao.TagRepository;
 import it.vito.blog.index.IndexArticolo;
+import it.vito.blog.web.bean.CategoryWeb;
 import it.vito.blog.web.bean.ItemPropertyWeb;
 import it.vito.blog.web.bean.ItemShopWeb;
 import it.vito.blog.web.bean.ItemWeb;
@@ -58,7 +61,7 @@ public class GestioneBlog {
 	TagRepository tagRepository;
 	
 	@Autowired
-	LkTagItemRepository lkTagItemRepository;
+	LkTagItemRepositoryRepository lkTagItemRepository;
 	
 	@Autowired
 	AllegatoRepository allegatoRepository;
@@ -74,6 +77,9 @@ public class GestioneBlog {
 	
 	@Autowired
 	IndexArticolo indexArticolo;
+	
+	@Autowired
+	LkCategoryItemRepository lkCategoryItemRepository;
 	
 	@Value("${pathFile}")
 	String pathFile;
@@ -215,7 +221,7 @@ public class GestioneBlog {
 		else {
 			//se non si era salvato alcun colore allora si prende la proprietà dall'anagrafica.
 			//per le proprietà sopra non è necessario perché la combo viene popolata prendendo tutti i valori dall'anagrafica
-			List<AnagraficaProprieta> l = this.anagraficaProprietaRepository.findByNomeProprieta("Prezzo");
+			List<Property> l = this.anagraficaProprietaRepository.findByNomeProprieta("Prezzo");
 			ItemPropertyWeb ipw = new ItemPropertyWeb();
 			ipw.setId(l.get(0).getId());
 			ipw.setNome("Prezzo");
@@ -403,7 +409,7 @@ public class GestioneBlog {
 	}
 	
 	public List<ItemPropertyWeb> getProprieta(String nomeProprieta){
-		List<AnagraficaProprieta> l = this.anagraficaProprietaRepository.findByNomeProprieta(nomeProprieta);
+		List<Property> l = this.anagraficaProprietaRepository.findByNomeProprieta(nomeProprieta);
 		if (l==null || l.size()==0)return null;
 		List<ItemPropertyWeb> risultato = new LinkedList<ItemPropertyWeb>();
 		for (int i = 0; i < l.size();i++)
@@ -427,6 +433,13 @@ public class GestioneBlog {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public List<CategoryWeb> getCategory(){
+		List<LkCategoryItem> l = this.lkCategoryItemRepository.findAll();
+		if (l==null || l.size()==0)return null;
+		List<CategoryWeb> risultato = new LinkedList<CategoryWeb>();
+		
 	}
 	
 }

@@ -2,7 +2,7 @@ package it.vito.blog.web.bean;
 
 import java.io.Serializable;
 
-import it.vito.blog.db.bean.AnagraficaProprieta;
+import it.vito.blog.db.bean.Property;
 
 public class ItemPropertyWeb implements Serializable{
 
@@ -13,13 +13,13 @@ public class ItemPropertyWeb implements Serializable{
 	
 	public ItemPropertyWeb() {
 	}
-	public ItemPropertyWeb(AnagraficaProprieta anag) {
+	public ItemPropertyWeb(Property anag) {
 		this.nome = anag.getNomeProprieta();
 		this.valore = anag.getValoreProprieta();
 		this.id = anag.getId();
 	}
-	public AnagraficaProprieta toItemProperty(){
-		AnagraficaProprieta risultato = new AnagraficaProprieta();
+	public Property toItemProperty(){
+		Property risultato = new Property();
 		if (this.getId() !=null)
 			risultato.setId(this.getId());
 		risultato.setNomeProprieta(this.getNome());

@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="bg_property")
-public class AnagraficaProprieta implements Serializable,Comparable<AnagraficaProprieta>{
+public class Property implements Serializable,Comparable<Property>{
 
 	private static final long serialVersionUID = -7138638040952963959L;
 
@@ -69,7 +69,7 @@ public class AnagraficaProprieta implements Serializable,Comparable<AnagraficaPr
 	}
 
 	@Override
-	public int compareTo(AnagraficaProprieta arg0) {
+	public int compareTo(Property arg0) {
 		if (this.id > arg0.id)return 1;
 		if (this.id < arg0.id)return -1;
 		return 0;

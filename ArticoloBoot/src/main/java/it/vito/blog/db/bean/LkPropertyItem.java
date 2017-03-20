@@ -30,7 +30,7 @@ public class LkPropertyItem implements Serializable, Comparable<LkPropertyItem> 
 
 	@ManyToOne
 	@JoinColumns({@JoinColumn(name="id_prop", referencedColumnName="id_prop")})
-	private AnagraficaProprieta prop;
+	private Property prop;
 
 	@ManyToOne
 	@JoinColumns({@JoinColumn(name="id_item", referencedColumnName="id_item")})
@@ -54,11 +54,11 @@ public class LkPropertyItem implements Serializable, Comparable<LkPropertyItem> 
 	}
 
 
-	public AnagraficaProprieta getProp() {
+	public Property getProp() {
 		return prop;
 	}
 
-	public void setProp(AnagraficaProprieta prop) {
+	public void setProp(Property prop) {
 		this.prop = prop;
 	}
 

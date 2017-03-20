@@ -1,4 +1,5 @@
 drop table dbo.bg_lk_item_tag;
+drop table bg_lk_item_category;
 drop table bg_lk_item_property
 drop table dbo.bg_tag;
 drop table dbo.bg_Allegato;
@@ -10,6 +11,7 @@ drop table bg_cart_detail
 drop table bg_cart;
 drop table bg_order_detail;
 drop table bg_order;
+drop table bg_category;
 
 CREATE  TABLE bg_property (
   id_prop INT NOT NULL identity,
@@ -61,8 +63,35 @@ CREATE  TABLE bg_Allegato (
   data_modifica DATETIME NULL ,
   PRIMARY KEY (id_Allegato) );
 	
-	
 alter table bg_allegato add foreign key (id_item) references bg_item(id_item);  
+
+CREATE  TABLE bg_category (
+  id_category INT NOT NULL identity,
+  category_name varchar(1000) NOT NULL ,
+  id_parent_category INT null,
+  date_ins DATETIME not null,
+  user_ins varchar(100) not null,
+  date_edit DATETIME,
+  user_edit varchar(100),
+  PRIMARY KEY (id_category) );
+  
+CREATE  TABLE bg_lk_item_category (
+  id_item_category INT NOT NULL identity,
+  id_category INT NOT NULL,
+  id_item INT NOT NULL ,
+  date_ins DATETIME not null,
+  user_ins varchar(100) not null,
+  date_edit DATETIME,
+  user_edit varchar(100),
+  PRIMARY KEY (id_item_category) );
+
+
+ALTER TABLE [dbo].[bg_lk_item_category]  WITH CHECK ADD  CONSTRAINT [FK_lk_item_category_1] FOREIGN KEY([id_category])
+REFERENCES [dbo].[bg_category] ([id_category])
+GO
+ALTER TABLE [dbo].[bg_lk_item_category]  WITH CHECK ADD  CONSTRAINT [FK_lk_item_category_2] FOREIGN KEY([id_item])
+REFERENCES [dbo].[bg_item] ([id_item])
+GO
 
 CREATE  TABLE bg_tag (
   id_tag INT NOT NULL identity ,
@@ -194,3 +223,63 @@ insert into test.dbo.bg_property(nome_proprieta, valore_proprieta,flag_multiplo)
 
 
 insert into test.dbo.bg_property(nome_proprieta, valore_proprieta,flag_multiplo)values('Prezzo','','N');
+
+
+INSERT INTO "dbo"."bg_category" (category_name,id_parent_category,date_ins,user_ins,date_edit,user_edit) VALUES ('Categoria 1' ,null,getDate(),'Vito',null,null)
+GO
+
+INSERT INTO "dbo"."bg_category" (category_name,id_parent_category,date_ins,user_ins,date_edit,user_edit) VALUES ('Categoria 2' ,null,getDate(),'Vito',null,null)
+GO
+
+INSERT INTO "dbo"."bg_category" (category_name,id_parent_category,date_ins,user_ins,date_edit,user_edit) VALUES ('Categoria 3' ,null,getDate(),'Vito',null,null)
+GO
+
+INSERT INTO "dbo"."bg_category" (category_name,id_parent_category,date_ins,user_ins,date_edit,user_edit) VALUES ('Categoria 2.1' ,2,getDate(),'Vito',null,null)
+GO
+
+INSERT INTO "dbo"."bg_category" (category_name,id_parent_category,date_ins,user_ins,date_edit,user_edit) VALUES ('Categoria 2.2' ,2,getDate(),'Vito',null,null)
+GO
+
+INSERT INTO "dbo"."bg_category" (category_name,id_parent_category,date_ins,user_ins,date_edit,user_edit) VALUES ('Categoria 2.3' ,2,getDate(),'Vito',null,null)
+GO
+
+INSERT INTO "dbo"."bg_category" (category_name,id_parent_category,date_ins,user_ins,date_edit,user_edit) VALUES ('Categoria 3.1' ,3,getDate(),'Vito',null,null)
+GO
+
+INSERT INTO "dbo"."bg_category" (category_name,id_parent_category,date_ins,user_ins,date_edit,user_edit) VALUES ('Categoria 3.2' ,3,getDate(),'Vito',null,null)
+GO
+
+INSERT INTO "dbo"."bg_category" (category_name,id_parent_category,date_ins,user_ins,date_edit,user_edit) VALUES ('Categoria 3.3' ,3,getDate(),'Vito',null,null)
+GO
+
+INSERT INTO "dbo"."bg_category" (category_name,id_parent_category,date_ins,user_ins,date_edit,user_edit) VALUES ('Categoria 3.4' ,3,getDate(),'Vito',null,null)
+GO
+
+INSERT INTO "dbo"."bg_category" (category_name,id_parent_category,date_ins,user_ins,date_edit,user_edit) VALUES ('Categoria 2.1.1' ,4,getDate(),'Vito',null,null)
+GO
+
+INSERT INTO "dbo"."bg_category" (category_name,id_parent_category,date_ins,user_ins,date_edit,user_edit) VALUES ('Categoria 2.1.2' ,4,getDate(),'Vito',null,null)
+GO
+
+INSERT INTO "dbo"."bg_category" (category_name,id_parent_category,date_ins,user_ins,date_edit,user_edit) VALUES ('Categoria 2.3.1' ,6,getDate(),'Vito',null,null)
+GO
+
+INSERT INTO "dbo"."bg_category" (category_name,id_parent_category,date_ins,user_ins,date_edit,user_edit) VALUES ('Categoria 3.1.1' ,7,getDate(),'Vito',null,null)
+GO
+
+INSERT INTO "dbo"."bg_category" (category_name,id_parent_category,date_ins,user_ins,date_edit,user_edit) VALUES ('Categoria 3.1.2' ,7,getDate(),'Vito',null,null)
+GO
+
+INSERT INTO "dbo"."bg_category" (category_name,id_parent_category,date_ins,user_ins,date_edit,user_edit) VALUES ('Categoria 3.1.3' ,7,getDate(),'Vito',null,null)
+GO
+
+INSERT INTO "dbo"."bg_category" (category_name,id_parent_category,date_ins,user_ins,date_edit,user_edit) VALUES ('Categoria 3.4.1' ,10,getDate(),'Vito',null,null)
+GO
+
+INSERT INTO "dbo"."bg_category" (category_name,id_parent_category,date_ins,user_ins,date_edit,user_edit) VALUES ('Categoria 1.1' ,1,getDate(),'Vito',null,null)
+GO
+
+INSERT INTO "dbo"."bg_category" (category_name,id_parent_category,date_ins,user_ins,date_edit,user_edit) VALUES ('Categoria 1.2' ,1,getDate(),'Vito',null,null)
+GO
+
+

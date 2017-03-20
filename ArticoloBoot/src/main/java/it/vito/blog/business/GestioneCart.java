@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 
-import it.vito.blog.db.bean.AnagraficaProprieta;
+import it.vito.blog.db.bean.Property;
 import it.vito.blog.db.bean.Cart;
 import it.vito.blog.db.bean.CartDetail;
 import it.vito.blog.db.bean.CartDetailVW;
@@ -148,7 +148,7 @@ public class GestioneCart {
 	
 	private Float getPrice(Integer itemId){
 //		public List<ItemPropertyWeb> getProprieta(String nomeProprieta){
-		List<AnagraficaProprieta> lapr = anagraficaProprietaRepository.findByNomeProprieta("Prezzo");
+		List<Property> lapr = anagraficaProprietaRepository.findByNomeProprieta("Prezzo");
 		//qui ci dovrebbe essere un errore perché la proprietà "Prezzo" dovrebbe essere sempre definita
 		if (lapr == null) return new Float(0);
 		

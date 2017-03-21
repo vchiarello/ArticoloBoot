@@ -2,15 +2,15 @@ package it.vito.blog.db.bean;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,8 +27,9 @@ public class Category implements Serializable,Comparable<Category>{
 	@Column(name="category_name")
 	private String categoryName;
 		
-	@OneToMany(mappedBy="id", cascade=CascadeType.REMOVE)
-	private Set<Category> figli;
+	@ManyToOne
+	@JoinColumns({@JoinColumn(name="id_parent_category", referencedColumnName="id_category")})
+	private Category padre;
 
 	@Column(name="date_ins")
 	private Date dateIns;
@@ -59,12 +60,13 @@ public class Category implements Serializable,Comparable<Category>{
 		this.categoryName = categoryName;
 	}
 
-	public Set<Category> getFigli() {
-		return figli;
+
+	public Category getPadre() {
+		return padre;
 	}
 
-	public void setFigli(Set<Category> figli) {
-		this.figli = figli;
+	public void setPadre(Category padre) {
+		this.padre = padre;
 	}
 
 	public Date getDateIns() {
@@ -108,9 +110,8 @@ public class Category implements Serializable,Comparable<Category>{
 
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", categoryName=" + categoryName + ", figli=" + figli + ", dateIns=" + dateIns
-				+ ", userIns=" + userIns + ", dateEdit=" + dateEdit + ", userEdit=" + userEdit + ", flagMultiplo="
-				+ "]";
+		return "Category [id=" + id + ", categoryName=" + categoryName + ", padre=" + padre + ", dateIns=" + dateIns
+				+ ", userIns=" + userIns + ", dateEdit=" + dateEdit + ", userEdit=" + userEdit + "]";
 	}
 
 	

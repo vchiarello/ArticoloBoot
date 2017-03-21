@@ -3,6 +3,7 @@ package it.vito.blog.business;
 import it.vito.blog.aspect.AddIndexEntryAnnotation;
 import it.vito.blog.db.bean.Allegato;
 import it.vito.blog.db.bean.AllegatoInfo;
+import it.vito.blog.db.bean.Category;
 import it.vito.blog.db.bean.Property;
 import it.vito.blog.db.bean.Item;
 import it.vito.blog.db.bean.LkCategoryItem;
@@ -13,6 +14,7 @@ import it.vito.blog.db.bean.Tag;
 import it.vito.blog.db.dao.AllegatoInfoRepository;
 import it.vito.blog.db.dao.AllegatoRepository;
 import it.vito.blog.db.dao.AnagraficaProprietaRepository;
+import it.vito.blog.db.dao.CategoryRepository;
 import it.vito.blog.db.dao.ItemRepository;
 import it.vito.blog.db.dao.LkCategoryItemRepository;
 import it.vito.blog.db.dao.LkItemPropertyItemRepository;
@@ -80,6 +82,9 @@ public class GestioneBlog {
 	
 	@Autowired
 	LkCategoryItemRepository lkCategoryItemRepository;
+	
+	@Autowired
+	CategoryRepository categoryRepository;
 	
 	@Value("${pathFile}")
 	String pathFile;
@@ -436,10 +441,29 @@ public class GestioneBlog {
 	}
 	
 	public List<CategoryWeb> getCategory(){
-		List<LkCategoryItem> l = this.lkCategoryItemRepository.findAll();
+		List<Category> l = this.categoryRepository.findAll();
 		if (l==null || l.size()==0)return null;
-		List<CategoryWeb> risultato = new LinkedList<CategoryWeb>();
-		
+		return getAlberoCategory(l,null);
+	}
+	
+	private List<CategoryWeb> getAlberoCategory(List<Category> l, Integer nodoPadre){
+		List<CategoryWeb> risultato = null;
+		int i=0;
+		while (l.size()>0 && i < l.size()){
+			Category appo = l.get(i);
+			if ((nodoPadre==null && appo.getPadre()==null ) || (nodoPadre !=null && appo.getPadre()!=null && nodoPadre.intValue() == appo.getPadre().getId())){
+				if(risultato == null) risultato = new LinkedList<CategoryWeb>(); 
+				CategoryWeb cw = new CategoryWeb();
+				cw.setId(appo.getId());
+				cw.setCategoryName(appo.getCategoryName());
+				l.remove(i);
+				cw.setDescendant(getAlberoCategory(l, appo.getId()));
+				risultato.add(cw);
+			}else{
+				i++;
+			}
+		}
+		return risultato;
 	}
 	
 }

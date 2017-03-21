@@ -37,13 +37,7 @@ public class LkCategoryItem implements Serializable, Comparable<LkCategoryItem>{
 	@ManyToOne
 	@JoinColumns({@JoinColumn(name="id_item", referencedColumnName="id_item")})
 	private Item item;
-	
-	@OneToMany(mappedBy="item", cascade=CascadeType.REMOVE)
-	private Set<Allegato> allegati;
-	
-	@OneToMany(mappedBy="item", cascade=CascadeType.REMOVE)
-	private Set<LkTagItem> tag;
-	
+		
 	@Column(name="date_ins")
 	private Date dateIns;
 	
@@ -75,8 +69,8 @@ public class LkCategoryItem implements Serializable, Comparable<LkCategoryItem>{
 	
 	@Override
 	public String toString() {
-		return "LkCategoryItem [id=" + id + ", category=" + category + ", item=" + item + ", allegati=" + allegati
-				+ ", tag=" + tag + ", dateIns=" + dateIns + ", userIns=" + userIns + ", dateEdit=" + dateEdit
+		return "LkCategoryItem [id=" + id + ", category=" + category + ", item=" + item +
+					", dateIns=" + dateIns + ", userIns=" + userIns + ", dateEdit=" + dateEdit
 				+ ", userEdit=" + userEdit + "]";
 	}
 	

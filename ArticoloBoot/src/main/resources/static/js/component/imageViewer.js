@@ -1,3 +1,11 @@
+angular.module('blogApp').component('imageViewer', {
+    templateUrl: 'html/imageViewer.html',
+    controller: imageViewerCompCtrl,
+    bindings:{
+    	immagini:'='
+    }
+});
+
 function imageViewerCompCtrl(){
 	
 	this.$postLink=function(){
@@ -67,12 +75,4 @@ function imageViewerCompCtrl(){
 	}
 
 }
-
-angular.module('blogApp').component('imageViewer', {
-    templateUrl: 'html/imageViewer.html',
-    controller: imageViewerCompCtrl,
-    bindings:{
-    	immagini:'='
-    }
-});
 

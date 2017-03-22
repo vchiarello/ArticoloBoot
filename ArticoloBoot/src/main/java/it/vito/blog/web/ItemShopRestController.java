@@ -57,7 +57,6 @@ public class ItemShopRestController {
 	public ItemWeb get(@PathVariable("id") int id,@PathVariable("name") String name) {
 		logger.debug("Get item...");
 		ItemWeb item = gestioneBlog.getItemShop(id);
-		List<CategoryWeb> aa= gestioneBlog.getCategory();
 		return item;
 	}
 	

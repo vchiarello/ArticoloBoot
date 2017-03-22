@@ -1,5 +1,5 @@
 //controller per la creazione degli item
-angular.module("blogApp").controller("NewItemShopCtrl", ['$scope', 'Tag', 'ItemShop', 'ItemProperty', '$state', '$stateParams', 'FileUploader', '$q', '$cookies', function ($scope, Tag, ItemShop, ItemProperty, $state, $stateParams, FileUploader, $q, $cookies
+angular.module("blogApp").controller("NewItemShopCtrl", ['$scope', '$http', 'Tag', 'ItemShop', 'ItemProperty', '$state', '$stateParams', 'FileUploader', '$q', '$cookies', function ($scope, $http, Tag, ItemShop, ItemProperty, $state, $stateParams, FileUploader, $q, $cookies
 		) {
 	
 	//Label usate nella pagina
@@ -76,15 +76,39 @@ angular.module("blogApp").controller("NewItemShopCtrl", ['$scope', 'Tag', 'ItemS
 		getColori();
 		getTaglie();
 		getPrezzo();
-//		setTimeout(function() {
-//		      window.scrollTo(0,0);
-//		    }, 1000);
+		getCategory();
     }
 
-	$scope.debug=function(){
-		alert(document.activeElement)
+	function getCategory () {
+		$scope.category= $http({method: 'GET',
+		url:	'/rest/category/'
+				}).then(function successCallback(response){
+							//console.log("Category scaricata correttamenteRicerca avvenuta correttamente");
+							$scope.category = response.data;
+							$scope.categoryTree = showList($scope.category);
+							//console.log($scope.categoryTree)
+						},
+						function errorCallback(response){Alert("Errore nella ricerca")});
 	}
-    //tutti i tag della combo Dei Tag
+	    
+	
+	
+	function showList(lista){
+		var risultato = "";
+		if (lista == null) return "";
+		risultato += "<ol>";
+		for (var i=0;i < lista.length;i++){
+			risultato += "<li style=\"background-color:red;\">"+lista[i].categoryName+"</li>";
+			if (lista[i].descendant != null) {
+				risultato += showList(lista[i].descendant)
+			}
+			
+		}
+		risultato += "</ol>";
+		return risultato;
+	}
+	
+	//tutti i tag della combo Dei Tag
     function getTags() {
         $scope.listaTags = Tag.query();
     };

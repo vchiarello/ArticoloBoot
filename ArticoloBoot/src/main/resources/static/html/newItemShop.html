@@ -134,13 +134,21 @@
 	                	<div class="col-md-2">
 	                        <label for="autore">{{labelTag}}</label>
 	                    </div>
-	                    <div class="col-md-10">
+	                    <div class="col-md-2">
 	                             <select multiple="multiple" size="3"
 	                            ng-options="option.name for option in listaTags track by option.id"
 	                             ng-model="item.tagSelezionati"
 	                            >
 	                            </select>
 	                    </div>
+	                    <div class="col-md-3" ng-bind-html="categoryTree">
+	                    </div>
+	                    <div class="col-md-3">
+	                    	<ul ng-if="categoryTree != null">
+		                    	<category-tree lista="category"></category-tree>
+	                    	</ul>
+	                    </div>
+	                    
 	               	</div>
 	           </div>    	
 	        	<div class="row">

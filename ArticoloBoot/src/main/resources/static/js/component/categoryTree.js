@@ -23,7 +23,12 @@ function treeCategeoryCompCtrl(){
 	
 	this.$postLink=function(){
 		console.log("treeCategeoryCompCtrl -> $postLink:");
-		console.log("lunghezza lista: " + lista.length)
+		console.log("lunghezza lista: " + this.lista.length)
+	}
+	
+	this.mostraNascondi = function(id){
+		alert(id)
+		$("#"+id).css("display","none");
 	}
 }
 

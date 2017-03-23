@@ -1,1 +1,5 @@
-Ciao
+<li ng-repeat="item in $ctrl.lista" ng-click="mostraNascondi(item.id)">{{item.categoryName}}
+	<ul ng-if="item.descendant !=null" id="list_{{item.id}}">
+		<category-tree lista="item.descendant"></category-tree>
+	</ul>
+</li>

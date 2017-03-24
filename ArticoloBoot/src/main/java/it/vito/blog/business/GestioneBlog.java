@@ -443,10 +443,10 @@ public class GestioneBlog {
 	public List<CategoryWeb> getCategory(){
 		List<Category> l = this.categoryRepository.findAll();
 		if (l==null || l.size()==0)return null;
-		return getAlberoCategory(l,null);
+		return getAlberoCategory(l,null,1 );
 	}
 	
-	private List<CategoryWeb> getAlberoCategory(List<Category> l, Integer nodoPadre){
+	private List<CategoryWeb> getAlberoCategory(List<Category> l, Integer nodoPadre, Integer livello){
 		List<CategoryWeb> risultato = null;
 		int i=0;
 		while (l.size()>0 && i < l.size()){
@@ -456,8 +456,9 @@ public class GestioneBlog {
 				CategoryWeb cw = new CategoryWeb();
 				cw.setId(appo.getId());
 				cw.setCategoryName(appo.getCategoryName());
+				cw.setLivello(livello);
 				l.remove(i);
-				cw.setDescendant(getAlberoCategory(l, appo.getId()));
+				cw.setDescendant(getAlberoCategory(l, appo.getId(),livello+1));
 				risultato.add(cw);
 			}else{
 				i++;

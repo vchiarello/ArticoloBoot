@@ -12,6 +12,7 @@ public class CategoryWeb implements Serializable{
 	Integer id;
 	String categoryName;
 	List<CategoryWeb> descendant;
+	Integer livello;
 	public Integer getId() {
 		return id;
 	}
@@ -30,9 +31,16 @@ public class CategoryWeb implements Serializable{
 	public void setDescendant(List<CategoryWeb> descendant) {
 		this.descendant = descendant;
 	}
+	public Integer getLivello() {
+		return livello;
+	}
+	public void setLivello(Integer livello) {
+		this.livello = livello;
+	}
 	@Override
 	public String toString() {
-		return "CategoryWeb [id=" + id + ", categoryName=" + categoryName + ", descendant=" + descendant + "]";
+		return "CategoryWeb [id=" + id + ", categoryName=" + categoryName + ", descendant=" + descendant + ", livello="
+				+ livello + "]";
 	}
 	
 }

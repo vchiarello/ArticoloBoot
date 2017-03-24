@@ -85,7 +85,7 @@ angular.module("blogApp").controller("NewItemShopCtrl", ['$scope', '$http', 'Tag
 				}).then(function successCallback(response){
 							//console.log("Category scaricata correttamenteRicerca avvenuta correttamente");
 							$scope.category = response.data;
-							$scope.categoryTree = showList($scope.category);
+							
 							//console.log($scope.categoryTree)
 						},
 						function errorCallback(response){Alert("Errore nella ricerca")});
@@ -93,20 +93,7 @@ angular.module("blogApp").controller("NewItemShopCtrl", ['$scope', '$http', 'Tag
 	    
 	
 	
-	function showList(lista){
-		var risultato = "";
-		if (lista == null) return "";
-		risultato += "<ol>";
-		for (var i=0;i < lista.length;i++){
-			risultato += "<li style=\"background-color:red;\">"+lista[i].categoryName+"</li>";
-			if (lista[i].descendant != null) {
-				risultato += showList(lista[i].descendant)
-			}
-			
-		}
-		risultato += "</ol>";
-		return risultato;
-	}
+	
 	
 	//tutti i tag della combo Dei Tag
     function getTags() {

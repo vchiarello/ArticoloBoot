@@ -9,26 +9,26 @@ angular.module('blogApp').component('categoryTree', {
 function treeCategeoryCompCtrl(){
 	
 	this.$postLink=function(){
-		console.log("treeCategeoryCompCtrl -> $postLink:");
 	}
 	
 	
 	this.$onInit=function(){
-		console.log("treeCategeoryCompCtrl -> $onInit:");
 	}
 	
 	this.$doCheck=function(){
-		console.log("treeCategeoryCompCtrl -> $doCheck:" );
 	}
 	
 	this.$postLink=function(){
-		console.log("treeCategeoryCompCtrl -> $postLink:");
-		console.log("lunghezza lista: " + this.lista.length)
 	}
 	
 	this.mostraNascondi = function(id){
-		alert(id)
-		$("#"+id).css("display","none");
+		if ($("#list_"+id).css("display")=="none"){
+			$("#img_categ_"+id).attr("src","images/FrecciaElencoAperta.png")
+			$("#list_"+id).fadeIn(1000);
+		}else{	
+			$("#img_categ_"+id).attr("src","images/FrecciaElencoChiusa.png")
+			$("#list_"+id).fadeOut(1000);
+		}
 	}
 }
 

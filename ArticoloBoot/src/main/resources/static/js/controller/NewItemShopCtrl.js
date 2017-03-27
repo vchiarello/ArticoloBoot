@@ -41,6 +41,11 @@ angular.module("blogApp").controller("NewItemShopCtrl", ['$scope', '$http', 'Tag
 
 	$scope.labelColori = messaggi['createItemShop.label.colori']
 	$scope.labelTaglie = messaggi['createItemShop.label.taglie']
+
+	$scope.selectTreeItem = function(nodo){
+    	$scope.selezionato = nodo;
+    }
+
 	
 	//chiamata ad init per avere l'elenco dei tag
     init();

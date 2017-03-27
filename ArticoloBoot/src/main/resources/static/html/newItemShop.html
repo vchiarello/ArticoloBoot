@@ -143,8 +143,9 @@
 	                    </div>
 	                     	
 	                    <div class="col-md-3">
-	                    	<ul ng-if="categoryTree != null" style="list-style-type: none;">
-		                    	<category-tree lista="category"></category-tree>
+	                    	selezionato: {{selezionato}}
+	                    	<ul ng-if="category != null" style="list-style-type: none;">
+		                    	<category-tree lista="category" on-select="selectTreeItem(nodo)"></category-tree>
 	                    	</ul>
 	                    </div>
 	                    

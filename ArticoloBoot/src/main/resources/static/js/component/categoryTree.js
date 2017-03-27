@@ -2,7 +2,8 @@ angular.module('blogApp').component('categoryTree', {
     templateUrl: 'html/component/categoryTree.html',
     controller: treeCategeoryCompCtrl,
     bindings:{
-    	lista:'='
+    	lista:'=',
+    	onSelect:'&'
     }
 });
 
@@ -10,7 +11,15 @@ function treeCategeoryCompCtrl(){
 	
 	this.$postLink=function(){
 	}
-	
+    
+	this.select=function(nodo){
+		this.onSelect({nodo: nodo});
+	}
+
+	this.selectTreeItem = function(nodo){
+		this.onSelect({nodo: nodo});
+    }
+
 	
 	this.$onInit=function(){
 	}

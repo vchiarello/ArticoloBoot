@@ -43,7 +43,25 @@ angular.module("blogApp").controller("NewItemShopCtrl", ['$scope', '$http', 'Tag
 	$scope.labelTaglie = messaggi['createItemShop.label.taglie']
 
 	$scope.selectTreeItem = function(nodo){
-    	$scope.selezionato = nodo;
+    	$scope.selezionato = "";
+    	if ((String(nodo)).indexOf(",")==-1){
+    		for (var j = 0; j < $scope.category.length; j++)
+    			if(nodo==$scope.category[j].id){
+		    		$scope.selezionato += $scope.category[j].categoryName;
+		    		break;
+    			}
+    	}else{
+	    	var pathIds = nodo.split(",");
+	    	var temp = $scope.category;
+	    	for (var i = 0; i < pathIds.length;i++){
+	    		for (var j = 0; j < temp.length; j++)
+	    			if(pathIds[i]==temp[j].id){
+			    		$scope.selezionato += temp[j].categoryName+">";
+			    		temp = temp[j].descendant;
+			    		break;
+	    			}
+	    	}
+    	}
     }
 
 	

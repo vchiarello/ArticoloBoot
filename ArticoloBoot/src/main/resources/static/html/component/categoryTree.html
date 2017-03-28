@@ -4,6 +4,6 @@
 		<span ng-click="$ctrl.select(item.id)">{{item.categoryName}}</span>
 		
 	<ul ng-if="item.descendant !=null" id="list_{{item.id}}" style="display:none;list-style-type: none;">
-		<category-tree lista="item.descendant" on-select="$ctrl.selectTreeItem(item.id+ ' '+nodo)"></category-tree>
+		<category-tree lista="item.descendant" on-select="$ctrl.selectTreeItem(item.id+ ','+nodo)"></category-tree>
 	</ul>
 </li>
